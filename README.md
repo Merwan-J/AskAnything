@@ -1,7 +1,7 @@
 # AskAnything
 
 
-|        Name      |       ID        |
+
 |:-----------------|:---------------:|
 | Abenezer Melaku  | **UGR/6003/13** |
 | Amanuel Yihune   | **UGR/8408/13** |
