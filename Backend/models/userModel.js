@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
   followings: {
-    type: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+    type: [{ type: mongoose.Types.ObjectId, ref: 'User', default: [] }],
   },
   //   TODO: what is date
 });
