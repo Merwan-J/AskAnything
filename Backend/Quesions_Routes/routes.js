@@ -1,7 +1,6 @@
 const express = require('express');
 // const userController = require('./');
 const questionsController = require('../Questions_controller/questionsController')
-const temp = require('./')
 const router = express.Router();
 
 router

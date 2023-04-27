@@ -9,7 +9,7 @@ const questionsSchema = new mongoose.Schema({
         required: true,
     },
     anonymousAuthor: {
-        type: String,
+        type: Boolean,
         required: true,
     },
     answers: [{

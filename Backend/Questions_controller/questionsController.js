@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Questions = require('./questions_model')
+const Questions = require('./../Questions_model/questions_model')
 
 
 //Find all Questions
@@ -20,7 +20,7 @@ exports.getQuestionById = async (req, res) => {
     if (!question) {
         res.status(400).json({ message: 'Cannot find the question' })
     }
-    res.status(200).json(res.question)
+    res.status(200).json(question)
 }
 
 
