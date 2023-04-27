@@ -7,7 +7,11 @@ const Questions = require('./../models/questionsModel')
 exports.getAllQuestions = async (req, res) => {
     try {
         const questions = await Questions.find()
-        res.status(200).json(questions)
+        res.status(200).json({
+            status: 'success',
+            results: questions.length,
+            data: { questions },
+        });
     } catch {
         res.status(500).json({ message: err.message })
     }
@@ -18,7 +22,7 @@ exports.getAllQuestions = async (req, res) => {
 exports.getQuestionById = async (req, res) => {
     const question = await Questions.findById(req.params.id)
     if (!question) {
-        res.status(400).json({ message: 'Cannot find the question' })
+        res.status(400).json({ status: 'success', data: { question } })
     }
     res.status(200).json(question)
 }
@@ -28,10 +32,13 @@ exports.getQuestionById = async (req, res) => {
 exports.createQuestion = (async (req, res) => {
     try {
         const newQuestion = await Questions.create(req.body)
-        res.status(201).json(newQuestion)
+        res.status(201).json({
+            status: 'success',
+            data: { newQuestion },
+        });
     }
     catch (err) {
-        res.status(400).json({ message: err.message })
+        res.status(400).json({ status: 'fail', message: err.message })
     }
 })
 
@@ -40,8 +47,8 @@ exports.createQuestion = (async (req, res) => {
 //Patch a question
 exports.updateQuestion = (async (req, res) => {
     try {
-        const updatedQuestion = await Questions.findByIdAndUpdate(req.params.id, req.body)
-        res.status(200).json({ message: 'Successful update' })
+        const updatedQuestion = await Questions.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.status(200).json({ status: 'success', data: { updatedQuestion } })
     }
     catch (err) {
         res.status(500)
@@ -55,7 +62,7 @@ exports.deleteQuestionById = (async (req, res) => {
     try {
         const question = await Questions.findByIdAndDelete(req.params.id)
         if (!question) { res.status(400).json({ message: 'the question doesn\'t exist' }) }
-        res.status(200).json({ message: 'Sucessfully Deleted' })
+        res.status(200).json({ status: 'success', data: null })
     }
     catch (err) {
         res.status(500).json({ message: err.message })

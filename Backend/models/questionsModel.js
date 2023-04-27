@@ -1,14 +1,22 @@
 const mongoose = require('mongoose')
 const questionsSchema = new mongoose.Schema({
-    text: {
-        type: String,
-        required: true,
+    question: {
+        title: {
+            type: String,
+            required: true
+        },
+        description: {
+            type: String,
+            required: true
+        },
+
+
     },
     author: {
         type: String,
         required: true,
     },
-    anonymousAuthor: {
+    anonymous: {
         type: Boolean,
         required: true,
     },
