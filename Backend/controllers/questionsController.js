@@ -27,7 +27,7 @@ exports.getQuestionById = async (req, res) => {
         }
         res.status(200).json({ status: 'success', data: { question } })
     } catch {
-        res.status(400).json({ status: 'failed' })
+        res.status(400).json({ status: 'failed', data: null })
     }
 
 }
