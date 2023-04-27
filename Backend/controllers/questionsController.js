@@ -20,11 +20,16 @@ exports.getAllQuestions = async (req, res) => {
 
 //Find a question by id
 exports.getQuestionById = async (req, res) => {
-    const question = await Questions.findById(req.params.id)
-    if (!question) {
-        res.status(400).json({ status: 'success', data: { question } })
+    try {
+        const question = await Questions.findById(req.params.id)
+        if (!question) {
+            res.status(400).json({ status: 'failed' })
+        }
+        res.status(200).json({ status: 'success', data: { question } })
+    } catch {
+        res.status(400).json({ status: 'failed' })
     }
-    res.status(200).json(question)
+
 }
 
 
@@ -51,7 +56,7 @@ exports.updateQuestion = (async (req, res) => {
         res.status(200).json({ status: 'success', data: { updatedQuestion } })
     }
     catch (err) {
-        res.status(500)
+        res.status(500).json({ status: 'failed', message: err.message })
     }
 })
 
@@ -65,6 +70,6 @@ exports.deleteQuestionById = (async (req, res) => {
         res.status(200).json({ status: 'success', data: null })
     }
     catch (err) {
-        res.status(500).json({ message: err.message })
+        res.status(500).json({ status: 'failed', message: err.message })
     }
 })

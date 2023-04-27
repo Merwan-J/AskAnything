@@ -35,7 +35,7 @@ const questionsSchema = new mongoose.Schema({
         type: Array,
         default: 0
     },
-    date: {
+    timeStamp: {
         type: Date,
         default: Date.now,
     },
