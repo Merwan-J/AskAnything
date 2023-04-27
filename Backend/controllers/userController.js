@@ -16,7 +16,7 @@ exports.createUser = async (req, res) => {
       data: { user },
     });
   } catch (e) {
-    throw err;
+    throw e;
   }
 };
 exports.getUsers = async (req, res) => {

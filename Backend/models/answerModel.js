@@ -3,23 +3,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AnswerSchema = new Schema(
-    {
-        text: {type: String, required: true},
-        image: {type: Buffer},
-        likes: {type: Number, default: 0},
-        dislikes: {type: Number, default: 0},
-        author: {type: Schema.Types.ObjectId, ref: 'Author'},
-        anonymous_author: {type: Boolean, default: false},
-        question: {type: Schema.Types.ObjectId, ref: 'Question', required: true},
-        date: {type: Date, default: Date.now}
-    }
+  {
+    text: { type: String, required: true },
+    image: { type: String },
+    likes: {
+      type: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+      default: [],
+    },
+    dislikes: {
+      type: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+      default: [],
+    },
+    author: { type: Schema.Types.ObjectId, ref: 'Author' },
+    anonymous: { type: Boolean, default: false },
+    //question is a required thing but since i don't have the questions id i set the value to false, must be corrected
+    question: { type: Schema.Types.ObjectId, ref: 'Question', required: false },
+  },
+  { timestamps: true }
 );
-
-AnswerSchema
-.virtual('url')
-.get(function () {
-    return '/answers/' + this._id;
-});
-
 
 module.exports = mongoose.model('Answer', AnswerSchema);
