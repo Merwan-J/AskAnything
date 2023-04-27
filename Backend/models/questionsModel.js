@@ -28,12 +28,14 @@ const questionsSchema = new mongoose.Schema({
         required: true,
     }],
     like: {
-        type: Array,
-        default: 0
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
     },
     dislike: {
-        type: Array,
-        default: 0
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'User',
+        default: []
     },
     timeStamp: {
         type: Date,
