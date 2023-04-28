@@ -45,6 +45,8 @@ const questionsSchema = new mongoose.Schema({
         type: String,
         contentType: String
     }
-})
+},
+    { timestamps: true }
+)
 
 module.exports = mongoose.model('Question', questionsSchema)
