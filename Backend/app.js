@@ -1,5 +1,6 @@
 const express = require('express');
 const userRouter = require('./routes/userRoutes');
+const questionsRouter = require('./routes/questionsRoutes');
 const authRouter = require('./routes/authRoutes');
 const auth = require('./middlewares/auth');
 const imageRoute = require('./routes/imageRoutes');
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(`${prefix}/users`, userRouter);
 app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/uploads`, imageRoute);
+app.use(`${prefix}/questions`, questionsRouter);
 
 
 app.use((err, req, res, next) => {
