@@ -1,14 +1,27 @@
 const express = require('express');
-const app = express();
-
-// Routes
 const userRouter = require('./routes/userRoutes');
 const questionsRouter = require('./routes/questionsRoutes');
+const authRouter = require('./routes/authRoutes');
+const auth = require('./middlewares/auth');
+const imageRoute = require('./routes/imageRoutes');
+
+const app = express();
+const prefix = '/api/v1';
 
 app.use(express.json());
 
-app.use('/users', userRouter);
-app.use('/questions', questionsRouter);
+// for now accessing paths are with no jwt token, if needed just put 'auth' middleware
+app.use(`${prefix}/users`, userRouter);
+app.use(`${prefix}/auth`, authRouter);
+app.use(`${prefix}/uploads`, imageRoute);
+app.use(`${prefix}/questions`, questionsRouter);
+
+
+app.use((err, req, res, next) => {
+  if (err.name === 'UnauthorizedError') {
+    res.status(401).send('Invalid token');
+  }
+});
 
 //404 response
 app.all('*', (req, res) => {
