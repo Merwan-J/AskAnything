@@ -15,6 +15,7 @@ exports.createUser = async (req, res) => {
       status: 'success',
       data: { user },
     });
+
   } catch (err) {
     throw err;
   }
