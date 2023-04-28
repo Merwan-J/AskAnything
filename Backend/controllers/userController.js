@@ -1,7 +1,7 @@
-const User = require('./../models/userModel');
 const {
   Types: { ObjectId },
 } = require('mongoose');
+const User = require('./../models/userModel');
 
 const isIdValid = id => {
   return ObjectId.isValid(id) && new ObjectId(id).toString === id;
@@ -15,7 +15,7 @@ exports.createUser = async (req, res) => {
       status: 'success',
       data: { user },
     });
-  } catch (e) {
+  } catch (err) {
     throw err;
   }
 };
