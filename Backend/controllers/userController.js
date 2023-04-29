@@ -1,6 +1,5 @@
-const {
-  Types: { ObjectId },
-} = require('mongoose');
+const { Types: { ObjectId } } = require('mongoose');
+
 const User = require('./../models/userModel');
 
 const isIdValid = id => {
@@ -32,9 +31,6 @@ exports.getUsers = async (req, res) => {
   }
 };
 exports.getUser = async (req, res) => {
-
-
-  console.log(isIdValid(req.params.id))
   if (!isIdValid(req.params.id)) {
     res.status(400).json({
       status: 'failed',
@@ -55,12 +51,11 @@ exports.getUser = async (req, res) => {
   }
 };
 exports.updateUser = async (req, res) => {
-  //   console.log('updateing');
   if (!isIdValid(req.params.id)) {
     throw err;
   }
   try {
-    const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const newUser = await User.findOneAndUpdate(req.params.id, req.body, {
       new: true,
     });
     res.status(200).json({
@@ -68,7 +63,6 @@ exports.updateUser = async (req, res) => {
       data: { newUser },
     });
   } catch (err) {
-    // console.log(err.message);
     throw err;
   }
 };
@@ -90,29 +84,28 @@ exports.deleteUser = async (req, res) => {
 
 //follow a user
 exports.followUser = async (req, res) => {
-  const { id, _id } = req.params;
+  const { id } = req.params;
+  const { _id } = req.body;
 
   if (!isIdValid(id)) {
-    throw res.status(404).json({
+    res.status(404).json({
       status: 'failed',
       data: { message: 'invalid id' },
     })
   }
   try {
-    const user = await User.findByIdAndUpdate({
-      id,
-      $push: { following: _id },
-    },
+    await User.findByIdAndUpdate(
+      _id,
+      { $addToSet: { followings: id } },
       { new: true }
     );
-
-
-    await User.findByIdAndUpdate({
-      _id,
-      $push: { followers: id },
-    })
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $addToSet: { followers: _id } },
+      { new: true }
+    );
     res.status(201).json({
-      status: 'success',
+      status: 'sukcess',
       data: { user },
     });
   } catch (err) {
@@ -126,24 +119,28 @@ exports.followUser = async (req, res) => {
 
 //unfollow a user
 exports.unfollowUser = async (req, res) => {
-  const { id, _id } = req.params;
+  const { id } = req.params;
+  const { _id } = req.body;
 
   if (!isIdValid(id)) {
-    throw err;
+    res.status(404).json({
+      status: 'failed',
+      data: { message: 'invalid id' },
+    })
   }
   try {
-    const user = await User.findByIdAndUpdate(
-      id,
-      { $pull: { following: _id } },
-      { new: true }
-    );
     await User.findByIdAndUpdate(
       _id,
-      { $pull: { followers: id } },
+      { $pull: { followings: id } },
       { new: true }
-    )
+    );
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $pull: { followers: _id } },
+      { new: true }
+    );
     res.status(201).json({
-      status: 'success',
+      status: 'sukcess',
       data: { user },
     });
   } catch (err) {
@@ -152,6 +149,7 @@ exports.unfollowUser = async (req, res) => {
       data: { message: err.message },
     });
   }
+
 }
 
 //get followers

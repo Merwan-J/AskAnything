@@ -29,13 +29,13 @@ router
 
 //follow a user
 router
-  .route('/:id/follow/:id')
+  .route('/:id/follow')
   .patch(userController.followUser)
 
 
 //unfollow a user
 router
-  .route('/:id/unfollow/:id')
+  .route('/:id/unfollow/')
   .patch(userController.unfollowUser)
 
 module.exports = router;
