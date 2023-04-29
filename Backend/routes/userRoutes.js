@@ -14,4 +14,9 @@ router
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
 
+router
+  .route("/explore")
+  .get(userController.explore);
+
+router.route("/following")
 module.exports = router;
