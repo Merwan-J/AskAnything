@@ -7,11 +7,13 @@ const AnswerSchema = new Schema(
     text: { type: String, required: true },
     image: { type: String },
     likes: {
-      type: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User',
       default: [],
     },
     dislikes: {
-      type: [{ type: mongoose.Types.ObjectId, ref: 'User' }],
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: 'User',
       default: [],
     },
     author: { type: Schema.Types.ObjectId, ref: 'Author' },

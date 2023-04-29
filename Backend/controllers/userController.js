@@ -15,12 +15,12 @@ exports.createUser = async (req, res) => {
       status: 'success',
       data: { user },
     });
-
   } catch (err) {
     throw err;
   }
 };
 exports.getUsers = async (req, res) => {
+  console.log(req.params);
   try {
     const users = await User.find();
     res.status(200).json({
@@ -34,7 +34,7 @@ exports.getUsers = async (req, res) => {
 };
 exports.getUser = async (req, res) => {
   if (!isIdValid(req.params.id)) {
-    throw err;
+    throw Error;
   }
   try {
     const user = await User.findById(req.params.id);
@@ -49,7 +49,7 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   //   console.log('updateing');
   if (!isIdValid(req.params.id)) {
-    throw err;
+    throw Error;
   }
   try {
     const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
