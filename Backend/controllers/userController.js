@@ -4,7 +4,7 @@ const {
 const User = require('./../models/userModel');
 
 const isIdValid = id => {
-  return ObjectId.isValid(id) && new ObjectId(id).toString === id;
+  return ObjectId.isValid(id) && new ObjectId(id).toString() === id;
 };
 
 exports.createUser = async (req, res) => {
@@ -32,6 +32,9 @@ exports.getUsers = async (req, res) => {
   }
 };
 exports.getUser = async (req, res) => {
+
+
+  console.log(isIdValid(req.params.id))
   if (!isIdValid(req.params.id)) {
     res.status(400).json({
       status: 'failed',
