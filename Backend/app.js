@@ -1,6 +1,7 @@
 const express = require('express');
 const userRouter = require('./routes/userRoutes');
 const answerRouter = require('./routes/answerRouter');
+<<<<<<< Updated upstream
 const questionsRouter = require('./routes/questionsRoutes');
 const authRouter = require('./routes/authRoutes');
 const auth = require('./middlewares/auth');
@@ -25,6 +26,15 @@ app.use((err, req, res, next) => {
     res.status(401).send('Invalid token');
   }
 });
+=======
+const bookmarkRouter = require('./routes/bookmarkRouter');
+
+app.use(express.json());
+
+app.use('/users', userRouter);
+app.use('/answers', answerRouter);
+app.use('/bookmarks', bookmarkRouter);
+>>>>>>> Stashed changes
 
 //404 response
 app.all('*', (req, res) => {
