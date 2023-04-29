@@ -12,7 +12,7 @@ exports.getAllQuestions = async (req, res) => {
             results: questions.length,
             data: { questions },
         });
-    } catch {
+    } catch (err) {
         res.status(500).json({ message: err.message })
     }
 }
