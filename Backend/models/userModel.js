@@ -39,8 +39,12 @@ const userSchema = new mongoose.Schema(
     bookmarks: {
       type: {
         questions: [{ type: mongoose.Types.ObjectId, ref: 'Question' }],
+        answers: [{ type: mongoose.Types.ObjectId, ref: 'Answer' }],
       },
-      default: [],
+      default: {
+        questions: [],
+        answers: [],
+      },
     },
     //   TODO: what is date
   },

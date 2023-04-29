@@ -4,12 +4,8 @@ const Schema = mongoose.Schema;
 
 const BookmarkSchema = new Schema({
   url: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  title: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Answers',
     required: true,
     trim: true,
   },
