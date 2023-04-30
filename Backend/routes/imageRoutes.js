@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const uploadController = require('../controllers/imageController');
-const upload = require('../middleware/multer');
+const upload = require('../middlewares/multer');
 
 router.post('/upload', upload.single('image'), uploadController.uploadImage);
 

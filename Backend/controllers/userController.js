@@ -14,12 +14,12 @@ exports.createUser = async (req, res) => {
       status: 'success',
       data: { user },
     });
-
   } catch (err) {
     throw err;
   }
 };
 exports.getUsers = async (req, res) => {
+  console.log(req.params);
   try {
     const users = await User.find();
     res.status(200).json({
@@ -53,7 +53,7 @@ exports.getUser = async (req, res) => {
 };
 exports.updateUser = async (req, res) => {
   if (!isIdValid(req.params.id)) {
-    throw err;
+    throw Error;
   }
   try {
     const newUser = await User.findOneAndUpdate(req.params.id, req.body, {
