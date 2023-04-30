@@ -41,10 +41,7 @@ const questionsSchema = new mongoose.Schema(
       ref: 'User',
       default: [],
     },
-    timeStamp: {
-      type: Date,
-      default: Date.now,
-    },
+
     image: {
       type: String,
       contentType: String,
@@ -53,4 +50,4 @@ const questionsSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Question', questionsSchema);
+module.exports = mongoose.model('Question', questionsSchema)

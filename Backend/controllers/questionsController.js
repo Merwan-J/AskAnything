@@ -1,5 +1,3 @@
-const express = require('express')
-const router = express.Router()
 const Questions = require('./../models/questionsModel')
 
 
@@ -12,7 +10,7 @@ exports.getAllQuestions = async (req, res) => {
             results: questions.length,
             data: { questions },
         });
-    } catch {
+    } catch (err) {
         res.status(500).json({ message: err.message })
     }
 }
