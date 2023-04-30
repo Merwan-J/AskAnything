@@ -22,8 +22,6 @@ exports.addToBookmark = async (req, res) => {
       { new: true }
     );
 
-    // const bookmark = await Bookmark.create(req.body);
-
     res.status(201).json({
       status: 'success',
       data: { updated },
@@ -49,5 +47,14 @@ exports.removeFromBookmark = async (req, res) => {
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+};
+
+exports.getBookmarks = async (req, res) => {
+  try {
+    const user = await User.findById(req.body.userId);
+    res.status(200).json(user.bookmarks);
+  } catch (err) {
+    res.json(err);
   }
 };

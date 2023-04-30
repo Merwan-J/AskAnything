@@ -1,4 +1,5 @@
 const Answer = require('./../models/answerModel');
+const User = require('./../models/userModel');
 
 exports.createAnswer = async (req, res) => {
   try {
@@ -53,7 +54,12 @@ exports.updateAnswer = async (req, res) => {
 };
 exports.deleteAnswer = async (req, res) => {
   try {
-    const answer = await User.findByIdAndDelete(req.params.id);
+    await User.updateMany(
+      { 'bookmarks.answers': req.params.id },
+      { $pull: { 'bookmarks.answers': req.params.id } }
+    );
+    const answer = await Answer.findByIdAndDelete(req.params.id);
+
     if (!answer) {
       return res.status(404).send('there is no answer by this id');
     }

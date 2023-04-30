@@ -6,8 +6,8 @@ const router = express.Router();
 router
   .route('/')
   .post(bookmarkController.addToBookmark)
-  .delete(bookmarkController.removeFromBookmark);
-//   .get(bookmarkController.getAnswers);
+  .delete(bookmarkController.removeFromBookmark)
+  .get(bookmarkController.getBookmarks);
 // router
 //   .route('/:id')
 //   .get(bookmarkController.getAnswer)
