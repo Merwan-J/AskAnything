@@ -29,14 +29,20 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    followers: [{
-      type: mongoose.Types.ObjectId, ref: 'User',
-      default: [],
-    }],
-    followings: [{
-      type: mongoose.Types.ObjectId, ref: 'User',
-      default: [],
-    }],
+    followers: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
+    followings: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        default: [],
+      },
+    ],
   },
   { timestamps: true }
 );
