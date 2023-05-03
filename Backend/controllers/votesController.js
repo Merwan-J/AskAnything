@@ -18,7 +18,7 @@ exports.upvote = async (req, res) => {
           { new: true }
         );
 
-        await author.decrementLikes();
+        if (!item.anonymous) await author.decrementLikes();
       } else {
         item = await Question.findByIdAndUpdate(
           itemId,
@@ -26,7 +26,7 @@ exports.upvote = async (req, res) => {
           { new: true }
         );
 
-        await author.incrementLikes();
+        if (!item.anonymous) await author.incrementLikes();
       }
 
       item = await Question.findByIdAndUpdate(
@@ -46,14 +46,14 @@ exports.upvote = async (req, res) => {
           { $pull: { likes: userId } },
           { new: true }
         );
-        await author.decrementLikes();
+        if (!item.anonymous) await author.decrementLikes();
       } else {
         item = await Answer.findByIdAndUpdate(
           itemId,
           { $addToSet: { likes: userId } },
           { new: true }
         );
-        await author.incrementLikes();
+        if (!item.anonymous) await author.incrementLikes();
       }
 
       item = await Answer.findByIdAndUpdate(
@@ -66,7 +66,7 @@ exports.upvote = async (req, res) => {
     default:
       return res.status(400).send('Invalid item type');
   }
-  await author.updateReputation();
+  if (!item.anonymous) await author.updateReputation();
 
   res.status(201).json({
     status: 'success',
@@ -90,7 +90,7 @@ exports.downvote = async (req, res) => {
           { new: true }
         );
 
-        await author.decrementDislikes();
+        if (!item.anonymous) await author.decrementDislikes();
       } else {
         item = await Question.findByIdAndUpdate(
           itemId,
@@ -98,7 +98,7 @@ exports.downvote = async (req, res) => {
           { new: true }
         );
 
-        await author.incrementDislikes();
+        if (!item.anonymous) await author.incrementDislikes();
       }
 
       item = await Question.findByIdAndUpdate(
@@ -117,14 +117,14 @@ exports.downvote = async (req, res) => {
           { new: true }
         );
 
-        await author.decrementDislikes();
+        if (!item.anonymous) await author.decrementDislikes();
       } else {
         item = await Answer.findByIdAndUpdate(
           itemId,
           { $addToSet: { dislikes: userId } },
           { new: true }
         );
-        await author.incrementDislikes();
+        if (!item.anonymous) await author.incrementDislikes();
       }
 
       item = await Answer.findByIdAndUpdate(
@@ -137,7 +137,7 @@ exports.downvote = async (req, res) => {
     default:
       return res.status(400).send('Invalid item type');
   }
-  await author.updateReputation();
+  if (!item.anonymous) await author.updateReputation();
   res.status(201).json({
     status: 'success',
     data: { likes: item.likes.length, dislikes: item.dislikes.length },
