@@ -7,11 +7,19 @@ exports.upvote = async (req, res) => {
   switch (itemType) {
     case 'Question':
       item = await Question.findById(itemId);
-      item = await Question.findByIdAndUpdate(
-        itemId,
-        { $addToSet: { likes: userId } },
-        { new: true }
-      );
+      if (item.likes.includes(userId)) {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $pull: { likes: userId } },
+          { new: true }
+        );
+      } else {
+        item = await Question.findByIdAndUpdate(
+          itemId,
+          { $addToSet: { likes: userId } },
+          { new: true }
+        );
+      }
 
       item = await Question.findByIdAndUpdate(
         itemId,
@@ -22,12 +30,19 @@ exports.upvote = async (req, res) => {
       break;
     case 'Answer':
       item = await Answer.findById(itemId);
-
-      item = await Answer.findByIdAndUpdate(
-        itemId,
-        { $addToSet: { likes: userId } },
-        { new: true }
-      );
+      if (item.likes.includes(userId)) {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $pull: { likes: userId } },
+          { new: true }
+        );
+      } else {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $addToSet: { likes: userId } },
+          { new: true }
+        );
+      }
 
       item = await Answer.findByIdAndUpdate(
         itemId,
@@ -53,12 +68,19 @@ exports.downvote = async (req, res) => {
   switch (itemType) {
     case 'Question':
       item = await Question.findById(itemId);
-
-      item = await Question.findByIdAndUpdate(
-        itemId,
-        { $addToSet: { dislikes: userId } },
-        { new: true }
-      );
+      if (item.likes.includes(userId)) {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $pull: { dislikes: userId } },
+          { new: true }
+        );
+      } else {
+        item = await Question.findByIdAndUpdate(
+          itemId,
+          { $addToSet: { dislikes: userId } },
+          { new: true }
+        );
+      }
 
       item = await Question.findByIdAndUpdate(
         itemId,
@@ -69,12 +91,19 @@ exports.downvote = async (req, res) => {
       break;
     case 'Answer':
       item = await Answer.findById(itemId);
-
-      item = await Answer.findByIdAndUpdate(
-        itemId,
-        { $addToSet: { dislikes: userId } },
-        { new: true }
-      );
+      if (item.dislikes.includes(userId)) {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $pull: { dislikes: userId } },
+          { new: true }
+        );
+      } else {
+        item = await Answer.findByIdAndUpdate(
+          itemId,
+          { $addToSet: { dislikes: userId } },
+          { new: true }
+        );
+      }
 
       item = await Answer.findByIdAndUpdate(
         itemId,
