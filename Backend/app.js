@@ -7,6 +7,9 @@ const imageRouter = require('./routes/imageRoutes');
 const votesRouter = require('./routes/votesRouter');
 const searchRouter = require('./routes/searchRoutes');
 
+const AppError = require('./utils/appError');
+const errorHandler = require('./controllers/errorController');
+
 const app = express();
 const prefix = '/api/v1';
 
@@ -21,18 +24,17 @@ app.use(`${prefix}/answers`, answerRouter);
 app.use(`${prefix}/votes`, votesRouter);
 app.use(`${prefix}/search`, searchRouter);
 
+//404 response
+
+app.all('*', (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
 app.use((err, req, res, next) => {
   if (err.name === 'UnauthorizedError') {
     res.status(401).send('Invalid token');
   }
+  next(err);
 });
-
-//404 response
-app.all('*', (req, res) => {
-  res.status(404).json({
-    status: 'fail',
-    message: `Can't find ${req.originalUrl}`,
-  });
-});
+app.use(errorHandler);
 
 module.exports = app;
