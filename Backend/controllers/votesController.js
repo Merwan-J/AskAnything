@@ -1,7 +1,10 @@
 const Question = require('../models/questionsModel');
 const Answer = require('../models/answerModel');
+const { catchAsyncError } = require('../utils/catchAsyncError');
+const { Next } = require('@nestjs/common');
+const AppError = require('../utils/appError');
 
-exports.upvote = async (req, res) => {
+exports.upvote = catchAsyncError(async (req, res, next) => {
   const { itemId, itemType, userId } = req.body;
   let item;
   switch (itemType) {
@@ -52,16 +55,16 @@ exports.upvote = async (req, res) => {
 
       break;
     default:
-      return res.status(400).send('Invalid item type');
+      return next(new AppError('invalid item type', 400));
   }
 
   res.status(201).json({
     status: 'success',
     data: { likes: item.likes.length, dislikes: item.dislikes.length },
   });
-};
+});
 
-exports.downvote = async (req, res) => {
+exports.downvote = catchAsyncError(async (req, res, next) => {
   const { itemId, itemType, userId } = req.body;
   let item;
 
@@ -113,11 +116,11 @@ exports.downvote = async (req, res) => {
 
       break;
     default:
-      return res.status(400).send('Invalid item type');
+      return next(new AppError('invalid item type', 400));
   }
 
   res.status(201).json({
     status: 'success',
     data: { likes: item.likes.length, dislikes: item.dislikes.length },
   });
-};
+});
