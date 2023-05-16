@@ -29,6 +29,14 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    dislikes: {
+      type: Number,
+      default: 0,
+    },
     followers: [
       {
         type: mongoose.Types.ObjectId,
@@ -46,6 +54,58 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userSchema.methods.incrementLikes = function() {
+  this.likes += 1;
+  return this.save();
+};
+userSchema.methods.incrementDislikes = function() {
+  this.dislikes += 1;
+  return this.save();
+};
+userSchema.methods.decrementLikes = function() {
+  this.likes -= 1;
+  return this.save();
+};
+userSchema.methods.decrementDislikes = function() {
+  this.dislikes -= 1;
+  return this.save();
+};
+
+userSchema.methods.updateReputation = function() {
+  // Define the weightings for likes and dislikes
+  const LIKE_WEIGHT = 2;
+  const DISLIKE_WEIGHT = -1;
+
+  // Define the minimum number of likes/dislikes required to affect a user's reputation
+  const MIN_LIKES = 5;
+  const MIN_DISLIKES = 5;
+
+  const MIN_REPUTATION = -1000;
+  const MAX_REPUTATION = 1000;
+
+  const { likes, dislikes, reputation } = this;
+
+  if (likes < MIN_LIKES && dislikes < MIN_DISLIKES) {
+    return null;
+  }
+  // Apply weightings based on the user's reputation
+  const weightedLikes = likes * (1 + reputation / 1000);
+  const weightedDislikes = dislikes * (1 - reputation / 1000);
+
+  // Calculate the new reputation
+  const updateReputation = Math.min(
+    Math.max(
+      weightedLikes * LIKE_WEIGHT + weightedDislikes * DISLIKE_WEIGHT,
+      MIN_REPUTATION
+    ),
+    MAX_REPUTATION
+  );
+
+  this.reputation = updateReputation;
+
+  return this.save();
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
