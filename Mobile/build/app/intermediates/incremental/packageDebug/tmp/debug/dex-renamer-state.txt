@@ -1,0 +1,4 @@
+#Sat May 20 22:45:38 EAT 2023
+base.0=C\:\\Users\\Merwan\\Desktop\\Projects\\AskAnything\\Mobile\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
