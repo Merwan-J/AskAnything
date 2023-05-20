@@ -36,6 +36,16 @@ const userSchema = new mongoose.Schema(
     followings: {
       type: [{ type: mongoose.Types.ObjectId, ref: 'User', default: [] }],
     },
+    bookmarks: {
+      type: {
+        questions: [{ type: mongoose.Types.ObjectId, ref: 'Question' }],
+        answers: [{ type: mongoose.Types.ObjectId, ref: 'Answer' }],
+      },
+      default: {
+        questions: [],
+        answers: [],
+      },
+    },
     //   TODO: what is date
   },
   { timestamps: true }

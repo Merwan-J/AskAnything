@@ -6,6 +6,8 @@ const authRouter = require('./routes/authRoutes');
 const auth = require('./middlewares/auth');
 const imageRoute = require('./routes/imageRoutes');
 
+const bookmarkRouter = require('./routes/bookmarkRouter');
+
 const app = express();
 const prefix = '/api/v1';
 
@@ -17,6 +19,7 @@ app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/uploads`, imageRoute);
 app.use(`${prefix}/questions`, questionsRouter);
 app.use(`${prefix}/answers`, answerRouter);
+app.use(`${prefix}/bookmarks`, bookmarkRouter);
 
 
 
