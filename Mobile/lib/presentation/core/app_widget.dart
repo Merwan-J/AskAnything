@@ -1,4 +1,3 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 import '../../injection.dart';
@@ -10,21 +9,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final AppRouter _appRouter = getIt<AppRouter>();
-  final BotToastNavigatorObserver botToastNavigatorObserver =
-      BotToastNavigatorObserver();
-  final botToastBuilder = BotToastInit();
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      builder: botToastBuilder,
-      routerDelegate: _appRouter.delegate(
-        navigatorObservers: () => [botToastNavigatorObserver],
-      ),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      title: 'Sponty',
-    );
+    return MaterialApp();
   }
 }
