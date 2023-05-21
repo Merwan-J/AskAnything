@@ -1,7 +1,6 @@
 const Question = require('../models/questionsModel');
 const Answer = require('../models/answerModel');
 const { catchAsyncError } = require('../utils/catchAsyncError');
-const { Next } = require('@nestjs/common');
 const AppError = require('../utils/appError');
 
 exports.upvote = catchAsyncError(async (req, res, next) => {
