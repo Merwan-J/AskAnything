@@ -1,15 +1,22 @@
-const {
-  Types: { ObjectId },
-} = require('mongoose');
 const User = require('./../models/userModel');
+const { catchAsyncError } = require('../utils/catchAsyncError');
+// const { isIdValid, isEmailValid } = require('./../utils/validator');
 
-const isIdValid = id => {
-  return ObjectId.isValid(id) && new ObjectId(id).toString === id;
-};
+const AppError = require('../utils/appError');
 
-exports.createUser = async (req, res) => {
-  try {
-    const user = await User.create(req.body);
+exports.createUser = catchAsyncError(async (req, res, next) => {
+  // next(new Error('tdhis sjfaksjfksjfkj'));
+  // const { valid, reason, validators } = await isEmailValid(req.body.email);
+  // if (!valid) {
+  //   next(
+  //     new AppError(
+  //       `please provide a valid email: ${validators[reason].reason}`,
+  //       400
+  //     )
+  //   );
+  //   return;
+  // }
+  const user = await User.create(req.body);
 
     res.status(201).json({
       status: 'success',
@@ -19,61 +26,139 @@ exports.createUser = async (req, res) => {
     throw err;
   }
 };
-exports.getUsers = async (req, res) => {
-  try {
-    const users = await User.find();
-    res.status(200).json({
-      status: 'success',
-      results: users.length,
-      data: { users },
-    });
-  } catch (err) {
-    throw err;
+
+exports.getUsers = catchAsyncError(async (req, res, next) => {
+  // console.log(req.params);
+  const users = await User.find();
+  res.status(200).json({
+    status: 'success',
+    results: users.length,
+    data: { users },
+  });
+});
+
+exports.getUser = catchAsyncError(async (req, res, next) => {
+  // if (!isIdValid(req.params.id)) {
+  //   return next(new AppError('invalid id', 400));
+  // }
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError('user not found', 404));
   }
-};
-exports.getUser = async (req, res) => {
-  if (!isIdValid(req.params.id)) {
-    throw err;
+  res.status(200).json({
+    status: 'success',
+    data: { user },
+  });
+});
+
+exports.updateUser = catchAsyncError(async (req, res, next) => {
+  // if (!isIdValid(req.params.id)) {
+  //   return next(new AppError('invalid id', 400));
+  // }
+
+  const newUser = await User.findOneAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  if (!newUser) {
+    return next(new AppError('user not found', 404));
   }
-  try {
-    const user = await User.findById(req.params.id);
-    res.status(200).json({
-      status: 'success',
-      data: { user },
-    });
-  } catch (err) {
-    throw err;
-  }
-};
-exports.updateUser = async (req, res) => {
-  //   console.log('updateing');
-  if (!isIdValid(req.params.id)) {
-    throw err;
-  }
-  try {
-    const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.status(200).json({
-      status: 'sucess',
-      data: { newUser },
-    });
-  } catch (err) {
-    // console.log(err.message);
-    throw err;
-  }
-};
-exports.deleteUser = async (req, res) => {
-  if (!isIdValid(req.params.id)) {
-    throw err;
-  }
-  try {
-    const user = await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({
-      staus: 'success',
-      data: { user },
-    });
-  } catch (err) {
-    throw err;
-  }
-};
+  res.status(200).json({
+    status: 'sucess',
+    data: { newUser },
+  });
+});
+
+exports.deleteUser = catchAsyncError(async (req, res, next) => {
+  // if (!isIdValid(req.params.id)) {
+  //   return next(new AppError('invalid id', 400));
+  // }
+
+  const user = await User.findByIdAndDelete(req.params.id);
+  res.status(200).json({
+    staus: 'success',
+    data: { user },
+  });
+});
+
+//follow a user
+exports.followUser = catchAsyncError(async (req, res) => {
+  const { id } = req.params;
+  const { _id } = req.body;
+
+  // if (!isIdValid(id) || !isIdValid(_id)) {
+  //   return next(new AppError('invalid id'));
+  // }
+
+  await User.findByIdAndUpdate(
+    _id,
+    { $addToSet: { followings: id } },
+    { new: true }
+  );
+  const user = await User.findByIdAndUpdate(
+    id,
+    { $addToSet: { followers: _id } },
+    { new: true }
+  );
+  res.status(201).json({
+    status: 'sukcess',
+    data: { user },
+  });
+});
+
+//unfollow a user
+exports.unfollowUser = catchAsyncError(async (req, res, next) => {
+  const { id } = req.params;
+  const { _id } = req.body;
+
+  // if (!isIdValid(id) || !isIdValid(_id)) {
+  //   return next(new AppError('invalid id'));
+  // }
+
+  await User.findByIdAndUpdate(
+    _id,
+    { $pull: { followings: id } },
+    { new: true }
+  );
+  const user = await User.findByIdAndUpdate(
+    id,
+    { $pull: { followers: _id } },
+    { new: true }
+  );
+  res.status(201).json({
+    status: 'sukcess',
+    data: { user },
+  });
+});
+
+//get followers
+exports.getfollowers = catchAsyncError(async (req, res) => {
+  const { id } = req.params;
+
+  // if (!isIdValid(id) || !isIdValid(_id)) {
+  //   return next(new AppError('invalid id'));
+  // }
+
+  const user = await User.findById(id);
+  const followers = await User.find({ _id: { $in: user.followers } });
+  res.status(200).json({
+    status: 'success',
+    data: { followers },
+  });
+});
+
+//get following
+exports.getfollowing = catchAsyncError(async (req, res) => {
+  const { id } = req.params;
+  // if (!isIdValid(id) || !isIdValid(_id)) {
+  //   return next(new AppError('invalid id'));
+  // }
+
+  const user = await User.findById(id);
+  const following = await User.find({ _id: { $in: user.followings } });
+  res.status(201).json({
+    status: 'success',
+    data: { following },
+  });
+});
