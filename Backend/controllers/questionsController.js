@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+const User = require('./../models/userModel');
 const AppError = require('../utils/appError');
 const { catchAsyncError } = require('../utils/catchAsyncError');
 const { isIdValid } = require('../utils/validator');

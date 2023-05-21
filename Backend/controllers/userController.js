@@ -20,11 +20,15 @@ exports.createUser = catchAsyncError(async (req, res, next) => {
   // }
   const user = await User.create(req.body);
 
-  res.status(201).json({
-    status: 'success',
-    data: { user },
-  });
-});
+    res.status(201).json({
+      status: 'success',
+      data: { user },
+    });
+  } catch (err) {
+    throw err;
+  }
+};
+
 exports.getUsers = catchAsyncError(async (req, res, next) => {
   // console.log(req.params);
   const users = await User.find();
@@ -67,6 +71,7 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
     data: { newUser },
   });
 });
+
 exports.deleteUser = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.params.id)) {
   //   return next(new AppError('invalid id', 400));

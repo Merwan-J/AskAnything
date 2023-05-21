@@ -10,6 +10,8 @@ const searchRouter = require('./routes/searchRoutes');
 const AppError = require('./utils/appError');
 const errorHandler = require('./controllers/errorController');
 
+const bookmarkRouter = require('./routes/bookmarkRouter');
+
 const app = express();
 const prefix = '/api/v1';
 
@@ -21,6 +23,7 @@ app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/uploads`, imageRouter);
 app.use(`${prefix}/questions`, questionsRouter);
 app.use(`${prefix}/answers`, answerRouter);
+app.use(`${prefix}/bookmarks`, bookmarkRouter);
 app.use(`${prefix}/votes`, votesRouter);
 app.use(`${prefix}/search`, searchRouter);
 
