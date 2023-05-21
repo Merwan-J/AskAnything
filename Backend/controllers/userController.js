@@ -3,6 +3,8 @@ const { catchAsyncError } = require('../utils/catchAsyncError');
 // const { isIdValid, isEmailValid } = require('./../utils/validator');
 
 const AppError = require('../utils/appError');
+const Answer = require('../models/answerModel');
+const Question = require('../models/questionsModel');
 
 exports.createUser = catchAsyncError(async (req, res, next) => {
   // next(new Error('tdhis sjfaksjfksjfkj'));
@@ -71,6 +73,7 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
   // }
 
   const user = await User.findByIdAndDelete(req.params.id);
+  const answers = await Answer.deleteMany({ user: req.params.id });
   res.status(200).json({
     staus: 'success',
     data: { user },

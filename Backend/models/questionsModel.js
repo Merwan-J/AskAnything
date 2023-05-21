@@ -35,18 +35,17 @@ const questionsSchema = new mongoose.Schema(
       },
     },
     author: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     anonymous: {
       type: Boolean,
       // required: true,
+      default: false,
     },
-    answers: [
-      {
-        type: Array,
-      },
-    ],
+    answers: {
+      type: [{ type: mongoose.Types.ObjectId, ref: 'Answer' }],
+    },
     topic: {
       type: String,
       required: true,

@@ -2,6 +2,7 @@ const AppError = require('../utils/appError');
 const { catchAsyncError } = require('../utils/catchAsyncError');
 const { isIdValid } = require('../utils/validator');
 const Questions = require('./../models/questionsModel');
+const User = require('./../models/userModel');
 
 //Find all Questions
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
@@ -29,6 +30,11 @@ exports.getQuestionById = catchAsyncError(async (req, res, next) => {
 //Add a question
 exports.createQuestion = catchAsyncError(async (req, res) => {
   const newQuestion = await Questions.create(req.body);
+  const user = await User.findById(req.body.author);
+  // console.log(user.questions);
+  // console.log(user.email);
+  user.questions.push(newQuestion._id);
+  await user.save();
   res.status(201).json({
     status: 'success',
     data: { newQuestion },
@@ -48,6 +54,9 @@ exports.updateQuestion = catchAsyncError(async (req, res) => {
 //Delete a question
 exports.deleteQuestionById = catchAsyncError(async (req, res) => {
   const question = await Questions.findByIdAndDelete(req.params.id);
+  const user = await User.findById(question.author);
+  user.questions.pull(question._id);
+  await user.save();
   if (!question) {
     return new AppError('question not found', 404);
   }
