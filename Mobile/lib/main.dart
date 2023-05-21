@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-import 'injection.dart';
-import 'presentation/core/app_widget.dart';
+void main() {
+  runApp(const MainApp());
+}
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  configureInjection(Environment.dev);
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
 
-  runApp(MyApp());
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('Hello World!'),
+        ),
+      ),
+    );
+  }
 }
