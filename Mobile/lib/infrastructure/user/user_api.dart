@@ -1,120 +1,101 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:askanything/domain/user/user_failure.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_form_dto.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:askanything/util/custom_http_client.dart';
 
 class UserApi {
-  final apiUrl = dotenv.env['API_URL'];
+  CustomHttpClient _customHttpClient = CustomHttpClient();
 
-  Future<UserDTO> createUser(UserFormDTO userFormDTO) async {
-    final url = Uri.parse('$apiUrl/users');
-    final headers = {'Content-Type': 'application/json'};
-    final body = json.encode(userFormDTO.toJson());
-
-    final response = await http.post(url, headers: headers, body: body);
+  Future<UserDTO> createUser(UserFormDTO userFormDto) async {
+    var response = await _customHttpClient.post("users",
+        body: json.encode(userFormDto.toJson()));
 
     if (response.statusCode == 201) {
-      final dynamic jsonData = json.decode(response.body);
-      return UserDTO.fromJson(jsonData['data']['user']);
+      return UserDTO.fromJson(jsonDecode(response.body));
     } else {
-      throw UserFailure.serverError();
+      throw Exception("Failed to create user");
     }
   }
 
   Future<UserDTO> getUserById(String id) async {
-    final url = Uri.parse('$apiUrl/users/$id');
-    final response = await http.get(url);
+    var response = await _customHttpClient.get("users/$id");
 
     if (response.statusCode == 200) {
-      final dynamic jsonData = json.decode(response.body);
-      return UserDTO.fromJson(jsonData['data']['user']);
-    } else if (response.statusCode == 404) {
-      throw UserFailure.notFoundError();
+      return UserDTO.fromJson(jsonDecode(response.body));
     } else {
-      throw UserFailure.serverError();
+      throw Exception("Failed to load user");
     }
   }
 
-  Future<void> updateUser(UserDTO user) async {
-    final url = Uri.parse('$apiUrl/users/${user.id}');
-    final headers = {'Content-Type': 'application/json'};
-    final body = json.encode(user.toJson());
-
-    final response = await http.patch(url, headers: headers, body: body);
+  Future<void> updateUser(UserDTO userDto) async {
+    var response = await _customHttpClient.put("users/${userDto.id}",
+        body: json.encode(userDto.toJson()));
 
     if (response.statusCode != 200) {
-      throw UserFailure.serverError();
+      throw Exception("Failed to update user");
     }
   }
 
   Future<void> deleteUser(String id) async {
-    final url = Uri.parse('$apiUrl/users/$id');
-    final response = await http.delete(url);
+    var response = await _customHttpClient.delete("users/$id");
 
     if (response.statusCode != 200) {
-      throw UserFailure.serverError();
+      throw Exception("Failed to delete user");
     }
   }
 
   Future<List<UserDTO>> getUsers() async {
-    final url = Uri.parse('$apiUrl/users');
-    final response = await http.get(url);
+    var response = await _customHttpClient.get("users");
 
     if (response.statusCode == 200) {
-      final List<dynamic> jsonList = json.decode(response.body);
-      return jsonList.map((json) => UserDTO.fromJson(json)).toList();
+      List<dynamic> usersJson = jsonDecode(response.body);
+      return usersJson.map((user) => UserDTO.fromJson(user)).toList();
     } else {
-      throw UserFailure.serverError();
+      throw Exception("Failed to load users");
     }
   }
 
   Future<void> followUser(String followerId, String followingId) async {
-    final url = Uri.parse('$apiUrl/users/$followerId/follow');
-    final headers = {'Content-Type': 'application/json'};
-    final body = json.encode({'_id': followingId});
+    var response = await _customHttpClient.post("users/$followerId/follow",
+        body: json.encode({"followingId": followingId}));
 
-    final response = await http.patch(url, headers: headers, body: body);
-
-    if (response.statusCode != 201) {
-      throw UserFailure.serverError();
+    if (response.statusCode != 200) {
+      throw Exception("Failed to follow user");
     }
   }
 
   Future<void> unfollowUser(String followerId, String followingId) async {
-    final url = Uri.parse('$apiUrl/users/$followerId/unfollow');
-    final headers = {'Content-Type': 'application/json'};
-    final body = json.encode({'_id': followingId});
+    var response = await _customHttpClient.post("users/$followerId/unfollow",
+        body: json.encode({"followingId": followingId}));
 
-    final response = await http.patch(url, headers: headers, body: body);
-
-    if (response.statusCode != 201) {
-      throw UserFailure.serverError();
+    if (response.statusCode != 200) {
+      throw Exception("Failed to unfollow user");
     }
   }
 
   Future<List<UserDTO>> getFollowers(String userId) async {
-    final url = Uri.parse('$apiUrl/users/$userId/followers');
-    final response = await http.get(url);
+    var response = await _customHttpClient.get("users/$userId/followers");
 
     if (response.statusCode == 200) {
-      final List<dynamic> jsonList = json.decode(response.body);
-      return jsonList.map((json) => UserDTO.fromJson(json)).toList();
+      List<dynamic> followersJson = jsonDecode(response.body);
+      return followersJson
+          .map((follower) => UserDTO.fromJson(follower))
+          .toList();
     } else {
-      throw UserFailure.serverError();
+      throw Exception("Failed to load followers");
     }
   }
 
   Future<List<UserDTO>> getFollowings(String userId) async {
-    final url = Uri.parse('$apiUrl/users/$userId/followings');
-    final response = await http.get(url);
+    var response = await _customHttpClient.get("users/$userId/followings");
 
     if (response.statusCode == 200) {
-      final List<dynamic> jsonList = json.decode(response.body);
-      return jsonList.map((json) => UserDTO.fromJson(json)).toList();
+      List<dynamic> followingsJson = jsonDecode(response.body);
+      return followingsJson
+          .map((following) => UserDTO.fromJson(following))
+          .toList();
     } else {
-      throw UserFailure.serverError();
+      throw Exception("Failed to load followings");
     }
   }
 }

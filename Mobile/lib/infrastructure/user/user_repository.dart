@@ -1,8 +1,8 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
 import 'package:askanything/infrastructure/user/user_api.dart';
+import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_form_dto.dart';
-import 'package:askanything/infrastructure/user/user_form_mapper.dart';
 import 'package:askanything/infrastructure/user/user_mapper.dart';
 import 'package:dartz/dartz.dart';
 
@@ -13,12 +13,10 @@ class UserRepository {
 
   Future<Either<UserFailure, User>> createUser(UserFormDTO userForm) async {
     try {
-      final userFormDto = UserFormMapper.toDTO(userForm as User);
-      final userDto = await _userApi.createUser(userFormDto);
+      final userDto = await _userApi.createUser(userForm);
       final createdUser = UserMapper.fromDTO(userDto);
       return Right(createdUser);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -28,21 +26,17 @@ class UserRepository {
       final userDto = await _userApi.getUserById(id);
       final user = UserMapper.fromDTO(userDto);
       return Right(user);
-    } on UserFailure {
-      // Propagate UserFailure without modification
-      rethrow;
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
 
   Future<Either<UserFailure, Unit>> updateUser(User user) async {
     try {
-      await _userApi.updateUser(UserMapper.toDTO(user));
+      final userDto = UserMapper.toDTO(user);
+      await _userApi.updateUser(userDto);
       return Right(unit);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -52,7 +46,6 @@ class UserRepository {
       await _userApi.deleteUser(id);
       return Right(unit);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -64,7 +57,6 @@ class UserRepository {
           userDtos.map((userDto) => UserMapper.fromDTO(userDto)).toList();
       return Right(users);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -75,7 +67,6 @@ class UserRepository {
       await _userApi.followUser(followerId, followingId);
       return Right(unit);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -86,7 +77,6 @@ class UserRepository {
       await _userApi.unfollowUser(followerId, followingId);
       return Right(unit);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -98,7 +88,6 @@ class UserRepository {
           userDtos.map((userDto) => UserMapper.fromDTO(userDto)).toList();
       return Right(users);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
@@ -110,7 +99,6 @@ class UserRepository {
           userDtos.map((userDto) => UserMapper.fromDTO(userDto)).toList();
       return Right(users);
     } catch (e) {
-      // Handle specific exceptions or errors here if needed
       return Left(UserFailure.unexpectedError());
     }
   }
