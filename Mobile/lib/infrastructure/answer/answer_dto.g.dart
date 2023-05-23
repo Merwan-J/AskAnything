@@ -7,30 +7,29 @@ part of 'answer_dto.dart';
 // **************************************************************************
 
 _$_AnswerDto _$$_AnswerDtoFromJson(Map<String, dynamic> json) => _$_AnswerDto(
-      ids: json['ids'] as String,
-      texts: json['texts'] as String,
-      images: json['images'] as String,
-      likess:
-          (json['likess'] as List<dynamic>).map((e) => e as String).toList(),
-      dislikess:
-          (json['dislikess'] as List<dynamic>).map((e) => e as String).toList(),
-      authors: json['authors'] as String,
+      id: json['id'] as String,
+      text: json['text'] as String,
+      image: json['image'] as String,
+      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
+      dislikes:
+          (json['dislikes'] as List<dynamic>).map((e) => e as String).toList(),
+      author: json['author'] as String,
       questionId: json['questionId'] as String,
       anonymous: json['anonymous'] as bool,
-      createdAts: DateTime.parse(json['createdAts'] as String),
-      updatedAts: DateTime.parse(json['updatedAts'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_AnswerDtoToJson(_$_AnswerDto instance) =>
     <String, dynamic>{
-      'ids': instance.ids,
-      'texts': instance.texts,
-      'images': instance.images,
-      'likess': instance.likess,
-      'dislikess': instance.dislikess,
-      'authors': instance.authors,
+      'id': instance.id,
+      'text': instance.text,
+      'image': instance.image,
+      'likes': instance.likes,
+      'dislikes': instance.dislikes,
+      'author': instance.author,
       'questionId': instance.questionId,
       'anonymous': instance.anonymous,
-      'createdAts': instance.createdAts.toIso8601String(),
-      'updatedAts': instance.updatedAts.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };

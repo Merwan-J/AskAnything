@@ -6,16 +6,16 @@ part 'answer_dto.g.dart';
 @freezed
 class AnswerDto with _$AnswerDto {
   const factory AnswerDto({
-    required String ids,
-    required String texts,
-    required String images,
-    required List<String> likess, // TODO: Change to user ids
-    required List<String> dislikess, // TODO: List of user ids
-    required String authors, // TODO: User id
+    required String id,
+    required String text,
+    required String image,
+    required List<String> likes, // TODO: Change to user ids
+    required List<String> dislikes, // TODO: List of user ids
+    required String author, // TODO: User id
     required String questionId, // TODO: Question id
     required bool anonymous,
-    required DateTime createdAts,
-    required DateTime updatedAts,
+    required DateTime createdAt,
+    required DateTime updatedAt,
   }) = _AnswerDto;
 
   factory AnswerDto.fromJson(Map<String, dynamic> json) =>

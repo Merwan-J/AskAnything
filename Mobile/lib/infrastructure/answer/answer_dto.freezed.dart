@@ -20,19 +20,19 @@ AnswerDto _$AnswerDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AnswerDto {
-  String get ids => throw _privateConstructorUsedError;
-  String get texts => throw _privateConstructorUsedError;
-  String get images => throw _privateConstructorUsedError;
-  List<String> get likess =>
+  String get id => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
+  List<String> get likes =>
       throw _privateConstructorUsedError; // TODO: Change to user ids
-  List<String> get dislikess =>
+  List<String> get dislikes =>
       throw _privateConstructorUsedError; // TODO: List of user ids
-  String get authors => throw _privateConstructorUsedError; // TODO: User id
+  String get author => throw _privateConstructorUsedError; // TODO: User id
   String get questionId =>
       throw _privateConstructorUsedError; // TODO: Question id
   bool get anonymous => throw _privateConstructorUsedError;
-  DateTime get createdAts => throw _privateConstructorUsedError;
-  DateTime get updatedAts => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,16 +46,16 @@ abstract class $AnswerDtoCopyWith<$Res> {
       _$AnswerDtoCopyWithImpl<$Res, AnswerDto>;
   @useResult
   $Res call(
-      {String ids,
-      String texts,
-      String images,
-      List<String> likess,
-      List<String> dislikess,
-      String authors,
+      {String id,
+      String text,
+      String image,
+      List<String> likes,
+      List<String> dislikes,
+      String author,
       String questionId,
       bool anonymous,
-      DateTime createdAts,
-      DateTime updatedAts});
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -71,41 +71,41 @@ class _$AnswerDtoCopyWithImpl<$Res, $Val extends AnswerDto>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
-    Object? texts = null,
-    Object? images = null,
-    Object? likess = null,
-    Object? dislikess = null,
-    Object? authors = null,
+    Object? id = null,
+    Object? text = null,
+    Object? image = null,
+    Object? likes = null,
+    Object? dislikes = null,
+    Object? author = null,
     Object? questionId = null,
     Object? anonymous = null,
-    Object? createdAts = null,
-    Object? updatedAts = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
-      ids: null == ids
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      texts: null == texts
-          ? _value.texts
-          : texts // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
-      likess: null == likess
-          ? _value.likess
-          : likess // ignore: cast_nullable_to_non_nullable
+      likes: null == likes
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      dislikess: null == dislikess
-          ? _value.dislikess
-          : dislikess // ignore: cast_nullable_to_non_nullable
+      dislikes: null == dislikes
+          ? _value.dislikes
+          : dislikes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      authors: null == authors
-          ? _value.authors
-          : authors // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
       questionId: null == questionId
           ? _value.questionId
@@ -115,13 +115,13 @@ class _$AnswerDtoCopyWithImpl<$Res, $Val extends AnswerDto>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAts: null == createdAts
-          ? _value.createdAts
-          : createdAts // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAts: null == updatedAts
-          ? _value.updatedAts
-          : updatedAts // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
@@ -135,16 +135,16 @@ abstract class _$$_AnswerDtoCopyWith<$Res> implements $AnswerDtoCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String ids,
-      String texts,
-      String images,
-      List<String> likess,
-      List<String> dislikess,
-      String authors,
+      {String id,
+      String text,
+      String image,
+      List<String> likes,
+      List<String> dislikes,
+      String author,
       String questionId,
       bool anonymous,
-      DateTime createdAts,
-      DateTime updatedAts});
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -158,41 +158,41 @@ class __$$_AnswerDtoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ids = null,
-    Object? texts = null,
-    Object? images = null,
-    Object? likess = null,
-    Object? dislikess = null,
-    Object? authors = null,
+    Object? id = null,
+    Object? text = null,
+    Object? image = null,
+    Object? likes = null,
+    Object? dislikes = null,
+    Object? author = null,
     Object? questionId = null,
     Object? anonymous = null,
-    Object? createdAts = null,
-    Object? updatedAts = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_AnswerDto(
-      ids: null == ids
-          ? _value.ids
-          : ids // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      texts: null == texts
-          ? _value.texts
-          : texts // ignore: cast_nullable_to_non_nullable
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
               as String,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
               as String,
-      likess: null == likess
-          ? _value._likess
-          : likess // ignore: cast_nullable_to_non_nullable
+      likes: null == likes
+          ? _value._likes
+          : likes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      dislikess: null == dislikess
-          ? _value._dislikess
-          : dislikess // ignore: cast_nullable_to_non_nullable
+      dislikes: null == dislikes
+          ? _value._dislikes
+          : dislikes // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      authors: null == authors
-          ? _value.authors
-          : authors // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
       questionId: null == questionId
           ? _value.questionId
@@ -202,13 +202,13 @@ class __$$_AnswerDtoCopyWithImpl<$Res>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      createdAts: null == createdAts
-          ? _value.createdAts
-          : createdAts // ignore: cast_nullable_to_non_nullable
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      updatedAts: null == updatedAts
-          ? _value.updatedAts
-          : updatedAts // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -218,49 +218,49 @@ class __$$_AnswerDtoCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AnswerDto implements _AnswerDto {
   const _$_AnswerDto(
-      {required this.ids,
-      required this.texts,
-      required this.images,
-      required final List<String> likess,
-      required final List<String> dislikess,
-      required this.authors,
+      {required this.id,
+      required this.text,
+      required this.image,
+      required final List<String> likes,
+      required final List<String> dislikes,
+      required this.author,
       required this.questionId,
       required this.anonymous,
-      required this.createdAts,
-      required this.updatedAts})
-      : _likess = likess,
-        _dislikess = dislikess;
+      required this.createdAt,
+      required this.updatedAt})
+      : _likes = likes,
+        _dislikes = dislikes;
 
   factory _$_AnswerDto.fromJson(Map<String, dynamic> json) =>
       _$$_AnswerDtoFromJson(json);
 
   @override
-  final String ids;
+  final String id;
   @override
-  final String texts;
+  final String text;
   @override
-  final String images;
-  final List<String> _likess;
+  final String image;
+  final List<String> _likes;
   @override
-  List<String> get likess {
-    if (_likess is EqualUnmodifiableListView) return _likess;
+  List<String> get likes {
+    if (_likes is EqualUnmodifiableListView) return _likes;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_likess);
+    return EqualUnmodifiableListView(_likes);
   }
 
 // TODO: Change to user ids
-  final List<String> _dislikess;
+  final List<String> _dislikes;
 // TODO: Change to user ids
   @override
-  List<String> get dislikess {
-    if (_dislikess is EqualUnmodifiableListView) return _dislikess;
+  List<String> get dislikes {
+    if (_dislikes is EqualUnmodifiableListView) return _dislikes;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dislikess);
+    return EqualUnmodifiableListView(_dislikes);
   }
 
 // TODO: List of user ids
   @override
-  final String authors;
+  final String author;
 // TODO: User id
   @override
   final String questionId;
@@ -268,13 +268,13 @@ class _$_AnswerDto implements _AnswerDto {
   @override
   final bool anonymous;
   @override
-  final DateTime createdAts;
+  final DateTime createdAt;
   @override
-  final DateTime updatedAts;
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'AnswerDto(ids: $ids, texts: $texts, images: $images, likess: $likess, dislikess: $dislikess, authors: $authors, questionId: $questionId, anonymous: $anonymous, createdAts: $createdAts, updatedAts: $updatedAts)';
+    return 'AnswerDto(id: $id, text: $text, image: $image, likes: $likes, dislikes: $dislikes, author: $author, questionId: $questionId, anonymous: $anonymous, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -282,37 +282,36 @@ class _$_AnswerDto implements _AnswerDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AnswerDto &&
-            (identical(other.ids, ids) || other.ids == ids) &&
-            (identical(other.texts, texts) || other.texts == texts) &&
-            (identical(other.images, images) || other.images == images) &&
-            const DeepCollectionEquality().equals(other._likess, _likess) &&
-            const DeepCollectionEquality()
-                .equals(other._dislikess, _dislikess) &&
-            (identical(other.authors, authors) || other.authors == authors) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.text, text) || other.text == text) &&
+            (identical(other.image, image) || other.image == image) &&
+            const DeepCollectionEquality().equals(other._likes, _likes) &&
+            const DeepCollectionEquality().equals(other._dislikes, _dislikes) &&
+            (identical(other.author, author) || other.author == author) &&
             (identical(other.questionId, questionId) ||
                 other.questionId == questionId) &&
             (identical(other.anonymous, anonymous) ||
                 other.anonymous == anonymous) &&
-            (identical(other.createdAts, createdAts) ||
-                other.createdAts == createdAts) &&
-            (identical(other.updatedAts, updatedAts) ||
-                other.updatedAts == updatedAts));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      ids,
-      texts,
-      images,
-      const DeepCollectionEquality().hash(_likess),
-      const DeepCollectionEquality().hash(_dislikess),
-      authors,
+      id,
+      text,
+      image,
+      const DeepCollectionEquality().hash(_likes),
+      const DeepCollectionEquality().hash(_dislikes),
+      author,
       questionId,
       anonymous,
-      createdAts,
-      updatedAts);
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -330,40 +329,40 @@ class _$_AnswerDto implements _AnswerDto {
 
 abstract class _AnswerDto implements AnswerDto {
   const factory _AnswerDto(
-      {required final String ids,
-      required final String texts,
-      required final String images,
-      required final List<String> likess,
-      required final List<String> dislikess,
-      required final String authors,
+      {required final String id,
+      required final String text,
+      required final String image,
+      required final List<String> likes,
+      required final List<String> dislikes,
+      required final String author,
       required final String questionId,
       required final bool anonymous,
-      required final DateTime createdAts,
-      required final DateTime updatedAts}) = _$_AnswerDto;
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$_AnswerDto;
 
   factory _AnswerDto.fromJson(Map<String, dynamic> json) =
       _$_AnswerDto.fromJson;
 
   @override
-  String get ids;
+  String get id;
   @override
-  String get texts;
+  String get text;
   @override
-  String get images;
+  String get image;
   @override
-  List<String> get likess;
+  List<String> get likes;
   @override // TODO: Change to user ids
-  List<String> get dislikess;
+  List<String> get dislikes;
   @override // TODO: List of user ids
-  String get authors;
+  String get author;
   @override // TODO: User id
   String get questionId;
   @override // TODO: Question id
   bool get anonymous;
   @override
-  DateTime get createdAts;
+  DateTime get createdAt;
   @override
-  DateTime get updatedAts;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_AnswerDtoCopyWith<_$_AnswerDto> get copyWith =>
