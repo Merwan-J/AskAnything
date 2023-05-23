@@ -1,16 +1,16 @@
-import 'package:askanything/domain/user/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
 
-part 'question.freezed.dart';
-part 'question.g.dart';
+part 'question_entity.freezed.dart';
+part 'question_entity.g.dart';
 
 @freezed
-class Question with _$Question {
-  const factory Question({
+class QuestionEntity with _$QuestionEntity {
+  const factory QuestionEntity({
     required String id,
     required String title,
     required String description,
-    // TODO: Replace string with User model class
+    //TODO: Replace string with User model class
     required String author,
     required bool anonymous,
     // TODO: Replace string with Answer model class
@@ -19,10 +19,11 @@ class Question with _$Question {
     required List<String> likes,
     required List<String> dislikes,
     String? image,
+    // TODO: Convert to DateTime
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _Question;
+  }) = _QuestionEntity;
 
-  factory Question.fromJson(Map<String, dynamic> json) =>
-      _$QuestionFromJson(json);
+  factory QuestionEntity.fromJson(Map<String, dynamic> json) =>
+      _$QuestionEntityFromJson(json);
 }

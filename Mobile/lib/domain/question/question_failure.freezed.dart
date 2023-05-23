@@ -24,9 +24,9 @@ mixin _$QuestionFailure {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,9 +37,9 @@ mixin _$QuestionFailure {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,9 +50,9 @@ mixin _$QuestionFailure {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,10 +64,10 @@ mixin _$QuestionFailure {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,9 +78,9 @@ mixin _$QuestionFailure {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,9 +91,9 @@ mixin _$QuestionFailure {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,9 +161,9 @@ class _$ServerError implements ServerError {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return serverError();
   }
@@ -177,9 +177,9 @@ class _$ServerError implements ServerError {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return serverError?.call();
   }
@@ -193,9 +193,9 @@ class _$ServerError implements ServerError {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -213,10 +213,10 @@ class _$ServerError implements ServerError {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return serverError(this);
   }
@@ -230,9 +230,9 @@ class _$ServerError implements ServerError {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return serverError?.call(this);
   }
@@ -246,9 +246,9 @@ class _$ServerError implements ServerError {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -306,9 +306,9 @@ class _$NetworkError implements NetworkError {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return networkError();
   }
@@ -322,9 +322,9 @@ class _$NetworkError implements NetworkError {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return networkError?.call();
   }
@@ -338,9 +338,9 @@ class _$NetworkError implements NetworkError {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -358,10 +358,10 @@ class _$NetworkError implements NetworkError {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return networkError(this);
   }
@@ -375,9 +375,9 @@ class _$NetworkError implements NetworkError {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return networkError?.call(this);
   }
@@ -391,9 +391,9 @@ class _$NetworkError implements NetworkError {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (networkError != null) {
@@ -451,9 +451,9 @@ class _$Unauthorized implements Unauthorized {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return unauthorized();
   }
@@ -467,9 +467,9 @@ class _$Unauthorized implements Unauthorized {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return unauthorized?.call();
   }
@@ -483,9 +483,9 @@ class _$Unauthorized implements Unauthorized {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (unauthorized != null) {
@@ -503,10 +503,10 @@ class _$Unauthorized implements Unauthorized {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return unauthorized(this);
   }
@@ -520,9 +520,9 @@ class _$Unauthorized implements Unauthorized {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return unauthorized?.call(this);
   }
@@ -536,9 +536,9 @@ class _$Unauthorized implements Unauthorized {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (unauthorized != null) {
@@ -595,9 +595,9 @@ class _$NotFound implements NotFound {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return notFound();
   }
@@ -611,9 +611,9 @@ class _$NotFound implements NotFound {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return notFound?.call();
   }
@@ -627,9 +627,9 @@ class _$NotFound implements NotFound {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -647,10 +647,10 @@ class _$NotFound implements NotFound {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return notFound(this);
   }
@@ -664,9 +664,9 @@ class _$NotFound implements NotFound {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return notFound?.call(this);
   }
@@ -680,9 +680,9 @@ class _$NotFound implements NotFound {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (notFound != null) {
@@ -740,9 +740,9 @@ class _$PermissionDenied implements PermissionDenied {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return permissionDenied();
   }
@@ -756,9 +756,9 @@ class _$PermissionDenied implements PermissionDenied {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return permissionDenied?.call();
   }
@@ -772,9 +772,9 @@ class _$PermissionDenied implements PermissionDenied {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (permissionDenied != null) {
@@ -792,10 +792,10 @@ class _$PermissionDenied implements PermissionDenied {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return permissionDenied(this);
   }
@@ -809,9 +809,9 @@ class _$PermissionDenied implements PermissionDenied {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return permissionDenied?.call(this);
   }
@@ -825,9 +825,9 @@ class _$PermissionDenied implements PermissionDenied {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (permissionDenied != null) {
@@ -885,9 +885,9 @@ class _$Forbidden implements Forbidden {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
     return forbidden();
   }
@@ -901,9 +901,9 @@ class _$Forbidden implements Forbidden {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
     return forbidden?.call();
   }
@@ -917,9 +917,9 @@ class _$Forbidden implements Forbidden {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
     if (forbidden != null) {
@@ -937,10 +937,10 @@ class _$Forbidden implements Forbidden {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
     return forbidden(this);
   }
@@ -954,9 +954,9 @@ class _$Forbidden implements Forbidden {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
     return forbidden?.call(this);
   }
@@ -970,9 +970,9 @@ class _$Forbidden implements Forbidden {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
     if (forbidden != null) {
@@ -1009,7 +1009,7 @@ class _$EmptyTitleError implements EmptyTitleError {
 
   @override
   String toString() {
-    return 'QuestionFailure.EmptyTitleError()';
+    return 'QuestionFailure.emptyTitleError()';
   }
 
   @override
@@ -1030,11 +1030,11 @@ class _$EmptyTitleError implements EmptyTitleError {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
-    return EmptyTitleError();
+    return emptyTitleError();
   }
 
   @override
@@ -1046,11 +1046,11 @@ class _$EmptyTitleError implements EmptyTitleError {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
-    return EmptyTitleError?.call();
+    return emptyTitleError?.call();
   }
 
   @override
@@ -1062,13 +1062,13 @@ class _$EmptyTitleError implements EmptyTitleError {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyTitleError != null) {
-      return EmptyTitleError();
+    if (emptyTitleError != null) {
+      return emptyTitleError();
     }
     return orElse();
   }
@@ -1082,12 +1082,12 @@ class _$EmptyTitleError implements EmptyTitleError {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
-    return EmptyTitleError(this);
+    return emptyTitleError(this);
   }
 
   @override
@@ -1099,11 +1099,11 @@ class _$EmptyTitleError implements EmptyTitleError {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
-    return EmptyTitleError?.call(this);
+    return emptyTitleError?.call(this);
   }
 
   @override
@@ -1115,13 +1115,13 @@ class _$EmptyTitleError implements EmptyTitleError {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyTitleError != null) {
-      return EmptyTitleError(this);
+    if (emptyTitleError != null) {
+      return emptyTitleError(this);
     }
     return orElse();
   }
@@ -1154,7 +1154,7 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
 
   @override
   String toString() {
-    return 'QuestionFailure.EmptyDescriptionError()';
+    return 'QuestionFailure.emptyDescriptionError()';
   }
 
   @override
@@ -1175,11 +1175,11 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
-    return EmptyDescriptionError();
+    return emptyDescriptionError();
   }
 
   @override
@@ -1191,11 +1191,11 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
-    return EmptyDescriptionError?.call();
+    return emptyDescriptionError?.call();
   }
 
   @override
@@ -1207,13 +1207,13 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyDescriptionError != null) {
-      return EmptyDescriptionError();
+    if (emptyDescriptionError != null) {
+      return emptyDescriptionError();
     }
     return orElse();
   }
@@ -1227,12 +1227,12 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
-    return EmptyDescriptionError(this);
+    return emptyDescriptionError(this);
   }
 
   @override
@@ -1244,11 +1244,11 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
-    return EmptyDescriptionError?.call(this);
+    return emptyDescriptionError?.call(this);
   }
 
   @override
@@ -1260,13 +1260,13 @@ class _$EmptyDescriptionError implements EmptyDescriptionError {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyDescriptionError != null) {
-      return EmptyDescriptionError(this);
+    if (emptyDescriptionError != null) {
+      return emptyDescriptionError(this);
     }
     return orElse();
   }
@@ -1299,7 +1299,7 @@ class _$EmptyTopicError implements EmptyTopicError {
 
   @override
   String toString() {
-    return 'QuestionFailure.EmptyTopicError()';
+    return 'QuestionFailure.emptyTopicError()';
   }
 
   @override
@@ -1320,11 +1320,11 @@ class _$EmptyTopicError implements EmptyTopicError {
     required TResult Function() notFound,
     required TResult Function() permissionDenied,
     required TResult Function() forbidden,
-    required TResult Function() EmptyTitleError,
-    required TResult Function() EmptyDescriptionError,
-    required TResult Function() EmptyTopicError,
+    required TResult Function() emptyTitleError,
+    required TResult Function() emptyDescriptionError,
+    required TResult Function() emptyTopicError,
   }) {
-    return EmptyTopicError();
+    return emptyTopicError();
   }
 
   @override
@@ -1336,11 +1336,11 @@ class _$EmptyTopicError implements EmptyTopicError {
     TResult? Function()? notFound,
     TResult? Function()? permissionDenied,
     TResult? Function()? forbidden,
-    TResult? Function()? EmptyTitleError,
-    TResult? Function()? EmptyDescriptionError,
-    TResult? Function()? EmptyTopicError,
+    TResult? Function()? emptyTitleError,
+    TResult? Function()? emptyDescriptionError,
+    TResult? Function()? emptyTopicError,
   }) {
-    return EmptyTopicError?.call();
+    return emptyTopicError?.call();
   }
 
   @override
@@ -1352,13 +1352,13 @@ class _$EmptyTopicError implements EmptyTopicError {
     TResult Function()? notFound,
     TResult Function()? permissionDenied,
     TResult Function()? forbidden,
-    TResult Function()? EmptyTitleError,
-    TResult Function()? EmptyDescriptionError,
-    TResult Function()? EmptyTopicError,
+    TResult Function()? emptyTitleError,
+    TResult Function()? emptyDescriptionError,
+    TResult Function()? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyTopicError != null) {
-      return EmptyTopicError();
+    if (emptyTopicError != null) {
+      return emptyTopicError();
     }
     return orElse();
   }
@@ -1372,12 +1372,12 @@ class _$EmptyTopicError implements EmptyTopicError {
     required TResult Function(NotFound value) notFound,
     required TResult Function(PermissionDenied value) permissionDenied,
     required TResult Function(Forbidden value) forbidden,
-    required TResult Function(EmptyTitleError value) EmptyTitleError,
+    required TResult Function(EmptyTitleError value) emptyTitleError,
     required TResult Function(EmptyDescriptionError value)
-        EmptyDescriptionError,
-    required TResult Function(EmptyTopicError value) EmptyTopicError,
+        emptyDescriptionError,
+    required TResult Function(EmptyTopicError value) emptyTopicError,
   }) {
-    return EmptyTopicError(this);
+    return emptyTopicError(this);
   }
 
   @override
@@ -1389,11 +1389,11 @@ class _$EmptyTopicError implements EmptyTopicError {
     TResult? Function(NotFound value)? notFound,
     TResult? Function(PermissionDenied value)? permissionDenied,
     TResult? Function(Forbidden value)? forbidden,
-    TResult? Function(EmptyTitleError value)? EmptyTitleError,
-    TResult? Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult? Function(EmptyTopicError value)? EmptyTopicError,
+    TResult? Function(EmptyTitleError value)? emptyTitleError,
+    TResult? Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult? Function(EmptyTopicError value)? emptyTopicError,
   }) {
-    return EmptyTopicError?.call(this);
+    return emptyTopicError?.call(this);
   }
 
   @override
@@ -1405,13 +1405,13 @@ class _$EmptyTopicError implements EmptyTopicError {
     TResult Function(NotFound value)? notFound,
     TResult Function(PermissionDenied value)? permissionDenied,
     TResult Function(Forbidden value)? forbidden,
-    TResult Function(EmptyTitleError value)? EmptyTitleError,
-    TResult Function(EmptyDescriptionError value)? EmptyDescriptionError,
-    TResult Function(EmptyTopicError value)? EmptyTopicError,
+    TResult Function(EmptyTitleError value)? emptyTitleError,
+    TResult Function(EmptyDescriptionError value)? emptyDescriptionError,
+    TResult Function(EmptyTopicError value)? emptyTopicError,
     required TResult orElse(),
   }) {
-    if (EmptyTopicError != null) {
-      return EmptyTopicError(this);
+    if (emptyTopicError != null) {
+      return emptyTopicError(this);
     }
     return orElse();
   }

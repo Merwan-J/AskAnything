@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'question.dart';
+part of 'question_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,16 +14,16 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Question _$QuestionFromJson(Map<String, dynamic> json) {
-  return _Question.fromJson(json);
+QuestionDto _$QuestionDtoFromJson(Map<String, dynamic> json) {
+  return _QuestionDto.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Question {
+mixin _$QuestionDto {
   String get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description =>
-      throw _privateConstructorUsedError; // TODO: Replace string with User model class
+      throw _privateConstructorUsedError; //TODO: Replace string with User model class
   String get author => throw _privateConstructorUsedError;
   bool get anonymous =>
       throw _privateConstructorUsedError; // TODO: Replace string with Answer model class
@@ -31,20 +31,22 @@ mixin _$Question {
   String get topic => throw _privateConstructorUsedError;
   List<String> get likes => throw _privateConstructorUsedError;
   List<String> get dislikes => throw _privateConstructorUsedError;
-  String? get image => throw _privateConstructorUsedError;
+  String? get image =>
+      throw _privateConstructorUsedError; // TODO: Convert to DateTime
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $QuestionCopyWith<Question> get copyWith =>
+  $QuestionDtoCopyWith<QuestionDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $QuestionCopyWith<$Res> {
-  factory $QuestionCopyWith(Question value, $Res Function(Question) then) =
-      _$QuestionCopyWithImpl<$Res, Question>;
+abstract class $QuestionDtoCopyWith<$Res> {
+  factory $QuestionDtoCopyWith(
+          QuestionDto value, $Res Function(QuestionDto) then) =
+      _$QuestionDtoCopyWithImpl<$Res, QuestionDto>;
   @useResult
   $Res call(
       {String id,
@@ -62,9 +64,9 @@ abstract class $QuestionCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$QuestionCopyWithImpl<$Res, $Val extends Question>
-    implements $QuestionCopyWith<$Res> {
-  _$QuestionCopyWithImpl(this._value, this._then);
+class _$QuestionDtoCopyWithImpl<$Res, $Val extends QuestionDto>
+    implements $QuestionDtoCopyWith<$Res> {
+  _$QuestionDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -141,10 +143,11 @@ class _$QuestionCopyWithImpl<$Res, $Val extends Question>
 }
 
 /// @nodoc
-abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
-  factory _$$_QuestionCopyWith(
-          _$_Question value, $Res Function(_$_Question) then) =
-      __$$_QuestionCopyWithImpl<$Res>;
+abstract class _$$_QuestionDtoCopyWith<$Res>
+    implements $QuestionDtoCopyWith<$Res> {
+  factory _$$_QuestionDtoCopyWith(
+          _$_QuestionDto value, $Res Function(_$_QuestionDto) then) =
+      __$$_QuestionDtoCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -163,11 +166,11 @@ abstract class _$$_QuestionCopyWith<$Res> implements $QuestionCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_QuestionCopyWithImpl<$Res>
-    extends _$QuestionCopyWithImpl<$Res, _$_Question>
-    implements _$$_QuestionCopyWith<$Res> {
-  __$$_QuestionCopyWithImpl(
-      _$_Question _value, $Res Function(_$_Question) _then)
+class __$$_QuestionDtoCopyWithImpl<$Res>
+    extends _$QuestionDtoCopyWithImpl<$Res, _$_QuestionDto>
+    implements _$$_QuestionDtoCopyWith<$Res> {
+  __$$_QuestionDtoCopyWithImpl(
+      _$_QuestionDto _value, $Res Function(_$_QuestionDto) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -186,7 +189,7 @@ class __$$_QuestionCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$_Question(
+    return _then(_$_QuestionDto(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -241,8 +244,8 @@ class __$$_QuestionCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Question implements _Question {
-  const _$_Question(
+class _$_QuestionDto with DiagnosticableTreeMixin implements _QuestionDto {
+  const _$_QuestionDto(
       {required this.id,
       required this.title,
       required this.description,
@@ -259,8 +262,8 @@ class _$_Question implements _Question {
         _likes = likes,
         _dislikes = dislikes;
 
-  factory _$_Question.fromJson(Map<String, dynamic> json) =>
-      _$$_QuestionFromJson(json);
+  factory _$_QuestionDto.fromJson(Map<String, dynamic> json) =>
+      _$$_QuestionDtoFromJson(json);
 
   @override
   final String id;
@@ -268,7 +271,7 @@ class _$_Question implements _Question {
   final String title;
   @override
   final String description;
-// TODO: Replace string with User model class
+//TODO: Replace string with User model class
   @override
   final String author;
   @override
@@ -303,21 +306,41 @@ class _$_Question implements _Question {
 
   @override
   final String? image;
+// TODO: Convert to DateTime
   @override
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
 
   @override
-  String toString() {
-    return 'Question(id: $id, title: $title, description: $description, author: $author, anonymous: $anonymous, answers: $answers, topic: $topic, likes: $likes, dislikes: $dislikes, image: $image, createdAt: $createdAt, updatedAt: $updatedAt)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'QuestionDto(id: $id, title: $title, description: $description, author: $author, anonymous: $anonymous, answers: $answers, topic: $topic, likes: $likes, dislikes: $dislikes, image: $image, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'QuestionDto'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('author', author))
+      ..add(DiagnosticsProperty('anonymous', anonymous))
+      ..add(DiagnosticsProperty('answers', answers))
+      ..add(DiagnosticsProperty('topic', topic))
+      ..add(DiagnosticsProperty('likes', likes))
+      ..add(DiagnosticsProperty('dislikes', dislikes))
+      ..add(DiagnosticsProperty('image', image))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Question &&
+            other is _$_QuestionDto &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
@@ -356,19 +379,19 @@ class _$_Question implements _Question {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_QuestionCopyWith<_$_Question> get copyWith =>
-      __$$_QuestionCopyWithImpl<_$_Question>(this, _$identity);
+  _$$_QuestionDtoCopyWith<_$_QuestionDto> get copyWith =>
+      __$$_QuestionDtoCopyWithImpl<_$_QuestionDto>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_QuestionToJson(
+    return _$$_QuestionDtoToJson(
       this,
     );
   }
 }
 
-abstract class _Question implements Question {
-  const factory _Question(
+abstract class _QuestionDto implements QuestionDto {
+  const factory _QuestionDto(
       {required final String id,
       required final String title,
       required final String description,
@@ -380,9 +403,10 @@ abstract class _Question implements Question {
       required final List<String> dislikes,
       final String? image,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_Question;
+      required final DateTime updatedAt}) = _$_QuestionDto;
 
-  factory _Question.fromJson(Map<String, dynamic> json) = _$_Question.fromJson;
+  factory _QuestionDto.fromJson(Map<String, dynamic> json) =
+      _$_QuestionDto.fromJson;
 
   @override
   String get id;
@@ -390,7 +414,7 @@ abstract class _Question implements Question {
   String get title;
   @override
   String get description;
-  @override // TODO: Replace string with User model class
+  @override //TODO: Replace string with User model class
   String get author;
   @override
   bool get anonymous;
@@ -404,12 +428,12 @@ abstract class _Question implements Question {
   List<String> get dislikes;
   @override
   String? get image;
-  @override
+  @override // TODO: Convert to DateTime
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_QuestionCopyWith<_$_Question> get copyWith =>
+  _$$_QuestionDtoCopyWith<_$_QuestionDto> get copyWith =>
       throw _privateConstructorUsedError;
 }
