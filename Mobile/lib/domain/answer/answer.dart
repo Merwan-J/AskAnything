@@ -2,7 +2,8 @@ import 'dart:core';
 import 'dart:core';
 
 class Answer {
-  final int id;
+  final String id;
+  final String text;
   final String image;
   final List<String> likes;
   final List<String> dislikes;
@@ -14,6 +15,7 @@ class Answer {
 
   Answer({
     required this.id,
+    required this.text,
     required this.image,
     required this.likes,
     required this.dislikes,

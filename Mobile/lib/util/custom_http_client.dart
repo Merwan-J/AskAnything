@@ -5,7 +5,7 @@ import './string_extension.dart';
 
 // Custom HTTP client to streamline the HTTP requests.
 class CustomHttpClient {
-  static String baseUrl = "http://localhost:3000/";
+  static String baseUrl = "http://localhost:3000/api/v1/";
 
   final http.Client _httpClient = http.Client();
   String? _authToken;
