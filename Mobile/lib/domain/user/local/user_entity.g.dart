@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_dto.dart';
+part of 'user_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_UserDTO _$$_UserDTOFromJson(Map<String, dynamic> json) => _$_UserDTO(
+_$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
+    _$_UserEntity(
       id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
@@ -33,7 +34,7 @@ _$_UserDTO _$$_UserDTOFromJson(Map<String, dynamic> json) => _$_UserDTO(
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
-Map<String, dynamic> _$$_UserDTOToJson(_$_UserDTO instance) =>
+Map<String, dynamic> _$$_UserEntityToJson(_$_UserEntity instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_dto.freezed.dart';
-part 'user_dto.g.dart';
+part 'user_entity.freezed.dart';
+part 'user_entity.g.dart';
 
 @freezed
-class UserDTO with _$UserDTO {
-  const factory UserDTO({
+class UserEntity with _$UserEntity {
+  const factory UserEntity({
     required String id,
     required String name,
     required String email,
@@ -22,8 +22,8 @@ class UserDTO with _$UserDTO {
     required List<String> followings,
     required DateTime createdAt,
     required DateTime updatedAt,
-  }) = _UserDTO;
+  }) = _UserEntity;
 
-  factory UserDTO.fromJson(Map<String, dynamic> json) =>
-      _$UserDTOFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) =>
+      _$UserEntityFromJson(json);
 }

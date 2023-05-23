@@ -27,11 +27,15 @@ class UserApi {
     }
   }
 
-  Future<void> updateUser(UserDTO userDto) async {
-    var response = await _customHttpClient.put("users/${userDto.id}",
-        body: json.encode(userDto.toJson()));
+  Future<UserDTO> updateUser(UserFormDTO userFormDto, String userId) async {
+    final response = await _customHttpClient.put(
+      "users/$userId",
+      body: json.encode(userFormDto.toJson()),
+    );
 
-    if (response.statusCode != 200) {
+    if (response.statusCode == 200) {
+      return UserDTO.fromJson(jsonDecode(response.body));
+    } else {
       throw Exception("Failed to update user");
     }
   }
