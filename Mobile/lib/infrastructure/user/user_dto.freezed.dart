@@ -20,21 +20,22 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDTO {
-  String get id => throw _privateConstructorUsedError;
+  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
-  String get profilePic => throw _privateConstructorUsedError;
-  List<String> get questionIds => throw _privateConstructorUsedError;
-  List<String> get answerIds => throw _privateConstructorUsedError;
-  int get reputation => throw _privateConstructorUsedError;
-  int get likes => throw _privateConstructorUsedError;
-  int get dislikes => throw _privateConstructorUsedError;
-  Map<String, List<String>> get bookmarks => throw _privateConstructorUsedError;
-  List<String> get followers => throw _privateConstructorUsedError;
-  List<String> get followings => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  String? get profilePic => throw _privateConstructorUsedError;
+  List<String>? get questionIds => throw _privateConstructorUsedError;
+  List<String>? get answerIds => throw _privateConstructorUsedError;
+  int? get reputation => throw _privateConstructorUsedError;
+  int? get likes => throw _privateConstructorUsedError;
+  int? get dislikes => throw _privateConstructorUsedError;
+  Map<String, List<String>>? get bookmarks =>
+      throw _privateConstructorUsedError;
+  List<String>? get followers => throw _privateConstructorUsedError;
+  List<String>? get followings => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -47,21 +48,21 @@ abstract class $UserDTOCopyWith<$Res> {
       _$UserDTOCopyWithImpl<$Res, UserDTO>;
   @useResult
   $Res call(
-      {String id,
+      {String? id,
       String name,
       String email,
       String password,
-      String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
-      int reputation,
-      int likes,
-      int dislikes,
-      Map<String, List<String>> bookmarks,
-      List<String> followers,
-      List<String> followings,
-      DateTime createdAt,
-      DateTime updatedAt});
+      String? profilePic,
+      List<String>? questionIds,
+      List<String>? answerIds,
+      int? reputation,
+      int? likes,
+      int? dislikes,
+      Map<String, List<String>>? bookmarks,
+      List<String>? followers,
+      List<String>? followings,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -77,27 +78,27 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? email = null,
     Object? password = null,
-    Object? profilePic = null,
-    Object? questionIds = null,
-    Object? answerIds = null,
-    Object? reputation = null,
-    Object? likes = null,
-    Object? dislikes = null,
-    Object? bookmarks = null,
-    Object? followers = null,
-    Object? followings = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? profilePic = freezed,
+    Object? questionIds = freezed,
+    Object? answerIds = freezed,
+    Object? reputation = freezed,
+    Object? likes = freezed,
+    Object? dislikes = freezed,
+    Object? bookmarks = freezed,
+    Object? followers = freezed,
+    Object? followings = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -110,50 +111,50 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      profilePic: null == profilePic
+      profilePic: freezed == profilePic
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
-              as String,
-      questionIds: null == questionIds
+              as String?,
+      questionIds: freezed == questionIds
           ? _value.questionIds
           : questionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      answerIds: null == answerIds
+              as List<String>?,
+      answerIds: freezed == answerIds
           ? _value.answerIds
           : answerIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      reputation: null == reputation
+              as List<String>?,
+      reputation: freezed == reputation
           ? _value.reputation
           : reputation // ignore: cast_nullable_to_non_nullable
-              as int,
-      likes: null == likes
+              as int?,
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      dislikes: null == dislikes
+              as int?,
+      dislikes: freezed == dislikes
           ? _value.dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as int,
-      bookmarks: null == bookmarks
+              as int?,
+      bookmarks: freezed == bookmarks
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
-      followers: null == followers
+              as Map<String, List<String>>?,
+      followers: freezed == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      followings: null == followings
+              as List<String>?,
+      followings: freezed == followings
           ? _value.followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      createdAt: null == createdAt
+              as List<String>?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -166,21 +167,21 @@ abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {String? id,
       String name,
       String email,
       String password,
-      String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
-      int reputation,
-      int likes,
-      int dislikes,
-      Map<String, List<String>> bookmarks,
-      List<String> followers,
-      List<String> followings,
-      DateTime createdAt,
-      DateTime updatedAt});
+      String? profilePic,
+      List<String>? questionIds,
+      List<String>? answerIds,
+      int? reputation,
+      int? likes,
+      int? dislikes,
+      Map<String, List<String>>? bookmarks,
+      List<String>? followers,
+      List<String>? followings,
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -193,27 +194,27 @@ class __$$_UserDTOCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? email = null,
     Object? password = null,
-    Object? profilePic = null,
-    Object? questionIds = null,
-    Object? answerIds = null,
-    Object? reputation = null,
-    Object? likes = null,
-    Object? dislikes = null,
-    Object? bookmarks = null,
-    Object? followers = null,
-    Object? followings = null,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? profilePic = freezed,
+    Object? questionIds = freezed,
+    Object? answerIds = freezed,
+    Object? reputation = freezed,
+    Object? likes = freezed,
+    Object? dislikes = freezed,
+    Object? bookmarks = freezed,
+    Object? followers = freezed,
+    Object? followings = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$_UserDTO(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -226,50 +227,50 @@ class __$$_UserDTOCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-      profilePic: null == profilePic
+      profilePic: freezed == profilePic
           ? _value.profilePic
           : profilePic // ignore: cast_nullable_to_non_nullable
-              as String,
-      questionIds: null == questionIds
+              as String?,
+      questionIds: freezed == questionIds
           ? _value._questionIds
           : questionIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      answerIds: null == answerIds
+              as List<String>?,
+      answerIds: freezed == answerIds
           ? _value._answerIds
           : answerIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      reputation: null == reputation
+              as List<String>?,
+      reputation: freezed == reputation
           ? _value.reputation
           : reputation // ignore: cast_nullable_to_non_nullable
-              as int,
-      likes: null == likes
+              as int?,
+      likes: freezed == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as int,
-      dislikes: null == dislikes
+              as int?,
+      dislikes: freezed == dislikes
           ? _value.dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as int,
-      bookmarks: null == bookmarks
+              as int?,
+      bookmarks: freezed == bookmarks
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
-      followers: null == followers
+              as Map<String, List<String>>?,
+      followers: freezed == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      followings: null == followings
+              as List<String>?,
+      followings: freezed == followings
           ? _value._followings
           : followings // ignore: cast_nullable_to_non_nullable
-              as List<String>,
-      createdAt: null == createdAt
+              as List<String>?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as DateTime?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
     ));
   }
 }
@@ -278,21 +279,21 @@ class __$$_UserDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserDTO implements _UserDTO {
   const _$_UserDTO(
-      {required this.id,
+      {this.id,
       required this.name,
       required this.email,
       required this.password,
-      required this.profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
-      required this.reputation,
-      required this.likes,
-      required this.dislikes,
-      required final Map<String, List<String>> bookmarks,
-      required final List<String> followers,
-      required final List<String> followings,
-      required this.createdAt,
-      required this.updatedAt})
+      this.profilePic,
+      final List<String>? questionIds,
+      final List<String>? answerIds,
+      this.reputation,
+      this.likes,
+      this.dislikes,
+      final Map<String, List<String>>? bookmarks,
+      final List<String>? followers,
+      final List<String>? followings,
+      this.createdAt,
+      this.updatedAt})
       : _questionIds = questionIds,
         _answerIds = answerIds,
         _bookmarks = bookmarks,
@@ -303,7 +304,7 @@ class _$_UserDTO implements _UserDTO {
       _$$_UserDTOFromJson(json);
 
   @override
-  final String id;
+  final String? id;
   @override
   final String name;
   @override
@@ -311,57 +312,67 @@ class _$_UserDTO implements _UserDTO {
   @override
   final String password;
   @override
-  final String profilePic;
-  final List<String> _questionIds;
+  final String? profilePic;
+  final List<String>? _questionIds;
   @override
-  List<String> get questionIds {
+  List<String>? get questionIds {
+    final value = _questionIds;
+    if (value == null) return null;
     if (_questionIds is EqualUnmodifiableListView) return _questionIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_questionIds);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<String> _answerIds;
+  final List<String>? _answerIds;
   @override
-  List<String> get answerIds {
+  List<String>? get answerIds {
+    final value = _answerIds;
+    if (value == null) return null;
     if (_answerIds is EqualUnmodifiableListView) return _answerIds;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_answerIds);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final int reputation;
+  final int? reputation;
   @override
-  final int likes;
+  final int? likes;
   @override
-  final int dislikes;
-  final Map<String, List<String>> _bookmarks;
+  final int? dislikes;
+  final Map<String, List<String>>? _bookmarks;
   @override
-  Map<String, List<String>> get bookmarks {
+  Map<String, List<String>>? get bookmarks {
+    final value = _bookmarks;
+    if (value == null) return null;
     if (_bookmarks is EqualUnmodifiableMapView) return _bookmarks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_bookmarks);
+    return EqualUnmodifiableMapView(value);
   }
 
-  final List<String> _followers;
+  final List<String>? _followers;
   @override
-  List<String> get followers {
+  List<String>? get followers {
+    final value = _followers;
+    if (value == null) return null;
     if (_followers is EqualUnmodifiableListView) return _followers;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_followers);
+    return EqualUnmodifiableListView(value);
   }
 
-  final List<String> _followings;
+  final List<String>? _followings;
   @override
-  List<String> get followings {
+  List<String>? get followings {
+    final value = _followings;
+    if (value == null) return null;
     if (_followings is EqualUnmodifiableListView) return _followings;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_followings);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
-  final DateTime createdAt;
+  final DateTime? createdAt;
   @override
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   @override
   String toString() {
@@ -437,26 +448,26 @@ class _$_UserDTO implements _UserDTO {
 
 abstract class _UserDTO implements UserDTO {
   const factory _UserDTO(
-      {required final String id,
+      {final String? id,
       required final String name,
       required final String email,
       required final String password,
-      required final String profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
-      required final int reputation,
-      required final int likes,
-      required final int dislikes,
-      required final Map<String, List<String>> bookmarks,
-      required final List<String> followers,
-      required final List<String> followings,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_UserDTO;
+      final String? profilePic,
+      final List<String>? questionIds,
+      final List<String>? answerIds,
+      final int? reputation,
+      final int? likes,
+      final int? dislikes,
+      final Map<String, List<String>>? bookmarks,
+      final List<String>? followers,
+      final List<String>? followings,
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$_UserDTO;
 
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
-  String get id;
+  String? get id;
   @override
   String get name;
   @override
@@ -464,27 +475,27 @@ abstract class _UserDTO implements UserDTO {
   @override
   String get password;
   @override
-  String get profilePic;
+  String? get profilePic;
   @override
-  List<String> get questionIds;
+  List<String>? get questionIds;
   @override
-  List<String> get answerIds;
+  List<String>? get answerIds;
   @override
-  int get reputation;
+  int? get reputation;
   @override
-  int get likes;
+  int? get likes;
   @override
-  int get dislikes;
+  int? get dislikes;
   @override
-  Map<String, List<String>> get bookmarks;
+  Map<String, List<String>>? get bookmarks;
   @override
-  List<String> get followers;
+  List<String>? get followers;
   @override
-  List<String> get followings;
+  List<String>? get followings;
   @override
-  DateTime get createdAt;
+  DateTime? get createdAt;
   @override
-  DateTime get updatedAt;
+  DateTime? get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
