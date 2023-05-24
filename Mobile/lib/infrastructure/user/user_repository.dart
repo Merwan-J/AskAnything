@@ -1,3 +1,4 @@
+import 'package:askanything/domain/user/user_form.dart';
 import 'package:askanything/domain/user/user_repository_interface.dart';
 import 'package:askanything/infrastructure/user/user_mapper.dart';
 import 'package:dartz/dartz.dart';
@@ -22,9 +23,9 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, User>> createUser(User user) async {
+  Future<Either<UserFailure, User>> createUser(UserForm userForm) async {
     try {
-      final userFormDto = user.toFormDTO();
+      final userFormDto = userForm.toFormDTO();
       final createdUserDto = await _userApi.createUser(userFormDto);
       final createdUser = createdUserDto.toModel();
       return Right(createdUser);
@@ -34,10 +35,11 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, User>> updateUser(User user) async {
+  Future<Either<UserFailure, User>> updateUser(
+      UserForm userForm, String id) async {
     try {
-      final userFormDto = user.toFormDTO();
-      final updatedUserDto = await _userApi.updateUser(userFormDto, user.id);
+      final userFormDto = userForm.toFormDTO();
+      final updatedUserDto = await _userApi.updateUser(userFormDto, id);
       final updatedUser = updatedUserDto.toModel();
       return Right(updatedUser);
     } catch (e) {
