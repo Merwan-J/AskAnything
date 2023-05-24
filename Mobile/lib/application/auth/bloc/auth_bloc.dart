@@ -1,13 +1,33 @@
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'auth_event.dart';
-part 'auth_state.dart';
+import '../../../domain/auth/auth_repository_interface.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(AuthInitial()) {
-    on<AuthEvent>((event, emit) {
-      // TODO: implement event handler
-    });
+  final IAuthRepository authRepository;
+  final SharedPreferenceService sharedPrefsService;
+
+  AuthBloc({required this.authRepository, required this.sharedPrefsService})
+      : super(const AuthUnInitialized()) {
+    () async {
+      await authRepository.getAuthenticatedUser();
+      var authToken = await authRepository.getAuthToken();
+      bool firstRun = await sharedPrefsService.isFirstRun();
+      await Future.delayed(const Duration(seconds: 1, milliseconds: 500));
+      emit(AppInitialized(token: authToken, isFirstRun: firstRun));
+    }();
+
+    on<AuthEventSignedIn>(
+      ((event, emit) async {
+        sharedPrefsService.setFirstRun(false);
+        emit(AuthAuthenticated(event.user, event.token));
+      }),
+    );
+    on<AuthEventSignOut>(((event, emit) async {
+      await authRepository.logout();
+      emit(const AuthUnauthenticated());
+    }));
   }
 }
