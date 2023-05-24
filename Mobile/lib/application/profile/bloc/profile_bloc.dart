@@ -7,9 +7,9 @@ import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  IEditProfileFormRepository editProfileFormRepository;
+  final IEditProfileFormRepository editProfileFormRepository;
 
-  ProfileBloc() : super(InitialProfileState()) {
+  ProfileBloc(this.editProfileFormRepository) : super(InitialProfileState()) {
     on<LoadProfileEvent>((event, emit) async {
       Either<EditProfileFailure, Profile> profile =
           await editProfileFormRepository.getProfile(event.id);
