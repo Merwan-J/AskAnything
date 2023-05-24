@@ -1,5 +1,6 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
+import 'package:askanything/infrastructure/user/user_form_dto.dart';
 
 extension UserMapper on User {
   UserDTO toDTO() {
@@ -19,6 +20,15 @@ extension UserMapper on User {
       followings: followings,
       createdAt: createdAt,
       updatedAt: updatedAt,
+    );
+  }
+
+  UserFormDTO toFormDTO() {
+    return UserFormDTO(
+      name: name,
+      email: email,
+      password: password,
+      profilePic: profilePic,
     );
   }
 }
