@@ -10,6 +10,6 @@ abstract class IQuestionRepository {
   Future<Either<QuestionFailure, Question>> updateQuestion(
       QuestionForm question, String questionId);
   Future<Either<QuestionFailure, Unit>> deleteQuestion(String questionId);
-  Future<Either<QuestionFailure, Unit>> likeQuestion(String questionId);
-  Future<Either<QuestionFailure, Unit>> dislikeQuestion(String questionId);
+  Future<Either<QuestionFailure, Question>> likeQuestion(String questionId);
+  Future<Either<QuestionFailure, Question>> dislikeQuestion(String questionId);
 }

@@ -79,21 +79,24 @@ class QuestionRepository implements IQuestionRepository {
   }
 
   @override
-  Future<Either<QuestionFailure, Unit>> dislikeQuestion(
+  Future<Either<QuestionFailure, Question>> dislikeQuestion(
       String questionId) async {
     try {
-      await _questionProvider.downvoteQuestion(questionId);
-      return right(unit);
+      QuestionDto questionDto =
+          await _questionProvider.upvoteQuestion(questionId);
+      return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
       return left(QuestionFailure.serverError());
     }
   }
 
   @override
-  Future<Either<QuestionFailure, Unit>> likeQuestion(String questionId) async {
+  Future<Either<QuestionFailure, Question>> likeQuestion(
+      String questionId) async {
     try {
-      await _questionProvider.upvoteQuestion(questionId);
-      return right(unit);
+      QuestionDto questionDto =
+          await _questionProvider.upvoteQuestion(questionId);
+      return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
       return left(QuestionFailure.serverError());
     }
