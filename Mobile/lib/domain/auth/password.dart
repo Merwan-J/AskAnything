@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-class Password extends Equatable{
+class Password extends Equatable {
   final String password;
 
-  Password(this.password) {
+  Password({required this.password}) {
     if (password.isEmpty) {
       throw Exception('Password can not be empty');
     }
@@ -14,4 +14,17 @@ class Password extends Equatable{
 
   @override
   List<Object?> get props => [password];
+
+  factory Password.fromJson(Map<String, dynamic> json) {
+    return Password(
+      password: json['password'] as String,
+    );
+  }
+
+  // Add the toJson method
+  Map<String, dynamic> toJson() {
+    return {
+      'password': password,
+    };
+  }
 }
