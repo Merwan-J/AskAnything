@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:askanything/domain/auth/change_password_form.dart';
 import 'package:askanything/domain/auth/email.dart';
 import 'package:askanything/domain/auth/name.dart';
 import 'package:askanything/domain/auth/password.dart';
+import 'package:askanything/infrastructure/auth/change_password_form_dto.dart';
+import 'package:askanything/infrastructure/auth/login_form_dto.dart';
+import 'package:askanything/infrastructure/auth/signup_form_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
 
@@ -16,12 +20,8 @@ class AuthApi {
 
   AuthApi(this.http);
 
-  Future<AuthResponseDto> login(
-      {required Name name, required Password password}) async {
-    var body = jsonEncode({
-      'username': name,
-      'password': password,
-    });
+  Future<AuthResponseDto> login({required LogInFormDto login}) async {
+    var body = jsonEncode(login.toJson());
 
     var response = await http.post(_loginUrl, body: body);
 
@@ -34,17 +34,9 @@ class AuthApi {
   }
 
   Future<UserDTO> signup({
-    required Name name,
-    required Password password,
-    required Password confirmPassword,
-    required EmailAddress email,
+    required SignUpFormDto signupForm,
   }) async {
-    var body = jsonEncode({
-      'username': name,
-      'password': password,
-      'confirmPassword': confirmPassword,
-      'email': email,
-    });
+    var body = jsonEncode(signupForm.toJson());
     var response = await http.post(_registerUrl, body: body);
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
@@ -55,17 +47,9 @@ class AuthApi {
   }
 
   Future changePassword({
-    required Name name,
-    required Password oldPassword,
-    required Password newPassword,
-    required Password confirmPassword,
+    required ChangePasswordFormDto changePassword,
   }) async {
-    var body = jsonEncode({
-      'username': name,
-      'oldPassword': oldPassword,
-      'newPassword': newPassword,
-      'confirmPassword': confirmPassword,
-    });
+    var body = jsonEncode(changePassword.toJson());
     var response = await http.patch(_registerUrl, body: body);
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
