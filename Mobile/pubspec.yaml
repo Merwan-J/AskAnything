@@ -5,7 +5,6 @@ version: 0.1.0
 
 environment:
   sdk: ">=2.19.5 <3.0.0"
-
 dependencies:
   bloc: ^8.1.2
   build_runner: ^2.3.1
