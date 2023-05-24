@@ -134,6 +134,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "either_dart",
+      "rootUri": "file:///home/elizur/.pub-cache/hosted/pub.dev/either_dart-0.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "equatable",
       "rootUri": "file:///home/elizur/.pub-cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -536,7 +542,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-24T15:37:54.602850Z",
+  "generated": "2023-05-24T22:43:26.758511Z",
   "generator": "pub",
   "generatorVersion": "3.0.1"
 }

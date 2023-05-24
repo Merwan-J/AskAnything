@@ -20,8 +20,12 @@ class AuthApi {
 
   AuthApi(this.http);
 
-  Future<AuthResponseDto> login({required LogInFormDto login}) async {
-    var body = jsonEncode(login.toJson());
+  Future<AuthResponseDto> login(
+      {required String username, required String password}) async {
+    var body = jsonEncode({
+      'username': username,
+      'password': password,
+    });
 
     var response = await http.post(_loginUrl, body: body);
 

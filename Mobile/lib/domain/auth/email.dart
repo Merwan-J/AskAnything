@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
 class EmailAddress extends Equatable {
-  final email;
+  final String email;
   final RegExp emailRegex = RegExp(
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""");
-  EmailAddress({this.email}) {
+  EmailAddress({required this.email}) {
     if (email.isEmpty) {
       throw Exception('Name can not be empty');
     }
