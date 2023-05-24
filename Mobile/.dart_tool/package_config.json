@@ -26,6 +26,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "bloc",
+      "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -434,7 +440,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-24T20:13:11.466013Z",
+  "generated": "2023-05-24T20:51:19.131452Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }
