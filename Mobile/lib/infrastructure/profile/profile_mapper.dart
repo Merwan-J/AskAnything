@@ -2,7 +2,7 @@ import '../../domain/profile/profile.dart';
 import './profile_dto.dart';
 
 extension ProfileMapper on ProfileDto {
-  Object toProfile() {
+  Profile toProfile() {
     return Profile(
       name: name,
       profilePicture: profilePicture,
