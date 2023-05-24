@@ -19,7 +19,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
@@ -28,7 +28,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
@@ -37,7 +37,7 @@ mixin _$ProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,
@@ -157,7 +157,7 @@ class _$LoadProfileEvent implements LoadProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
@@ -169,7 +169,7 @@ class _$LoadProfileEvent implements LoadProfileEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
@@ -181,7 +181,7 @@ class _$LoadProfileEvent implements LoadProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,
@@ -249,7 +249,9 @@ abstract class _$$UpdateProfileEventCopyWith<$Res> {
           $Res Function(_$UpdateProfileEvent) then) =
       __$$UpdateProfileEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({InvalidType profile});
+  $Res call({ProfileFormDto profileDto});
+
+  $ProfileFormDtoCopyWith<$Res> get profileDto;
 }
 
 /// @nodoc
@@ -263,28 +265,36 @@ class __$$UpdateProfileEventCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? profile = freezed,
+    Object? profileDto = null,
   }) {
     return _then(_$UpdateProfileEvent(
-      freezed == profile
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
-              as InvalidType,
+      null == profileDto
+          ? _value.profileDto
+          : profileDto // ignore: cast_nullable_to_non_nullable
+              as ProfileFormDto,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileFormDtoCopyWith<$Res> get profileDto {
+    return $ProfileFormDtoCopyWith<$Res>(_value.profileDto, (value) {
+      return _then(_value.copyWith(profileDto: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$UpdateProfileEvent implements UpdateProfileEvent {
-  const _$UpdateProfileEvent(this.profile);
+  const _$UpdateProfileEvent(this.profileDto);
 
   @override
-  final InvalidType profile;
+  final ProfileFormDto profileDto;
 
   @override
   String toString() {
-    return 'ProfileEvent.updateProfileEvent(profile: $profile)';
+    return 'ProfileEvent.updateProfileEvent(profileDto: $profileDto)';
   }
 
   @override
@@ -292,12 +302,12 @@ class _$UpdateProfileEvent implements UpdateProfileEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UpdateProfileEvent &&
-            const DeepCollectionEquality().equals(other.profile, profile));
+            (identical(other.profileDto, profileDto) ||
+                other.profileDto == profileDto));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(profile));
+  int get hashCode => Object.hash(runtimeType, profileDto);
 
   @JsonKey(ignore: true)
   @override
@@ -310,38 +320,38 @@ class _$UpdateProfileEvent implements UpdateProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
   }) {
-    return updateProfileEvent(profile);
+    return updateProfileEvent(profileDto);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
   }) {
-    return updateProfileEvent?.call(profile);
+    return updateProfileEvent?.call(profileDto);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,
     required TResult orElse(),
   }) {
     if (updateProfileEvent != null) {
-      return updateProfileEvent(profile);
+      return updateProfileEvent(profileDto);
     }
     return orElse();
   }
@@ -388,10 +398,10 @@ class _$UpdateProfileEvent implements UpdateProfileEvent {
 }
 
 abstract class UpdateProfileEvent implements ProfileEvent {
-  const factory UpdateProfileEvent(final InvalidType profile) =
+  const factory UpdateProfileEvent(final ProfileFormDto profileDto) =
       _$UpdateProfileEvent;
 
-  InvalidType get profile;
+  ProfileFormDto get profileDto;
   @JsonKey(ignore: true)
   _$$UpdateProfileEventCopyWith<_$UpdateProfileEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -463,7 +473,7 @@ class _$DeleteProfileEvent implements DeleteProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
@@ -475,7 +485,7 @@ class _$DeleteProfileEvent implements DeleteProfileEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
@@ -487,7 +497,7 @@ class _$DeleteProfileEvent implements DeleteProfileEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,
@@ -588,7 +598,7 @@ class _$ChangePasswordEvent implements ChangePasswordEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
@@ -600,7 +610,7 @@ class _$ChangePasswordEvent implements ChangePasswordEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
@@ -612,7 +622,7 @@ class _$ChangePasswordEvent implements ChangePasswordEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,
@@ -708,7 +718,7 @@ class _$LogoutEvent implements LogoutEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id) loadProfileEvent,
-    required TResult Function(InvalidType profile) updateProfileEvent,
+    required TResult Function(ProfileFormDto profileDto) updateProfileEvent,
     required TResult Function(String id) deleteProfile,
     required TResult Function() changePasswordEvent,
     required TResult Function() logoutEvent,
@@ -720,7 +730,7 @@ class _$LogoutEvent implements LogoutEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String id)? loadProfileEvent,
-    TResult? Function(InvalidType profile)? updateProfileEvent,
+    TResult? Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult? Function(String id)? deleteProfile,
     TResult? Function()? changePasswordEvent,
     TResult? Function()? logoutEvent,
@@ -732,7 +742,7 @@ class _$LogoutEvent implements LogoutEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id)? loadProfileEvent,
-    TResult Function(InvalidType profile)? updateProfileEvent,
+    TResult Function(ProfileFormDto profileDto)? updateProfileEvent,
     TResult Function(String id)? deleteProfile,
     TResult Function()? changePasswordEvent,
     TResult Function()? logoutEvent,

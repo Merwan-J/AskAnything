@@ -17,9 +17,9 @@ class ProfileRepository implements IEditProfileFormRepository {
   ProfileRepository(this._profileAPI);
 
   @override
-  Future<Either<EditProfileFailure, Unit>> deleteProfile(String userId) async {
+  Future<Either<EditProfileFailure, Unit>> deleteAccount(String userId) async {
     try {
-      await _profileAPI.deleteprofile(userId);
+      await _profileAPI.deleteAccount(userId);
       return right(unit);
     } catch (e) {
       return left(const EditProfileFailure.serverError());
