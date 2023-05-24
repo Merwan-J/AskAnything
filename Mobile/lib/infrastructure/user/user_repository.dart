@@ -35,10 +35,11 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, User>> updateUser(User user, String id) async {
+  Future<Either<UserFailure, User>> updateUser(
+      UserForm userForm, String id) async {
     try {
-      final userFormDto = user.toFormDTO();
-      final updatedUserDto = await _userApi.updateUser(userFormDto, user.id);
+      final userFormDto = userForm.toFormDTO();
+      final updatedUserDto = await _userApi.updateUser(userFormDto, id);
       final updatedUser = updatedUserDto.toModel();
       return Right(updatedUser);
     } catch (e) {
