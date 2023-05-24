@@ -29,12 +29,12 @@ extension on QuestionEntity {
         description: question.description,
         topic: question.topic,
         anonymous: question.anonymous,
-        author: question.author!,
-        answers: question.answers!,
-        likes: question.likes!,
-        dislikes: question.dislikes!,
-        createdAt: question.createdAt!,
-        updatedAt: question.updatedAt!);
+        author: question.author,
+        answers: question.answers,
+        likes: question.likes,
+        dislikes: question.dislikes,
+        createdAt: question.createdAt,
+        updatedAt: question.updatedAt);
   }
 
   QuestionDto toQuestionDto() {
