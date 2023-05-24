@@ -32,7 +32,6 @@ extension UserMapper on User {
       profilePic: profilePic,
     );
   }
-}
 
 extension UserFormDTOMapper on UserForm {
   UserFormDTO toFormDTO() {
