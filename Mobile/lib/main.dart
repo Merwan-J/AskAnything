@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
             home: child,
           );
         },
-        child: Home());
+        child: Scaffold(body: Home()));
   }
 }
 
@@ -50,11 +50,139 @@ class Home extends StatelessWidget {
       question: "2",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now());
+
+  buildBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.h),
+                topRight: Radius.circular(30.h))),
+        context: context,
+        builder: (context) => DraggableScrollableSheet(
+              expand: false,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return SingleChildScrollView(
+                  controller: scrollController,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Positioned(
+                          top: -15.h,
+                          child: Container(
+                            height: 5.h,
+                            width: 60.h,
+                            color: Colors.grey,
+                          )),
+                      Container(
+                        padding: EdgeInsets.only(
+                            top: 20.h,
+                            right: 20.h,
+                            left: 20.h,
+                            // ),
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
+                        // height: MediaQuery.of(context).size.height * 0.8,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            TextField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.h)),
+                                  hintText: "Type your answer here"),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            TextField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.h)),
+                                  hintText: "Type your answer here"),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            SizedBox(
+                              // height: 300.h,
+                              child: TextField(
+                                maxLines: 10,
+                                // expands: true,
+                                // keyboardType: TextInputType.multiline,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.h)),
+                                    hintText: "Type your answer here"),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Container(
+                              child: Row(
+                                children: [
+                                  Icon(Icons.cloud_upload_outlined),
+                                  SizedBox(
+                                    width: 10.h,
+                                  ),
+                                  Text("Upload Image")
+                                ],
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                const Text("Anonymous"),
+                                Switch(
+                                    activeTrackColor:
+                                        Color.fromRGBO(226, 230, 234, 1),
+                                    activeColor:
+                                        Color.fromRGBO(255, 115, 92, 1),
+                                    value: true,
+                                    onChanged: (_) {})
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text("Cancel"),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                Container(
+                                  // color: Colors.blue,
+                                  decoration: BoxDecoration(
+                                      color: Color.fromRGBO(255, 115, 92, 1),
+                                      borderRadius:
+                                          BorderRadius.circular(10.h)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.h, vertical: 10.h),
+                                  child: Text("Post",
+                                      style: TextStyle(color: Colors.white)),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+
+                        // color: Colors.red,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: Column(
+    return Center(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -65,8 +193,16 @@ class Home extends StatelessWidget {
             height: 20.h,
           ),
           AnswerW(answer: answer),
+          SizedBox(
+            height: 15.h,
+          ),
+          TextButton(
+              onPressed: () {
+                buildBottomSheet(context);
+              },
+              child: Text("Ask Question")),
         ],
-      )),
+      ),
     );
   }
 }

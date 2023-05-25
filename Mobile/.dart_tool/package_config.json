@@ -170,6 +170,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "file_picker",
+      "rootUri": "file:///C:/Users/user/AppData/Local/Pub/Cache/hosted/pub.dev/file_picker-5.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "fixnum",
       "rootUri": "file:///C:/Users/user/AppData/Local/Pub/Cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
@@ -198,6 +204,12 @@
       "rootUri": "file:///C:/Users/user/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///C:/Users/user/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
     },
     {
       "name": "flutter_screenutil",
@@ -578,7 +590,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-25T19:12:57.066061Z",
+  "generated": "2023-05-25T22:09:39.703351Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }
