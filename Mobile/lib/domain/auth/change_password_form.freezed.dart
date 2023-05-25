@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ChangePasswordForm {
-  Password get currentPassword => throw _privateConstructorUsedError;
+  Name get name => throw _privateConstructorUsedError;
+  Password get oldPassword => throw _privateConstructorUsedError;
   Password get newPassword => throw _privateConstructorUsedError;
+  Password get confirmPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChangePasswordFormCopyWith<ChangePasswordForm> get copyWith =>
@@ -30,7 +32,11 @@ abstract class $ChangePasswordFormCopyWith<$Res> {
           ChangePasswordForm value, $Res Function(ChangePasswordForm) then) =
       _$ChangePasswordFormCopyWithImpl<$Res, ChangePasswordForm>;
   @useResult
-  $Res call({Password currentPassword, Password newPassword});
+  $Res call(
+      {Name name,
+      Password oldPassword,
+      Password newPassword,
+      Password confirmPassword});
 }
 
 /// @nodoc
@@ -46,17 +52,27 @@ class _$ChangePasswordFormCopyWithImpl<$Res, $Val extends ChangePasswordForm>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPassword = null,
+    Object? name = null,
+    Object? oldPassword = null,
     Object? newPassword = null,
+    Object? confirmPassword = null,
   }) {
     return _then(_value.copyWith(
-      currentPassword: null == currentPassword
-          ? _value.currentPassword
-          : currentPassword // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Name,
+      oldPassword: null == oldPassword
+          ? _value.oldPassword
+          : oldPassword // ignore: cast_nullable_to_non_nullable
               as Password,
       newPassword: null == newPassword
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
+              as Password,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
               as Password,
     ) as $Val);
   }
@@ -70,7 +86,11 @@ abstract class _$$_ChangePasswordFormCopyWith<$Res>
       __$$_ChangePasswordFormCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Password currentPassword, Password newPassword});
+  $Res call(
+      {Name name,
+      Password oldPassword,
+      Password newPassword,
+      Password confirmPassword});
 }
 
 /// @nodoc
@@ -84,17 +104,27 @@ class __$$_ChangePasswordFormCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentPassword = null,
+    Object? name = null,
+    Object? oldPassword = null,
     Object? newPassword = null,
+    Object? confirmPassword = null,
   }) {
     return _then(_$_ChangePasswordForm(
-      currentPassword: null == currentPassword
-          ? _value.currentPassword
-          : currentPassword // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as Name,
+      oldPassword: null == oldPassword
+          ? _value.oldPassword
+          : oldPassword // ignore: cast_nullable_to_non_nullable
               as Password,
       newPassword: null == newPassword
           ? _value.newPassword
           : newPassword // ignore: cast_nullable_to_non_nullable
+              as Password,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
               as Password,
     ));
   }
@@ -104,16 +134,23 @@ class __$$_ChangePasswordFormCopyWithImpl<$Res>
 
 class _$_ChangePasswordForm implements _ChangePasswordForm {
   _$_ChangePasswordForm(
-      {required this.currentPassword, required this.newPassword});
+      {required this.name,
+      required this.oldPassword,
+      required this.newPassword,
+      required this.confirmPassword});
 
   @override
-  final Password currentPassword;
+  final Name name;
+  @override
+  final Password oldPassword;
   @override
   final Password newPassword;
+  @override
+  final Password confirmPassword;
 
   @override
   String toString() {
-    return 'ChangePasswordForm(currentPassword: $currentPassword, newPassword: $newPassword)';
+    return 'ChangePasswordForm(name: $name, oldPassword: $oldPassword, newPassword: $newPassword, confirmPassword: $confirmPassword)';
   }
 
   @override
@@ -121,14 +158,18 @@ class _$_ChangePasswordForm implements _ChangePasswordForm {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChangePasswordForm &&
-            (identical(other.currentPassword, currentPassword) ||
-                other.currentPassword == currentPassword) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.oldPassword, oldPassword) ||
+                other.oldPassword == oldPassword) &&
             (identical(other.newPassword, newPassword) ||
-                other.newPassword == newPassword));
+                other.newPassword == newPassword) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentPassword, newPassword);
+  int get hashCode =>
+      Object.hash(runtimeType, name, oldPassword, newPassword, confirmPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -140,13 +181,19 @@ class _$_ChangePasswordForm implements _ChangePasswordForm {
 
 abstract class _ChangePasswordForm implements ChangePasswordForm {
   factory _ChangePasswordForm(
-      {required final Password currentPassword,
-      required final Password newPassword}) = _$_ChangePasswordForm;
+      {required final Name name,
+      required final Password oldPassword,
+      required final Password newPassword,
+      required final Password confirmPassword}) = _$_ChangePasswordForm;
 
   @override
-  Password get currentPassword;
+  Name get name;
+  @override
+  Password get oldPassword;
   @override
   Password get newPassword;
+  @override
+  Password get confirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$_ChangePasswordFormCopyWith<_$_ChangePasswordForm> get copyWith =>

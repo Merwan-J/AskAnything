@@ -7,36 +7,30 @@ part of 'user_dto.dart';
 // **************************************************************************
 
 _$_UserDTO _$$_UserDTOFromJson(Map<String, dynamic> json) => _$_UserDTO(
-      id: json['id'] as String?,
+      id: json['id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
-      profilePic: json['profilePic'] as String?,
-      questionIds: (json['questionIds'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      profilePic: json['profilePic'] as String,
+      questionIds: (json['questionIds'] as List<dynamic>)
+          .map((e) => e as String)
           .toList(),
-      answerIds: (json['answerIds'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      reputation: json['reputation'] as int?,
-      likes: json['likes'] as int?,
-      dislikes: json['dislikes'] as int?,
-      bookmarks: (json['bookmarks'] as Map<String, dynamic>?)?.map(
+      answerIds:
+          (json['answerIds'] as List<dynamic>).map((e) => e as String).toList(),
+      reputation: json['reputation'] as int,
+      likes: json['likes'] as int,
+      dislikes: json['dislikes'] as int,
+      bookmarks: (json['bookmarks'] as Map<String, dynamic>).map(
         (k, e) =>
             MapEntry(k, (e as List<dynamic>).map((e) => e as String).toList()),
       ),
-      followers: (json['followers'] as List<dynamic>?)
-          ?.map((e) => e as String)
+      followers:
+          (json['followers'] as List<dynamic>).map((e) => e as String).toList(),
+      followings: (json['followings'] as List<dynamic>)
+          .map((e) => e as String)
           .toList(),
-      followings: (json['followings'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      createdAt: json['createdAt'] == null
-          ? null
-          : DateTime.parse(json['createdAt'] as String),
-      updatedAt: json['updatedAt'] == null
-          ? null
-          : DateTime.parse(json['updatedAt'] as String),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$$_UserDTOToJson(_$_UserDTO instance) =>
@@ -54,6 +48,6 @@ Map<String, dynamic> _$$_UserDTOToJson(_$_UserDTO instance) =>
       'bookmarks': instance.bookmarks,
       'followers': instance.followers,
       'followings': instance.followings,
-      'createdAt': instance.createdAt?.toIso8601String(),
-      'updatedAt': instance.updatedAt?.toIso8601String(),
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
     };
