@@ -19,7 +19,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
-    required TResult Function(String? token, bool isFirstRun) initial,
+    required TResult Function(String? token, bool isfirstTime) initial,
     required TResult Function(User user, String token) authenticated,
     required TResult Function() unauthenticated,
   }) =>
@@ -27,7 +27,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
-    TResult? Function(String? token, bool isFirstRun)? initial,
+    TResult? Function(String? token, bool isfirstTime)? initial,
     TResult? Function(User user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) =>
@@ -35,7 +35,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
-    TResult Function(String? token, bool isFirstRun)? initial,
+    TResult Function(String? token, bool isfirstTime)? initial,
     TResult Function(User user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -44,7 +44,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthUnInitialized value) unInitialized,
-    required TResult Function(AppInitialized value) initial,
+    required TResult Function(AuthInitialized value) initial,
     required TResult Function(AuthAuthenticated value) authenticated,
     required TResult Function(AuthUnauthenticated value) unauthenticated,
   }) =>
@@ -52,7 +52,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthUnInitialized value)? unInitialized,
-    TResult? Function(AppInitialized value)? initial,
+    TResult? Function(AuthInitialized value)? initial,
     TResult? Function(AuthAuthenticated value)? authenticated,
     TResult? Function(AuthUnauthenticated value)? unauthenticated,
   }) =>
@@ -60,7 +60,7 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthUnInitialized value)? unInitialized,
-    TResult Function(AppInitialized value)? initial,
+    TResult Function(AuthInitialized value)? initial,
     TResult Function(AuthAuthenticated value)? authenticated,
     TResult Function(AuthUnauthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -124,7 +124,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
-    required TResult Function(String? token, bool isFirstRun) initial,
+    required TResult Function(String? token, bool isfirstTime) initial,
     required TResult Function(User user, String token) authenticated,
     required TResult Function() unauthenticated,
   }) {
@@ -135,7 +135,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
-    TResult? Function(String? token, bool isFirstRun)? initial,
+    TResult? Function(String? token, bool isfirstTime)? initial,
     TResult? Function(User user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
@@ -146,7 +146,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
-    TResult Function(String? token, bool isFirstRun)? initial,
+    TResult Function(String? token, bool isfirstTime)? initial,
     TResult Function(User user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -161,7 +161,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthUnInitialized value) unInitialized,
-    required TResult Function(AppInitialized value) initial,
+    required TResult Function(AuthInitialized value) initial,
     required TResult Function(AuthAuthenticated value) authenticated,
     required TResult Function(AuthUnauthenticated value) unauthenticated,
   }) {
@@ -172,7 +172,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthUnInitialized value)? unInitialized,
-    TResult? Function(AppInitialized value)? initial,
+    TResult? Function(AuthInitialized value)? initial,
     TResult? Function(AuthAuthenticated value)? authenticated,
     TResult? Function(AuthUnauthenticated value)? unauthenticated,
   }) {
@@ -183,7 +183,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthUnInitialized value)? unInitialized,
-    TResult Function(AppInitialized value)? initial,
+    TResult Function(AuthInitialized value)? initial,
     TResult Function(AuthAuthenticated value)? authenticated,
     TResult Function(AuthUnauthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -200,36 +200,36 @@ abstract class AuthUnInitialized implements AuthState {
 }
 
 /// @nodoc
-abstract class _$$AppInitializedCopyWith<$Res> {
-  factory _$$AppInitializedCopyWith(
-          _$AppInitialized value, $Res Function(_$AppInitialized) then) =
-      __$$AppInitializedCopyWithImpl<$Res>;
+abstract class _$$AuthInitializedCopyWith<$Res> {
+  factory _$$AuthInitializedCopyWith(
+          _$AuthInitialized value, $Res Function(_$AuthInitialized) then) =
+      __$$AuthInitializedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? token, bool isFirstRun});
+  $Res call({String? token, bool isfirstTime});
 }
 
 /// @nodoc
-class __$$AppInitializedCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AppInitialized>
-    implements _$$AppInitializedCopyWith<$Res> {
-  __$$AppInitializedCopyWithImpl(
-      _$AppInitialized _value, $Res Function(_$AppInitialized) _then)
+class __$$AuthInitializedCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthInitialized>
+    implements _$$AuthInitializedCopyWith<$Res> {
+  __$$AuthInitializedCopyWithImpl(
+      _$AuthInitialized _value, $Res Function(_$AuthInitialized) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? token = freezed,
-    Object? isFirstRun = null,
+    Object? isfirstTime = null,
   }) {
-    return _then(_$AppInitialized(
+    return _then(_$AuthInitialized(
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      isFirstRun: null == isFirstRun
-          ? _value.isFirstRun
-          : isFirstRun // ignore: cast_nullable_to_non_nullable
+      isfirstTime: null == isfirstTime
+          ? _value.isfirstTime
+          : isfirstTime // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -237,71 +237,71 @@ class __$$AppInitializedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AppInitialized implements AppInitialized {
-  const _$AppInitialized({this.token, required this.isFirstRun});
+class _$AuthInitialized implements AuthInitialized {
+  const _$AuthInitialized({this.token, required this.isfirstTime});
 
   @override
   final String? token;
   @override
-  final bool isFirstRun;
+  final bool isfirstTime;
 
   @override
   String toString() {
-    return 'AuthState.initial(token: $token, isFirstRun: $isFirstRun)';
+    return 'AuthState.initial(token: $token, isfirstTime: $isfirstTime)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AppInitialized &&
+            other is _$AuthInitialized &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.isFirstRun, isFirstRun) ||
-                other.isFirstRun == isFirstRun));
+            (identical(other.isfirstTime, isfirstTime) ||
+                other.isfirstTime == isfirstTime));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token, isFirstRun);
+  int get hashCode => Object.hash(runtimeType, token, isfirstTime);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AppInitializedCopyWith<_$AppInitialized> get copyWith =>
-      __$$AppInitializedCopyWithImpl<_$AppInitialized>(this, _$identity);
+  _$$AuthInitializedCopyWith<_$AuthInitialized> get copyWith =>
+      __$$AuthInitializedCopyWithImpl<_$AuthInitialized>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
-    required TResult Function(String? token, bool isFirstRun) initial,
+    required TResult Function(String? token, bool isfirstTime) initial,
     required TResult Function(User user, String token) authenticated,
     required TResult Function() unauthenticated,
   }) {
-    return initial(token, isFirstRun);
+    return initial(token, isfirstTime);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
-    TResult? Function(String? token, bool isFirstRun)? initial,
+    TResult? Function(String? token, bool isfirstTime)? initial,
     TResult? Function(User user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
-    return initial?.call(token, isFirstRun);
+    return initial?.call(token, isfirstTime);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
-    TResult Function(String? token, bool isFirstRun)? initial,
+    TResult Function(String? token, bool isfirstTime)? initial,
     TResult Function(User user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(token, isFirstRun);
+      return initial(token, isfirstTime);
     }
     return orElse();
   }
@@ -310,7 +310,7 @@ class _$AppInitialized implements AppInitialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthUnInitialized value) unInitialized,
-    required TResult Function(AppInitialized value) initial,
+    required TResult Function(AuthInitialized value) initial,
     required TResult Function(AuthAuthenticated value) authenticated,
     required TResult Function(AuthUnauthenticated value) unauthenticated,
   }) {
@@ -321,7 +321,7 @@ class _$AppInitialized implements AppInitialized {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthUnInitialized value)? unInitialized,
-    TResult? Function(AppInitialized value)? initial,
+    TResult? Function(AuthInitialized value)? initial,
     TResult? Function(AuthAuthenticated value)? authenticated,
     TResult? Function(AuthUnauthenticated value)? unauthenticated,
   }) {
@@ -332,7 +332,7 @@ class _$AppInitialized implements AppInitialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthUnInitialized value)? unInitialized,
-    TResult Function(AppInitialized value)? initial,
+    TResult Function(AuthInitialized value)? initial,
     TResult Function(AuthAuthenticated value)? authenticated,
     TResult Function(AuthUnauthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -344,14 +344,15 @@ class _$AppInitialized implements AppInitialized {
   }
 }
 
-abstract class AppInitialized implements AuthState {
-  const factory AppInitialized(
-      {final String? token, required final bool isFirstRun}) = _$AppInitialized;
+abstract class AuthInitialized implements AuthState {
+  const factory AuthInitialized(
+      {final String? token,
+      required final bool isfirstTime}) = _$AuthInitialized;
 
   String? get token;
-  bool get isFirstRun;
+  bool get isfirstTime;
   @JsonKey(ignore: true)
-  _$$AppInitializedCopyWith<_$AppInitialized> get copyWith =>
+  _$$AuthInitializedCopyWith<_$AuthInitialized> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -428,7 +429,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
-    required TResult Function(String? token, bool isFirstRun) initial,
+    required TResult Function(String? token, bool isfirstTime) initial,
     required TResult Function(User user, String token) authenticated,
     required TResult Function() unauthenticated,
   }) {
@@ -439,7 +440,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
-    TResult? Function(String? token, bool isFirstRun)? initial,
+    TResult? Function(String? token, bool isfirstTime)? initial,
     TResult? Function(User user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
@@ -450,7 +451,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
-    TResult Function(String? token, bool isFirstRun)? initial,
+    TResult Function(String? token, bool isfirstTime)? initial,
     TResult Function(User user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -465,7 +466,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthUnInitialized value) unInitialized,
-    required TResult Function(AppInitialized value) initial,
+    required TResult Function(AuthInitialized value) initial,
     required TResult Function(AuthAuthenticated value) authenticated,
     required TResult Function(AuthUnauthenticated value) unauthenticated,
   }) {
@@ -476,7 +477,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthUnInitialized value)? unInitialized,
-    TResult? Function(AppInitialized value)? initial,
+    TResult? Function(AuthInitialized value)? initial,
     TResult? Function(AuthAuthenticated value)? authenticated,
     TResult? Function(AuthUnauthenticated value)? unauthenticated,
   }) {
@@ -487,7 +488,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthUnInitialized value)? unInitialized,
-    TResult Function(AppInitialized value)? initial,
+    TResult Function(AuthInitialized value)? initial,
     TResult Function(AuthAuthenticated value)? authenticated,
     TResult Function(AuthUnauthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -549,7 +550,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
-    required TResult Function(String? token, bool isFirstRun) initial,
+    required TResult Function(String? token, bool isfirstTime) initial,
     required TResult Function(User user, String token) authenticated,
     required TResult Function() unauthenticated,
   }) {
@@ -560,7 +561,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
-    TResult? Function(String? token, bool isFirstRun)? initial,
+    TResult? Function(String? token, bool isfirstTime)? initial,
     TResult? Function(User user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
@@ -571,7 +572,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
-    TResult Function(String? token, bool isFirstRun)? initial,
+    TResult Function(String? token, bool isfirstTime)? initial,
     TResult Function(User user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -586,7 +587,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(AuthUnInitialized value) unInitialized,
-    required TResult Function(AppInitialized value) initial,
+    required TResult Function(AuthInitialized value) initial,
     required TResult Function(AuthAuthenticated value) authenticated,
     required TResult Function(AuthUnauthenticated value) unauthenticated,
   }) {
@@ -597,7 +598,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(AuthUnInitialized value)? unInitialized,
-    TResult? Function(AppInitialized value)? initial,
+    TResult? Function(AuthInitialized value)? initial,
     TResult? Function(AuthAuthenticated value)? authenticated,
     TResult? Function(AuthUnauthenticated value)? unauthenticated,
   }) {
@@ -608,7 +609,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(AuthUnInitialized value)? unInitialized,
-    TResult Function(AppInitialized value)? initial,
+    TResult Function(AuthInitialized value)? initial,
     TResult Function(AuthAuthenticated value)? authenticated,
     TResult Function(AuthUnauthenticated value)? unauthenticated,
     required TResult orElse(),

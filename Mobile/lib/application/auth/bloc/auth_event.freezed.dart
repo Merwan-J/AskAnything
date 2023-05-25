@@ -17,38 +17,44 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthEvent {
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
+  TResult when<TResult extends Object?>(
+    TResult Function(User user) $default, {
     required TResult Function(User user, String token) signedIn,
     required TResult Function() signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(User user)? $default, {
     TResult? Function(User user, String token)? signedIn,
     TResult? Function()? signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(User user)? $default, {
     TResult Function(User user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
+  TResult map<TResult extends Object?>(
+    TResult Function(_SignUpForm value) $default, {
     required TResult Function(AuthEventSignedIn value) signedIn,
     required TResult Function(AuthEventSignOut value) signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SignUpForm value)? $default, {
     TResult? Function(AuthEventSignedIn value)? signedIn,
     TResult? Function(AuthEventSignOut value)? signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SignUpForm value)? $default, {
     TResult Function(AuthEventSignedIn value)? signedIn,
     TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
@@ -71,6 +77,145 @@ class _$AuthEventCopyWithImpl<$Res, $Val extends AuthEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$_SignUpFormCopyWith<$Res> {
+  factory _$$_SignUpFormCopyWith(
+          _$_SignUpForm value, $Res Function(_$_SignUpForm) then) =
+      __$$_SignUpFormCopyWithImpl<$Res>;
+  @useResult
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$$_SignUpFormCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_SignUpForm>
+    implements _$$_SignUpFormCopyWith<$Res> {
+  __$$_SignUpFormCopyWithImpl(
+      _$_SignUpForm _value, $Res Function(_$_SignUpForm) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? user = null,
+  }) {
+    return _then(_$_SignUpForm(
+      null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SignUpForm implements _SignUpForm {
+  const _$_SignUpForm(this.user);
+
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'AuthEvent(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_SignUpForm &&
+            (identical(other.user, user) || other.user == user));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_SignUpFormCopyWith<_$_SignUpForm> get copyWith =>
+      __$$_SignUpFormCopyWithImpl<_$_SignUpForm>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(User user) $default, {
+    required TResult Function(User user, String token) signedIn,
+    required TResult Function() signOut,
+  }) {
+    return $default(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(User user)? $default, {
+    TResult? Function(User user, String token)? signedIn,
+    TResult? Function()? signOut,
+  }) {
+    return $default?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(User user)? $default, {
+    TResult Function(User user, String token)? signedIn,
+    TResult Function()? signOut,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_SignUpForm value) $default, {
+    required TResult Function(AuthEventSignedIn value) signedIn,
+    required TResult Function(AuthEventSignOut value) signOut,
+  }) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SignUpForm value)? $default, {
+    TResult? Function(AuthEventSignedIn value)? signedIn,
+    TResult? Function(AuthEventSignOut value)? signOut,
+  }) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SignUpForm value)? $default, {
+    TResult Function(AuthEventSignedIn value)? signedIn,
+    TResult Function(AuthEventSignOut value)? signOut,
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SignUpForm implements AuthEvent {
+  const factory _SignUpForm(final User user) = _$_SignUpForm;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$$_SignUpFormCopyWith<_$_SignUpForm> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -144,7 +289,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
+  TResult when<TResult extends Object?>(
+    TResult Function(User user) $default, {
     required TResult Function(User user, String token) signedIn,
     required TResult Function() signOut,
   }) {
@@ -153,7 +299,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(User user)? $default, {
     TResult? Function(User user, String token)? signedIn,
     TResult? Function()? signOut,
   }) {
@@ -162,7 +309,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(User user)? $default, {
     TResult Function(User user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
@@ -175,7 +323,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
+  TResult map<TResult extends Object?>(
+    TResult Function(_SignUpForm value) $default, {
     required TResult Function(AuthEventSignedIn value) signedIn,
     required TResult Function(AuthEventSignOut value) signOut,
   }) {
@@ -184,7 +333,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SignUpForm value)? $default, {
     TResult? Function(AuthEventSignedIn value)? signedIn,
     TResult? Function(AuthEventSignOut value)? signOut,
   }) {
@@ -193,7 +343,8 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SignUpForm value)? $default, {
     TResult Function(AuthEventSignedIn value)? signedIn,
     TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
@@ -253,7 +404,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
+  TResult when<TResult extends Object?>(
+    TResult Function(User user) $default, {
     required TResult Function(User user, String token) signedIn,
     required TResult Function() signOut,
   }) {
@@ -262,7 +414,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(User user)? $default, {
     TResult? Function(User user, String token)? signedIn,
     TResult? Function()? signOut,
   }) {
@@ -271,7 +424,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(User user)? $default, {
     TResult Function(User user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
@@ -284,7 +438,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object?>({
+  TResult map<TResult extends Object?>(
+    TResult Function(_SignUpForm value) $default, {
     required TResult Function(AuthEventSignedIn value) signedIn,
     required TResult Function(AuthEventSignOut value) signOut,
   }) {
@@ -293,7 +448,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_SignUpForm value)? $default, {
     TResult? Function(AuthEventSignedIn value)? signedIn,
     TResult? Function(AuthEventSignOut value)? signOut,
   }) {
@@ -302,7 +458,8 @@ class _$AuthEventSignOut implements AuthEventSignOut {
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_SignUpForm value)? $default, {
     TResult Function(AuthEventSignedIn value)? signedIn,
     TResult Function(AuthEventSignOut value)? signOut,
     required TResult orElse(),
