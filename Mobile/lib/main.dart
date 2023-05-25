@@ -2,7 +2,9 @@ import 'package:askanything/presentation/pages/login_and_registration/login/logi
 import 'package:askanything/presentation/pages/login_and_registration/login/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:askanything/presentation/splash_screen/splash_screen.dart';
+import 'package:askanything/domain/answer/answer.dart';
 import 'package:askanything/domain/question/question.dart';
+import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,6 +43,17 @@ class Home extends StatelessWidget {
       dislikes: ["1,2"],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now());
+  Answer answer = Answer(
+      id: "1",
+      text: "I don't know man",
+      image: "",
+      likes: ["1", "3"],
+      dislikes: ["1,23"],
+      author: "Doju",
+      anonymous: false,
+      question: "2",
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +64,11 @@ class Home extends StatelessWidget {
         children: [
           QuestionW(
             question: question,
-          )
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          AnswerW(answer: answer),
         ],
       )),
     );
