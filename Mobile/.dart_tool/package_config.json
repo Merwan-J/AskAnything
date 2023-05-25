@@ -158,12 +158,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "ffi",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/ffi-2.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "file",
       "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/file-6.1.4",
       "packageUri": "lib/",
@@ -200,14 +194,14 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_test",
-      "rootUri": "file:///C:/flutter/packages/flutter_test",
+      "name": "flutter_screenutil",
+      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screenutil-5.7.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
-      "name": "flutter_web_plugins",
-      "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
+      "name": "flutter_test",
+      "rootUri": "file:///C:/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -338,46 +332,10 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "path_provider_linux",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_linux-2.1.11",
-      "packageUri": "lib/",
-      "languageVersion": "2.18"
-    },
-    {
-      "name": "path_provider_platform_interface",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_platform_interface-2.0.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "path_provider_windows",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_windows-2.1.6",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "platform",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "plugin_platform_interface",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/plugin_platform_interface-2.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "pool",
       "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/pool-1.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "process",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/process-4.2.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
     },
     {
       "name": "provider",
@@ -398,48 +356,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "shared_preferences",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_android",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_foundation",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.2.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_linux",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_linux-2.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_platform_interface",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_web",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_web-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "shared_preferences_windows",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_windows-2.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "shelf",
       "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/shelf-1.4.1",
       "packageUri": "lib/",
@@ -454,12 +370,6 @@
     {
       "name": "sky_engine",
       "rootUri": "file:///C:/flutter/bin/cache/pkg/sky_engine",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "smooth_page_indicator",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/smooth_page_indicator-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -548,18 +458,6 @@
       "languageVersion": "2.15"
     },
     {
-      "name": "win32",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/win32-4.1.4",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
-      "name": "xdg_directories",
-      "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "yaml",
       "rootUri": "file:///C:/Users/Merwan/AppData/Local/Pub/Cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
@@ -572,7 +470,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-25T19:27:02.066349Z",
+  "generated": "2023-05-25T22:32:01.470011Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }
