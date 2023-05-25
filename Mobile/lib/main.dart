@@ -6,6 +6,7 @@ import 'package:askanything/presentation/splash_screen/splash_screen.dart';
 import 'package:askanything/domain/answer/answer.dart';
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
+import 'package:askanything/presentation/widgets/ask_question_form.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class MainApp extends StatelessWidget {
             home: child,
           );
         },
-        child: Home());
+        child: Scaffold(body: Home()));
   }
 }
 
@@ -56,8 +57,11 @@ class Home extends StatelessWidget {
       question: "2",
       createdAt: DateTime.now(),
       updatedAt: DateTime.now());
+
   @override
   Widget build(BuildContext context) {
+    return Center(
+      child: Column(
     return ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
