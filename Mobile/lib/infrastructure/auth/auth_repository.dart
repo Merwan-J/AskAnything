@@ -42,10 +42,10 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Error, User>> changePassword(
       {required ChangePasswordForm changePasswordForm}) async {
-    User user = await authApi.changePassword(
-        changePassword: changePasswordForm.toDto());
+    User user =
+        await authApi.changePassword(changePassword: changePasswordForm);
     return Right(user);
-  //something is wrong here - MERWAN
+    //something is wrong here - MERWAN
     // User user =
     //     await authApi.changePassword(changePassword: changePasswordForm);
     // return Right(user);

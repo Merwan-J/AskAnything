@@ -18,7 +18,6 @@ void main() {
 class MainApp extends StatelessWidget {
   MainApp({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -60,8 +59,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
     return ScreenUtilInit(
         builder: (BuildContext context, Widget? child) {
           return MaterialApp(
@@ -72,7 +69,7 @@ class Home extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class AnotherHome extends StatelessWidget {
   Question question = Question(
       id: "1",
       title:

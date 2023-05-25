@@ -225,6 +225,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.4"
+  file_picker:
+    dependency: "direct main"
+    description:
+      name: file_picker
+      sha256: "9d6e95ec73abbd31ec54d0e0df8a961017e165aba1395e462e5b31ea0c165daf"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.1"
   fixnum:
     dependency: transitive
     description:
@@ -262,6 +270,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      sha256: "950e77c2bbe1692bc0874fc7fb491b96a4dc340457f4ea1641443d0a6c1ea360"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.15"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      sha256: "0a122936b450324cbdfd51be0819cc6fcebb093eb65585e9cd92263f7a1a8a39"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.7.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -336,6 +360,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.1"
   io:
     dependency: transitive
     description:
@@ -597,6 +629,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_gen:
     dependency: transitive
     description:
