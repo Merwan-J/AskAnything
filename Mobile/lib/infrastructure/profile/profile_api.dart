@@ -33,17 +33,16 @@ class ProfileApi {
       return ProfileDto.fromJson(json.decode(response.body));
     } else {
       throw Exception(
-          "Unknown error",
-          );
+        "Unknown error",
+      );
     }
   }
 
-  Future<void> deleteAccount() async {
+  Future<void> deleteAccount(String id) async {
     var response = await _httpClient.delete("profile");
 
     if (response.statusCode != 204) {
-      throw Exception(
-          "Unknown error");
+      throw Exception("Unknown error");
     }
   }
 }
