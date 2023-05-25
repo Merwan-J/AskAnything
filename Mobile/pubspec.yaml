@@ -5,12 +5,7 @@ version: 0.1.0
 
 environment:
   sdk: ">=2.19.4 <3.0.0"
-
-assets:
-  - assets/images/
-  # - assets/icons/
-  # - assets/fonts/
-
+  
 dependencies:
   bloc: ^8.1.2
   dartz: ^0.10.1

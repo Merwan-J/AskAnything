@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'package:askanything/domain/auth/auth_repository_interface.dart';
 import 'package:askanything/domain/auth/signup_form.dart';
 import 'package:askanything/infrastructure/auth/auth_response_dto.dart';
+import 'package:askanything/infrastructure/auth/change_password_form_mapper.dart';
 import 'package:askanything/infrastructure/auth/sign_up_form_mapper.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_mapper.dart';
@@ -41,10 +42,14 @@ class AuthRepository implements IAuthRepository {
   @override
   Future<Either<Error, User>> changePassword(
       {required ChangePasswordForm changePasswordForm}) async {
+    User user = await authApi.changePassword(
+        changePassword: changePasswordForm.toDto());
+    return Right(user);
+  //something is wrong here - MERWAN
     // User user =
     //     await authApi.changePassword(changePassword: changePasswordForm);
     // return Right(user);
-    throw UnimplementedError();
+    //throw UnimplementedError();
   }
 
   @override
