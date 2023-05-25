@@ -26,10 +26,10 @@ dependencies:
   json_serializable: ^6.6.2
   either_dart: ^0.4.0
   build_runner: ^2.3.3
+  flutter_screenutil: ^5.8.2
   shared_preferences: ^2.1.1
   flutter_screenutil: ^5.7.0
   intl: ^0.18.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

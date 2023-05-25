@@ -1,3 +1,4 @@
+import 'package:askanything/presentation/base/bottomBar.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -84,21 +85,6 @@ class Home extends StatelessWidget {
       updatedAt: DateTime.now());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          QuestionW(
-            question: question,
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          AnswerW(answer: answer),
-        ],
-      )),
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, home: BottomBar());
   }
 }
