@@ -45,6 +45,11 @@ class AuthRepository implements IAuthRepository {
     User user = await authApi.changePassword(
         changePassword: changePasswordForm.toDto());
     return Right(user);
+  //something is wrong here - MERWAN
+    // User user =
+    //     await authApi.changePassword(changePassword: changePasswordForm);
+    // return Right(user);
+    //throw UnimplementedError();
   }
 
   @override

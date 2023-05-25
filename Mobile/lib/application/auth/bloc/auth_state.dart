@@ -1,0 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../domain/user/user.dart';
+
+part 'auth_state.freezed.dart';
+
+@freezed
+class AuthState with _$AuthState {
+  const factory AuthState.unInitialized() = AuthUnInitialized;
+  const factory AuthState.initial({String? token, required bool isfirstTime}) =
+      AuthInitialized;
+  const factory AuthState.authenticated(User user, String token) =
+      AuthAuthenticated;
+  const factory AuthState.unauthenticated() = AuthUnauthenticated;
+}
