@@ -1,5 +1,5 @@
 import 'package:askanything/presentation/base/bottomBar.dart';
-import 'package:askanything/presentation/base/home_page.dart';
+// import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/register_screen.dart';
 import 'package:askanything/util/custom_theme.dart';
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
             home: child,
           );
         },
-        child: Home());
+        child: SplashScreen());
   }
 }
 
