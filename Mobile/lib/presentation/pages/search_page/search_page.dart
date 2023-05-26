@@ -50,7 +50,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: 10,
               ),
               Container(
-                child: Icon(Icons.search, color: Colors.white),
+                child: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 30,
+                ),
                 width: 55,
                 height: 55,
                 decoration: BoxDecoration(
@@ -62,7 +66,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 width: 6,
               ),
               Container(
-                child: Icon(Icons.filter_list, color: Colors.white),
+                child: Icon(
+                  Icons.filter_list,
+                  color: Colors.white,
+                  size: 30,
+                ),
                 width: 55,
                 height: 55,
                 decoration: BoxDecoration(
@@ -90,6 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       });
                     },
                     selectedColor: const Color(0xFFFF735C),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(
