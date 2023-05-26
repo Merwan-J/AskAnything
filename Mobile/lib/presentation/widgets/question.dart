@@ -24,18 +24,18 @@ class QuestionW extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(10.h),
-            height: 150.h,
+            // height: 150.h,
             width: MediaQuery.of(context).size.width * 0.9,
             // width: 300,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(241, 236, 236, 1)),
+                color: Theme.of(context).cardColor),
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
@@ -50,8 +50,7 @@ class QuestionW extends StatelessWidget {
                           children: [
                             Text(
                               question.author,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 15.h),
+                              style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 3.h,
@@ -60,32 +59,34 @@ class QuestionW extends StatelessWidget {
                               DateFormat.jm()
                                   .format(question.createdAt)
                                   .toString(),
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300),
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(
-                      width: 35.h,
-                    ),
                     Row(
                       children: [
                         Icon(Icons.circle,
-                            color: Color.fromRGBO(255, 115, 92, 1), size: 10.h),
+                            color: Theme.of(context).primaryColor, size: 10.h),
                         Text(
                           question.topic,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(255, 115, 92, 1)),
+                              color: Theme.of(context).primaryColor),
                         ),
                       ],
                     ),
                   ],
                 ),
-                Text(question.title),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(question.title,
+                    style: Theme.of(context).textTheme.bodyMedium),
+                SizedBox(
+                  height: 10.h,
+                ),
                 //TODO: change like color based on user likes
                 Row(
                   children: [
@@ -94,13 +95,13 @@ class QuestionW extends StatelessWidget {
                     ),
                     Icon(Icons.keyboard_arrow_up_outlined,
                         color: nolikes > 0
-                            ? Color.fromRGBO(255, 115, 92, 1)
-                            : Colors.black),
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).textTheme.bodyLarge!.color),
                     Text(nolikes.toString()),
                     Icon(Icons.keyboard_arrow_down_outlined,
                         color: nolikes < 0
-                            ? Color.fromRGBO(255, 115, 92, 1)
-                            : Colors.black),
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).textTheme.bodyLarge!.color),
                     SizedBox(
                       width: 10.h,
                     ),

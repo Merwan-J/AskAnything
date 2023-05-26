@@ -36,19 +36,13 @@ class SplashScreenItem extends StatelessWidget {
         ),
         Text(title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
+            style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(
           height: 16,
         ),
         Text(subtitle,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: Colors.black)),
+            style: Theme.of(context).textTheme.titleSmall),
 
         const Spacer(),
         buttonTitle == "Next"
