@@ -51,9 +51,9 @@ class AuthApi {
   }
 
   Future changePassword({
-    required ChangePasswordFormDto changePassword,
+    required ChangePasswordForm changePassword,
   }) async {
-    var body = jsonEncode(changePassword.toJson());
+    var body = jsonEncode(changePassword);
     var response = await http.patch(_registerUrl, body: body);
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
