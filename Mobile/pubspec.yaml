@@ -22,6 +22,7 @@ dependencies:
   either_dart: ^0.4.0
   build_runner: ^2.3.3
   flutter_screenutil: ^5.7.0
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -31,3 +32,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/svg/

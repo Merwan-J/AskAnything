@@ -10,6 +10,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool passwordVisible = false;
+  bool confirmPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -151,17 +152,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   hintText: 'Confirm password',
                   suffixIcon: IconButton(
                     icon: Icon(
-                      passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      confirmPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                       color: Colors.grey[800],
                     ),
                     onPressed: () {
                       setState(() {
-                        passwordVisible = !passwordVisible;
+                        confirmPasswordVisible = !confirmPasswordVisible;
                       });
                     },
                   ),
                 ),
-                obscureText: !passwordVisible,
+                obscureText: !confirmPasswordVisible,
               ),
             ),
             SizedBox(

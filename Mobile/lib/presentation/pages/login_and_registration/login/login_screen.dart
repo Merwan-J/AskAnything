@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.all(15.h),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.h),
                   ),
                   child: IconButton(
                     onPressed: () {},
@@ -60,12 +60,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderSide:
                         const BorderSide(color: Colors.black, width: 2.0),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.h),
                   ),
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(
                         color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.h),
                   ),
                   hintText: 'Enter your email',
                 ),

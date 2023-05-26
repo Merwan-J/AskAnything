@@ -1,5 +1,6 @@
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/register_screen.dart';
+import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,7 +20,7 @@ class MainApp extends StatelessWidget {
         );
       },
       // child: const RegisterScreen(),
-      // child: const LoginScreen(),
+      child: const UpdateProfileScreen(),
     );
   }
 }
