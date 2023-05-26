@@ -13,20 +13,27 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          SizedBox(
-            height: 50.h,
-          ),
-          Row(
-            children: [
-              Container(
-                margin: EdgeInsets.all(15.h),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(15),
+    return MaterialApp(
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            SizedBox(
+              height: 50.h,
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.all(15.h),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(15.h),
+                  ),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.arrow_back_ios),
+                    iconSize: 17.h,
+                  ),
                 ),
                 child: IconButton(
                   onPressed: () {},
@@ -53,25 +60,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: 'Enter your email',
               ),
             ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Enter your password',
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    passwordVisible ? Icons.visibility : Icons.visibility_off,
-                    // color: Colors.grey[800],
+            SizedBox(
+              height: 20.h,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(160, 238, 238, 238),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 2.0),
+                    borderRadius: BorderRadius.circular(10.h),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      passwordVisible = !passwordVisible;
-                    });
-                  },
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
+                    borderRadius: BorderRadius.circular(10.h),
+                  ),
+                  hintText: 'Enter your email',
                 ),
               ),
               obscureText: !passwordVisible,

@@ -10,6 +10,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool passwordVisible = false;
+  bool confirmPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -124,37 +125,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               obscureText: !passwordVisible,
             ),
-          ),
-          SizedBox(
-            height: 15.h,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: TextField(
-              decoration: InputDecoration(
-                // filled: true,
-                // fillColor: Color.fromARGB(160, 238, 238, 238),
-                // focusedBorder: OutlineInputBorder(
-                //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                // border: OutlineInputBorder(
-                //   borderSide: const BorderSide(
-                //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                hintText: 'Confirm password',
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    passwordVisible ? Icons.visibility : Icons.visibility_off,
-                    // color: Colors.grey[800],
+            SizedBox(
+              height: 15.h,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Color.fromARGB(160, 238, 238, 238),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 2.0),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  onPressed: () {
-                    setState(() {
-                      passwordVisible = !passwordVisible;
-                    });
-                  },
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  hintText: 'Confirm password',
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      confirmPasswordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                      color: Colors.grey[800],
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        confirmPasswordVisible = !confirmPasswordVisible;
+                      });
+                    },
+                  ),
                 ),
+                obscureText: !confirmPasswordVisible,
               ),
               obscureText: !passwordVisible,
             ),

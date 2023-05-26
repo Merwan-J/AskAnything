@@ -2,6 +2,7 @@ import 'package:askanything/presentation/base/bottomBar.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/register_screen.dart';
+import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
 import 'package:askanything/util/custom_theme.dart';
 import 'package:askanything/presentation/pages/search_page/search_page.dart';
 import 'package:flutter/material.dart';
