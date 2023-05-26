@@ -34,8 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       SplashScreenItem(
         buttonTitle: "Get Started",
         image: "assets/splash screen image 2.png",
-        subtitle:
-            "We welcome you to discover new perspectives and insights every day.",
+        subtitle: "Discover new perspectives and insights every day.",
         title: "Welcome to Ask Anything!",
         controller: controller,
         pages: 2,

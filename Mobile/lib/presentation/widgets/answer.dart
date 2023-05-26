@@ -28,7 +28,7 @@ class AnswerW extends StatelessWidget {
             // width: 300,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Color.fromRGBO(241, 236, 236, 1)),
+                color: Theme.of(context).cardColor),
             // color: Colors.red,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,8 +48,7 @@ class AnswerW extends StatelessWidget {
                           children: [
                             Text(
                               answer.author,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 15.h),
+                              style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
                               height: 3.h,
@@ -58,9 +57,7 @@ class AnswerW extends StatelessWidget {
                               DateFormat.jm()
                                   .format(answer.createdAt)
                                   .toString(),
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300),
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                           ],
                         ),
@@ -98,13 +95,13 @@ class AnswerW extends StatelessWidget {
                     ),
                     Icon(Icons.keyboard_arrow_up_outlined,
                         color: nolikes > 0
-                            ? Color.fromRGBO(255, 115, 92, 1)
-                            : Colors.black),
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).textTheme.bodyLarge!.color),
                     Text(nolikes.toString()),
                     Icon(Icons.keyboard_arrow_down_outlined,
                         color: nolikes < 0
-                            ? Color.fromRGBO(255, 115, 92, 1)
-                            : Colors.black),
+                            ? Theme.of(context).primaryColor
+                            : Theme.of(context).textTheme.bodyLarge!.color),
                   ],
                 ),
               ],

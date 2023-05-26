@@ -11,7 +11,7 @@ class BottomBar extends StatelessWidget {
           onPressed: () {
             // add your FAB action here
           },
-          backgroundColor: const Color.fromARGB(255, 255, 115, 92),
+          backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,
           elevation: 4.0,
           shape: RoundedRectangleBorder(
@@ -21,7 +21,7 @@ class BottomBar extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: Container(
-          color: Colors.white,
+          // color: Colors.white,
           height: 50.0,
           alignment: Alignment.center,
           child: BottomAppBar(

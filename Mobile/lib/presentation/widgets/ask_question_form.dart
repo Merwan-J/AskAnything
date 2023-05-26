@@ -171,16 +171,14 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
   }
 }
 
-
 // Use this to display the sheet
-// buildBottomSheet(BuildContext context) {
-//     showModalBottomSheet(
-//         isScrollControlled: true,
-//         elevation: 10,
-//         shape: RoundedRectangleBorder(
-//             borderRadius: BorderRadius.only(
-//                 topLeft: Radius.circular(30.h),
-//                 topRight: Radius.circular(30.h))),
-//         context: context,
-//         builder: (context) => AskQuestionForm());
-//   }
+buildBottomSheet(BuildContext context) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.h), topRight: Radius.circular(30.h))),
+      context: context,
+      builder: (context) => AskQuestionForm());
+}
