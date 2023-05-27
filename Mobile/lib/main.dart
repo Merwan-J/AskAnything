@@ -32,7 +32,7 @@ class MainApp extends StatelessWidget {
             home: child,
           );
         },
-        child: SplashScreen());
+        child: LoginScreen());
   }
 }
 
