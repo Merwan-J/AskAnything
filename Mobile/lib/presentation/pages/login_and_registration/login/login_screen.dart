@@ -13,27 +13,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            SizedBox(
-              height: 50.h,
-            ),
-            Row(
-              children: [
-                Container(
-                  margin: EdgeInsets.all(15.h),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(15.h),
-                  ),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_back_ios),
-                    iconSize: 17.h,
-                  ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        children: [
+          SizedBox(
+            height: 50.h,
+          ),
+          Row(
+            children: [
+              Container(
+                margin: EdgeInsets.all(15.h),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(15.h),
                 ),
                 child: IconButton(
                   onPressed: () {},
@@ -60,26 +53,36 @@ class _LoginScreenState extends State<LoginScreen> {
                 hintText: 'Enter your email',
               ),
             ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: TextField(
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Color.fromARGB(160, 238, 238, 238),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: Colors.black, width: 2.0),
-                    borderRadius: BorderRadius.circular(10.h),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: TextField(
+              decoration: InputDecoration(
+                // filled: true,
+                // fillColor: Color.fromARGB(160, 238, 238, 238),
+                // focusedBorder: OutlineInputBorder(
+                //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
+                //   borderRadius: BorderRadius.circular(10),
+                // ),
+                // border: OutlineInputBorder(
+                //   borderSide: const BorderSide(
+                //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
+                //   borderRadius: BorderRadius.circular(10),
+                // ),
+                hintText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility : Icons.visibility_off,
+                    // color: Colors.grey[800],
                   ),
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    borderRadius: BorderRadius.circular(10.h),
-                  ),
-                  hintText: 'Enter your email',
+                  onPressed: () {
+                    setState(() {
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
                 ),
               ),
               obscureText: !passwordVisible,
@@ -122,18 +125,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 //     ),
                 //   ),
                 // ),
-                child: const Text(
+                child: Text(
                   'Login',
                   style: TextStyle(
-                    fontSize: 20,
-                  ),
+                      fontSize:
+                          Theme.of(context).textTheme.bodyLarge!.fontSize),
                 ),
               ),
             ),
           ),
-          SizedBox(
-            height: 100.h,
-          ),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
