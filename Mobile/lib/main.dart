@@ -30,11 +30,11 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           home: child,
         );
       },
-      child: SearchScreen(),
+      child: Home(),
     );
   }
 }

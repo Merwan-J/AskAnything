@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     SearchScreen(),
     // Text(""),
     SavedPage(),
-    UpdateProfileScreen()
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {
