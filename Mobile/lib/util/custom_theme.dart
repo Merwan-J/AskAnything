@@ -13,6 +13,25 @@ class CustomTheme {
         primary: CustomColor.primaryColor,
         secondary: CustomColor.secondaryColor,
       ),
+
+      chipTheme: ChipThemeData(
+          disabledColor: Colors.grey,
+          selectedColor: CustomColor.primaryColor,
+          secondarySelectedColor: CustomColor.secondaryColor,
+          padding: const EdgeInsets.all(10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.h),
+          ),
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          ),
+          secondaryLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          )),
       brightness: Brightness.light,
       cardColor: Color.fromRGBO(241, 236, 236, 1),
       primarySwatch: CustomColor.primaryColor,
@@ -41,13 +60,20 @@ class CustomTheme {
         actionsIconTheme: IconThemeData(
           color: Colors.black,
         ),
+        titleTextStyle: TextStyle(color: Colors.black),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(
           color: Colors.black,
         ),
       ),
-      disabledColor: const Color.fromRGBO(247, 248, 249, 1),
+      tabBarTheme: TabBarTheme(
+          labelColor: CustomColor.primaryColor,
+          unselectedLabelColor: Colors.black,
+          labelStyle: TextStyle(
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          )),
 
       //give button thext theme
 
@@ -123,8 +149,36 @@ class CustomTheme {
           color: Colors.white,
         ),
       ),
+      elevatedButtonTheme: const ElevatedButtonThemeData(
+          // style: ButtonStyle(foregroundColor: Colors.white)
+
+          ),
+      //chip theme for dark mode based on the above lightmode
+      chipTheme: ChipThemeData(
+          disabledColor: Colors.grey,
+          selectedColor: CustomColor.primaryColor,
+          secondarySelectedColor: CustomColor.secondaryColor,
+          padding: const EdgeInsets.all(10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.h),
+          ),
+          labelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          ),
+          secondaryLabelStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 14.sp,
+            fontWeight: FontWeight.w500,
+          )),
+
+      tabBarTheme: TabBarTheme(
+          labelColor: CustomColor.primaryColor,
+          unselectedLabelColor: Colors.white),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.white,
+          elevation: 10,
+          // backgroundColor: const Color.fromRGBO(46, 80, 91, 1),
           selectedItemColor: CustomColor.primaryColor,
           unselectedItemColor: Colors.grey),
       inputDecorationTheme: InputDecorationTheme(

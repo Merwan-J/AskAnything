@@ -195,11 +195,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Theme.of(context).textTheme.bodyLarge!.fontSize),
                     ),
                   ),
-                ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Login Now',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color.fromRGBO(255, 115, 92, 1),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 50.h,
-              ),
+              // Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
