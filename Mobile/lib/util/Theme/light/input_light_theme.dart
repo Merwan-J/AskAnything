@@ -13,7 +13,7 @@ class CustomLightInput {
         ),
         enabledBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: Colors.black),
+          borderSide: BorderSide(color: Color.fromARGB(255, 175, 175, 175)),
         ),
         border: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
