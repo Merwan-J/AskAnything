@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -195,17 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Theme.of(context).textTheme.bodyLarge!.fontSize),
                     ),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Login Now',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color.fromRGBO(255, 115, 92, 1),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
               // Spacer(),
               Row(
