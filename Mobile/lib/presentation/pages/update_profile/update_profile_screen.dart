@@ -1,6 +1,10 @@
+import 'package:askanything/presentation/widgets/ask_question_form.dart';
+import 'package:askanything/presentation/widgets/update_profie_form.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:file_picker/file_picker.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -12,9 +16,42 @@ class UpdateProfileScreen extends StatefulWidget {
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String? selectedImage;
 
-  void _selectImage() {
-    // Implement the logic to select an image from the device
-    // and update the selectedImage variable
+  String filename = "";
+  Uint8List? filebyte;
+  FilePickerResult? pickeFile;
+  void _chooseFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        allowedExtensions: ['jpg', 'png'],
+        type: FileType.custom);
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      setState(() {
+        filename = file.name;
+        filename = filename.substring(0, 20);
+        filebyte = file.bytes;
+      });
+    } else {
+      // User canceled the picker
+    }
+  }
+
+  void _showUpdateProfileForm(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      elevation: 10,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(30.h),
+          topRight: Radius.circular(30.h),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return UpdateProfileForm();
+      },
+    );
   }
 
   @override
@@ -70,7 +107,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       // ),
       body: ProfileForm(
         selectedImage: selectedImage,
-        onImageSelected: _selectImage,
+        onImageSelected: _chooseFile,
+        onChangePasswordPressed: () => _showUpdateProfileForm(context),
       ),
     );
   }
@@ -79,11 +117,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 class ProfileForm extends StatelessWidget {
   final String? selectedImage;
   final VoidCallback onImageSelected;
+  final VoidCallback onChangePasswordPressed;
 
   const ProfileForm({
     Key? key,
     this.selectedImage,
     required this.onImageSelected,
+    required this.onChangePasswordPressed,
   }) : super(key: key);
 
   @override
@@ -107,10 +147,10 @@ class ProfileForm extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  child: GestureDetector(
+                  child: InkWell(
                     onTap: onImageSelected,
                     child: Container(
-                      margin: EdgeInsets.all(8),
+                      margin: EdgeInsets.all(6),
                       child: TextButton(
                         onPressed: onImageSelected,
                         child: SvgPicture.asset(
@@ -198,13 +238,8 @@ class ProfileForm extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Handle change password action
-                  },
+                  onPressed: onChangePasswordPressed,
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                      Color.fromRGBO(255, 115, 92, 1),
-                    ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
