@@ -1,15 +1,14 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+part of 'auth_bloc.dart';
 
-import '../../../domain/user/user.dart';
+@immutable
+abstract class AuthState {}
 
-part 'auth_state.freezed.dart';
+class AuthInitial extends AuthState {}
 
-@freezed
-class AuthState with _$AuthState {
-  const factory AuthState.unInitialized() = AuthUnInitialized;
-  const factory AuthState.initial({String? token, required bool isfirstTime}) =
-      AuthInitialized;
-  const factory AuthState.authenticated(User user, String token) =
-      AuthAuthenticated;
-  const factory AuthState.unauthenticated() = AuthUnauthenticated;
+class Authenticated extends AuthState {
+  final Name name;
+
+  Authenticated(this.name);
 }
+
+class Unauthenticated extends AuthState {}

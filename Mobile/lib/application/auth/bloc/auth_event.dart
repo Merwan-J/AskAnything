@@ -1,14 +1,15 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+part of 'auth_bloc.dart';
 
-import '../../../domain/user/user.dart';
-
-part 'auth_event.freezed.dart';
-
-@freezed
-abstract class AuthEvent with _$AuthEvent {
-  const factory AuthEvent(
-    User user,
-  ) = _SignUpForm;
-  const factory AuthEvent.signedIn(User user, String token) = AuthEventSignedIn;
-  const factory AuthEvent.signOut() = AuthEventSignOut;
+@immutable
+abstract class AuthEvent {
+  const AuthEvent();
 }
+
+class SignedInEvent extends AuthEvent {
+  final Name name;
+  final Password password;
+
+  const SignedInEvent(this.name, this.password);
+}
+
+class LogoutEvent extends AuthEvent {}
