@@ -21,8 +21,8 @@ class _AppState extends State<App> {
     HomePage(),
     SearchScreen(),
     // Text(""),
-    BookmarkPage(),
-    UpdateProfileScreen()
+    SavedPage(),
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {
