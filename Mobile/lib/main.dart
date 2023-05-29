@@ -30,9 +30,10 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           home: child,
         );
       },
