@@ -22,6 +22,10 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
   String filename = "";
   FilePickerResult? pickeFile;
   Uint8List? filebyte;
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   toggle() {
     setState(() {
       isAnnonymous = !isAnnonymous;
@@ -44,6 +48,13 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
     } else {
       // User canceled the picker
     }
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -92,6 +103,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                       height: 10.h,
                     ),
                     TextField(
+                      controller: titleController,
                       decoration: InputDecoration(hintText: "Enter title here"),
                     ),
                     SizedBox(
@@ -103,6 +115,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         maxLines: 6,
                         // expands: true,
                         // keyboardType: TextInputType.multiline,
+                        controller: descriptionController,
                         decoration:
                             InputDecoration(hintText: "Enter description"),
                       ),

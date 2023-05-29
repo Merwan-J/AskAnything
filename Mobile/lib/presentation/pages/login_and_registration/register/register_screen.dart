@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,10 +12,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool passwordVisible = false;
   bool confirmPasswordVisible = false;
 
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
           padding:
@@ -59,18 +72,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: TextField(
+                  controller: _nameController,
                   decoration: InputDecoration(
-                    // filled: true,
-                    // fillColor: Color.fromARGB(160, 238, 238, 238),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: const BorderSide(
-                    //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
                     hintText: 'Name',
                   ),
                 ),
@@ -81,18 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: TextField(
+                  controller: _emailController,
                   decoration: InputDecoration(
-                    // filled: true,
-                    // fillColor: Color.fromARGB(160, 238, 238, 238),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: const BorderSide(
-                    //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
                     hintText: 'Email',
                   ),
                 ),
@@ -103,25 +96,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: TextField(
+                  controller: _passwordController,
                   decoration: InputDecoration(
-                    // filled: true,
-                    // fillColor: Color.fromARGB(160, 238, 238, 238),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: const BorderSide(
-                    //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
                     hintText: 'Password',
                     suffixIcon: IconButton(
                       icon: Icon(
                         passwordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        // color: Colors.grey[800],
                       ),
                       onPressed: () {
                         setState(() {
@@ -139,25 +121,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w),
                 child: TextField(
+                  controller: _confirmPasswordController,
                   decoration: InputDecoration(
-                    filled: true,
-                    // fillColor: Color.fromARGB(160, 238, 238, 238),
-                    // focusedBorder: OutlineInputBorder(
-                    //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
-                    // border: OutlineInputBorder(
-                    //   borderSide: const BorderSide(
-                    //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                    //   borderRadius: BorderRadius.circular(10),
-                    // ),
                     hintText: 'Confirm password',
                     suffixIcon: IconButton(
                       icon: Icon(
                         confirmPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
-                        // color: Colors.grey[800],
                       ),
                       onPressed: () {
                         setState(() {
@@ -178,7 +149,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: double.infinity,
                   height: 50.h,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      String name = _nameController.text;
+                      String email = _emailController.text;
+                      String password = _passwordController.text;
+                      String confirmPassword = _confirmPasswordController.text;
+
+                      // Perform registration logic here
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                         Color.fromRGBO(255, 115, 92, 1),
@@ -198,7 +176,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              // Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
