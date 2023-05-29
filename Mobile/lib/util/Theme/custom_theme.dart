@@ -2,6 +2,7 @@ import 'package:askanything/util/Theme/dark/appbar_dark_theme.dart';
 import 'package:askanything/util/Theme/dark/bottom_navigation_dark_theme.dart';
 import 'package:askanything/util/Theme/dark/button_dark_theme.dart';
 import 'package:askanything/util/Theme/dark/chip_theme.dart';
+import 'package:askanything/util/Theme/dark/elevatedButton_dark_theme.dart';
 import 'package:askanything/util/Theme/dark/input_dartk_theme.dart';
 import 'package:askanything/util/Theme/dark/tabbar_dark_theme.dart';
 import 'package:askanything/util/Theme/dark/text_dark_theme.dart';
@@ -38,6 +39,7 @@ class CustomTheme {
 
   static ThemeData get darkTheme {
     return ThemeData(
+        elevatedButtonTheme: CustomDarkElevatedTheme.darkElevatedButton,
         brightness: Brightness.dark,
         primarySwatch: CustomColor.primaryColor,
         primaryColor: const Color.fromRGBO(255, 115, 92, 1),

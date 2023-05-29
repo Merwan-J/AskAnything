@@ -1,5 +1,5 @@
 import 'package:askanything/presentation/base/bottomBar.dart';
-import 'package:askanything/presentation/pages/home/home_page.dart';
+import 'package:askanything/presentation/home_page.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
@@ -31,11 +31,11 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           home: child,
         );
       },
-      child: Home(),
+      child: App(),
     );
   }
 }
