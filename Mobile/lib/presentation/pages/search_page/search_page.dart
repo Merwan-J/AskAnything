@@ -1,3 +1,4 @@
+import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:askanything/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -21,6 +22,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBar(
+          title: 'Search',
+        ),
         body: Container(
           padding: const EdgeInsets.all(10.0),
           child: Column(

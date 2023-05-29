@@ -6,15 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/question/question.dart';
 
-class HomeTempPage extends StatefulWidget {
-  const HomeTempPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeTempPage> createState() => _HomeTempPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeTempPageState extends State<HomeTempPage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];
@@ -36,6 +35,7 @@ class _HomeTempPageState extends State<HomeTempPage>
     return Scaffold(
         appBar: AppBar(
           elevation: 0.5,
+          toolbarHeight: 60.h,
           actions: [Icon(Icons.search)],
           title: Container(
             child: Row(
