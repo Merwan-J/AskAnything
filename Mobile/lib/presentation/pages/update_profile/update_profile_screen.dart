@@ -1,10 +1,11 @@
-import 'package:askanything/presentation/widgets/ask_question_form.dart';
 import 'package:askanything/presentation/widgets/update_profie_form.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:file_picker/file_picker.dart';
+
+import 'package:flutter/material.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -19,11 +20,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String filename = "";
   Uint8List? filebyte;
   FilePickerResult? pickeFile;
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   void _chooseFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        allowedExtensions: ['jpg', 'png'],
-        type: FileType.custom);
+      allowMultiple: false,
+      allowedExtensions: ['jpg', 'png'],
+      type: FileType.custom,
+    );
 
     if (result != null) {
       PlatformFile file = result.files.first;
@@ -44,14 +50,21 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       elevation: 10,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30.h),
-          topRight: Radius.circular(30.h),
+          topLeft: Radius.circular(30),
+          topRight: Radius.circular(30),
         ),
       ),
       builder: (BuildContext context) {
         return UpdateProfileForm();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    super.dispose();
   }
 
   @override
@@ -108,6 +121,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       body: ProfileForm(
         selectedImage: selectedImage,
         onImageSelected: _chooseFile,
+        nameController: nameController,
+        emailController: emailController,
         onChangePasswordPressed: () => _showUpdateProfileForm(context),
       ),
     );
@@ -117,12 +132,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 class ProfileForm extends StatelessWidget {
   final String? selectedImage;
   final VoidCallback onImageSelected;
+  final TextEditingController nameController;
+  final TextEditingController emailController;
   final VoidCallback onChangePasswordPressed;
 
   const ProfileForm({
     Key? key,
     this.selectedImage,
     required this.onImageSelected,
+    required this.nameController,
+    required this.emailController,
     required this.onChangePasswordPressed,
   }) : super(key: key);
 
@@ -133,13 +152,13 @@ class ProfileForm extends StatelessWidget {
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Column(
         children: [
-          SizedBox(height: 30.h),
+          SizedBox(height: 30),
           Center(
             child: Stack(
               alignment: Alignment.center,
               children: [
                 CircleAvatar(
-                  radius: 50.r,
+                  radius: 50,
                   backgroundImage: selectedImage != null
                       ? AssetImage(selectedImage!)
                       : AssetImage('assets/images/profile.jpg'),
@@ -155,8 +174,8 @@ class ProfileForm extends StatelessWidget {
                         onPressed: onImageSelected,
                         child: SvgPicture.asset(
                           "assets/svg/upload.svg",
-                          width: 70.w,
-                          height: 70.h,
+                          width: 70,
+                          height: 70,
                         ),
                       ),
                     ),
@@ -165,75 +184,49 @@ class ProfileForm extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 45.h),
+          SizedBox(height: 45),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Name',
                   style: TextStyle(
-                    fontSize: 16, // Set the font size to 16
-                    fontWeight: FontWeight.bold, // Set the font weight to bold
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5.h),
+                SizedBox(height: 5),
                 TextField(
-                    // decoration: InputDecoration(
-                    //   enabledBorder: UnderlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //       color: Color.fromRGBO(255, 115, 92, 1),
-                    //       width: 1.0,
-                    //     ),
-                    //   ),
-                    //   focusedBorder: UnderlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //       color: Color.fromRGBO(255, 115, 92, 1),
-                    //       width: 1.0,
-                    //     ),
-                    //   ),
-                    // ),
-                    ),
+                  controller: nameController,
+                ),
               ],
             ),
           ),
-          SizedBox(height: 15.h),
+          SizedBox(height: 15),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Email',
                   style: TextStyle(
-                    fontSize: 16, // Set the font size to 16
-                    fontWeight: FontWeight.bold, // Set the font weight to bold
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5.h),
+                SizedBox(height: 5),
                 TextField(
-                    // decoration: InputDecoration(
-                    //   enabledBorder: UnderlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //       color: Color.fromRGBO(255, 115, 92, 1),
-                    //       width: 1.0,
-                    //     ),
-                    //   ),
-                    //   focusedBorder: UnderlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //       color: Color.fromRGBO(255, 115, 92, 1),
-                    //       width: 1.0,
-                    //     ),
-                    //   ),
-                    // ),
-                    ),
+                  controller: emailController,
+                ),
               ],
             ),
           ),
-          SizedBox(height: 20.h),
+          SizedBox(height: 20),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Container(
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -247,11 +240,11 @@ class ProfileForm extends StatelessWidget {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: const Text(
                       'Change Password',
                       style: TextStyle(
-                        fontSize: 16, // Set the font size to 16
+                        fontSize: 16,
                       ),
                     ),
                   ),
