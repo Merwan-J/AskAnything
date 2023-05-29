@@ -3,11 +3,12 @@ import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/answer/answer.dart';
 import '../../../domain/question/question.dart';
 
-class QuestionDetail extends StatelessWidget {
+class QuestionDetail extends StatefulWidget {
   static Question question = Question(
       id: "1",
       title:
@@ -22,6 +23,13 @@ class QuestionDetail extends StatelessWidget {
       dislikes: ["1,2"],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now());
+
+  @override
+  State<QuestionDetail> createState() => _QuestionDetailState();
+}
+
+class _QuestionDetailState extends State<QuestionDetail> {
+  bool isAnonymous = false;
   final List<Answer> answerList = [
     Answer(
         id: "1",
@@ -174,21 +182,25 @@ class QuestionDetail extends StatelessWidget {
         .map((answer) => Row(
               children: [
                 SizedBox(
-                  width: 10,
+                  width: 10.h,
                 ),
                 AnswerW(answer: answer),
               ],
             ))
         .toList();
+
     return Scaffold(
       appBar: AppBar(title: Text('question comments')),
       bottomNavigationBar: BottomAppBar(),
       body: Column(
         children: [
           SizedBox(
-            height: 10,
+            height: 10.h,
           ),
-          QuestionW(question: question),
+          QuestionW(question: QuestionDetail.question),
+          SizedBox(
+            height: 10.h,
+          ),
           Container(
             // color: Colors.red,
             child: Expanded(
@@ -208,13 +220,26 @@ class QuestionDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Image.asset('assets/images/user 1.png'),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isAnonymous = !isAnonymous;
+                    });
+                  },
+                  child: Container(
+                    width: 40.w,
+                    height: 40.h,
+                    child: Image.asset(
+                        // ignore: dead_code
+                        'assets/images/${isAnonymous ? 'anonnymous.png' : 'user 1.png'}'),
+                  ),
+                ),
                 SizedBox(
-                  width: 10.0,
+                  width: 10.w,
                 ),
                 Expanded(
                   child: Container(
-                    height: 50,
+                    height: 50.h,
                     child: TextField(
                       decoration: InputDecoration(
                         suffixIcon: IconButton(
