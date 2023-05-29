@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginForm {
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
+  String get emailAddress => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginFormCopyWith<LoginForm> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $LoginFormCopyWith<$Res> {
   factory $LoginFormCopyWith(LoginForm value, $Res Function(LoginForm) then) =
       _$LoginFormCopyWithImpl<$Res, LoginForm>;
   @useResult
-  $Res call({EmailAddress emailAddress, Password password});
+  $Res call({String emailAddress, String password});
 }
 
 /// @nodoc
@@ -52,11 +52,11 @@ class _$LoginFormCopyWithImpl<$Res, $Val extends LoginForm>
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ) as $Val);
   }
 }
@@ -68,7 +68,7 @@ abstract class _$$_LoginFormCopyWith<$Res> implements $LoginFormCopyWith<$Res> {
       __$$_LoginFormCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({EmailAddress emailAddress, Password password});
+  $Res call({String emailAddress, String password});
 }
 
 /// @nodoc
@@ -89,11 +89,11 @@ class __$$_LoginFormCopyWithImpl<$Res>
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ));
   }
 }
@@ -104,9 +104,9 @@ class _$_LoginForm implements _LoginForm {
   const _$_LoginForm({required this.emailAddress, required this.password});
 
   @override
-  final EmailAddress emailAddress;
+  final String emailAddress;
   @override
-  final Password password;
+  final String password;
 
   @override
   String toString() {
@@ -136,13 +136,13 @@ class _$_LoginForm implements _LoginForm {
 
 abstract class _LoginForm implements LoginForm {
   const factory _LoginForm(
-      {required final EmailAddress emailAddress,
-      required final Password password}) = _$_LoginForm;
+      {required final String emailAddress,
+      required final String password}) = _$_LoginForm;
 
   @override
-  EmailAddress get emailAddress;
+  String get emailAddress;
   @override
-  Password get password;
+  String get password;
   @override
   @JsonKey(ignore: true)
   _$$_LoginFormCopyWith<_$_LoginForm> get copyWith =>

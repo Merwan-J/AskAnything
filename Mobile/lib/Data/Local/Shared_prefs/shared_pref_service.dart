@@ -42,9 +42,9 @@ class SharedPreferenceService {
     });
   }
 
-  Future<void> setAuthenticatedUser(User user) async {
+  Future<void> setAuthenticatedUser(Map<String, dynamic> user) async {
     return SharedPreferences.getInstance().then((prefs) {
-      prefs.setString('user', json.encode(user.toDTO().toJson()));
+      prefs.setString('user', json.encode(user));
     });
   }
 

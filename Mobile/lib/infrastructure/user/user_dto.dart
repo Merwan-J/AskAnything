@@ -7,17 +7,17 @@ part 'user_dto.g.dart';
 @freezed
 class UserDTO with _$UserDTO {
   const factory UserDTO({
-    required String id,
+    @JsonKey(name: '_id') required String id,
     required String name,
     required String email,
     required String password,
-    required String profilePic,
-    required List<String> questionIds,
-    required List<String> answerIds,
+    @Default('') String profilePic,
+    @JsonKey(name: 'questions') required List<String> questionIds,
+    @JsonKey(name: 'answers') required List<String> answerIds,
     required int reputation,
     required int likes,
     required int dislikes,
-    required Map<String, List<String>> bookmarks,
+    required Map<String, dynamic> bookmarks,
     required List<String> followers,
     required List<String> followings,
     required DateTime createdAt,

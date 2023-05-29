@@ -1,31 +1,42 @@
-import 'dart:ffi';
-
+import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
+import 'package:askanything/domain/auth/auth_failure.dart';
 import 'package:askanything/domain/auth/auth_repository_interface.dart';
+import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/auth/auth_api.dart';
+import 'package:askanything/infrastructure/auth/auth_response_dto.dart';
+import 'package:askanything/infrastructure/user/user_mapper.dart';
+import 'package:askanything/util/custom_http_client.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:dartz/dartz.dart';
 
-import '../../../domain/auth/login_form.dart';
-import '../../../domain/auth/name.dart';
-import '../../../domain/auth/password.dart';
-
-part 'login_event.dart';
-part 'login_state.dart';
+import '../../../infrastructure/auth/auth_repository.dart';
+import 'login_event.dart';
+import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final IAuthRepository authRepository;
-  LoginBloc(this.authRepository) : super(LoginInitial());
-  // @override
-  Future<dynamic> mapStatetoEvent(LoginEvent event, Emitter emit) async {
-    emit(LoginLoading());
-    try {
-      final result = await authRepository.login(loginForm: event.loginForm);
-      if (result == null) {
-        return emit(LoginFailure('Invalid credentials'));
-      } else {
-        return emit(LoginSuccess());
-      }
-    } catch (e) {
-      return emit(LoginFailure(e.toString()));
-    }
+  late final CustomHttpClient _customHttpClient;
+  late final AuthApi _authApi;
+  late final IAuthRepository _authRepository;
+  late final SharedPreferenceService _sharedPreferenceService;
+
+  LoginBloc() : super(const LoginState.initial()) {
+    _customHttpClient = CustomHttpClient();
+    _authApi = AuthApi(_customHttpClient);
+    _sharedPreferenceService = SharedPreferenceService();
+    _authRepository = AuthRepository(_authApi, _sharedPreferenceService);
+
+    on<LoginEventLogin>(
+      ((event, emit) async {
+        emit(const LoginStateLoading());
+        Either<AuthFailure, AuthResponseDto> result =
+            await _authRepository.login(loginForm: event.form);
+
+        result.fold(
+          (failure) => emit(LoginState.failure(failure)),
+          (response) =>
+              emit(LoginState.success(response.user, response.accessToken)),
+        );
+      }),
+    );
   }
 }

@@ -7,7 +7,7 @@ part 'login_form.freezed.dart';
 @freezed
 class LoginForm with _$LoginForm {
   const factory LoginForm({
-    required EmailAddress emailAddress,
-    required Password password,
+    required String emailAddress,
+    required String password,
   }) = _LoginForm;
 }
