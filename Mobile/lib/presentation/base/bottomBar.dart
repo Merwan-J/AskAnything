@@ -6,7 +6,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: App_Bar(),
+        // appBar: App_Bar(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // add your FAB action here

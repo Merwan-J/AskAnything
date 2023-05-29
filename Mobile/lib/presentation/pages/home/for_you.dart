@@ -23,20 +23,17 @@ class ForYou extends StatelessWidget {
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.h),
-      child: ListView.builder(
-          padding: EdgeInsets.symmetric(vertical: 10.h),
-          // shrinkWrap: true,
-          // scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.only(bottom: 15.h),
-              child: QuestionW(question: question),
-            );
-          },
-          itemCount: 30),
-    );
+    return ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: 10.h),
+        // shrinkWrap: true,
+        // scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: 15.h),
+            child: QuestionW(question: question),
+          );
+        },
+        itemCount: 30);
     // return Expanded(child: QuestionW(question: question));
   }
 }

@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../domain/question/question.dart';
 import '../../widgets/end_drawer.dart';
 
-class HomeTempPage extends StatefulWidget {
-  const HomeTempPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeTempPage> createState() => _HomeTempPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomeTempPageState extends State<HomeTempPage>
@@ -21,7 +21,6 @@ class _HomeTempPageState extends State<HomeTempPage>
   void openEndDrawer() {
     _scaffoldKey.currentState?.openEndDrawer();
   }
-
   @override
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];

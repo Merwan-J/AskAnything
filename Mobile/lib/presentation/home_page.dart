@@ -4,9 +4,9 @@ import 'package:askanything/presentation/pages/search_page/search_page.dart';
 import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../profile_page/profile_temp.dart';
-import '../bookmark_page/saved_temp.dart';
-import '../../widgets/ask_question_form.dart';
+import 'pages/profile_page/profile_temp.dart';
+import './pages/bookmark_page/book_mark.dart';
+import 'widgets/ask_question_form.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -18,11 +18,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final screens = [
-    HomeTempPage(),
+    HomePage(),
     SearchScreen(),
     // Text(""),
-    SavedPage(),
-    UpdateProfileScreen()
+    BookmarkPage(),
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {

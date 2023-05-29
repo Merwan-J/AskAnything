@@ -20,7 +20,7 @@ AuthResponseDto _$AuthResponseDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AuthResponseDto {
-  UserDTO get user => throw _privateConstructorUsedError;
+  Map<String, dynamic> get user => throw _privateConstructorUsedError;
   String get accessToken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,9 +35,7 @@ abstract class $AuthResponseDtoCopyWith<$Res> {
           AuthResponseDto value, $Res Function(AuthResponseDto) then) =
       _$AuthResponseDtoCopyWithImpl<$Res, AuthResponseDto>;
   @useResult
-  $Res call({UserDTO user, String accessToken});
-
-  $UserDTOCopyWith<$Res> get user;
+  $Res call({Map<String, dynamic> user, String accessToken});
 }
 
 /// @nodoc
@@ -60,20 +58,12 @@ class _$AuthResponseDtoCopyWithImpl<$Res, $Val extends AuthResponseDto>
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserDTO,
+              as Map<String, dynamic>,
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserDTOCopyWith<$Res> get user {
-    return $UserDTOCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
   }
 }
 
@@ -85,10 +75,7 @@ abstract class _$$_AuthResponseDtoCopyWith<$Res>
       __$$_AuthResponseDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UserDTO user, String accessToken});
-
-  @override
-  $UserDTOCopyWith<$Res> get user;
+  $Res call({Map<String, dynamic> user, String accessToken});
 }
 
 /// @nodoc
@@ -107,9 +94,9 @@ class __$$_AuthResponseDtoCopyWithImpl<$Res>
   }) {
     return _then(_$_AuthResponseDto(
       user: null == user
-          ? _value.user
+          ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
-              as UserDTO,
+              as Map<String, dynamic>,
       accessToken: null == accessToken
           ? _value.accessToken
           : accessToken // ignore: cast_nullable_to_non_nullable
@@ -121,13 +108,21 @@ class __$$_AuthResponseDtoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AuthResponseDto implements _AuthResponseDto {
-  const _$_AuthResponseDto({required this.user, required this.accessToken});
+  const _$_AuthResponseDto(
+      {required final Map<String, dynamic> user, required this.accessToken})
+      : _user = user;
 
   factory _$_AuthResponseDto.fromJson(Map<String, dynamic> json) =>
       _$$_AuthResponseDtoFromJson(json);
 
+  final Map<String, dynamic> _user;
   @override
-  final UserDTO user;
+  Map<String, dynamic> get user {
+    if (_user is EqualUnmodifiableMapView) return _user;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_user);
+  }
+
   @override
   final String accessToken;
 
@@ -141,14 +136,15 @@ class _$_AuthResponseDto implements _AuthResponseDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AuthResponseDto &&
-            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._user, _user) &&
             (identical(other.accessToken, accessToken) ||
                 other.accessToken == accessToken));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, user, accessToken);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_user), accessToken);
 
   @JsonKey(ignore: true)
   @override
@@ -166,14 +162,14 @@ class _$_AuthResponseDto implements _AuthResponseDto {
 
 abstract class _AuthResponseDto implements AuthResponseDto {
   const factory _AuthResponseDto(
-      {required final UserDTO user,
+      {required final Map<String, dynamic> user,
       required final String accessToken}) = _$_AuthResponseDto;
 
   factory _AuthResponseDto.fromJson(Map<String, dynamic> json) =
       _$_AuthResponseDto.fromJson;
 
   @override
-  UserDTO get user;
+  Map<String, dynamic> get user;
   @override
   String get accessToken;
   @override
