@@ -34,11 +34,11 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           home: child,
         );
       },
-      child: LoginScreen(),
+      child: RegisterScreen(),
       // child: SearchScreen(),
     );
   }

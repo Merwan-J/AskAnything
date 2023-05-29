@@ -23,12 +23,14 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this.authApi, this.sharedPreferences);
 
   @override
-  Future<Either<AuthFailure, User>> signup(
+  Future<Either<AuthFailure, Unit>> signup(
       {required SignUpForm signUpForm}) async {
     try {
-      UserDTO user = await authApi.signup(signupForm: signUpForm.toDto());
-      return right(user.toModel());
+      await authApi.signup(signupForm: signUpForm.toDto());
+      return right(unit);
     } catch (e) {
+      print(e);
+      print('excpetion in repo');
       return left(const AuthFailure.serverError());
     }
   }

@@ -20,14 +20,10 @@ SignUpFormDto _$SignUpFormDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SignUpFormDto {
-  @JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-  Name get name => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  Password get password => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  Password get confirmPassword => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get emailAddress => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get confirmPassword => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,14 +38,10 @@ abstract class $SignUpFormDtoCopyWith<$Res> {
       _$SignUpFormDtoCopyWithImpl<$Res, SignUpFormDto>;
   @useResult
   $Res call(
-      {@JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-          Name name,
-      @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-          EmailAddress emailAddress,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          Password password,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          Password confirmPassword});
+      {String name,
+      String emailAddress,
+      String password,
+      String confirmPassword});
 }
 
 /// @nodoc
@@ -74,19 +66,19 @@ class _$SignUpFormDtoCopyWithImpl<$Res, $Val extends SignUpFormDto>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
+              as String,
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ) as $Val);
   }
 }
@@ -100,14 +92,10 @@ abstract class _$$_SignUpFormDtoCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-          Name name,
-      @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-          EmailAddress emailAddress,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          Password password,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          Password confirmPassword});
+      {String name,
+      String emailAddress,
+      String password,
+      String confirmPassword});
 }
 
 /// @nodoc
@@ -130,52 +118,43 @@ class __$$_SignUpFormDtoCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
+              as String,
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ));
   }
 }
 
 /// @nodoc
-
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class _$_SignUpFormDto implements _SignUpFormDto {
-  _$_SignUpFormDto(
-      {@JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-          required this.name,
-      @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-          required this.emailAddress,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          required this.password,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          required this.confirmPassword});
+  const _$_SignUpFormDto(
+      {required this.name,
+      required this.emailAddress,
+      required this.password,
+      required this.confirmPassword});
 
   factory _$_SignUpFormDto.fromJson(Map<String, dynamic> json) =>
       _$$_SignUpFormDtoFromJson(json);
 
   @override
-  @JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-  final Name name;
+  final String name;
   @override
-  @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-  final EmailAddress emailAddress;
+  final String emailAddress;
   @override
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  final Password password;
+  final String password;
   @override
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  final Password confirmPassword;
+  final String confirmPassword;
 
   @override
   String toString() {
@@ -216,31 +195,23 @@ class _$_SignUpFormDto implements _SignUpFormDto {
 }
 
 abstract class _SignUpFormDto implements SignUpFormDto {
-  factory _SignUpFormDto(
-      {@JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-          required final Name name,
-      @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-          required final EmailAddress emailAddress,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          required final Password password,
-      @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-          required final Password confirmPassword}) = _$_SignUpFormDto;
+  const factory _SignUpFormDto(
+      {required final String name,
+      required final String emailAddress,
+      required final String password,
+      required final String confirmPassword}) = _$_SignUpFormDto;
 
   factory _SignUpFormDto.fromJson(Map<String, dynamic> json) =
       _$_SignUpFormDto.fromJson;
 
   @override
-  @JsonKey(fromJson: _nameFromJson, toJson: _nameToJson)
-  Name get name;
+  String get name;
   @override
-  @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-  EmailAddress get emailAddress;
+  String get emailAddress;
   @override
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  Password get password;
+  String get password;
   @override
-  @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-  Password get confirmPassword;
+  String get confirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpFormDtoCopyWith<_$_SignUpFormDto> get copyWith =>
