@@ -11,6 +11,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool passwordVisible = false;
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: TextField(
-              // decoration: Theme.of(context).inputDecorationTheme.,
+              controller: _emailController,
               decoration: InputDecoration(
                 hintText: 'Enter your email',
               ),
@@ -60,23 +70,12 @@ class _LoginScreenState extends State<LoginScreen> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: TextField(
+              controller: _passwordController,
               decoration: InputDecoration(
-                // filled: true,
-                // fillColor: Color.fromARGB(160, 238, 238, 238),
-                // focusedBorder: OutlineInputBorder(
-                //   borderSide: const BorderSide(color: Colors.black, width: 2.0),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
-                // border: OutlineInputBorder(
-                //   borderSide: const BorderSide(
-                //       color: Color.fromARGB(199, 158, 158, 158), width: 2.0),
-                //   borderRadius: BorderRadius.circular(10),
-                // ),
                 hintText: 'Password',
                 suffixIcon: IconButton(
                   icon: Icon(
                     passwordVisible ? Icons.visibility : Icons.visibility_off,
-                    // color: Colors.grey[800],
                   ),
                   onPressed: () {
                     setState(() {
@@ -115,21 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 50.h,
               child: ElevatedButton(
                 onPressed: () {},
-                // style: ButtonStyle(
-                //   backgroundColor: MaterialStateProperty.all(
-                //     Color.fromRGBO(255, 115, 92, 1),
-                //   ),
-                //   shape: MaterialStateProperty.all(
-                //     RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(10),
-                //     ),
-                //   ),
-                // ),
                 child: Text(
                   'Login',
                   style: TextStyle(
-                      fontSize:
-                          Theme.of(context).textTheme.bodyLarge!.fontSize),
+                    fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
+                  ),
                 ),
               ),
             ),

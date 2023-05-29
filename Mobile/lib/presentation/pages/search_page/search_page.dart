@@ -17,6 +17,14 @@ class _SearchScreenState extends State<SearchScreen> {
   int _selectedTopicIndex = 0;
   bool _filterSelected = true;
 
+  TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,6 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: SizedBox(
                       height: 40.h,
                       child: TextField(
+                        controller: _searchController,
                         decoration: InputDecoration(
                           hintStyle: TextStyle(
                             fontSize: 12.sp,
