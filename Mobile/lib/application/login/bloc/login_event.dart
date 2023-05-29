@@ -1,15 +1,11 @@
-part of 'login_bloc.dart';
+import 'package:askanything/domain/auth/login_form.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class LoginEvent {
-  final LoginForm loginForm;
-  const LoginEvent(this.loginForm); 
-}
+part 'login_event.freezed.dart';
 
-class LoginButtonPressed extends LoginEvent {
-  final Name name;
-  final Password password;
+@freezed
+class LoginEvent with _$LoginEvent {
+  const LoginEvent._();
 
-  LoginButtonPressed(LoginForm)
-  :name = LoginForm.name, password = LoginForm.password, super(LoginForm);
+  const factory LoginEvent.login(LoginForm form) = LoginEventLogin;
 }

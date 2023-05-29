@@ -1,16 +1,14 @@
-part of 'login_bloc.dart';
+import 'package:askanything/domain/auth/auth_failure.dart';
+import 'package:askanything/domain/user/user.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@immutable
-abstract class LoginState {}
+part 'login_state.freezed.dart';
 
-class LoginInitial extends LoginState {}
-
-class LoginLoading extends LoginState {}
-
-class LoginSuccess extends LoginState {}
-
-class LoginFailure extends LoginState {
-  final String error;
-
-  LoginFailure(this.error);
+@freezed
+class LoginState with _$LoginState {
+  const factory LoginState.initial() = LoginStateInitial;
+  const factory LoginState.loading() = LoginStateLoading;
+  const factory LoginState.success(Map<String, dynamic> user, String token) =
+      LoginStateSuccess;
+  const factory LoginState.failure(AuthFailure error) = LoginStateFailure;
 }

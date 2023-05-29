@@ -1,6 +1,6 @@
 import 'package:askanything/presentation/base/bottomBar.dart';
+import 'package:askanything/presentation/home_page.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
-import 'package:askanything/presentation/pages/home/home_page.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
@@ -32,11 +32,11 @@ class MainApp extends StatelessWidget {
         return MaterialApp(
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
-          themeMode: ThemeMode.light,
+          themeMode: ThemeMode.dark,
           home: child,
         );
       },
-      child: FollowersFollowingPage(isAdminProfile: false),
+      child: LoginScreen(),
       // child: SearchScreen(),
     );
   }

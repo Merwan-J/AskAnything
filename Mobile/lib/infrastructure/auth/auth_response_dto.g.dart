@@ -8,7 +8,7 @@ part of 'auth_response_dto.dart';
 
 _$_AuthResponseDto _$$_AuthResponseDtoFromJson(Map<String, dynamic> json) =>
     _$_AuthResponseDto(
-      user: UserDTO.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] as Map<String, dynamic>,
       accessToken: json['accessToken'] as String,
     );
 
