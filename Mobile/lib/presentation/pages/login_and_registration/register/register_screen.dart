@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -197,9 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 50.h,
-              ),
+              // Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

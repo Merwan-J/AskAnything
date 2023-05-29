@@ -134,9 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          SizedBox(
-            height: 100.h,
-          ),
+          Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:askanything/util/constants.dart';
+import 'package:askanything/util/custom_color.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +15,12 @@ class AskQuestionForm extends StatefulWidget {
 }
 
 class _AskQuestionFormState extends State<AskQuestionForm> {
-  FilePickerResult? pickeFile;
   bool isAnnonymous = false;
+
+  String selectedTopic = "";
+
   String filename = "";
+  FilePickerResult? pickeFile;
   Uint8List? filebyte;
   toggle() {
     setState(() {
@@ -45,9 +50,9 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
       expand: false,
-      initialChildSize: 0.7,
+      initialChildSize: 0.8,
       minChildSize: 0.3,
-      maxChildSize: 1,
+      // maxChildSize: 0.9,
       builder: (BuildContext context, ScrollController scrollController) {
         return SingleChildScrollView(
           controller: scrollController,
@@ -56,7 +61,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
             alignment: Alignment.topCenter,
             children: [
               Positioned(
-                  top: -15.h,
+                  top: 7,
                   child: Container(
                     height: 5.h,
                     width: 60.h,
@@ -64,7 +69,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                   )),
               Container(
                 padding: EdgeInsets.only(
-                    top: 20.h,
+                    top: 30.h,
                     right: 20.h,
                     left: 20.h,
                     // ),
@@ -73,20 +78,21 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.h)),
-                          hintText: "Type your answer here"),
-                    ),
+                    DropdownButtonFormField(
+                        decoration: InputDecoration(hintText: "Select Topic"),
+                        disabledHint: Text("Choose Topic"),
+                        value: selectedTopic != "" ? selectedTopic : null,
+                        items: _dropDownButtonList(),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedTopic = value;
+                          });
+                        }),
                     SizedBox(
                       height: 10.h,
                     ),
                     TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.h)),
-                          hintText: "Type your answer here"),
+                      decoration: InputDecoration(hintText: "Enter title here"),
                     ),
                     SizedBox(
                       height: 10.h,
@@ -94,13 +100,11 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                     SizedBox(
                       // height: 300.h,
                       child: TextField(
-                        maxLines: 10,
+                        maxLines: 6,
                         // expands: true,
                         // keyboardType: TextInputType.multiline,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.h)),
-                            hintText: "Type your answer here"),
+                        decoration:
+                            InputDecoration(hintText: "Enter description"),
                       ),
                     ),
                     SizedBox(
@@ -113,7 +117,10 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         },
                         child: Row(
                           children: [
-                            Icon(Icons.cloud_upload_outlined),
+                            Icon(
+                              Icons.cloud_upload_outlined,
+                              color: CustomColor.primaryColor,
+                            ),
                             SizedBox(
                               width: 10.h,
                             ),
@@ -127,7 +134,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         const Text("Anonymous"),
                         Switch(
                             activeTrackColor: Color.fromRGBO(226, 230, 234, 1),
-                            activeColor: Color.fromRGBO(255, 115, 92, 1),
+                            // activeColor: Color.fromRGBO(255, 115, 92, 1),
+                            activeColor: CustomColor.primaryColor,
                             value: isAnnonymous,
                             onChanged: (value) {
                               setState(() {
@@ -169,16 +177,30 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
       },
     );
   }
+
+  //define drop down button list
+
+  List<DropdownMenuItem> _dropDownButtonList() {
+    final topics = Constants.topics;
+    //return list of DropDownMenuItem from topics
+
+    return topics
+        .map((topic) => DropdownMenuItem(
+              child: Text(topic),
+              value: topic,
+            ))
+        .toList();
+  }
 }
 
 // Use this to display the sheet
-buildBottomSheet(BuildContext context) {
-  showModalBottomSheet(
-      isScrollControlled: true,
-      elevation: 10,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30.h), topRight: Radius.circular(30.h))),
-      context: context,
-      builder: (context) => AskQuestionForm());
-}
+// buildBottomSheet(BuildContext context) {
+//   showModalBottomSheet(
+//       isScrollControlled: true,
+//       elevation: 10,
+//       shape: RoundedRectangleBorder(
+//           borderRadius: BorderRadius.only(
+//               topLeft: Radius.circular(30.h), topRight: Radius.circular(30.h))),
+//       context: context,
+//       builder: (context) => AskQuestionForm());
+// }
