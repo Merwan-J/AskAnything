@@ -1,11 +1,17 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import './string_extension.dart';
 
 // Custom HTTP client to streamline the HTTP requests.
 class CustomHttpClient {
-  static String baseUrl = "http://localhost:3000/api/v1/";
+  static String imagesBaseUrl = !kIsWeb && Platform.isAndroid
+      ? "http://10.0.2.2:3000"
+      : "http://localhost:3000";
+  static String baseUrl = !kIsWeb && Platform.isAndroid
+      ? "http://10.0.2.2:3000/api/v1/"
+      : "http://localhost:3000/api/v1/";
 
   final http.Client _httpClient = http.Client();
   String? _authToken;
@@ -17,14 +23,15 @@ class CustomHttpClient {
   }
 
   Future<http.Response> get(String url,
-      {Map<String, String> headers = const {}}) async {
+      {Map<String, String> headers = const {},
+      Map<String, String> queryParameters = const {}}) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
       if (_authToken != null) 'Authorization': 'Bearer $_authToken'
     };
 
     return _httpClient.get(
-      (baseUrl + url).uri,
+      (baseUrl + url).uri.replace(queryParameters: queryParameters),
       headers: headersWithContentTypeAndAuth,
     );
   }
@@ -32,7 +39,8 @@ class CustomHttpClient {
   Future<http.Response> post(String url,
       {Map<String, String> headers = const <String, String>{},
       Object? body,
-      String contentType = "application/json"}) async {
+      String contentType = "application/json",
+      Map<String, String> queryParameters = const {}}) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
       'Content-Type': contentType,
@@ -40,7 +48,7 @@ class CustomHttpClient {
     };
 
     return _httpClient.post(
-      (baseUrl + url).uri,
+      (baseUrl + url).uri.replace(queryParameters: queryParameters),
       headers: headersWithContentTypeAndAuth,
       body: body,
     );
@@ -49,7 +57,8 @@ class CustomHttpClient {
   Future<http.Response> put(String url,
       {Map<String, String> headers = const {},
       Object? body,
-      String contentType = "application/json"}) async {
+      String contentType = "application/json",
+      Map<String, String> queryParameters = const {}}) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
       'Content-Type': contentType,
@@ -57,7 +66,7 @@ class CustomHttpClient {
     };
 
     return _httpClient.put(
-      (baseUrl + url).uri,
+      (baseUrl + url).uri.replace(queryParameters: queryParameters),
       headers: headersWithContentTypeAndAuth,
       body: body,
     );
@@ -66,7 +75,8 @@ class CustomHttpClient {
   Future<http.Response> patch(String url,
       {Map<String, String> headers = const {},
       Object? body,
-      String contentType = "application/json"}) async {
+      String contentType = "application/json",
+      Map<String, String> queryParameters = const {}}) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
       'Content-Type': contentType,
@@ -74,7 +84,7 @@ class CustomHttpClient {
     };
 
     return _httpClient.patch(
-      (baseUrl + url).uri,
+      (baseUrl + url).uri.replace(queryParameters: queryParameters),
       headers: headersWithContentTypeAndAuth,
       body: body,
     );
@@ -83,6 +93,7 @@ class CustomHttpClient {
   Future<http.Response> delete(String url,
       {Map<String, String> headers = const {},
       Object? body,
+      Map<String, String> queryParameters = const {},
       String contentType = "application/json"}) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
@@ -91,7 +102,7 @@ class CustomHttpClient {
     };
 
     return _httpClient.delete(
-      (baseUrl + url).uri,
+      (baseUrl + url).uri.replace(queryParameters: queryParameters),
       headers: headersWithContentTypeAndAuth,
       body: body,
     );
@@ -103,6 +114,7 @@ class CustomHttpClient {
     Map<String, String> headers = const {},
     Map<String, dynamic> body = const {},
     Map<String, File> files = const {},
+    Map<String, String> queryParameters = const {},
   }) async {
     Map<String, String> headersWithContentTypeAndAuth = {
       ...headers,
@@ -110,7 +122,8 @@ class CustomHttpClient {
       if (_authToken != null) 'Authorization': 'Bearer $_authToken'
     };
 
-    var request = http.MultipartRequest(method, Uri.parse(baseUrl + url));
+    var request = http.MultipartRequest(
+        method, (baseUrl + url).uri.replace(queryParameters: queryParameters));
 
     // Add headers
     request.headers.addAll(headersWithContentTypeAndAuth);

@@ -1,5 +1,6 @@
 import 'package:askanything/presentation/base/bottomBar.dart';
 import 'package:askanything/presentation/home_page.dart';
+import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
@@ -30,13 +31,15 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
           themeMode: ThemeMode.light,
           home: child,
         );
       },
-      child: BottomBar(),
+      child: LoginScreen(),
+      // child: SearchScreen(),
     );
   }
 }

@@ -5,24 +5,24 @@ import 'package:askanything/presentation/pages/update_profile/update_profile_scr
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'pages/profile_page/profile_temp.dart';
-import 'pages/bookmark_page/book_mark.dart';
+import './pages/bookmark_page/book_mark.dart';
 import 'widgets/ask_question_form.dart';
 
-class App extends StatefulWidget {
-  const App({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  State<Home> createState() => _HomeState();
 }
 
-class _AppState extends State<App> {
+class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final screens = [
     HomePage(),
     SearchScreen(),
     // Text(""),
     BookmarkPage(),
-    UpdateProfileScreen()
+    ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {
