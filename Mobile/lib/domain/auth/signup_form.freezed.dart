@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SignUpForm {
-  Name get name => throw _privateConstructorUsedError;
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
-  Password get confirmPassword => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get emailAddress => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get confirmPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpFormCopyWith<SignUpForm> get copyWith =>
@@ -33,10 +33,10 @@ abstract class $SignUpFormCopyWith<$Res> {
       _$SignUpFormCopyWithImpl<$Res, SignUpForm>;
   @useResult
   $Res call(
-      {Name name,
-      EmailAddress emailAddress,
-      Password password,
-      Password confirmPassword});
+      {String name,
+      String emailAddress,
+      String password,
+      String confirmPassword});
 }
 
 /// @nodoc
@@ -61,19 +61,19 @@ class _$SignUpFormCopyWithImpl<$Res, $Val extends SignUpForm>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
+              as String,
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ) as $Val);
   }
 }
@@ -87,10 +87,10 @@ abstract class _$$_SignUpFormCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Name name,
-      EmailAddress emailAddress,
-      Password password,
-      Password confirmPassword});
+      {String name,
+      String emailAddress,
+      String password,
+      String confirmPassword});
 }
 
 /// @nodoc
@@ -113,19 +113,19 @@ class __$$_SignUpFormCopyWithImpl<$Res>
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as Name,
+              as String,
       emailAddress: null == emailAddress
           ? _value.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
+              as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
       confirmPassword: null == confirmPassword
           ? _value.confirmPassword
           : confirmPassword // ignore: cast_nullable_to_non_nullable
-              as Password,
+              as String,
     ));
   }
 }
@@ -140,13 +140,13 @@ class _$_SignUpForm implements _SignUpForm {
       required this.confirmPassword});
 
   @override
-  final Name name;
+  final String name;
   @override
-  final EmailAddress emailAddress;
+  final String emailAddress;
   @override
-  final Password password;
+  final String password;
   @override
-  final Password confirmPassword;
+  final String confirmPassword;
 
   @override
   String toString() {
@@ -180,19 +180,19 @@ class _$_SignUpForm implements _SignUpForm {
 
 abstract class _SignUpForm implements SignUpForm {
   const factory _SignUpForm(
-      {required final Name name,
-      required final EmailAddress emailAddress,
-      required final Password password,
-      required final Password confirmPassword}) = _$_SignUpForm;
+      {required final String name,
+      required final String emailAddress,
+      required final String password,
+      required final String confirmPassword}) = _$_SignUpForm;
 
   @override
-  Name get name;
+  String get name;
   @override
-  EmailAddress get emailAddress;
+  String get emailAddress;
   @override
-  Password get password;
+  String get password;
   @override
-  Password get confirmPassword;
+  String get confirmPassword;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpFormCopyWith<_$_SignUpForm> get copyWith =>

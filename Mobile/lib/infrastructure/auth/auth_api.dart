@@ -9,6 +9,7 @@ import 'package:askanything/infrastructure/auth/login_form_dto.dart';
 import 'package:askanything/infrastructure/auth/signup_form_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
+import 'package:dartz/dartz.dart';
 import 'auth_response_dto.dart';
 
 class AuthApi {
@@ -46,17 +47,26 @@ class AuthApi {
     }
   }
 
-  Future<UserDTO> signup({
+  Future<Unit> signup({
     required SignUpFormDto signupForm,
   }) async {
-    var body = jsonEncode(signupForm.toJson());
-
-    // TODO: from the response body access the data and extract user and token
-    var response = await http.post(_registerUrl, body: body);
-    if (response.statusCode == 200) {
-      var data = await jsonDecode(response.body);
-      return UserDTO.fromJson(data);
-    } else {
+    try {
+      var body = jsonEncode({
+        'name': signupForm.name,
+        'email': signupForm.emailAddress,
+        'password': signupForm.password,
+      });
+      var response = await http.post(_registerUrl, body: body);
+      final Map<String, dynamic> data = await json.decode(response.body);
+      if (response.statusCode != 200) {
+        print(response.body);
+        throw Exception("Failed to signup");
+      } else {
+        return unit;
+      }
+    } on Exception catch (e) {
+      print(e);
+      print('exception in api');
       throw Exception("Failed to signup");
     }
   }

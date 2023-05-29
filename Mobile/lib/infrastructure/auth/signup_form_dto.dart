@@ -9,41 +9,13 @@ part 'signup_form_dto.g.dart';
 
 @freezed
 class SignUpFormDto with _$SignUpFormDto {
-  @JsonSerializable(explicitToJson: true)
-  factory SignUpFormDto({
-    @JsonKey(fromJson: _nameFromJson, toJson: _nameToJson) required Name name,
-    @JsonKey(fromJson: _emailFromJson, toJson: _emailToJson)
-    required EmailAddress emailAddress,
-    @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-    required Password password,
-    @JsonKey(fromJson: _passwordFromJson, toJson: _passwordToJson)
-    required Password confirmPassword,
+  const factory SignUpFormDto({
+    required String name,
+    required String emailAddress,
+    required String password,
+    required String confirmPassword,
   }) = _SignUpFormDto;
 
   factory SignUpFormDto.fromJson(Map<String, dynamic> json) =>
       _$SignUpFormDtoFromJson(json);
-}
-
-Name _nameFromJson(Map<String, dynamic> json) {
-  return Name.fromJson(json);
-}
-
-Map<String, dynamic> _nameToJson(Name name) {
-  return name.toJson();
-}
-
-EmailAddress _emailFromJson(Map<String, dynamic> json) {
-  return EmailAddress.fromJson(json);
-}
-
-Map<String, dynamic> _emailToJson(EmailAddress email) {
-  return email.toJson();
-}
-
-Password _passwordFromJson(Map<String, dynamic> json) {
-  return Password.fromJson(json);
-}
-
-Map<String, dynamic> _passwordToJson(Password password) {
-  return password.toJson();
 }

@@ -21,7 +21,7 @@ mixin _$SignUpState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Error error) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$SignUpState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function(Error error)? failure,
+    TResult? Function(AuthFailure failure)? failure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$SignUpState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Error error)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ class _$SignUpStateInitial implements SignUpStateInitial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Error error) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return initial();
   }
@@ -138,7 +138,7 @@ class _$SignUpStateInitial implements SignUpStateInitial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function(Error error)? failure,
+    TResult? Function(AuthFailure failure)? failure,
   }) {
     return initial?.call();
   }
@@ -149,7 +149,7 @@ class _$SignUpStateInitial implements SignUpStateInitial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Error error)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -241,7 +241,7 @@ class _$SignUpStateLoading implements SignUpStateLoading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Error error) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return loading();
   }
@@ -252,7 +252,7 @@ class _$SignUpStateLoading implements SignUpStateLoading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function(Error error)? failure,
+    TResult? Function(AuthFailure failure)? failure,
   }) {
     return loading?.call();
   }
@@ -263,7 +263,7 @@ class _$SignUpStateLoading implements SignUpStateLoading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Error error)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -355,7 +355,7 @@ class _$SignUpStateSuccess implements SignUpStateSuccess {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Error error) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
     return success();
   }
@@ -366,7 +366,7 @@ class _$SignUpStateSuccess implements SignUpStateSuccess {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function(Error error)? failure,
+    TResult? Function(AuthFailure failure)? failure,
   }) {
     return success?.call();
   }
@@ -377,7 +377,7 @@ class _$SignUpStateSuccess implements SignUpStateSuccess {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Error error)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -434,7 +434,9 @@ abstract class _$$SignUpStateFailureCopyWith<$Res> {
           $Res Function(_$SignUpStateFailure) then) =
       __$$SignUpStateFailureCopyWithImpl<$Res>;
   @useResult
-  $Res call({Error error});
+  $Res call({AuthFailure failure});
+
+  $AuthFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -448,28 +450,36 @@ class __$$SignUpStateFailureCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? failure = null,
   }) {
     return _then(_$SignUpStateFailure(
-      null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Error,
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as AuthFailure,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthFailureCopyWith<$Res> get failure {
+    return $AuthFailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$SignUpStateFailure implements SignUpStateFailure {
-  const _$SignUpStateFailure(this.error);
+  const _$SignUpStateFailure(this.failure);
 
   @override
-  final Error error;
+  final AuthFailure failure;
 
   @override
   String toString() {
-    return 'SignUpState.failure(error: $error)';
+    return 'SignUpState.failure(failure: $failure)';
   }
 
   @override
@@ -477,11 +487,11 @@ class _$SignUpStateFailure implements SignUpStateFailure {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SignUpStateFailure &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, failure);
 
   @JsonKey(ignore: true)
   @override
@@ -496,9 +506,9 @@ class _$SignUpStateFailure implements SignUpStateFailure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
-    required TResult Function(Error error) failure,
+    required TResult Function(AuthFailure failure) failure,
   }) {
-    return failure(error);
+    return failure(this.failure);
   }
 
   @override
@@ -507,9 +517,9 @@ class _$SignUpStateFailure implements SignUpStateFailure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function()? success,
-    TResult? Function(Error error)? failure,
+    TResult? Function(AuthFailure failure)? failure,
   }) {
-    return failure?.call(error);
+    return failure?.call(this.failure);
   }
 
   @override
@@ -518,11 +528,11 @@ class _$SignUpStateFailure implements SignUpStateFailure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
-    TResult Function(Error error)? failure,
+    TResult Function(AuthFailure failure)? failure,
     required TResult orElse(),
   }) {
     if (failure != null) {
-      return failure(error);
+      return failure(this.failure);
     }
     return orElse();
   }
@@ -566,9 +576,10 @@ class _$SignUpStateFailure implements SignUpStateFailure {
 }
 
 abstract class SignUpStateFailure implements SignUpState {
-  const factory SignUpStateFailure(final Error error) = _$SignUpStateFailure;
+  const factory SignUpStateFailure(final AuthFailure failure) =
+      _$SignUpStateFailure;
 
-  Error get error;
+  AuthFailure get failure;
   @JsonKey(ignore: true)
   _$$SignUpStateFailureCopyWith<_$SignUpStateFailure> get copyWith =>
       throw _privateConstructorUsedError;

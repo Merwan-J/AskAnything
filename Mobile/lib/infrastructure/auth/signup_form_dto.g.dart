@@ -8,18 +8,16 @@ part of 'signup_form_dto.dart';
 
 _$_SignUpFormDto _$$_SignUpFormDtoFromJson(Map<String, dynamic> json) =>
     _$_SignUpFormDto(
-      name: _nameFromJson(json['name'] as Map<String, dynamic>),
-      emailAddress:
-          _emailFromJson(json['emailAddress'] as Map<String, dynamic>),
-      password: _passwordFromJson(json['password'] as Map<String, dynamic>),
-      confirmPassword:
-          _passwordFromJson(json['confirmPassword'] as Map<String, dynamic>),
+      name: json['name'] as String,
+      emailAddress: json['emailAddress'] as String,
+      password: json['password'] as String,
+      confirmPassword: json['confirmPassword'] as String,
     );
 
 Map<String, dynamic> _$$_SignUpFormDtoToJson(_$_SignUpFormDto instance) =>
     <String, dynamic>{
-      'name': _nameToJson(instance.name),
-      'emailAddress': _emailToJson(instance.emailAddress),
-      'password': _passwordToJson(instance.password),
-      'confirmPassword': _passwordToJson(instance.confirmPassword),
+      'name': instance.name,
+      'emailAddress': instance.emailAddress,
+      'password': instance.password,
+      'confirmPassword': instance.confirmPassword,
     };

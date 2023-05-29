@@ -14,13 +14,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeTempPageState extends State<HomeTempPage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void openEndDrawer() {
     _scaffoldKey.currentState?.openEndDrawer();
   }
+
   @override
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];
