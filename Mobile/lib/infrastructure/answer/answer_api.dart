@@ -4,7 +4,9 @@ import "package:askanything/infrastructure/answer/answer_form_dto.dart";
 import "package:askanything/util/custom_http_client.dart";
 
 class AnswerAPI {
-  CustomHttpClient _customHttpClient = CustomHttpClient();
+  CustomHttpClient _customHttpClient;
+
+  AnswerAPI(this._customHttpClient);
 
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
     var answer = await _customHttpClient.post("answers",
