@@ -14,10 +14,10 @@ class Question with _$Question {
     required String author,
     required bool anonymous,
     // TODO: Replace string with Answer model class
-    required List<String> answers,
+    required List<dynamic> answers,
     required String topic,
-    required List<String> likes,
-    required List<String> dislikes,
+    required List<dynamic> likes,
+    required List<dynamic> dislikes,
     String? image,
     required DateTime createdAt,
     required DateTime updatedAt,

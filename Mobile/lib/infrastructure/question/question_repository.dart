@@ -45,12 +45,17 @@ class QuestionRepository implements IQuestionRepository {
 
   @override
   Future<Either<QuestionFailure, Question>> askQuestion(
-      QuestionForm question) async {
+      QuestionForm questionForm) async {
     try {
+      print("yess");
       var questionDto =
-          await _questionProvider.createQuestion(question.toDto());
-      return right(Question.fromJson(questionDto.toJson()));
+          await _questionProvider.createQuestion(questionForm.toDto());
+      print("again yess");
+      var question = Question.fromJson(questionDto.toJson());
+      print("!21question: $question");
+      return right(question);
     } catch (e) {
+      print(e);
       return left(const QuestionFailure.serverError());
     }
   }

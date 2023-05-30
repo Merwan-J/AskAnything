@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:askanything/infrastructure/question/question_form_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
@@ -22,14 +23,42 @@ class QuestionProvider {
   // TODO: handle image uploads/ multipart form data
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    var response = await _httpClient.post('questions',
-        body: json.encode(questionFormDto.toJson()));
+    final author = "6448f5ead561de32dc337d5b";
+    print("here");
 
-    if (response.statusCode == 201) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to create question');
+    var response = await _httpClient.post('questions',
+        body: json.encode(questionFormDto.toJson()..['author'] = author));
+    print(response.body);
+    Map<String, dynamic> decoded =
+        await json.decode(response.body)['data']["question"];
+    print("works");
+    print("decoded: $decoded");
+    try {
+      QuestionDto questionDto = QuestionDto(
+        id: decoded['_id'],
+        title: decoded['title'],
+        description: decoded['description'],
+        topic: decoded['topic'],
+        author: decoded['author'],
+        answers: decoded['answers'],
+        anonymous: decoded['anonymous'],
+        createdAt: DateTime.parse(decoded["createdAt"]),
+        updatedAt: DateTime.parse(decoded["updatedAt"]),
+        likes: decoded['likes'],
+        dislikes: decoded['dislikes'],
+      );
+
+      if (response.statusCode.toString() == "201") {
+        print("returning");
+        return questionDto;
+      } else {
+        print("throwing");
+        throw Exception('Failed to create question');
+      }
+    } catch (e) {
+      print(e);
     }
+    return QuestionDto.fromJson(jsonDecode(response.body));
   }
 
   Future<QuestionDto> updateQuestion(

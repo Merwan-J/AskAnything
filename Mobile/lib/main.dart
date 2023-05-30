@@ -10,7 +10,6 @@ import 'package:askanything/infrastructure/profile/profile_repository.dart';
 import 'package:askanything/infrastructure/question/question_provider.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_api.dart';
-import 'package:askanything/presentation/base/bottomBar.dart';
 import 'package:askanything/presentation/app.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
@@ -19,6 +18,7 @@ import 'package:askanything/util/custom_http_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'application/question/question_post/bloc/question_post_bloc.dart';
 import 'infrastructure/user/user_repository.dart';
 
 void main() {
@@ -67,6 +67,9 @@ void main() {
             ],
             child: MultiBlocProvider(
               providers: [
+                BlocProvider(
+                    create: (context) => QuestionPostBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
                     create: (context) => AuthBloc(
                         authRepository:
