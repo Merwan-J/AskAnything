@@ -33,4 +33,22 @@ class User {
       this.followings = const [],
       required this.createdAt,
       required this.updatedAt});
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'email': email,
+        'password': password,
+        'profilePic': profilePic,
+        'questionIds': questionIds,
+        'answerIds': answerIds,
+        'reputation': reputation,
+        'likes': likes,
+        'dislikes': dislikes,
+        'bookmarks': bookmarks,
+        'followers': followers,
+        'followings': followings,
+        'createdAt': createdAt,
+        'updatedAt': updatedAt,
+      };
 }
