@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 class Routes {
-  static const String HOME = '/login';
-  static const String LOGIN = '/';
+  static const String HOME = '/';
+  static const String LOGIN = '/login';
   static const String SIGNUP = '/signup';
   static const String SPLASH = '/splash';
   static const String PROFILE = '/profile';
