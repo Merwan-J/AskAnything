@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(InvalidType user, String token) signedIn,
+    required TResult Function(Map<String, dynamic> user, String token) signedIn,
     required TResult Function() signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(InvalidType user, String token)? signedIn,
+    TResult? Function(Map<String, dynamic> user, String token)? signedIn,
     TResult? Function()? signOut,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(InvalidType user, String token)? signedIn,
+    TResult Function(Map<String, dynamic> user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
   }) =>
@@ -79,7 +79,7 @@ abstract class _$$AuthEventSignedInCopyWith<$Res> {
           _$AuthEventSignedIn value, $Res Function(_$AuthEventSignedIn) then) =
       __$$AuthEventSignedInCopyWithImpl<$Res>;
   @useResult
-  $Res call({InvalidType user, String token});
+  $Res call({Map<String, dynamic> user, String token});
 }
 
 /// @nodoc
@@ -93,14 +93,14 @@ class __$$AuthEventSignedInCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
     Object? token = null,
   }) {
     return _then(_$AuthEventSignedIn(
-      freezed == user
-          ? _value.user
+      null == user
+          ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
-              as InvalidType,
+              as Map<String, dynamic>,
       null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -112,10 +112,17 @@ class __$$AuthEventSignedInCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthEventSignedIn implements AuthEventSignedIn {
-  const _$AuthEventSignedIn(this.user, this.token);
+  const _$AuthEventSignedIn(final Map<String, dynamic> user, this.token)
+      : _user = user;
 
+  final Map<String, dynamic> _user;
   @override
-  final InvalidType user;
+  Map<String, dynamic> get user {
+    if (_user is EqualUnmodifiableMapView) return _user;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_user);
+  }
+
   @override
   final String token;
 
@@ -129,13 +136,13 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthEventSignedIn &&
-            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other._user, _user) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(user), token);
+      runtimeType, const DeepCollectionEquality().hash(_user), token);
 
   @JsonKey(ignore: true)
   @override
@@ -146,7 +153,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(InvalidType user, String token) signedIn,
+    required TResult Function(Map<String, dynamic> user, String token) signedIn,
     required TResult Function() signOut,
   }) {
     return signedIn(user, token);
@@ -155,7 +162,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(InvalidType user, String token)? signedIn,
+    TResult? Function(Map<String, dynamic> user, String token)? signedIn,
     TResult? Function()? signOut,
   }) {
     return signedIn?.call(user, token);
@@ -164,7 +171,7 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(InvalidType user, String token)? signedIn,
+    TResult Function(Map<String, dynamic> user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
   }) {
@@ -207,10 +214,11 @@ class _$AuthEventSignedIn implements AuthEventSignedIn {
 }
 
 abstract class AuthEventSignedIn implements AuthEvent {
-  const factory AuthEventSignedIn(final InvalidType user, final String token) =
+  const factory AuthEventSignedIn(
+          final Map<String, dynamic> user, final String token) =
       _$AuthEventSignedIn;
 
-  InvalidType get user;
+  Map<String, dynamic> get user;
   String get token;
   @JsonKey(ignore: true)
   _$$AuthEventSignedInCopyWith<_$AuthEventSignedIn> get copyWith =>
@@ -255,7 +263,7 @@ class _$AuthEventSignOut implements AuthEventSignOut {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(InvalidType user, String token) signedIn,
+    required TResult Function(Map<String, dynamic> user, String token) signedIn,
     required TResult Function() signOut,
   }) {
     return signOut();
@@ -264,7 +272,7 @@ class _$AuthEventSignOut implements AuthEventSignOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(InvalidType user, String token)? signedIn,
+    TResult? Function(Map<String, dynamic> user, String token)? signedIn,
     TResult? Function()? signOut,
   }) {
     return signOut?.call();
@@ -273,7 +281,7 @@ class _$AuthEventSignOut implements AuthEventSignOut {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(InvalidType user, String token)? signedIn,
+    TResult Function(Map<String, dynamic> user, String token)? signedIn,
     TResult Function()? signOut,
     required TResult orElse(),
   }) {

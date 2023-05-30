@@ -1,5 +1,6 @@
 import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
+import 'package:askanything/application/auth/bloc/auth_state.dart';
 import 'package:askanything/infrastructure/answer/answer_api.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
 import 'package:askanything/infrastructure/auth/auth_api.dart';
@@ -9,28 +10,11 @@ import 'package:askanything/infrastructure/profile/profile_repository.dart';
 import 'package:askanything/infrastructure/question/question_provider.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_api.dart';
-import 'package:askanything/presentation/base/bottomBar.dart';
-import 'package:askanything/presentation/home_page.dart';
-import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
-import 'package:askanything/presentation/pages/home/home_temp.dart';
+import 'package:askanything/presentation/app.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
-import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
-import 'package:askanything/presentation/pages/login_and_registration/register/register_screen.dart';
-import 'package:askanything/presentation/pages/pending_questions/pending.dart';
-import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
-import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
-import 'package:askanything/util/Theme/custom_theme.dart';
-import 'package:askanything/presentation/pages/search_page/search_page.dart';
 import 'package:askanything/util/custom_http_client.dart';
 import 'package:flutter/material.dart';
-import 'package:askanything/presentation/splash_screen/splash_screen.dart';
-import 'package:askanything/domain/answer/answer.dart';
-import 'package:askanything/domain/question/question.dart';
-import 'package:askanything/presentation/widgets/answer.dart';
-import 'package:askanything/presentation/widgets/question.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'infrastructure/user/user_repository.dart';
 
@@ -91,6 +75,16 @@ void main() {
               child: BlocListener<AuthBloc, AuthState>(listener:
                   (context, state) {
                 //TODO: implement listener
+                if (state is AuthAuthenticated) {
+                  RepositoryProvider.of<CustomHttpClient>(context).authToken =
+                      state.token;
+                } else if (state is AuthUnauthenticated) {
+                  RepositoryProvider.of<CustomHttpClient>(context).authToken =
+                      null;
+                } else if (state is AppInitialized) {
+                  RepositoryProvider.of<CustomHttpClient>(context).authToken =
+                      state.token;
+                }
               }, child:
                   BlocBuilder<AuthBloc, AuthState>(builder: ((context, state) {
                 return App(
