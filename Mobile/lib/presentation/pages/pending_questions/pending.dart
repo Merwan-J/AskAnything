@@ -86,8 +86,8 @@ class Pending_questions extends StatelessWidget {
             itemCount: questionList.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.only(
-                    left: 16, right: 0, top: 0, bottom: 5),
+                padding:
+                    const EdgeInsets.only(left: 7, right: 0, top: 0, bottom: 5),
                 child: questionWidget[index],
               );
             }),
