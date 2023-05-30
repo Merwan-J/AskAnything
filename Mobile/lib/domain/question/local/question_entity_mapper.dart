@@ -12,12 +12,12 @@ extension on QuestionEntity {
       description: description,
       topic: topic,
       anonymous: anonymous,
-      author: author!,
-      answers: answers!,
-      likes: likes!,
-      createdAt: createdAt!,
-      updatedAt: updatedAt!,
-      dislikes: dislikes!,
+      author: author,
+      answers: answers,
+      likes: likes,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      dislikes: dislikes,
       image: image,
     );
   }

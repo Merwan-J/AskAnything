@@ -8,9 +8,9 @@ part 'signup_form.freezed.dart';
 @freezed
 class SignUpForm with _$SignUpForm {
   const factory SignUpForm({
-    required Name name,
-    required EmailAddress emailAddress,
-    required Password password,
-    required Password confirmPassword,
+    required String name,
+    required String emailAddress,
+    required String password,
+    required String confirmPassword,
   }) = _SignUpForm;
 }

@@ -9,52 +9,76 @@ import 'package:askanything/infrastructure/auth/login_form_dto.dart';
 import 'package:askanything/infrastructure/auth/signup_form_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
-
+import 'package:dartz/dartz.dart';
 import 'auth_response_dto.dart';
 
 class AuthApi {
   static const String _loginUrl = "auth/login";
-  static const String _registerUrl = "auth/register";
+  static const String _registerUrl = "auth/signup";
 
   final CustomHttpClient http;
 
   AuthApi(this.http);
 
   Future<AuthResponseDto> login(
-      {required String username, required String password}) async {
+      {required String email, required String password}) async {
     var body = jsonEncode({
-      'username': username,
+      'email': email,
       'password': password,
     });
 
     var response = await http.post(_loginUrl, body: body);
-
     if (response.statusCode == 200) {
-      final Map<String, dynamic> data = await json.decode(response.body);
-      return AuthResponseDto.fromJson(data);
+      final Map<String, dynamic> data =
+          await json.decode(response.body)['data'];
+
+      print(data['user']);
+      String token = data['token'];
+      // UserDTO user = UserDTO.fromJson(data['user']);
+      Map<String, dynamic> user = data['user'];
+      print(user);
+      print(token);
+
+      return AuthResponseDto(accessToken: token, user: user);
     } else {
-      throw Error();
+      print(response.body);
+      print('in api');
+      throw Exception('Failed to login');
     }
   }
 
-  Future<UserDTO> signup({
+  Future<Unit> signup({
     required SignUpFormDto signupForm,
   }) async {
-    var body = jsonEncode(signupForm.toJson());
-    var response = await http.post(_registerUrl, body: body);
-    if (response.statusCode == 200) {
-      var data = await jsonDecode(response.body);
-      return UserDTO.fromJson(data);
-    } else {
-      throw Error();
+    try {
+      var body = jsonEncode({
+        'name': signupForm.name,
+        'email': signupForm.emailAddress,
+        'password': signupForm.password,
+      });
+      var response = await http.post(_registerUrl, body: body);
+      final Map<String, dynamic> data = await json.decode(response.body);
+      if (response.statusCode != 200) {
+        print(response.body);
+        throw Exception("Failed to signup");
+      } else {
+        return unit;
+      }
+    } on Exception catch (e) {
+      print(e);
+      print('exception in api');
+      throw Exception("Failed to signup");
     }
   }
 
-  Future changePassword({
-    required ChangePasswordForm changePassword,
-  }) async {
-    var body = jsonEncode(changePassword);
-    var response = await http.patch(_registerUrl, body: body);
+  Future changePassword(
+      {required ChangePasswordForm changePassword,
+      required String userId}) async {
+    var body = jsonEncode({
+      'password': changePassword.newPassword.password,
+    });
+    var response = await http
+        .patch(_registerUrl, body: body, queryParameters: {'id': userId});
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
       return UserDTO.fromJson(data);

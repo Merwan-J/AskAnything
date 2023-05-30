@@ -20,17 +20,20 @@ UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserDTO {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get profilePic => throw _privateConstructorUsedError;
+  @JsonKey(name: 'questions')
   List<String> get questionIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'answers')
   List<String> get answerIds => throw _privateConstructorUsedError;
   int get reputation => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   int get dislikes => throw _privateConstructorUsedError;
-  Map<String, List<String>> get bookmarks => throw _privateConstructorUsedError;
+  Map<String, dynamic> get bookmarks => throw _privateConstructorUsedError;
   List<String> get followers => throw _privateConstructorUsedError;
   List<String> get followings => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -47,17 +50,17 @@ abstract class $UserDTOCopyWith<$Res> {
       _$UserDTOCopyWithImpl<$Res, UserDTO>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String name,
       String email,
       String password,
       String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
+      @JsonKey(name: 'questions') List<String> questionIds,
+      @JsonKey(name: 'answers') List<String> answerIds,
       int reputation,
       int likes,
       int dislikes,
-      Map<String, List<String>> bookmarks,
+      Map<String, dynamic> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -137,7 +140,7 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
       bookmarks: null == bookmarks
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
+              as Map<String, dynamic>,
       followers: null == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -166,17 +169,17 @@ abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String name,
       String email,
       String password,
       String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
+      @JsonKey(name: 'questions') List<String> questionIds,
+      @JsonKey(name: 'answers') List<String> answerIds,
       int reputation,
       int likes,
       int dislikes,
-      Map<String, List<String>> bookmarks,
+      Map<String, dynamic> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -253,7 +256,7 @@ class __$$_UserDTOCopyWithImpl<$Res>
       bookmarks: null == bookmarks
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>,
+              as Map<String, dynamic>,
       followers: null == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -278,17 +281,17 @@ class __$$_UserDTOCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserDTO implements _UserDTO {
   const _$_UserDTO(
-      {required this.id,
+      {@JsonKey(name: '_id') required this.id,
       required this.name,
       required this.email,
       required this.password,
-      required this.profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
+      this.profilePic = '',
+      @JsonKey(name: 'questions') required final List<String> questionIds,
+      @JsonKey(name: 'answers') required final List<String> answerIds,
       required this.reputation,
       required this.likes,
       required this.dislikes,
-      required final Map<String, List<String>> bookmarks,
+      required final Map<String, dynamic> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required this.createdAt,
@@ -303,6 +306,7 @@ class _$_UserDTO implements _UserDTO {
       _$$_UserDTOFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String name;
@@ -311,9 +315,11 @@ class _$_UserDTO implements _UserDTO {
   @override
   final String password;
   @override
+  @JsonKey()
   final String profilePic;
   final List<String> _questionIds;
   @override
+  @JsonKey(name: 'questions')
   List<String> get questionIds {
     if (_questionIds is EqualUnmodifiableListView) return _questionIds;
     // ignore: implicit_dynamic_type
@@ -322,6 +328,7 @@ class _$_UserDTO implements _UserDTO {
 
   final List<String> _answerIds;
   @override
+  @JsonKey(name: 'answers')
   List<String> get answerIds {
     if (_answerIds is EqualUnmodifiableListView) return _answerIds;
     // ignore: implicit_dynamic_type
@@ -334,9 +341,9 @@ class _$_UserDTO implements _UserDTO {
   final int likes;
   @override
   final int dislikes;
-  final Map<String, List<String>> _bookmarks;
+  final Map<String, dynamic> _bookmarks;
   @override
-  Map<String, List<String>> get bookmarks {
+  Map<String, dynamic> get bookmarks {
     if (_bookmarks is EqualUnmodifiableMapView) return _bookmarks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableMapView(_bookmarks);
@@ -437,17 +444,17 @@ class _$_UserDTO implements _UserDTO {
 
 abstract class _UserDTO implements UserDTO {
   const factory _UserDTO(
-      {required final String id,
+      {@JsonKey(name: '_id') required final String id,
       required final String name,
       required final String email,
       required final String password,
-      required final String profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
+      final String profilePic,
+      @JsonKey(name: 'questions') required final List<String> questionIds,
+      @JsonKey(name: 'answers') required final List<String> answerIds,
       required final int reputation,
       required final int likes,
       required final int dislikes,
-      required final Map<String, List<String>> bookmarks,
+      required final Map<String, dynamic> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required final DateTime createdAt,
@@ -456,6 +463,7 @@ abstract class _UserDTO implements UserDTO {
   factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get name;
@@ -466,8 +474,10 @@ abstract class _UserDTO implements UserDTO {
   @override
   String get profilePic;
   @override
+  @JsonKey(name: 'questions')
   List<String> get questionIds;
   @override
+  @JsonKey(name: 'answers')
   List<String> get answerIds;
   @override
   int get reputation;
@@ -476,7 +486,7 @@ abstract class _UserDTO implements UserDTO {
   @override
   int get dislikes;
   @override
-  Map<String, List<String>> get bookmarks;
+  Map<String, dynamic> get bookmarks;
   @override
   List<String> get followers;
   @override

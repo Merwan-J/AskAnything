@@ -1,9 +1,11 @@
 import 'package:askanything/presentation/base/bottomBar.dart';
-import 'package:askanything/presentation/pages/home/home_page.dart';
+import 'package:askanything/presentation/home_page.dart';
+import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 // import 'package:askanything/presentation/base/home_page.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/register/register_screen.dart';
+import 'package:askanything/presentation/pages/pending_questions/pending.dart';
 import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
 import 'package:askanything/util/Theme/custom_theme.dart';
@@ -29,13 +31,15 @@ class MainApp extends StatelessWidget {
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
           themeMode: ThemeMode.dark,
           home: child,
         );
       },
-      child: Home(),
+      child: RegisterScreen(),
+      // child: SearchScreen(),
     );
   }
 }

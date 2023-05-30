@@ -1,3 +1,4 @@
+import 'package:askanything/presentation/pages/pending_questions/pending.dart';
 import 'package:flutter/material.dart';
 
 import 'app_bar.dart';
@@ -6,7 +7,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: App_Bar(),
+        // appBar: App_Bar(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             // add your FAB action here
@@ -19,6 +20,7 @@ class BottomBar extends StatelessWidget {
           ),
           child: Icon(Icons.add),
         ),
+        body: Pending_questions(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: Container(
           // color: Colors.white,

@@ -5,16 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../domain/question/question.dart';
+import '../../widgets/end_drawer.dart';
 
-class HomeTempPage extends StatefulWidget {
-  const HomeTempPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeTempPage> createState() => _HomeTempPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeTempPageState extends State<HomeTempPage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void openEndDrawer() {
+    _scaffoldKey.currentState?.openEndDrawer();
+  }
+
   @override
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];
@@ -34,32 +40,43 @@ class _HomeTempPageState extends State<HomeTempPage>
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0.5,
-          actions: [Icon(Icons.search)],
-          title: Container(
-            child: Row(
-              children: [
-                TabBar(
-                  controller: _tabController,
-                  indicatorColor: Colors.transparent,
-                  isScrollable: true,
-                  tabs: [
-                    Tab(
-                      text: "Following",
-                    ),
-                    Tab(
-                      text: "Explore",
-                    ),
-                  ],
-                ),
-              ],
-            ),
+      key: _scaffoldKey,
+      appBar: AppBar(
+        elevation: 0.5,
+        actions: [
+          Icon(Icons.search),
+          IconButton(
+            icon: const Icon(Icons.grid_view_rounded), // Change the icon here
+            onPressed: () {
+              openEndDrawer();
+            },
+          ),
+        ],
+        title: Container(
+          child: Row(
+            children: [
+              TabBar(
+                controller: _tabController,
+                indicatorColor: Colors.transparent,
+                isScrollable: true,
+                tabs: [
+                  Tab(
+                    text: "Following",
+                  ),
+                  Tab(
+                    text: "Explore",
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: tabScreens,
-        ));
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: tabScreens,
+      ),
+      endDrawer: MyDrawer(),
+    );
   }
 }

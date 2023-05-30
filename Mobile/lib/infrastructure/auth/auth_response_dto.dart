@@ -7,7 +7,7 @@ part 'auth_response_dto.g.dart';
 @freezed
 class AuthResponseDto with _$AuthResponseDto {
   const factory AuthResponseDto({
-    required UserDTO user,
+    required Map<String, dynamic> user,
     required String accessToken,
   }) = _AuthResponseDto;
 

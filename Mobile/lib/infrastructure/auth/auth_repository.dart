@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:askanything/domain/auth/auth_failure.dart';
 import 'package:askanything/domain/auth/auth_repository_interface.dart';
 import 'package:askanything/domain/auth/signup_form.dart';
 import 'package:askanything/infrastructure/auth/auth_response_dto.dart';
@@ -11,6 +12,7 @@ import '../../Data/Local/Shared_prefs/shared_pref_service.dart';
 import '../../domain/auth/change_password_form.dart';
 import '../../domain/auth/login_form.dart';
 import '../../domain/user/user.dart';
+import '../user/user_mapper.dart';
 import 'auth_api.dart';
 
 class AuthRepository implements IAuthRepository {
@@ -21,35 +23,50 @@ class AuthRepository implements IAuthRepository {
   AuthRepository(this.authApi, this.sharedPreferences);
 
   @override
-  Future<Either<User, User>> signup({required SignUpForm signUpForm}) async {
-    UserDTO user = await authApi.signup(signupForm: signUpForm.toDto());
-    return Right(user.toModel());
+  Future<Either<AuthFailure, Unit>> signup(
+      {required SignUpForm signUpForm}) async {
+    try {
+      await authApi.signup(signupForm: signUpForm.toDto());
+      return right(unit);
+    } catch (e) {
+      print(e);
+      print('excpetion in repo');
+      return left(const AuthFailure.serverError());
+    }
   }
 
   @override
-  Future<Either<User, User?>> login({required LoginForm loginForm}) async {
-    AuthResponseDto response = await authApi.login(
-      username: loginForm.emailAddress.email,
-      password: loginForm.password.password,
-    );
-    await sharedPreferences.setJwtToken(response.accessToken);
-    await sharedPreferences.setAuthenticatedUser(response.user.toModel());
+  Future<Either<AuthFailure, AuthResponseDto>> login(
+      {required LoginForm loginForm}) async {
+    try {
+      print('before response');
+      AuthResponseDto response = await authApi.login(
+        email: loginForm.emailAddress,
+        password: loginForm.password,
+      );
+      print('after response');
+      print(response);
+      await sharedPreferences.setJwtToken(response.accessToken);
+      await sharedPreferences.setAuthenticatedUser(response.user);
 
-    _authenticatedUser = response.user.toModel();
-    return Right(_authenticatedUser);
+      return Right(response);
+    } catch (e) {
+      print(e);
+      print('in repo');
+      return left(const AuthFailure.serverError());
+    }
   }
 
   @override
-  Future<Either<Error, User>> changePassword(
+  Future<Either<AuthFailure, User>> changePassword(
       {required ChangePasswordForm changePasswordForm}) async {
-    User user =
-        await authApi.changePassword(changePassword: changePasswordForm);
-    return Right(user);
-    //something is wrong here - MERWAN
-    // User user =
-    //     await authApi.changePassword(changePassword: changePasswordForm);
-    // return Right(user);
-    //throw UnimplementedError();
+    try {
+      User user = await authApi.changePassword(
+          changePassword: changePasswordForm, userId: _authenticatedUser!.id);
+      return Right(user);
+    } on Exception catch (e) {
+      return left(const AuthFailure.serverError());
+    }
   }
 
   @override
