@@ -3,7 +3,6 @@ const { catchAsyncError } = require('../utils/catchAsyncError');
 const Answer = require('./../models/answerModel');
 const User = require('./../models/userModel');
 const { isIdValid } = require('./../utils/validator');
-const User = require('./../models/userModel');
 const Question = require('./../models/questionsModel');
 
 exports.createAnswer = catchAsyncError(async (req, res, next) => {
@@ -54,8 +53,8 @@ exports.updateAnswer = catchAsyncError(async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
-                                    
+});
+
 exports.deleteAnswer = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.id)) {
   //   return next(new AppError('invalid id', 400));
@@ -71,7 +70,7 @@ exports.deleteAnswer = catchAsyncError(async (req, res, next) => {
   user.answers.pull(answer._id);
   await question.save();
   await user.save();
-  const answer = await User.findByIdAndDelete(req.params.id);
+  // const answer = await User.findByIdAndDelete(req.params.id);
   if (!answer) {
     return res.status(404).send('there is no answer by this id');
   }
