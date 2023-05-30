@@ -1,3 +1,5 @@
+import 'package:askanything/application/auth/bloc/auth_bloc.dart';
+import 'package:askanything/application/auth/bloc/auth_event.dart';
 import 'package:askanything/application/login/bloc/login_bloc.dart';
 import 'package:askanything/application/login/bloc/login_event.dart';
 import 'package:askanything/application/login/bloc/login_state.dart';
@@ -53,9 +55,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
           if (state is LoginStateSuccess) {
             ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
             // Notify auth bloc that user has logged in
-            // BlocProvider.of<AuthBloc>(context)
-            //     .add(AuthEventSignedIn(state.user, state.token));
+            BlocProvider.of<AuthBloc>(context)
+                .add(AuthEventSignedIn(state.user, state.token));
+
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Logged in successfully')),
             );

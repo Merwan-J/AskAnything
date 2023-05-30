@@ -44,8 +44,10 @@ class AuthRepository implements IAuthRepository {
         email: loginForm.emailAddress,
         password: loginForm.password,
       );
+
       print('after response');
       print(response);
+
       await sharedPreferences.setJwtToken(response.accessToken);
       await sharedPreferences.setAuthenticatedUser(response.user);
 

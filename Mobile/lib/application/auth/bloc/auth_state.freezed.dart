@@ -20,7 +20,8 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
     required TResult Function(String? token, bool isFirstRun) initial,
-    required TResult Function(User user, String token) authenticated,
+    required TResult Function(Map<String, dynamic> user, String token)
+        authenticated,
     required TResult Function() unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$AuthState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
     TResult? Function(String? token, bool isFirstRun)? initial,
-    TResult? Function(User user, String token)? authenticated,
+    TResult? Function(Map<String, dynamic> user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ mixin _$AuthState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
     TResult Function(String? token, bool isFirstRun)? initial,
-    TResult Function(User user, String token)? authenticated,
+    TResult Function(Map<String, dynamic> user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) =>
@@ -125,7 +126,8 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
     required TResult Function(String? token, bool isFirstRun) initial,
-    required TResult Function(User user, String token) authenticated,
+    required TResult Function(Map<String, dynamic> user, String token)
+        authenticated,
     required TResult Function() unauthenticated,
   }) {
     return unInitialized();
@@ -136,7 +138,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
     TResult? Function(String? token, bool isFirstRun)? initial,
-    TResult? Function(User user, String token)? authenticated,
+    TResult? Function(Map<String, dynamic> user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
     return unInitialized?.call();
@@ -147,7 +149,7 @@ class _$AuthUnInitialized implements AuthUnInitialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
     TResult Function(String? token, bool isFirstRun)? initial,
-    TResult Function(User user, String token)? authenticated,
+    TResult Function(Map<String, dynamic> user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
@@ -274,7 +276,8 @@ class _$AppInitialized implements AppInitialized {
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
     required TResult Function(String? token, bool isFirstRun) initial,
-    required TResult Function(User user, String token) authenticated,
+    required TResult Function(Map<String, dynamic> user, String token)
+        authenticated,
     required TResult Function() unauthenticated,
   }) {
     return initial(token, isFirstRun);
@@ -285,7 +288,7 @@ class _$AppInitialized implements AppInitialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
     TResult? Function(String? token, bool isFirstRun)? initial,
-    TResult? Function(User user, String token)? authenticated,
+    TResult? Function(Map<String, dynamic> user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
     return initial?.call(token, isFirstRun);
@@ -296,7 +299,7 @@ class _$AppInitialized implements AppInitialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
     TResult Function(String? token, bool isFirstRun)? initial,
-    TResult Function(User user, String token)? authenticated,
+    TResult Function(Map<String, dynamic> user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
@@ -361,7 +364,7 @@ abstract class _$$AuthAuthenticatedCopyWith<$Res> {
           _$AuthAuthenticated value, $Res Function(_$AuthAuthenticated) then) =
       __$$AuthAuthenticatedCopyWithImpl<$Res>;
   @useResult
-  $Res call({User user, String token});
+  $Res call({Map<String, dynamic> user, String token});
 }
 
 /// @nodoc
@@ -380,9 +383,9 @@ class __$$AuthAuthenticatedCopyWithImpl<$Res>
   }) {
     return _then(_$AuthAuthenticated(
       null == user
-          ? _value.user
+          ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
-              as User,
+              as Map<String, dynamic>,
       null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -394,10 +397,17 @@ class __$$AuthAuthenticatedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthAuthenticated implements AuthAuthenticated {
-  const _$AuthAuthenticated(this.user, this.token);
+  const _$AuthAuthenticated(final Map<String, dynamic> user, this.token)
+      : _user = user;
 
+  final Map<String, dynamic> _user;
   @override
-  final User user;
+  Map<String, dynamic> get user {
+    if (_user is EqualUnmodifiableMapView) return _user;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_user);
+  }
+
   @override
   final String token;
 
@@ -411,12 +421,13 @@ class _$AuthAuthenticated implements AuthAuthenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AuthAuthenticated &&
-            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._user, _user) &&
             (identical(other.token, token) || other.token == token));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, user, token);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_user), token);
 
   @JsonKey(ignore: true)
   @override
@@ -429,7 +440,8 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
     required TResult Function(String? token, bool isFirstRun) initial,
-    required TResult Function(User user, String token) authenticated,
+    required TResult Function(Map<String, dynamic> user, String token)
+        authenticated,
     required TResult Function() unauthenticated,
   }) {
     return authenticated(user, token);
@@ -440,7 +452,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
     TResult? Function(String? token, bool isFirstRun)? initial,
-    TResult? Function(User user, String token)? authenticated,
+    TResult? Function(Map<String, dynamic> user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
     return authenticated?.call(user, token);
@@ -451,7 +463,7 @@ class _$AuthAuthenticated implements AuthAuthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
     TResult Function(String? token, bool isFirstRun)? initial,
-    TResult Function(User user, String token)? authenticated,
+    TResult Function(Map<String, dynamic> user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
@@ -500,10 +512,11 @@ class _$AuthAuthenticated implements AuthAuthenticated {
 }
 
 abstract class AuthAuthenticated implements AuthState {
-  const factory AuthAuthenticated(final User user, final String token) =
+  const factory AuthAuthenticated(
+          final Map<String, dynamic> user, final String token) =
       _$AuthAuthenticated;
 
-  User get user;
+  Map<String, dynamic> get user;
   String get token;
   @JsonKey(ignore: true)
   _$$AuthAuthenticatedCopyWith<_$AuthAuthenticated> get copyWith =>
@@ -550,7 +563,8 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() unInitialized,
     required TResult Function(String? token, bool isFirstRun) initial,
-    required TResult Function(User user, String token) authenticated,
+    required TResult Function(Map<String, dynamic> user, String token)
+        authenticated,
     required TResult Function() unauthenticated,
   }) {
     return unauthenticated();
@@ -561,7 +575,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? unInitialized,
     TResult? Function(String? token, bool isFirstRun)? initial,
-    TResult? Function(User user, String token)? authenticated,
+    TResult? Function(Map<String, dynamic> user, String token)? authenticated,
     TResult? Function()? unauthenticated,
   }) {
     return unauthenticated?.call();
@@ -572,7 +586,7 @@ class _$AuthUnauthenticated implements AuthUnauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? unInitialized,
     TResult Function(String? token, bool isFirstRun)? initial,
-    TResult Function(User user, String token)? authenticated,
+    TResult Function(Map<String, dynamic> user, String token)? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
