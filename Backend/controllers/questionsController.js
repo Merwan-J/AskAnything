@@ -5,7 +5,6 @@ const AppError = require('../utils/appError');
 const { catchAsyncError } = require('../utils/catchAsyncError');
 const { isIdValid } = require('../utils/validator');
 const Questions = require('./../models/questionsModel');
-const User = require('./../models/userModel');
 
 //Find all Questions
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {

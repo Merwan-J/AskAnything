@@ -20,14 +20,11 @@ exports.createUser = catchAsyncError(async (req, res, next) => {
   // }
   const user = await User.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      data: { user },
-    });
-  } catch (err) {
-    throw err;
-  }
-};
+  res.status(201).json({
+    status: 'success',
+    data: { user },
+  });
+});
 
 exports.getUsers = catchAsyncError(async (req, res, next) => {
   // console.log(req.params);
