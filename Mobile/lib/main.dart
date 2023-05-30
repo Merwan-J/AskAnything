@@ -10,7 +10,7 @@ import 'package:askanything/infrastructure/question/question_provider.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_api.dart';
 import 'package:askanything/presentation/base/bottomBar.dart';
-import 'package:askanything/presentation/home_page.dart';
+import 'package:askanything/presentation/app.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 // import 'package:askanything/presentation/base/home_page.dart';

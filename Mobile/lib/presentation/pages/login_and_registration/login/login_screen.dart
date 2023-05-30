@@ -2,7 +2,7 @@ import 'package:askanything/application/login/bloc/login_bloc.dart';
 import 'package:askanything/application/login/bloc/login_event.dart';
 import 'package:askanything/application/login/bloc/login_state.dart';
 import 'package:askanything/domain/auth/login_form.dart';
-import 'package:askanything/presentation/home_page.dart';
+import 'package:askanything/presentation/app.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
