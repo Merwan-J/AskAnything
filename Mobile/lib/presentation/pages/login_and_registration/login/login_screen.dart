@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../mainscreen/main_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -61,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // Navigate to home screen
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const Home(),
+                builder: (context) => const MainScreen(),
               ),
             );
           }

@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_form_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
 
 class UserApi {
-  CustomHttpClient _customHttpClient = CustomHttpClient();
-
+  CustomHttpClient _customHttpClient;
+  UserApi(this._customHttpClient);
   Future<UserDTO> createUser(UserFormDTO userFormDto) async {
     var response = await _customHttpClient.post("users",
         body: json.encode(userFormDto.toJson()));
