@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:go_router/go_router.dart';
+import '../routes/routes_dart.dart';
 import '../widgets/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -48,7 +50,9 @@ class SplashScreenItem extends StatelessWidget {
         buttonTitle == "Next"
             ? CustomButton.small(text: buttonTitle, onPressed: controller)
             : buttonTitle == "Get Started"
-                ? CustomButton.medium(text: buttonTitle, onPressed: controller)
+                ? ElevatedButton(
+                    onPressed: () => context.go(Routes.SIGNUP),
+                    child: Text('Get Started'))
                 : CustomButton.large(text: buttonTitle, onPressed: controller),
 
         const Spacer(),

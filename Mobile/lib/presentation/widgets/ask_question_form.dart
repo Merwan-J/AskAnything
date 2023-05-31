@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../application/question/question_post/bloc/question_post_bloc.dart';
 import '../../domain/question/question_form.dart';
 
@@ -159,82 +160,90 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                             })
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(onTap: () {}, child: Text("Cancel")),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                        BlocConsumer<QuestionPostBloc, QuestionPostState>(
-                          listener: (context, state) {
-                            print(state);
-                            if (state is QuestionPostInitial) {
-                              //snackbar
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Initial"),
-                                ),
-                              );
-                            }
-                            if (state is QuestionPostSuccess) {
-                              //remove snackbar
-
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("success"),
-                                ),
-                              );
-                              //snackbar
-                            }
-
-                            if (state is QuestionPosting) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("posting"),
-                                ),
-                              );
-                              //snackbar
-                            }
-
-                            if (state is QuestionPostFailure) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("failed"),
-                                ),
-                              );
-                              //snackbar
-                            }
-                          },
-                          builder: (context, state) {
-                            return GestureDetector(
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
                               onTap: () {
-                                final questionForm = QuestionForm(
-                                  title: titleController.text,
-                                  description: descriptionController.text,
-                                  topic: selectedTopic,
-                                  anonymous: isAnnonymous,
-                                );
-                                BlocProvider.of<QuestionPostBloc>(context)
-                                    .add(QuestionPostAdd(questionForm));
-                                Navigator.pop(context);
+                                context.pop();
                               },
-                              child: Container(
-                                // color: Colors.blue,
-                                decoration: BoxDecoration(
-                                    color: Color.fromRGBO(255, 115, 92, 1),
-                                    borderRadius: BorderRadius.circular(10.h)),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.h, vertical: 10.h),
-                                child: Text("Post",
-                                    style: TextStyle(color: Colors.white)),
-                              ),
-                            );
-                          },
-                        )
-                      ],
+                              child: Text("Cancel")),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          BlocConsumer<QuestionPostBloc, QuestionPostState>(
+                            listener: (context, state) {
+                              print(state);
+                              if (state is QuestionPostInitial) {
+                                //snackbar
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Initial"),
+                                  ),
+                                );
+                              }
+                              if (state is QuestionPostSuccess) {
+                                //remove snackbar
+
+                                ScaffoldMessenger.of(context)
+                                    .hideCurrentSnackBar();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("success"),
+                                  ),
+                                );
+                                //snackbar
+                              }
+
+                              if (state is QuestionPosting) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("posting"),
+                                  ),
+                                );
+                                //snackbar
+                              }
+
+                              if (state is QuestionPostFailure) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("failed"),
+                                  ),
+                                );
+                                //snackbar
+                              }
+                            },
+                            builder: (context, state) {
+                              return GestureDetector(
+                                onTap: () {
+                                  final questionForm = QuestionForm(
+                                    title: titleController.text,
+                                    description: descriptionController.text,
+                                    topic: selectedTopic,
+                                    anonymous: isAnnonymous,
+                                  );
+                                  BlocProvider.of<QuestionPostBloc>(context)
+                                      .add(QuestionPostAdd(questionForm));
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  // color: Colors.blue,
+                                  decoration: BoxDecoration(
+                                      color: Color.fromRGBO(255, 115, 92, 1),
+                                      borderRadius:
+                                          BorderRadius.circular(10.h)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20.h, vertical: 10.h),
+                                  child: Text("Post",
+                                      style: TextStyle(color: Colors.white)),
+                                ),
+                              );
+                            },
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),

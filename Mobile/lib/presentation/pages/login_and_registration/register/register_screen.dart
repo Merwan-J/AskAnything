@@ -3,9 +3,11 @@ import 'package:askanything/application/sign_up/sign_up_event.dart';
 import 'package:askanything/application/sign_up/sign_up_state.dart';
 import 'package:askanything/domain/auth/signup_form.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
+import 'package:askanything/presentation/routes/routes_dart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -253,7 +255,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.go(Routes.LOGIN);
+                          },
                           child: const Text(
                             'Login Now',
                             style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:askanything/presentation/pages/pending_questions/pending_question.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -78,19 +79,22 @@ class Pending_questions extends StatelessWidget {
               ],
             ))
         .toList();
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      // color: Colors.red,
-      child: Expanded(
-        child: ListView.builder(
-            itemCount: questionList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding:
-                    const EdgeInsets.only(left: 7, right: 0, top: 0, bottom: 5),
-                child: questionWidget[index],
-              );
-            }),
+    return Scaffold(
+      appBar: CustomAppBar(title: 'Pending Questions'),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        // color: Colors.red,
+        child: Expanded(
+          child: ListView.builder(
+              itemCount: questionList.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                      left: 7, right: 0, top: 0, bottom: 5),
+                  child: questionWidget[index],
+                );
+              }),
+        ),
       ),
     );
   }

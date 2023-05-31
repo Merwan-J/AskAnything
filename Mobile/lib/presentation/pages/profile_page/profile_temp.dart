@@ -8,6 +8,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../routes/routes_dart.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -91,26 +94,32 @@ class _ProfileScreenState extends State<ProfileScreen>
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Text(
-                              "25 following",
-                              style: TextStyle(
-                                  fontSize: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .fontSize),
+                            TextButton(
+                              onPressed: () => context.push(Routes.FOLLOWING),
+                              child: Text(
+                                "25 following",
+                                style: TextStyle(
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .fontSize),
+                              ),
                             ),
                             Icon(
                               Icons.circle,
                               color: Theme.of(context).primaryColor,
                               size: 10,
                             ),
-                            Text(
-                              "12 followers",
-                              style: TextStyle(
-                                  fontSize: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .fontSize),
+                            TextButton(
+                              onPressed: () => context.push(Routes.FOLLOWERS),
+                              child: Text(
+                                "12 followers",
+                                style: TextStyle(
+                                    fontSize: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .fontSize),
+                              ),
                             )
                           ]),
                       const SizedBox(
