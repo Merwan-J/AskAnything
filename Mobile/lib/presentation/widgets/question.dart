@@ -1,9 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:askanything/application/question/question_edit/question_edit_bloc.dart';
+import 'package:askanything/domain/question/question_form.dart';
+import 'package:askanything/presentation/widgets/question_edit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:askanything/domain/question/question.dart';
 import 'package:intl/intl.dart';
+
+import '../../application/question/question_edit/question_edit_events.dart';
+import 'ask_question_form.dart';
 
 class QuestionW extends StatelessWidget {
   Question question;
@@ -14,6 +21,22 @@ class QuestionW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    buildBottomSheet(
+        BuildContext context, QuestionForm questionForm, String questionId) {
+      showModalBottomSheet(
+          isScrollControlled: true,
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.h),
+                  topRight: Radius.circular(30.h))),
+          context: context,
+          builder: (context) => UpdateQuestionForm(
+                questionForm: questionForm,
+                questionId: questionId,
+              ));
+    }
+
     // final nolikes = question.likes.length - question.dislikes.length;
     final nolikes = 5;
     return GestureDetector(
@@ -103,27 +126,53 @@ class QuestionW extends StatelessWidget {
                     ),
                     //TODO: change like color based on user likes
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: 10.h,
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 10.h,
+                            ),
+                            Icon(Icons.keyboard_arrow_up_outlined,
+                                color: nolikes > 0
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .color),
+                            Text(nolikes.toString()),
+                            Icon(Icons.keyboard_arrow_down_outlined,
+                                color: nolikes < 0
+                                    ? Theme.of(context).primaryColor
+                                    : Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .color),
+                            SizedBox(
+                              width: 10.h,
+                            ),
+                            Icon(Icons.mode_comment_outlined),
+                            SizedBox(
+                              width: 5.h,
+                            ),
+                            Text(question.answers.length.toString()),
+                          ],
                         ),
-                        Icon(Icons.keyboard_arrow_up_outlined,
-                            color: nolikes > 0
-                                ? Theme.of(context).primaryColor
-                                : Theme.of(context).textTheme.bodyLarge!.color),
-                        Text(nolikes.toString()),
-                        Icon(Icons.keyboard_arrow_down_outlined,
-                            color: nolikes < 0
-                                ? Theme.of(context).primaryColor
-                                : Theme.of(context).textTheme.bodyLarge!.color),
-                        SizedBox(
-                          width: 10.h,
-                        ),
-                        Icon(Icons.mode_comment_outlined),
-                        SizedBox(
-                          width: 5.h,
-                        ),
-                        Text(question.answers.length.toString()),
+                        InkWell(
+                          radius: 10.h,
+                          onTap: () {
+                            QuestionForm questionForm = QuestionForm(
+                              anonymous: question.anonymous,
+                              title: question.title,
+                              topic: question.topic,
+                              description: question.description,
+                            );
+
+                            buildBottomSheet(
+                                context, questionForm, question.id);
+                          },
+                          child: Icon(Icons.edit),
+                        )
                       ],
                     ),
                   ],

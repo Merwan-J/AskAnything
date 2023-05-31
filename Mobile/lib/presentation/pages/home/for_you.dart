@@ -12,7 +12,7 @@ class ForYou extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Question question = Question(
-        id: "1",
+        id: "64768b7ffea9d03bb6389cb9",
         title:
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
@@ -42,28 +42,34 @@ class ForYou extends StatelessWidget {
             child: Text("No questions found"),
           );
         }
-        if (state is QuestionListLoaded) {
-          return RefreshIndicator(
-            onRefresh: () {
-              BlocProvider.of<QuestionListBloc>(context)
-                  .add(GetQuestionsEvent());
-              return Future<void>.delayed(const Duration(seconds: 3));
-            },
-            child: ListView.builder(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
-                // shrinkWrap: true,
-                // scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.only(bottom: 15.h),
-                    child: QuestionW(question: state.questions[index]),
-                  );
-                },
-                itemCount: state.questions.length),
-          );
-        }
+        // if (state is QuestionListLoaded) {
+        return RefreshIndicator(
+          onRefresh: () {
+            BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+            return Future<void>.delayed(const Duration(seconds: 3));
+          },
+          child: ListView.builder(
+              padding: EdgeInsets.symmetric(vertical: 10.h),
+              // shrinkWrap: true,
+              // scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.only(bottom: 15.h),
+                  child: QuestionW(question: question),
+                );
+              },
+              itemCount: 5),
+        );
+        // }
         return Center(
-          child: Text("state"),
+          child: ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<QuestionListBloc>(context)
+                    .add(GetQuestionsEvent());
+              },
+              child: Text(
+                "retry",
+              )),
         );
       },
     );

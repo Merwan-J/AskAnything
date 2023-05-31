@@ -65,9 +65,11 @@ class QuestionRepository implements IQuestionRepository {
   @override
   Future<Either<QuestionFailure, Question>> updateQuestion(
       QuestionForm question, String questionId) async {
+    print("before update repo");
     try {
       var questionDto =
           await _questionProvider.updateQuestion(question.toDto(), questionId);
+      print("after update repo");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
       return left(const QuestionFailure.serverError());

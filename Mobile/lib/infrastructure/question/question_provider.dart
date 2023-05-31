@@ -41,11 +41,17 @@ class QuestionProvider {
 
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, String questionId) async {
-    var response = await _httpClient.put('questions/${questionId}',
+    print("before question provider");
+    print(questionFormDto.description);
+    var response = await _httpClient.patch('questions/$questionId',
         body: json.encode(QuestionFormDto.fromJson(questionFormDto.toJson())));
+    print("after provider");
+    var decoded = await jsonDecode(response.body)["data"]["question"];
+    print(decoded);
 
+    QuestionDto questionDto = getQuestionDto(decoded);
     if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+      return questionDto;
     } else {
       throw Exception('Failed to update question');
     }
@@ -54,7 +60,7 @@ class QuestionProvider {
   Future<QuestionDto> getQuestion(String id) async {
     var response = await _httpClient.get('questions/$id');
 
-    if (response.statusCode == 200) {
+    if (response.statusCode.toString() == 200.toString()) {
       return QuestionDto.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to get question');

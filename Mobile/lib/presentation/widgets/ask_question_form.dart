@@ -1,3 +1,4 @@
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/util/constants.dart';
 import 'package:askanything/util/custom_color.dart';
@@ -27,6 +28,12 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+  }
 
   toggle() {
     setState(() {
@@ -262,15 +269,3 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
         .toList();
   }
 }
-
-// Use this to display the sheet
-// buildBottomSheet(BuildContext context) {
-//   showModalBottomSheet(
-//       isScrollControlled: true,
-//       elevation: 10,
-//       shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.only(
-//               topLeft: Radius.circular(30.h), topRight: Radius.circular(30.h))),
-//       context: context,
-//       builder: (context) => AskQuestionForm());
-// }

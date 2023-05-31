@@ -18,6 +18,7 @@ import 'package:askanything/util/custom_http_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'application/question/question_edit/question_edit_bloc.dart';
 import 'application/question/question_list/bloc/question_list_bloc.dart';
 import 'application/question/question_post/bloc/question_post_bloc.dart';
 import 'infrastructure/user/user_repository.dart';
@@ -68,6 +69,9 @@ void main() {
             ],
             child: MultiBlocProvider(
               providers: [
+                BlocProvider(
+                    create: (context) => QuestionEditBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
                     create: (context) => QuestionPostBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
