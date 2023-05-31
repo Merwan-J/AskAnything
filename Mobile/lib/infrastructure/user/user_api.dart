@@ -103,4 +103,15 @@ class UserApi {
       throw Exception("Failed to load followings");
     }
   }
+
+  Future<List<UserDTO>> getAdminUsers() async {
+    var response = await _customHttpClient.get("users/admin");
+
+    if (response.statusCode == 200) {
+      List<dynamic> usersJson = jsonDecode(response.body);
+      return usersJson.map((user) => UserDTO.fromJson(user)).toList();
+    } else {
+      throw Exception("Failed to load users");
+    }
+  }
 }

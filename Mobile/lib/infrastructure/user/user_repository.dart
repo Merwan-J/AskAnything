@@ -114,4 +114,16 @@ class UserRepository implements IUserRepository {
       return Left(UserFailure.unexpectedError());
     }
   }
+
+  @override
+  Future<Either<UserFailure, List<User>>> getAdminUsers() async {
+    try {
+      final adminListDto = await _userApi.getAdminUsers();
+      final adminList =
+          adminListDto.map((adminDto) => adminDto.toModel()).toList();
+      return Right(adminList);
+    } catch (e) {
+      return Left(UserFailure.unexpectedError());
+    }
+  }
 }

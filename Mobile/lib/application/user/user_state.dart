@@ -1,21 +1,46 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user_state.freezed.dart';
+abstract class UserState {}
 
-@freezed
-abstract class UserState with _$UserState {
-  const factory UserState.initial() = Initial;
-  const factory UserState.loading() = Loading;
-  const factory UserState.loaded(User user) = Loaded;
-  const factory UserState.loadedAll(List<User> users) = LoadedAll;
-  const factory UserState.loadedFollowers(List<User> followers) =
-      LoadedFollowers;
-  const factory UserState.loadedFollowings(List<User> followings) =
-      LoadedFollowings;
-  const factory UserState.error(UserFailure failure) = Error;
-  const factory UserState.deleted() = Deleted;
-  const factory UserState.followed() = Followed;
-  const factory UserState.unfollowed() = Unfollowed;
+class Initial extends UserState {}
+
+class Loading extends UserState {}
+
+class LoadedUser extends UserState {
+  final User user;
+  LoadedUser(this.user);
 }
+
+class LoadedAllUsers extends UserState {
+  final List<User> users;
+  LoadedAllUsers(this.users);
+}
+
+class LoadedAdminUsers extends UserState {
+  final List<User> users;
+  LoadedAdminUsers(this.users);
+}
+
+class LoadedFollowers extends UserState {
+  final List<User> followers;
+  LoadedFollowers(this.followers);
+}
+
+class LoadedFollowings extends UserState {
+  final List<User> followings;
+  LoadedFollowings(this.followings);
+}
+
+class UserError extends UserState {
+  final UserFailure failure;
+  UserError(this.failure);
+}
+
+class Deleted extends UserState {}
+
+class Followed extends UserState {}
+
+class Unfollowed extends UserState {}
+
+class Success extends UserState {}
