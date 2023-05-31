@@ -18,21 +18,23 @@ class QuestionPostBloc extends Bloc<QuestionPostEvent, QuestionPostState> {
 
   QuestionPostBloc(this._questionRepository) : super(QuestionPostInitial()) {
     on<QuestionPostAdd>((event, emit) async {
-      //emit loading state
-      emit(QuestionPosting());
-      //add question
-
+      //emit loading state then add question then emit success or failure state
+      emit(QuestionPostLoading());
+      print("before");
       final Either<QuestionFailure, Question> question =
           await _questionRepository.askQuestion(event.questionForm);
       //check if question is added
-      question.fold((l) {
-        //emit failure state
-        emit(QuestionPostFailure("Question adding failed"));
-      }, (r) {
-        //emit success state
-        emit(QuestionPostSuccess("Question added successfully"));
-      });
+
+      question.fold(
+        (failure) {
+          emit(QuestionPostFailure("Question adding failed"));
+        },
+        (question) {
+          emit(QuestionPostSuccess("Question added successfully"));
+        },
+      );
     });
+    on<QuestionPostingEvent>((event, emit) => emit(QuestionPosting()));
     //post question with image
     on<PostQuestionWithImage>((event, emit) async {
       //emit loading state

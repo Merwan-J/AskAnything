@@ -20,10 +20,11 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, List<Question>>> getQuestions() async {
     try {
       var questions = await _questionProvider.getQuestions();
-      return right(questions
-          .map((QuestionDto questionDto) =>
-              Question.fromJson(questionDto.toJson()))
-          .toList());
+      print("repository");
+      print("questions");
+      return right(questions.map((QuestionDto questionDto) {
+        return Question.fromJson(questionDto.toJson());
+      }).toList());
     }
     // TODO: handle more errors
     // TODO: Make sure user is authenticated
@@ -37,9 +38,9 @@ class QuestionRepository implements IQuestionRepository {
       String questionId) async {
     try {
       var question = await _questionProvider.getQuestion(questionId);
-      return right(Question.fromJson(question.toJson()));
+      return Right(Question.fromJson(question.toJson()));
     } catch (e) {
-      return left(const QuestionFailure.serverError());
+      return Left(const QuestionFailure.serverError());
     }
   }
 
@@ -53,10 +54,11 @@ class QuestionRepository implements IQuestionRepository {
       print("again yess");
       var question = Question.fromJson(questionDto.toJson());
       print("!21question: $question");
-      return right(question);
+
+      return Right(question);
     } catch (e) {
       print(e);
-      return left(const QuestionFailure.serverError());
+      return Left(const QuestionFailure.serverError());
     }
   }
 

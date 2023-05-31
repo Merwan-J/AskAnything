@@ -168,6 +168,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         ),
                         BlocConsumer<QuestionPostBloc, QuestionPostState>(
                           listener: (context, state) {
+                            print(state);
                             if (state is QuestionPostInitial) {
                               //snackbar
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -208,25 +209,25 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                             }
                           },
                           builder: (context, state) {
-                            return Container(
-                              // color: Colors.blue,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(255, 115, 92, 1),
-                                  borderRadius: BorderRadius.circular(10.h)),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.h, vertical: 10.h),
-                              child: GestureDetector(
-                                onTap: () {
-                                  final questionForm = QuestionForm(
-                                    title: titleController.text,
-                                    description: descriptionController.text,
-                                    topic: selectedTopic,
-                                    anonymous: isAnnonymous,
-                                  );
-                                  BlocProvider.of<QuestionPostBloc>(context)
-                                      .add(QuestionPostAdd(questionForm));
-                                  Navigator.pop(context);
-                                },
+                            return GestureDetector(
+                              onTap: () {
+                                final questionForm = QuestionForm(
+                                  title: titleController.text,
+                                  description: descriptionController.text,
+                                  topic: selectedTopic,
+                                  anonymous: isAnnonymous,
+                                );
+                                BlocProvider.of<QuestionPostBloc>(context)
+                                    .add(QuestionPostAdd(questionForm));
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                // color: Colors.blue,
+                                decoration: BoxDecoration(
+                                    color: Color.fromRGBO(255, 115, 92, 1),
+                                    borderRadius: BorderRadius.circular(10.h)),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.h, vertical: 10.h),
                                 child: Text("Post",
                                     style: TextStyle(color: Colors.white)),
                               ),

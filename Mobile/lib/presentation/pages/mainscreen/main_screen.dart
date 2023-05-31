@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,14 +26,14 @@ class _MainScreenState extends State<MainScreen> {
   ];
   int _selectedIndex = 0;
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    int _selectedIndex = widget.index != null
-        ? widget.index! < screens.length
-            ? widget.index as int
-            : 0
-        : 0;
-  }
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   int _selectedIndex = widget.index != null
+  //       ? widget.index! < screens.length
+  //           ? widget.index as int
+  //           : 0
+  //       : 0;
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,8 @@ part of 'question_post_bloc.dart';
 @immutable
 abstract class QuestionPostEvent {}
 
+class QuestionPostingEvent extends QuestionPostEvent {}
+
 class QuestionPostAdd extends QuestionPostEvent {
   final QuestionForm questionForm;
 
