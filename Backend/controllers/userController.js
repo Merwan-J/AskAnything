@@ -40,7 +40,16 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.params.id)) {
   //   return next(new AppError('invalid id', 400));
   // }
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id)
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate('answers')
+    .exec();
 
   if (!user) {
     return next(new AppError('user not found', 404));
