@@ -1,3 +1,6 @@
+import 'package:askanything/domain/question/question.dart';
+import 'package:askanything/domain/question/question_failure.dart';
+import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
 import 'package:bloc/bloc.dart';
@@ -9,12 +12,17 @@ import 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository _userRepository;
+  final IQuestionRepository _questionRepository;
 
-  UserBloc(this._userRepository) : super(Initial()) {
+  UserBloc(this._userRepository, this._questionRepository) : super(Initial()) {
     on<GetUserById>((event, emit) async {
       emit(Loading());
       Either<UserFailure, User> failureOrUser =
           await _userRepository.getUserById(event.id);
+
+      Either<QuestionFailure, Question> failureOrQuestion =
+          await _questionRepository.getQuestionById(event.id);
+
       failureOrUser.fold(
         (failure) => emit(UserError(failure)),
         (user) => emit(LoadedUser(user)),

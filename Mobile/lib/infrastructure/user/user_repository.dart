@@ -18,7 +18,8 @@ class UserRepository implements IUserRepository {
       final user = userDto.toModel();
       return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      print(e);
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -30,7 +31,7 @@ class UserRepository implements IUserRepository {
       final createdUser = createdUserDto.toModel();
       return Right(createdUser);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -43,7 +44,7 @@ class UserRepository implements IUserRepository {
       final updatedUser = updatedUserDto.toModel();
       return Right(updatedUser);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -51,9 +52,9 @@ class UserRepository implements IUserRepository {
   Future<Either<UserFailure, void>> deleteUser(String id) async {
     try {
       await _userApi.deleteUser(id);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -64,7 +65,7 @@ class UserRepository implements IUserRepository {
       final userList = userListDto.map((userDto) => userDto.toModel()).toList();
       return Right(userList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -73,9 +74,9 @@ class UserRepository implements IUserRepository {
       String followerId, String followingId) async {
     try {
       await _userApi.followUser(followerId, followingId);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -84,9 +85,9 @@ class UserRepository implements IUserRepository {
       String followerId, String followingId) async {
     try {
       await _userApi.unfollowUser(followerId, followingId);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -98,7 +99,7 @@ class UserRepository implements IUserRepository {
           followerListDto.map((followerDto) => followerDto.toModel()).toList();
       return Right(followerList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -111,7 +112,7 @@ class UserRepository implements IUserRepository {
           .toList();
       return Right(followingList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -123,7 +124,7 @@ class UserRepository implements IUserRepository {
           adminListDto.map((adminDto) => adminDto.toModel()).toList();
       return Right(adminList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 }
