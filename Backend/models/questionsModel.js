@@ -24,15 +24,13 @@ const Topics = {
 
 const questionsSchema = new mongoose.Schema(
   {
-    question: {
-      title: {
-        type: String,
-        // required: true,
-      },
-      description: {
-        type: String,
-        required: true,
-      },
+    title: {
+      type: String,
+      // required: true,
+    },
+    description: {
+      type: String,
+      // required: true,
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,

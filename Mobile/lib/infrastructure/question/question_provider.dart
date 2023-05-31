@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:askanything/infrastructure/question/question_form_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
@@ -22,11 +23,17 @@ class QuestionProvider {
   // TODO: handle image uploads/ multipart form data
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
+    final author = "6448f5ead561de32dc337d5b";
+    print("author: $author");
     var response = await _httpClient.post('questions',
-        body: json.encode(questionFormDto.toJson()));
+        body: json.encode(questionFormDto.toJson()..['author'] = author));
+    print("response: ${response.body}");
 
-    if (response.statusCode == 201) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    if (response.statusCode.toString() == 201.toString()) {
+      Map<String, dynamic> decoded =
+          await json.decode(response.body)['data']["question"];
+      QuestionDto questionDto = getQuestionDto(decoded);
+      return questionDto;
     } else {
       throw Exception('Failed to create question');
     }
@@ -55,12 +62,19 @@ class QuestionProvider {
   }
 
   Future<List<QuestionDto>> getQuestions() async {
+    print("fetching questions");
     var response = await _httpClient.get('questions');
+    //print print
+    print("res");
+    var decoded = await jsonDecode(response.body);
 
-    if (response.statusCode == 200) {
-      return (jsonDecode(response.body) as List)
-          .map((e) => QuestionDto.fromJson(e))
-          .toList();
+    if (response.statusCode.toString() == 200.toString()) {
+      var questionsLst = decoded["data"]["questions"];
+
+      var questionLstDto =
+          (questionsLst as List).map((e) => getQuestionDto(e)).toList();
+      print("success");
+      return (questionsLst).map((e) => getQuestionDto(e)).toList();
     } else {
       throw Exception('Failed to get questions');
     }
@@ -118,5 +132,22 @@ class QuestionProvider {
     } else {
       throw Exception('Failed to downvote question');
     }
+  }
+
+  QuestionDto getQuestionDto(decoded) {
+    QuestionDto questionDto = QuestionDto(
+      id: decoded['_id'],
+      title: decoded['title'],
+      description: decoded['description'],
+      topic: decoded['topic'],
+      author: decoded['author'],
+      answers: decoded['answers'],
+      anonymous: decoded['anonymous'],
+      createdAt: DateTime.parse(decoded["createdAt"]),
+      updatedAt: DateTime.parse(decoded["updatedAt"]),
+      likes: decoded['likes'],
+      dislikes: decoded['dislikes'],
+    );
+    return questionDto;
   }
 }

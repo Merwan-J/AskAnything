@@ -1,9 +1,12 @@
+import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/question/question_list/bloc/question_list_bloc.dart';
 import '../../../domain/question/question.dart';
 import '../../widgets/end_drawer.dart';
 
@@ -15,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void openEndDrawer() {
     _scaffoldKey.currentState?.openEndDrawer();

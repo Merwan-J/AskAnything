@@ -1,11 +1,13 @@
-import 'dart:io';
-
+import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/util/constants.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../application/question/question_post/bloc/question_post_bloc.dart';
+import '../../domain/question/question_form.dart';
 
 class AskQuestionForm extends StatefulWidget {
   const AskQuestionForm({super.key});
@@ -164,18 +166,73 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         SizedBox(
                           width: 10.h,
                         ),
-                        Container(
-                          // color: Colors.blue,
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(255, 115, 92, 1),
-                              borderRadius: BorderRadius.circular(10.h)),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 20.h, vertical: 10.h),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Text("Post",
-                                style: TextStyle(color: Colors.white)),
-                          ),
+                        BlocConsumer<QuestionPostBloc, QuestionPostState>(
+                          listener: (context, state) {
+                            print(state);
+                            if (state is QuestionPostInitial) {
+                              //snackbar
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("Initial"),
+                                ),
+                              );
+                            }
+                            if (state is QuestionPostSuccess) {
+                              //remove snackbar
+
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("success"),
+                                ),
+                              );
+                              //snackbar
+                            }
+
+                            if (state is QuestionPosting) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("posting"),
+                                ),
+                              );
+                              //snackbar
+                            }
+
+                            if (state is QuestionPostFailure) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text("failed"),
+                                ),
+                              );
+                              //snackbar
+                            }
+                          },
+                          builder: (context, state) {
+                            return GestureDetector(
+                              onTap: () {
+                                final questionForm = QuestionForm(
+                                  title: titleController.text,
+                                  description: descriptionController.text,
+                                  topic: selectedTopic,
+                                  anonymous: isAnnonymous,
+                                );
+                                BlocProvider.of<QuestionPostBloc>(context)
+                                    .add(QuestionPostAdd(questionForm));
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                // color: Colors.blue,
+                                decoration: BoxDecoration(
+                                    color: Color.fromRGBO(255, 115, 92, 1),
+                                    borderRadius: BorderRadius.circular(10.h)),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.h, vertical: 10.h),
+                                child: Text("Post",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            );
+                          },
                         )
                       ],
                     )

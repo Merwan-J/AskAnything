@@ -13,12 +13,10 @@ _$_QuestionEntity _$$_QuestionEntityFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       author: json['author'] as String,
       anonymous: json['anonymous'] as bool,
-      answers:
-          (json['answers'] as List<dynamic>).map((e) => e as String).toList(),
+      answers: json['answers'] as List<dynamic>,
       topic: json['topic'] as String,
-      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
-      dislikes:
-          (json['dislikes'] as List<dynamic>).map((e) => e as String).toList(),
+      likes: json['likes'] as List<dynamic>,
+      dislikes: json['dislikes'] as List<dynamic>,
       image: json['image'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),

@@ -31,26 +31,25 @@ exports.getQuestionById = catchAsyncError(async (req, res, next) => {
 
 //Add a question
 exports.createQuestion = catchAsyncError(async (req, res) => {
-  const newQuestion = await Questions.create(req.body);
+  console.log(req.body);
+  const question = await Questions.create(req.body);
   const user = await User.findById(req.body.author);
   // console.log(user.questions);
   // console.log(user.email);
-  user.questions.push(newQuestion._id);
+  user.questions.push(question._id);
   await user.save();
   res.status(201).json({
     status: 'success',
-    data: { newQuestion },
+    data: { question },
   });
 });
 
 //Patch a question
 exports.updateQuestion = catchAsyncError(async (req, res) => {
-  const updatedQuestion = await Questions.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.status(200).json({ status: 'success', data: { updatedQuestion } });
+  const question = await Questions.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  res.status(200).json({ status: 'success', data: { question } });
 });
 
 //Delete a question

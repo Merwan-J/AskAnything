@@ -20,10 +20,11 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, List<Question>>> getQuestions() async {
     try {
       var questions = await _questionProvider.getQuestions();
-      return right(questions
-          .map((QuestionDto questionDto) =>
-              Question.fromJson(questionDto.toJson()))
-          .toList());
+      print("repository");
+      print("questions");
+      return right(questions.map((QuestionDto questionDto) {
+        return Question.fromJson(questionDto.toJson());
+      }).toList());
     }
     // TODO: handle more errors
     // TODO: Make sure user is authenticated
@@ -37,21 +38,27 @@ class QuestionRepository implements IQuestionRepository {
       String questionId) async {
     try {
       var question = await _questionProvider.getQuestion(questionId);
-      return right(Question.fromJson(question.toJson()));
+      return Right(Question.fromJson(question.toJson()));
     } catch (e) {
-      return left(const QuestionFailure.serverError());
+      return Left(const QuestionFailure.serverError());
     }
   }
 
   @override
   Future<Either<QuestionFailure, Question>> askQuestion(
-      QuestionForm question) async {
+      QuestionForm questionForm) async {
     try {
+      print("yess");
       var questionDto =
-          await _questionProvider.createQuestion(question.toDto());
-      return right(Question.fromJson(questionDto.toJson()));
+          await _questionProvider.createQuestion(questionForm.toDto());
+      print("again yess");
+      var question = Question.fromJson(questionDto.toJson());
+      print("!21question: $question");
+
+      return Right(question);
     } catch (e) {
-      return left(const QuestionFailure.serverError());
+      print(e);
+      return Left(const QuestionFailure.serverError());
     }
   }
 

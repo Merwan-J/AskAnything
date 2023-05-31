@@ -1,7 +1,9 @@
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/question/question_list/bloc/question_list_bloc.dart';
 import '../../../domain/question/question.dart';
 
 class ForYou extends StatelessWidget {
@@ -23,17 +25,48 @@ class ForYou extends StatelessWidget {
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
-    return ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 10.h),
-        // shrinkWrap: true,
-        // scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: EdgeInsets.only(bottom: 15.h),
-            child: QuestionW(question: question),
+    return BlocBuilder<QuestionListBloc, QuestionListState>(
+      builder: (context, state) {
+        if (state is QuestionListLoading) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        },
-        itemCount: 30);
+        }
+        if (state is QuestionListFailure) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
+        if (state is QuestionListEmpty) {
+          return Center(
+            child: Text("No questions found"),
+          );
+        }
+        if (state is QuestionListLoaded) {
+          return RefreshIndicator(
+            onRefresh: () {
+              BlocProvider.of<QuestionListBloc>(context)
+                  .add(GetQuestionsEvent());
+              return Future<void>.delayed(const Duration(seconds: 3));
+            },
+            child: ListView.builder(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                // shrinkWrap: true,
+                // scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: QuestionW(question: state.questions[index]),
+                  );
+                },
+                itemCount: state.questions.length),
+          );
+        }
+        return Center(
+          child: Text("state"),
+        );
+      },
+    );
     // return Expanded(child: QuestionW(question: question));
   }
 }
