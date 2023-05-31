@@ -323,8 +323,6 @@ abstract class _$$QuestionEditSuccessStateCopyWith<$Res> {
       __$$QuestionEditSuccessStateCopyWithImpl<$Res>;
   @useResult
   $Res call({Question question});
-
-  $QuestionCopyWith<$Res> get question;
 }
 
 /// @nodoc
@@ -346,14 +344,6 @@ class __$$QuestionEditSuccessStateCopyWithImpl<$Res>
           : question // ignore: cast_nullable_to_non_nullable
               as Question,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $QuestionCopyWith<$Res> get question {
-    return $QuestionCopyWith<$Res>(_value.question, (value) {
-      return _then(_value.copyWith(question: value));
-    });
   }
 }
 

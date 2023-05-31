@@ -1,12 +1,17 @@
+import 'dart:convert';
+
 import 'package:askanything/application/user/user_bloc.dart';
 import 'package:askanything/application/user/user_event.dart';
 import 'package:askanything/application/user/user_state.dart';
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/answer/answer_dto.dart';
+import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
+import 'package:askanything/presentation/widgets/question.dart';
 import 'package:askanything/util/Theme/custom_theme.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -198,7 +203,32 @@ class _ProfileScreenState extends State<ProfileScreen>
               bucket: PageStorageBucket(),
               child: TabBarView(
                 controller: _tabController,
-                children: tabScreens,
+                children: [
+                  ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      // shrinkWrap: true,
+                      // scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: QuestionW(
+                              question: user.questionIds[index].toQuestion()),
+                        );
+                      },
+                      itemCount: user.questionIds.length),
+                  ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      // shrinkWrap: true,
+                      // scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 15),
+                          child: QuestionW(
+                              question: user.questionIds[index].toQuestion()),
+                        );
+                      },
+                      itemCount: user.questionIds.length)
+                ],
               ),
             ),
           )

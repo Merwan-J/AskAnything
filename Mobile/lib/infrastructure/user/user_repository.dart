@@ -15,9 +15,12 @@ class UserRepository implements IUserRepository {
   Future<Either<UserFailure, User>> getUserById(String id) async {
     try {
       final userDto = await _userApi.getUserById(id);
+      print(userDto.questionIds);
       final user = userDto.toModel();
+      print(user.questionIds);
       return Right(user);
     } catch (e) {
+      print("hey");
       print(e);
       return const Left(UserFailure.unexpectedError());
     }
