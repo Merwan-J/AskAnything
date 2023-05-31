@@ -48,7 +48,13 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
         model: 'User',
       },
     })
-    .populate('answers')
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
     .exec();
 
   if (!user) {

@@ -11,6 +11,7 @@ import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
+import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:askanything/util/Theme/custom_theme.dart';
 import 'package:askanything/util/custom_color.dart';
@@ -223,11 +224,11 @@ class _ProfileScreenState extends State<ProfileScreen>
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: EdgeInsets.only(bottom: 15),
-                          child: QuestionW(
-                              question: user.questionIds[index].toQuestion()),
+                          child:
+                              AnswerW(answer: user.answerIds[index].toAnswer()),
                         );
                       },
-                      itemCount: user.questionIds.length)
+                      itemCount: user.answerIds.length)
                 ],
               ),
             ),

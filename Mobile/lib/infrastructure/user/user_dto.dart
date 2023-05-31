@@ -1,3 +1,4 @@
+import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:equatable/equatable.dart';
 
@@ -8,7 +9,7 @@ class UserDTO extends Equatable {
   final String password;
   final String profilePic;
   final List<QuestionDto> questionIds;
-  final List<String> answerIds;
+  final List<AnswerDto> answerIds;
   final int reputation;
   final int likes;
   final int dislikes;
@@ -69,7 +70,9 @@ class UserDTO extends Equatable {
               .toList()
           : [],
       answerIds: json['answers'] != null
-          ? (json['answers'] as List<dynamic>).map((e) => e.toString()).toList()
+          ? (json['answers'] as List<dynamic>)
+              .map((answer) => AnswerDto.fromJson(answer))
+              .toList()
           : [],
       reputation: json['reputation'] ?? 0,
       likes: json['likes'] ?? 0,

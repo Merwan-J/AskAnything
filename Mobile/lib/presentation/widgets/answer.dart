@@ -47,7 +47,7 @@ class AnswerW extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              answer.author,
+                              answer.author.name,
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
