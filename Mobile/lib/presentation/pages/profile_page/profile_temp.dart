@@ -1,4 +1,10 @@
-import 'package:askanything/infrastructure/profile/profile_repository.dart';
+import 'package:askanything/application/user/user_bloc.dart';
+import 'package:askanything/application/user/user_event.dart';
+import 'package:askanything/application/user/user_state.dart';
+import 'package:askanything/domain/question/question.dart';
+import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/question/question_repository.dart';
+import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/util/Theme/custom_theme.dart';
@@ -38,6 +44,32 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
+    return BlocProvider(
+      create: (context) => UserBloc(
+          RepositoryProvider.of<UserRepository>(context),
+          RepositoryProvider.of<QuestionRepository>(context)),
+      child: BlocConsumer<UserBloc, UserState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          if (state is Initial) {
+            BlocProvider.of<UserBloc>(context)
+                .add(const GetUserById('6448f5ead561de32dc337d5b'));
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is Loading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is LoadedUser) {
+            return _buildBody(context, state.user);
+          } else if (state is UserError) {
+            return const Center(child: Text('Error'));
+          } else {
+            return const Center(child: Text('unexpected error'));
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildBody(BuildContext context, User user) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -60,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Gelete Burqa",
+                            user.name,
                             style: TextStyle(
                                 fontSize: Theme.of(context)
                                     .textTheme
@@ -75,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text('124',
+                              Text(user.reputation.toString(),
                                   style: TextStyle(
                                       fontSize: Theme.of(context)
                                           .textTheme
@@ -92,7 +124,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
-                              "25 following",
+                              '${user.followings.length} following',
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
@@ -105,7 +137,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               size: 10,
                             ),
                             Text(
-                              "12 followers",
+                              "${user.followers.length} followers",
                               style: TextStyle(
                                   fontSize: Theme.of(context)
                                       .textTheme
