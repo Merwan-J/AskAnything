@@ -102,7 +102,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.go(Routes.HOME);
+                            },
                             icon: const Icon(Icons.arrow_back_ios),
                             iconSize: 17.h,
                           ),

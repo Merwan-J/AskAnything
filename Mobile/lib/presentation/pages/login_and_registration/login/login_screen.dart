@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       child: IconButton(
                         onPressed: () {
-                          context.pop();
+                          context.go(Routes.SIGNUP);
                         },
                         icon: const Icon(Icons.arrow_back_ios),
                         iconSize: 17.h,
