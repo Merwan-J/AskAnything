@@ -20,9 +20,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           (r) => emit(ProfileState.loadedProfileState(profile)));
     });
     on<UpdateProfileEvent>(((event, emit) async {
+      print("before update profile bloc update profile");
+      emit(const ProfileState.loadingProfileState());
       Either<EditProfileFailure, Profile> profile =
           await editProfileFormRepository.updateProfile(
-              profileForm: event.profileDto);
+              profileForm: event.profileForm);
+      print(profile);
+      print("bloc success");
 
       profile.fold((l) => emit(const ProfileState.errorProfile()),
           (r) => emit(ProfileState.loadedProfileState(profile)));

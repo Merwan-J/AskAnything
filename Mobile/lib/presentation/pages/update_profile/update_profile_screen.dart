@@ -1,6 +1,11 @@
+import 'package:askanything/application/profile/bloc/profile_bloc.dart';
+import 'package:askanything/application/profile/bloc/profile_event.dart';
+import 'package:askanything/domain/profile/edit_profile_form.dart';
+import 'package:askanything/infrastructure/profile/profile_dto.dart';
 import 'package:askanything/presentation/widgets/update_profie_form.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:file_picker/file_picker.dart';
@@ -18,7 +23,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   String? selectedImage;
 
   String filename = "";
-  Uint8List? filebyte;
   FilePickerResult? pickeFile;
 
   TextEditingController nameController = TextEditingController();
@@ -36,7 +40,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       setState(() {
         filename = file.name;
         filename = filename.substring(0, 20);
-        filebyte = file.bytes;
+        // filebyte = file.bytes;
       });
     } else {
       // User canceled the picker
@@ -70,54 +74,67 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.white,
-      //   elevation: 0,
-      //   leading: Container(
-      //     margin: EdgeInsets.all(6.h),
-      //     decoration: BoxDecoration(
-      //       border: Border.all(color: Colors.grey),
-      //       borderRadius: BorderRadius.circular(10),
-      //     ),
-      //     child: IconButton(
-      //       onPressed: () {},
-      //       icon: const Icon(Icons.arrow_back_ios),
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   title: const Text('Profile'),
-      //   titleTextStyle: TextStyle(
-      //     color: Colors.black, // Set the text color to black
-      //     fontSize: 20, // Set the font size to 20
-      //     fontWeight: FontWeight.bold, // Set the font weight to bold
-      //   ),
-      //   actions: [
-      //     Container(
-      //       margin: EdgeInsets.all(6.h),
-      //       child: ElevatedButton(
-      //         onPressed: () {},
-      //         child: const Text('Save'),
-      //         style: ButtonStyle(
-      //           backgroundColor: MaterialStateProperty.all(
-      //             Color.fromRGBO(255, 115, 92, 1),
-      //           ),
-      //           shape: MaterialStateProperty.all(
-      //             RoundedRectangleBorder(
-      //               borderRadius: BorderRadius.circular(10),
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ],
-      //   bottom: PreferredSize(
-      //     preferredSize: Size.fromHeight(1.0),
-      //     child: Divider(
-      //       color: Colors.black,
-      //       height: 1.0,
-      //     ),
-      //   ),
-      // ),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: Container(
+          margin: EdgeInsets.all(6.h),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios),
+            color: Colors.black,
+          ),
+        ),
+        title: const Text('Profile'),
+        titleTextStyle: TextStyle(
+          color: Colors.black, // Set the text color to black
+          fontSize: 20, // Set the font size to 20
+          fontWeight: FontWeight.bold, // Set the font weight to bold
+        ),
+        actions: [
+          Container(
+            margin: EdgeInsets.all(6.h),
+            child: ElevatedButton(
+              onPressed: () {
+                context.read<ProfileBloc>().add(
+                      UpdateProfileEvent(
+                        EditProfileForm(
+                          name: nameController.text,
+                          email: emailController.text,
+                          image: "image",
+                        ),
+                      ),
+                    );
+                Navigator.pop(context);
+              },
+              child: const Text('Save'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  Color.fromRGBO(255, 115, 92, 1),
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1.0),
+          child: Divider(
+            color: Colors.black,
+            height: 1.0,
+          ),
+        ),
+      ),
       body: ProfileForm(
         selectedImage: selectedImage,
         onImageSelected: _chooseFile,

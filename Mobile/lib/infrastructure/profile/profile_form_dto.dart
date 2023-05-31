@@ -1,17 +1,21 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:askanything/domain/profile/edit_profile_form.dart';
 
-part 'profile_form_dto.freezed.dart';
-part 'profile_form_dto.g.dart';
+class ProfileFormDto {
+  final String name;
+  final String email;
+  final String? image;
 
-@freezed
-class ProfileFormDto with _$ProfileFormDto {
-  const factory ProfileFormDto({
-    required String email,
-    required String ProfilePicture,
-    required String userName, //TODO: Change to image
-  }) = _ProfileFormDto;
+  ProfileFormDto({
+    required this.name,
+    required this.email,
+    this.image,
+  });
 
-  factory ProfileFormDto.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFormDtoFromJson(json);
+  EditProfileForm toEditProfileForm() {
+    return EditProfileForm(
+      name: name,
+      email: email,
+      image: image,
+    );
+  }
 }

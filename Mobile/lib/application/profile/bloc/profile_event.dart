@@ -1,3 +1,4 @@
+import 'package:askanything/domain/profile/edit_profile_form.dart';
 import 'package:askanything/infrastructure/profile/profile_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,7 +9,7 @@ part 'profile_event.freezed.dart';
 @freezed
 class ProfileEvent with _$ProfileEvent {
   const factory ProfileEvent.loadProfileEvent(String id) = LoadProfileEvent;
-  const factory ProfileEvent.updateProfileEvent(ProfileFormDto profileDto) =
+  const factory ProfileEvent.updateProfileEvent(EditProfileForm profileForm) =
       UpdateProfileEvent;
 
   const factory ProfileEvent.deleteProfile(String id) = DeleteProfileEvent;
