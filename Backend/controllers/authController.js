@@ -72,3 +72,32 @@ exports.login = catchAsyncError(async (req, res, next) => {
     },
   });
 });
+
+exports.changePassword = catchAsyncError(async (req, res, next) => {
+  console.log(req.body);
+  console.log(req.params.id);
+  console.log(await userModel.findById(req.params.id));
+  const user = await userModel.findById(req.params.id);
+  console.log(user);
+  const { oldPassword, newPassword } = req.body;
+
+  if (await bcrypt.compare(oldPassword, user.password)) {
+    // change the new password
+    const encryptedPassword = await bcrypt.hash(newPassword, 10);
+
+    user.password = encryptedPassword;
+    await user.save();
+    res.status(200).json({
+      status: 'success',
+      data: {
+        user,
+      },
+    });
+  } else {
+    // send error
+    res.status(404).json({
+      status: 'fail',
+      message: "Password doesn't match",
+    });
+  }
+});
