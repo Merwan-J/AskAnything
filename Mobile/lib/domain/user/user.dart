@@ -1,3 +1,5 @@
+import 'package:askanything/infrastructure/answer/answer_dto.dart';
+import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:flutter/foundation.dart';
 
 class User {
@@ -6,8 +8,8 @@ class User {
   final String email;
   final String password;
   final String? profilePic; // Added required modifier here
-  final List<String> questionIds;
-  final List<String> answerIds;
+  final List<QuestionDto> questionIds;
+  final List<AnswerDto> answerIds;
   final int reputation;
   final int likes;
   final int dislikes;

@@ -1,15 +1,20 @@
 import 'package:askanything/domain/question/question_repository_interface.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
+import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../application/question/question_list/bloc/question_list_bloc.dart';
 import '../../../domain/question/question.dart';
 import '../../../infrastructure/user/author_dto.dart';
+import '../../routes/routes_dart.dart';
 import '../../widgets/end_drawer.dart';
+import '../mainscreen/main_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -49,7 +54,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         elevation: 0.5,
         actions: [
-          Icon(Icons.search),
+          IconButton(
+              onPressed: () => context.go('/search'), icon: Icon(Icons.search)),
           IconButton(
             icon: const Icon(Icons.grid_view_rounded), // Change the icon here
             onPressed: () {

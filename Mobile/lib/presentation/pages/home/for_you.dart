@@ -1,3 +1,4 @@
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,8 +90,16 @@ class ForYou extends StatelessWidget {
                   "retry",
                 )),
           );
-        },
-      ),
+        }
+        return Center(
+          child: ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<QuestionListBloc>(context)
+                    .add(GetQuestionsEvent());
+              },
+              child: Text("Refresh")),
+        );
+      },
     );
     // return Expanded(child: QuestionW(question: question));
   }

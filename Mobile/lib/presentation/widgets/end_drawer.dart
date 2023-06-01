@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../routes/routes_dart.dart';
 
 class MyDrawer extends StatelessWidget {
   MyDrawer({
@@ -41,7 +44,7 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: fontSize),
             ),
             onTap: () {
-              // Handle end drawer item 1 tap
+              context.push(Routes.USERS);
             },
           ),
           ListTile(
@@ -51,17 +54,17 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: fontSize),
             ),
             onTap: () {
-              // Handle end drawer item 2 tap
+              context.push(Routes.ADMINS);
             },
           ),
           ListTile(
             leading: Icon(Icons.hourglass_bottom),
             title: Text(
-              'Pending questions',
+              'Pending Questions',
               style: TextStyle(fontSize: fontSize),
             ),
             onTap: () {
-              // Handle end drawer item 2 tap
+              context.push(Routes.PENDINGQUESTIONS);
             },
           ),
         ],

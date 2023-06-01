@@ -1,3 +1,6 @@
+import 'package:askanything/domain/question/question.dart';
+import 'package:askanything/domain/question/question_failure.dart';
+import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
 import 'package:bloc/bloc.dart';
@@ -9,95 +12,90 @@ import 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final IUserRepository _userRepository;
+  final IQuestionRepository _questionRepository;
 
-  UserBloc(this._userRepository) : super(const UserState.initial()) {
+  UserBloc(this._userRepository, this._questionRepository) : super(Initial()) {
     on<GetUserById>((event, emit) async {
-      emit(const UserState.loading());
+      emit(Loading());
       Either<UserFailure, User> failureOrUser =
           await _userRepository.getUserById(event.id);
-      failureOrUser.fold(
-        (failure) => emit(UserState.error(failure)),
-        (user) => emit(UserState.loaded(user)),
-      );
-    });
 
-    on<CreateUser>((event, emit) async {
-      emit(const UserState.loading());
-      Either<UserFailure, User> failureOrUser =
-          await _userRepository.createUser(event.userForm);
-      failureOrUser.fold(
-        (failure) => emit(UserState.error(failure)),
-        (user) => emit(UserState.loaded(user)),
-      );
-    });
+      Either<QuestionFailure, Question> failureOrQuestion =
+          await _questionRepository.getQuestionById(event.id);
 
-    on<UpdateUser>((event, emit) async {
-      emit(const UserState.loading());
-      Either<UserFailure, User> failureOrUser =
-          await _userRepository.updateUser(event.userForm, event.userId);
       failureOrUser.fold(
-        (failure) => emit(UserState.error(failure)),
-        (user) => emit(UserState.loaded(user)),
+        (failure) => emit(UserError(failure)),
+        (user) => emit(LoadedUser(user)),
       );
     });
 
     on<DeleteUser>((event, emit) async {
-      emit(const UserState.loading());
+      emit(Loading());
       Either<UserFailure, void> failureOrVoid =
           await _userRepository.deleteUser(event.id);
       failureOrVoid.fold(
-        (failure) => emit(UserState.error(failure)),
-        (_) => emit(UserState.deleted()),
+        (failure) => emit(UserError(failure)),
+        (_) => emit(Deleted()),
       );
     });
 
     on<GetAllUsers>((event, emit) async {
-      emit(const UserState.loading());
+      emit(Loading());
       Either<UserFailure, List<User>> failureOrUsers =
           await _userRepository.getAllUsers();
       failureOrUsers.fold(
-        (failure) => emit(UserState.error(failure)),
-        (users) => emit(UserState.loadedAll(users)),
+        (failure) => emit(UserError(failure)),
+        (users) => emit(LoadedAllUsers(users)),
+      );
+    });
+
+    on<GetAdminUsers>((event, emit) async {
+      emit(Loading());
+      Either<UserFailure, List<User>> failureOrUsers =
+          await _userRepository.getAdminUsers();
+      failureOrUsers.fold(
+        (failure) => emit(UserError(failure)),
+        (users) => emit(LoadedAdminUsers(users)),
       );
     });
 
     on<FollowUser>((event, emit) async {
-      emit(const UserState.loading());
-      Either<UserFailure, void> failureOrVoid =
+      emit(Loading());
+      Either<UserFailure, User> failureOrUser =
           await _userRepository.followUser(event.followerId, event.followingId);
-      failureOrVoid.fold(
-        (failure) => emit(UserState.error(failure)),
-        (_) => emit(UserState.followed()),
+      failureOrUser.fold(
+        (failure) => emit(UserError(failure)),
+        (user) => emit(Followed(user)),
       );
     });
 
     on<UnfollowUser>((event, emit) async {
-      emit(const UserState.loading());
-      Either<UserFailure, void> failureOrVoid = await _userRepository
+      emit(Loading());
+      Either<UserFailure, User> failureOrUser = await _userRepository
           .unfollowUser(event.followerId, event.followingId);
-      failureOrVoid.fold(
-        (failure) => emit(UserState.error(failure)),
-        (_) => emit(UserState.unfollowed()),
+      failureOrUser.fold(
+        (failure) => emit(UserError(failure)),
+        (user) => emit(Unfollowed(user)),
       );
     });
 
     on<GetFollowers>((event, emit) async {
-      emit(const UserState.loading());
+      emit(Loading());
       Either<UserFailure, List<User>> failureOrFollowers =
           await _userRepository.getFollowers(event.userId);
       failureOrFollowers.fold(
-        (failure) => emit(UserState.error(failure)),
-        (followers) => emit(UserState.loadedFollowers(followers)),
+        (failure) => emit(UserError(failure)),
+        (followers) => emit(LoadedFollowers(followers)),
       );
     });
 
     on<GetFollowings>((event, emit) async {
-      emit(const UserState.loading());
+      emit(Loading());
       Either<UserFailure, List<User>> failureOrFollowings =
           await _userRepository.getFollowings(event.userId);
       failureOrFollowings.fold(
-        (failure) => emit(UserState.error(failure)),
-        (followings) => emit(UserState.loadedFollowings(followings)),
+        (failure) => emit(UserError(failure)),
+        (followings) => emit(LoadedFollowings(followings)),
       );
     });
   }

@@ -3,6 +3,7 @@ import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_form_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
+import 'package:askanything/infrastructure/question/question_dto.dart';
 
 class UserApi {
   CustomHttpClient _customHttpClient;
@@ -20,9 +21,16 @@ class UserApi {
 
   Future<UserDTO> getUserById(String id) async {
     var response = await _customHttpClient.get("users/$id");
-
     if (response.statusCode == 200) {
-      return UserDTO.fromJson(jsonDecode(response.body));
+      var user = jsonDecode(response.body)['data']['user'];
+      // var questions = (user['questions'] as List<dynamic>)
+      //     .map((question) => QuestionDto.fromJson(question))
+      //     .toList();
+      print("before updating");
+      // user['questions'] = questions;
+      print('after updating');
+      // print(user['questions'][0]['answers']);
+      return UserDTO.fromJson(user);
     } else {
       throw Exception("Failed to load user");
     }
@@ -60,20 +68,30 @@ class UserApi {
     }
   }
 
-  Future<void> followUser(String followerId, String followingId) async {
-    var response = await _customHttpClient.post("users/$followerId/follow",
-        body: json.encode({"followingId": followingId}));
-
-    if (response.statusCode != 200) {
+  Future<UserDTO> followUser(String followerId, String followingId) async {
+    var response = await _customHttpClient.post("users/$followingId/follow",
+        body: json.encode({"followerId": followerId}));
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('unfollow');
+      return UserDTO.fromJson(user);
+    } else {
+      print('follow error');
       throw Exception("Failed to follow user");
     }
   }
 
-  Future<void> unfollowUser(String followerId, String followingId) async {
-    var response = await _customHttpClient.post("users/$followerId/unfollow",
-        body: json.encode({"followingId": followingId}));
-
-    if (response.statusCode != 200) {
+  Future<UserDTO> unfollowUser(String followerId, String followingId) async {
+    var response = await _customHttpClient.post("users/$followingId/unfollow",
+        body: json.encode({"followerId": followerId}));
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('unfollow');
+      return UserDTO.fromJson(user);
+    } else {
+      print('unfollow error');
       throw Exception("Failed to unfollow user");
     }
   }
@@ -103,4 +121,49 @@ class UserApi {
       throw Exception("Failed to load followings");
     }
   }
+
+  Future<List<UserDTO>> getAdminUsers() async {
+    var response = await _customHttpClient.get("users/admin");
+
+    if (response.statusCode == 200) {
+      List<dynamic> usersJson = jsonDecode(response.body);
+      return usersJson.map((user) => UserDTO.fromJson(user)).toList();
+    } else {
+      throw Exception("Failed to load users");
+    }
+  }
+}
+
+void printUserJson(Map<String, dynamic> json) {
+  String id = json['_id'];
+  String name = json['name'];
+  String email = json['email'];
+  String password = json['password'];
+  String profilePic = json['profilePic'] ?? '';
+  List<String> questionIds = List<String>.from(json['questions']);
+  List<String> answerIds = List<String>.from(json['answers']);
+  int reputation = json['reputation'];
+  int likes = json['likes'];
+  int dislikes = json['dislikes'];
+  Map<String, dynamic> bookmarks = Map<String, dynamic>.from(json['bookmarks']);
+  List<String> followers = List<String>.from(json['followers']);
+  List<String> followings = List<String>.from(json['following']);
+  DateTime createdAt = DateTime.parse(json['createdAt']);
+  DateTime updatedAt = DateTime.parse(json['updatedAt']);
+
+  print('id: $id');
+  print('name: $name');
+  print('email: $email');
+  print('password: $password');
+  print('profilePic: $profilePic');
+  print('questionIds: $questionIds');
+  print('answerIds: $answerIds');
+  print('reputation: $reputation');
+  print('likes: $likes');
+  print('dislikes: $dislikes');
+  print('bookmarks: $bookmarks');
+  print('followers: $followers');
+  print('followings: $followings');
+  print('createdAt: $createdAt');
+  print('updatedAt: $updatedAt');
 }

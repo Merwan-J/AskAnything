@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:askanything/presentation/routes/routes_dart.dart';
 import 'package:flutter/material.dart';
 
 import 'package:askanything/domain/answer/answer.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 class AnswerW extends StatelessWidget {
@@ -16,7 +18,9 @@ class AnswerW extends StatelessWidget {
   Widget build(BuildContext context) {
     final nolikes = answer.likes.length - answer.dislikes.length;
     return GestureDetector(
-      onTap: () {}, //TODO: Go to question page
+      onTap: () {
+        context.push(Routes.QUESTIONSDETAIL);
+      }, //TODO: Go to question page
       onDoubleTap: () {}, // TODO:Like
       onLongPress: () {}, //TODO: maybe bookmark
       child: Stack(
@@ -47,7 +51,7 @@ class AnswerW extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              answer.author,
+                              answer.author.name,
                               style: Theme.of(context).textTheme.labelLarge,
                             ),
                             SizedBox(
