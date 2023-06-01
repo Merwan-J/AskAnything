@@ -54,7 +54,7 @@ class QuestionPending extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  question.author,
+                                  question.author.name,
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 SizedBox(

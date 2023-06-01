@@ -1,29 +1,85 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
+import 'package:askanything/domain/question/question.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 
-part 'question_dto.freezed.dart';
-part 'question_dto.g.dart';
+class QuestionDto {
+  final String id;
+  final String title;
+  final String description;
+  final AuthorDto author;
+  final bool anonymous;
+  final List<String> answers;
+  final String topic;
+  final List<String> likes;
+  final List<String> dislikes;
+  final String? image;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-@freezed
-class QuestionDto with _$QuestionDto {
-  const factory QuestionDto({
-    required String id,
-    required String title,
-    required String description,
-    //TODO: Replace string with User model class
-    required String author,
-    required bool anonymous,
-    // TODO: Replace string with Answer model class
-    required List<dynamic> answers,
-    required String topic,
-    required List<dynamic> likes,
-    required List<dynamic> dislikes,
-    String? image,
-    // TODO: Convert to DateTime
-    required DateTime createdAt,
-    required DateTime updatedAt,
-  }) = _QuestionDto;
+  QuestionDto({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.author,
+    required this.anonymous,
+    required this.answers,
+    required this.topic,
+    required this.likes,
+    required this.dislikes,
+    this.image,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-  factory QuestionDto.fromJson(Map<String, dynamic> json) =>
-      _$QuestionDtoFromJson(json);
+  factory QuestionDto.fromJson(Map<String, dynamic> json) {
+    return QuestionDto(
+      id: json['_id'] as String,
+      title: json['title'] as String,
+      description: json['description'] as String,
+      author: AuthorDto.fromJson(json['author']),
+      anonymous: json['anonymous'] as bool,
+      answers:
+          (json['answers'] as List<dynamic>).map((e) => e as String).toList(),
+      topic: json['topic'] as String,
+      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
+      dislikes:
+          (json['dislikes'] as List<dynamic>).map((e) => e as String).toList(),
+      image: json['image'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'author': author,
+      'anonymous': anonymous,
+      'answers': answers,
+      'topic': topic,
+      'likes': likes,
+      'dislikes': dislikes,
+      'image': image,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  Question toQuestion() {
+    return Question(
+      id: id,
+      title: title,
+      description: description,
+      author: author,
+      anonymous: anonymous,
+      answers: answers,
+      topic: topic,
+      likes: likes,
+      dislikes: dislikes,
+      image: image,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+    );
+  }
 }
