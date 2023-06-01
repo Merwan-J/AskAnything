@@ -10,12 +10,15 @@ const Questions = require('./../models/questionsModel');
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
   console.log('get all questions');
 
-  const questions = await Questions.find().populate({
-    path: 'author',
-    model: 'User',
-  });
+  //get questions sorted by date
+
+  const questions = await Questions.find()
+    .sort({ createdAt: -1 })
+    .populate({
+      path: 'author',
+      model: 'User',
+    });
   console.log(questions.length);
-  //populate author
 
   res.status(200).json({
     status: 'success',
@@ -84,4 +87,53 @@ exports.deleteQuestionById = catchAsyncError(async (req, res) => {
     return new AppError('question not found', 404);
   }
   res.status(200).json({ status: 'success', data: null });
+});
+
+//Upvote a question
+exports.upvoteQuestion = catchAsyncError(async (req, res, next) => {
+  const questionId = req.params.id;
+  const userId = req.body.userId;
+  const question = await Questions.findById(questionId);
+  if (!question) {
+    return next(new AppError('question not found', 404));
+  }
+  //remove userId from dislikes and add to likes
+  question.dislikes.pull(userId);
+  question.likes.pull(userId);
+  question.likes.push(userId);
+  await question.save();
+  const newQuestion = await Questions.findById(questionId).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      question: newQuestion,
+    },
+  });
+});
+
+exports.downvoteQuestion = catchAsyncError(async (req, res, next) => {
+  const questionId = req.params.id;
+  const userId = req.body.userId;
+  const question = await Questions.findById(questionId);
+  if (!question) {
+    return next(new AppError('question not found', 404));
+  }
+  question.likes.pull(userId);
+  question.dislikes.pull(userId);
+  question.dislikes.push(userId);
+
+  await question.save();
+  const newQuestion = await Questions.findById(questionId).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      question: newQuestion,
+    },
+  });
 });

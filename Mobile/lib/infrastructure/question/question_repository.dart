@@ -29,6 +29,7 @@ class QuestionRepository implements IQuestionRepository {
     // TODO: handle more errors
     // TODO: Make sure user is authenticated
     catch (e) {
+      print(e);
       return left(const QuestionFailure.serverError());
     }
   }
@@ -89,10 +90,14 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, Question>> dislikeQuestion(
       String questionId) async {
     try {
+      print("dislike question");
       QuestionDto questionDto =
-          await _questionProvider.upvoteQuestion(questionId);
+          await _questionProvider.downvoteQuestion(questionId);
+      print("after dislike question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
+      print(e);
+      print("never here");
       return left(QuestionFailure.serverError());
     }
   }
@@ -101,8 +106,10 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, Question>> likeQuestion(
       String questionId) async {
     try {
+      print("like question repo");
       QuestionDto questionDto =
           await _questionProvider.upvoteQuestion(questionId);
+      print("after like question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
       return left(QuestionFailure.serverError());

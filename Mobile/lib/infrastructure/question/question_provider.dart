@@ -24,7 +24,7 @@ class QuestionProvider {
   // TODO: handle image uploads/ multipart form data
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    final author = "6448f5ead561de32dc337d5b";
+    final author = "644a59d906e58c639150523c";
     print("author: $author");
     var response = await _httpClient.post('questions',
         body: json.encode(questionFormDto.toJson()..['author'] = author));
@@ -48,7 +48,7 @@ class QuestionProvider {
     print("questionId: $questionId");
     print("questionFormDto: ${questionFormDto.toJson()}");
     print("another");
-    var response = await _httpClient.patch('questions/64768b7ffea9d03bb6389cb9',
+    var response = await _httpClient.patch('questions/6448f615d561de32dc337d5e',
         body: json.encode(questionFormDto.toJson()));
     print("response: ${response.body}");
 
@@ -75,7 +75,8 @@ class QuestionProvider {
 
   Future<List<QuestionDto>> getQuestions() async {
     print("fetching questions");
-    var response = await _httpClient.get('questions');
+    var response =
+        await _httpClient.get('questions?userId=6448f615d561de32dc337d5e');
     //print print
     print("res");
     var decoded = await jsonDecode(response.body);
@@ -129,20 +130,38 @@ class QuestionProvider {
   }
 
   Future<QuestionDto> upvoteQuestion(String id) async {
-    var response = await _httpClient.post('questions/$id/upvote');
+    var userId = '6448f5ead561de32dc337d5b';
+    var body = json.encode({"userId": userId});
+    print("about like");
+    var response = await _httpClient.post('questions/upvote/$id', body: body);
+    var decoded = await jsonDecode(response.body)["data"]["question"];
+    print("decoded: $decoded");
+    print("like sucess");
 
-    if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    if (response.statusCode.toString() == 200.toString()) {
+      print("in here status");
+      try {
+        return QuestionDto.fromJson(decoded);
+      } catch (e) {
+        print("error: $e");
+        throw Exception('Failed to upvote question');
+      }
     } else {
       throw Exception('Failed to upvote question');
     }
   }
 
   Future<QuestionDto> downvoteQuestion(String id) async {
-    var response = await _httpClient.post('questions/$id/downvote');
+    var user = '6448f5ead561de32dc337d5b';
+    var body = json.encode({"userId": user});
+    print(body);
+    var response = await _httpClient.post('questions/downvote/$id', body: body);
+    var decoded = await jsonDecode(response.body)["data"]["question"];
+    print("decoded: $decoded");
 
-    if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    if (response.statusCode.toString() == 200.toString()) {
+      print("in status");
+      return QuestionDto.fromJson(decoded);
     } else {
       throw Exception('Failed to downvote question');
     }

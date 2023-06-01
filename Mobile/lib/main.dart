@@ -1,6 +1,7 @@
 import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_state.dart';
+import 'package:askanything/application/question/question_like/question_like_bloc.dart';
 import 'package:askanything/infrastructure/answer/answer_api.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
 import 'package:askanything/infrastructure/auth/auth_api.dart';
@@ -70,6 +71,13 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
+                    create: (context) => AuthBloc(
+                        authRepository:
+                            RepositoryProvider.of<AuthRepository>(context),
+                        sharedPrefsService:
+                            RepositoryProvider.of<SharedPreferenceService>(
+                                context))),
+                BlocProvider(
                     create: (context) => QuestionEditBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
@@ -78,13 +86,6 @@ void main() {
                 BlocProvider(
                     create: (context) => QuestionListBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
-                BlocProvider(
-                    create: (context) => AuthBloc(
-                        authRepository:
-                            RepositoryProvider.of<AuthRepository>(context),
-                        sharedPrefsService:
-                            RepositoryProvider.of<SharedPreferenceService>(
-                                context)))
               ],
               child: BlocListener<AuthBloc, AuthState>(listener:
                   (context, state) {
