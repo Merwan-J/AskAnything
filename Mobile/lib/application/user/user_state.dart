@@ -37,22 +37,6 @@ class LoadedAdminUsers extends UserState {
   List<Object> get props => [users];
 }
 
-class LoadedFollowers extends UserState {
-  final List<User> followers;
-  const LoadedFollowers(this.followers);
-
-  @override
-  List<Object> get props => [followers];
-}
-
-class LoadedFollowings extends UserState {
-  final List<User> followings;
-  const LoadedFollowings(this.followings);
-
-  @override
-  List<Object> get props => [followings];
-}
-
 class UserError extends UserState {
   final UserFailure failure;
   const UserError(this.failure);

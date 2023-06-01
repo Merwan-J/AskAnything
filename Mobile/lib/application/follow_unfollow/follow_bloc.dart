@@ -31,5 +31,25 @@ class FollowBloc extends Bloc<FollowEvent, FollowState> {
         (user) => emit(UnFollowSuccess(user)),
       );
     });
+
+    on<GetFollowers>((event, emit) async {
+      emit(FollowLoading());
+      Either<UserFailure, List<User>> failureOrFollowers =
+          await _userRepository.getFollowers(event.userId);
+      failureOrFollowers.fold(
+        (failure) => emit(FollowError('cant load followers')),
+        (followers) => emit(LoadedFollowers(followers)),
+      );
+    });
+
+    on<GetFollowings>((event, emit) async {
+      emit(FollowLoading());
+      Either<UserFailure, List<User>> failureOrFollowings =
+          await _userRepository.getFollowings(event.userId);
+      failureOrFollowings.fold(
+        (failure) => emit(FollowError("cant load followings")),
+        (followings) => emit(LoadedFollowings(followings)),
+      );
+    });
   }
 }

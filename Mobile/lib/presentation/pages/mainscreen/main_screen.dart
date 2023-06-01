@@ -103,15 +103,10 @@ class _MainScreenState extends State<MainScreen> {
                 child: const Icon(Icons.add),
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            body: IndexedStack(
-              // IndexedStack is used to keep the state of the pages
-              index: _selectedIndex,
-              children: screens,
-            ),
-            bottomNavigationBar: CustomBottomNavigation()),
-      ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          body: screens[_selectedIndex],
+          bottomNavigationBar: CustomBottomNavigation()),
     );
   }
 

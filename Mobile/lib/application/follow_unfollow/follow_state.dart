@@ -10,6 +10,8 @@ abstract class FollowState extends Equatable {
 
 class InitialFollowState extends FollowState {}
 
+class FollowLoading extends FollowState {}
+
 class FollowSuccess extends FollowState {
   final User user;
 
@@ -44,4 +46,20 @@ class UnFollowError extends FollowState {
 
   @override
   List<Object> get props => [message];
+}
+
+class LoadedFollowers extends FollowState {
+  final List<User> followers;
+  const LoadedFollowers(this.followers);
+
+  @override
+  List<Object> get props => [followers];
+}
+
+class LoadedFollowings extends FollowState {
+  final List<User> followings;
+  const LoadedFollowings(this.followings);
+
+  @override
+  List<Object> get props => [followings];
 }
