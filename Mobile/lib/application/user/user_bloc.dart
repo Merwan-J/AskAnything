@@ -78,5 +78,25 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         (user) => emit(Unfollowed(user)),
       );
     });
+
+    on<GetFollowers>((event, emit) async {
+      emit(Loading());
+      Either<UserFailure, List<User>> failureOrFollowers =
+          await _userRepository.getFollowers(event.userId);
+      failureOrFollowers.fold(
+        (failure) => emit(UserError(failure)),
+        (followers) => emit(LoadedFollowers(followers)),
+      );
+    });
+
+    on<GetFollowings>((event, emit) async {
+      emit(Loading());
+      Either<UserFailure, List<User>> failureOrFollowings =
+          await _userRepository.getFollowings(event.userId);
+      failureOrFollowings.fold(
+        (failure) => emit(UserError(failure)),
+        (followings) => emit(LoadedFollowings(followings)),
+      );
+    });
   }
 }

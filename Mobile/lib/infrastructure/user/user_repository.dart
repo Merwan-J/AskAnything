@@ -18,6 +18,7 @@ class UserRepository implements IUserRepository {
       print(userDto.questionIds);
       final user = userDto.toModel();
       print(user.questionIds);
+      print(userDto.answerIds[0].text);
       return Right(user);
     } catch (e) {
       print("hey");

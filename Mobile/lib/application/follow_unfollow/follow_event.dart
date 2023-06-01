@@ -24,19 +24,3 @@ class UnfollowUserEvent extends FollowEvent {
   @override
   List<Object> get props => [followerId, followingId];
 }
-
-class GetFollowers extends FollowEvent {
-  final String userId;
-  const GetFollowers(this.userId);
-
-  @override
-  List<Object> get props => [userId];
-}
-
-class GetFollowings extends FollowEvent {
-  final String userId;
-  const GetFollowings(this.userId);
-
-  @override
-  List<Object> get props => [userId];
-}
