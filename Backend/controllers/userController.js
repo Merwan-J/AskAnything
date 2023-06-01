@@ -90,7 +90,8 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
   // }
 
   const user = await User.findByIdAndDelete(req.params.id);
-  const answers = await Answer.deleteMany({ user: req.params.id });
+  const answers = await Answer.deleteMany({ author: req.params.id });
+  const questions = await Question.deleteMany({ author: req.params.id });
   res.status(200).json({
     staus: 'success',
     data: { user },

@@ -4,7 +4,10 @@ part of 'question_list_bloc.dart';
 abstract class QuestionListEvent {}
 
 //get questions event
-class GetQuestionsEvent extends QuestionListEvent {}
+class GetQuestionsEvent extends QuestionListEvent {
+  final bool isRefresh;
+  GetQuestionsEvent({this.isRefresh = false});
+}
 
 //get questions by topic event
 class GetQuestionsByTopicEvent extends QuestionListEvent {

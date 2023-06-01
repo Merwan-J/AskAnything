@@ -1,6 +1,10 @@
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/question/question_edit/question_edit_bloc.dart';
+import '../../../application/question/question_edit/question_edit_state.dart';
 import '../../widgets/ask_question_form.dart';
 import '../bookmark_page/book_mark.dart';
 import '../home/home_temp.dart';
@@ -58,22 +62,47 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     return SafeArea(
-      child: Scaffold(
-          floatingActionButton: Visibility(
-            visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-            child: FloatingActionButton(
-              onPressed: () {
-                buildBottomSheet(context);
-              },
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              elevation: 4.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+      child: BlocListener<QuestionEditBloc, QuestionEditState>(
+        listener: (context, state) {
+          if (state is QuestionEditSuccessState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Question updated successfully"),
               ),
-              child: const Icon(Icons.add),
+            );
+            BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+          }
+          if (state is QuestionEditFailureState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Question update failed"),
+              ),
+            );
+          }
+          if (state is QuestionEditLoadingState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Updating Question"),
+              ),
+            );
+          }
+        },
+        child: Scaffold(
+            floatingActionButton: Visibility(
+              visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+              child: FloatingActionButton(
+                onPressed: () {
+                  buildBottomSheet(context);
+                },
+                backgroundColor: Theme.of(context).primaryColor,
+                foregroundColor: Colors.white,
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                child: const Icon(Icons.add),
+              ),
             ),
-          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           body: screens[_selectedIndex],

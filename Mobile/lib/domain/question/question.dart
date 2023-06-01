@@ -35,7 +35,7 @@ class Question {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      author: AuthorDto.fromJson(json['author']),
+      author: json['author'],
       anonymous: json['anonymous'],
       answers: json['answers'],
       topic: json['topic'],

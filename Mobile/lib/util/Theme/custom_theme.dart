@@ -34,6 +34,11 @@ class CustomTheme {
       tabBarTheme: CustomLightTabBar.lightTabar,
       textTheme: CustomLightText.lightText,
       buttonTheme: CustomLightButton.lightButton,
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        contentTextStyle: CustomLightText.lightText.bodySmall,
+        backgroundColor: CustomColor.secondaryColor,
+      ),
     );
   }
 
@@ -48,6 +53,11 @@ class CustomTheme {
         appBarTheme: CustomDarkAppBar.darkAppBar,
         chipTheme: CustomDarkChipTheme.darkChipTheme,
         tabBarTheme: CustomDarkTabBar.darkTabarTheme,
+        snackBarTheme: SnackBarThemeData(
+          behavior: SnackBarBehavior.floating,
+          contentTextStyle: CustomDarkTextTheme.darkTextTheme.bodySmall,
+          backgroundColor: CustomColor.secondaryColor,
+        ),
         bottomNavigationBarTheme:
             CustomDarkBottomNavigation.darkBottomNavigationTheme,
         inputDecorationTheme: CustomDarkInput.darkInputTheme,

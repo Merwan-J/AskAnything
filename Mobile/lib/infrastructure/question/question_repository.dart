@@ -29,6 +29,7 @@ class QuestionRepository implements IQuestionRepository {
     // TODO: handle more errors
     // TODO: Make sure user is authenticated
     catch (e) {
+      print(e);
       return left(const QuestionFailure.serverError());
     }
   }
@@ -48,12 +49,9 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, Question>> askQuestion(
       QuestionForm questionForm) async {
     try {
-      print("yess");
       var questionDto =
           await _questionProvider.createQuestion(questionForm.toDto());
-      print("again yess");
       var question = Question.fromJson(questionDto.toJson());
-      print("!21question: $question");
 
       return Right(question);
     } catch (e) {
@@ -65,11 +63,14 @@ class QuestionRepository implements IQuestionRepository {
   @override
   Future<Either<QuestionFailure, Question>> updateQuestion(
       QuestionForm question, String questionId) async {
+    print(question);
     try {
       var questionDto =
           await _questionProvider.updateQuestion(question.toDto(), questionId);
+      print("after update repo");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
+      print("line 75${e}.");
       return left(const QuestionFailure.serverError());
     }
   }
@@ -89,10 +90,14 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, Question>> dislikeQuestion(
       String questionId) async {
     try {
+      print("dislike question");
       QuestionDto questionDto =
-          await _questionProvider.upvoteQuestion(questionId);
+          await _questionProvider.downvoteQuestion(questionId);
+      print("after dislike question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
+      print(e);
+      print("never here");
       return left(QuestionFailure.serverError());
     }
   }
@@ -101,8 +106,10 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, Question>> likeQuestion(
       String questionId) async {
     try {
+      print("like question repo");
       QuestionDto questionDto =
           await _questionProvider.upvoteQuestion(questionId);
+      print("after like question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
       return left(QuestionFailure.serverError());

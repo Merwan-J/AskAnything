@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../application/question/question_list/bloc/question_list_bloc.dart';
 import '../../../domain/question/question.dart';
+import '../../../infrastructure/user/author_dto.dart';
 import '../../routes/routes_dart.dart';
 import '../../widgets/end_drawer.dart';
 import '../mainscreen/main_screen.dart';
@@ -33,17 +34,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];
     TabController _tabController = TabController(length: 2, vsync: this);
-    Question question = Question(
+    Question(
         id: "1",
         title:
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",

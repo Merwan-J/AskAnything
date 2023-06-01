@@ -1,6 +1,7 @@
 import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_state.dart';
+import 'package:askanything/application/question/question_like/question_like_bloc.dart';
 import 'package:askanything/infrastructure/answer/answer_api.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
 import 'package:askanything/infrastructure/auth/auth_api.dart';
@@ -18,6 +19,7 @@ import 'package:askanything/util/custom_http_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'application/question/question_edit/question_edit_bloc.dart';
 import 'application/question/question_list/bloc/question_list_bloc.dart';
 import 'application/question/question_post/bloc/question_post_bloc.dart';
 import 'infrastructure/user/user_repository.dart';
@@ -69,18 +71,21 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
-                    create: (context) => QuestionPostBloc(
-                        RepositoryProvider.of<QuestionRepository>(context))),
-                BlocProvider(
-                    create: (context) => QuestionListBloc(
-                        RepositoryProvider.of<QuestionRepository>(context))),
-                BlocProvider(
                     create: (context) => AuthBloc(
                         authRepository:
                             RepositoryProvider.of<AuthRepository>(context),
                         sharedPrefsService:
                             RepositoryProvider.of<SharedPreferenceService>(
-                                context)))
+                                context))),
+                BlocProvider(
+                    create: (context) => QuestionEditBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
+                BlocProvider(
+                    create: (context) => QuestionPostBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
+                BlocProvider(
+                    create: (context) => QuestionListBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
               ],
               child: BlocListener<AuthBloc, AuthState>(listener:
                   (context, state) {

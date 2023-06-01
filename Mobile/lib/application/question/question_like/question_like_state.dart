@@ -10,6 +10,8 @@ class QuestionLikeState with _$QuestionLikeState {
   const factory QuestionLikeState.error(QuestionFailure questionFailure) =
       QuestionLikeStateError;
   const factory QuestionLikeState.loading() = QuestionLikeStateLoading;
-  const factory QuestionLikeState.success(Question question) =
+  const factory QuestionLikeState.likesuccess(Question question) =
       QuestionLikeStateSuccess;
+  const factory QuestionLikeState.dislikesuccess(Question question) =
+      QuestionDisLikeStateSuccess;
 }
