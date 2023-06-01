@@ -19,6 +19,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
     required TResult Function() loading,
     required TResult Function(Question question) success,
     required TResult Function(QuestionFailure questionFailure) failure,
@@ -27,6 +28,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
     TResult? Function()? loading,
     TResult? Function(Question question)? success,
     TResult? Function(QuestionFailure questionFailure)? failure,
@@ -35,6 +37,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
     TResult Function()? loading,
     TResult Function(Question question)? success,
     TResult Function(QuestionFailure questionFailure)? failure,
@@ -44,6 +47,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
     required TResult Function(QuestionEditLoadingState value) loading,
     required TResult Function(QuestionEditSuccessState value) success,
     required TResult Function(QuestionEditFailureState value) failure,
@@ -52,6 +56,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
     TResult? Function(QuestionEditLoadingState value)? loading,
     TResult? Function(QuestionEditSuccessState value)? success,
     TResult? Function(QuestionEditFailureState value)? failure,
@@ -60,6 +65,7 @@ mixin _$QuestionEditState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
     TResult Function(QuestionEditLoadingState value)? loading,
     TResult Function(QuestionEditSuccessState value)? success,
     TResult Function(QuestionEditFailureState value)? failure,
@@ -126,6 +132,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
     required TResult Function() loading,
     required TResult Function(Question question) success,
     required TResult Function(QuestionFailure questionFailure) failure,
@@ -137,6 +144,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
     TResult? Function()? loading,
     TResult? Function(Question question)? success,
     TResult? Function(QuestionFailure questionFailure)? failure,
@@ -148,6 +156,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
     TResult Function()? loading,
     TResult Function(Question question)? success,
     TResult Function(QuestionFailure questionFailure)? failure,
@@ -163,6 +172,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
     required TResult Function(QuestionEditLoadingState value) loading,
     required TResult Function(QuestionEditSuccessState value) success,
     required TResult Function(QuestionEditFailureState value) failure,
@@ -174,6 +184,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
     TResult? Function(QuestionEditLoadingState value)? loading,
     TResult? Function(QuestionEditSuccessState value)? success,
     TResult? Function(QuestionEditFailureState value)? failure,
@@ -185,6 +196,7 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
     TResult Function(QuestionEditLoadingState value)? loading,
     TResult Function(QuestionEditSuccessState value)? success,
     TResult Function(QuestionEditFailureState value)? failure,
@@ -199,6 +211,182 @@ class _$QuestionEditInitialState implements QuestionEditInitialState {
 
 abstract class QuestionEditInitialState implements QuestionEditState {
   const factory QuestionEditInitialState() = _$QuestionEditInitialState;
+}
+
+/// @nodoc
+abstract class _$$QuestionEditEditingStateCopyWith<$Res> {
+  factory _$$QuestionEditEditingStateCopyWith(_$QuestionEditEditingState value,
+          $Res Function(_$QuestionEditEditingState) then) =
+      __$$QuestionEditEditingStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({QuestionForm questionForm, String id});
+
+  $QuestionFormCopyWith<$Res> get questionForm;
+}
+
+/// @nodoc
+class __$$QuestionEditEditingStateCopyWithImpl<$Res>
+    extends _$QuestionEditStateCopyWithImpl<$Res, _$QuestionEditEditingState>
+    implements _$$QuestionEditEditingStateCopyWith<$Res> {
+  __$$QuestionEditEditingStateCopyWithImpl(_$QuestionEditEditingState _value,
+      $Res Function(_$QuestionEditEditingState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? questionForm = null,
+    Object? id = null,
+  }) {
+    return _then(_$QuestionEditEditingState(
+      questionForm: null == questionForm
+          ? _value.questionForm
+          : questionForm // ignore: cast_nullable_to_non_nullable
+              as QuestionForm,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $QuestionFormCopyWith<$Res> get questionForm {
+    return $QuestionFormCopyWith<$Res>(_value.questionForm, (value) {
+      return _then(_value.copyWith(questionForm: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$QuestionEditEditingState implements QuestionEditEditingState {
+  const _$QuestionEditEditingState(
+      {required this.questionForm, required this.id});
+
+  @override
+  final QuestionForm questionForm;
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'QuestionEditState.editStart(questionForm: $questionForm, id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionEditEditingState &&
+            (identical(other.questionForm, questionForm) ||
+                other.questionForm == questionForm) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, questionForm, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QuestionEditEditingStateCopyWith<_$QuestionEditEditingState>
+      get copyWith =>
+          __$$QuestionEditEditingStateCopyWithImpl<_$QuestionEditEditingState>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
+    required TResult Function() loading,
+    required TResult Function(Question question) success,
+    required TResult Function(QuestionFailure questionFailure) failure,
+  }) {
+    return editStart(questionForm, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
+    TResult? Function()? loading,
+    TResult? Function(Question question)? success,
+    TResult? Function(QuestionFailure questionFailure)? failure,
+  }) {
+    return editStart?.call(questionForm, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
+    TResult Function()? loading,
+    TResult Function(Question question)? success,
+    TResult Function(QuestionFailure questionFailure)? failure,
+    required TResult orElse(),
+  }) {
+    if (editStart != null) {
+      return editStart(questionForm, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
+    required TResult Function(QuestionEditLoadingState value) loading,
+    required TResult Function(QuestionEditSuccessState value) success,
+    required TResult Function(QuestionEditFailureState value) failure,
+  }) {
+    return editStart(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
+    TResult? Function(QuestionEditLoadingState value)? loading,
+    TResult? Function(QuestionEditSuccessState value)? success,
+    TResult? Function(QuestionEditFailureState value)? failure,
+  }) {
+    return editStart?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
+    TResult Function(QuestionEditLoadingState value)? loading,
+    TResult Function(QuestionEditSuccessState value)? success,
+    TResult Function(QuestionEditFailureState value)? failure,
+    required TResult orElse(),
+  }) {
+    if (editStart != null) {
+      return editStart(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionEditEditingState implements QuestionEditState {
+  const factory QuestionEditEditingState(
+      {required final QuestionForm questionForm,
+      required final String id}) = _$QuestionEditEditingState;
+
+  QuestionForm get questionForm;
+  String get id;
+  @JsonKey(ignore: true)
+  _$$QuestionEditEditingStateCopyWith<_$QuestionEditEditingState>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -241,6 +429,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
     required TResult Function() loading,
     required TResult Function(Question question) success,
     required TResult Function(QuestionFailure questionFailure) failure,
@@ -252,6 +441,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
     TResult? Function()? loading,
     TResult? Function(Question question)? success,
     TResult? Function(QuestionFailure questionFailure)? failure,
@@ -263,6 +453,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
     TResult Function()? loading,
     TResult Function(Question question)? success,
     TResult Function(QuestionFailure questionFailure)? failure,
@@ -278,6 +469,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
     required TResult Function(QuestionEditLoadingState value) loading,
     required TResult Function(QuestionEditSuccessState value) success,
     required TResult Function(QuestionEditFailureState value) failure,
@@ -289,6 +481,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
     TResult? Function(QuestionEditLoadingState value)? loading,
     TResult? Function(QuestionEditSuccessState value)? success,
     TResult? Function(QuestionEditFailureState value)? failure,
@@ -300,6 +493,7 @@ class _$QuestionEditLoadingState implements QuestionEditLoadingState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
     TResult Function(QuestionEditLoadingState value)? loading,
     TResult Function(QuestionEditSuccessState value)? success,
     TResult Function(QuestionEditFailureState value)? failure,
@@ -384,6 +578,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
     required TResult Function() loading,
     required TResult Function(Question question) success,
     required TResult Function(QuestionFailure questionFailure) failure,
@@ -395,6 +590,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
     TResult? Function()? loading,
     TResult? Function(Question question)? success,
     TResult? Function(QuestionFailure questionFailure)? failure,
@@ -406,6 +602,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
     TResult Function()? loading,
     TResult Function(Question question)? success,
     TResult Function(QuestionFailure questionFailure)? failure,
@@ -421,6 +618,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
     required TResult Function(QuestionEditLoadingState value) loading,
     required TResult Function(QuestionEditSuccessState value) success,
     required TResult Function(QuestionEditFailureState value) failure,
@@ -432,6 +630,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
     TResult? Function(QuestionEditLoadingState value)? loading,
     TResult? Function(QuestionEditSuccessState value)? success,
     TResult? Function(QuestionEditFailureState value)? failure,
@@ -443,6 +642,7 @@ class _$QuestionEditSuccessState implements QuestionEditSuccessState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
     TResult Function(QuestionEditLoadingState value)? loading,
     TResult Function(QuestionEditSuccessState value)? success,
     TResult Function(QuestionEditFailureState value)? failure,
@@ -543,6 +743,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function(QuestionForm questionForm, String id) editStart,
     required TResult Function() loading,
     required TResult Function(Question question) success,
     required TResult Function(QuestionFailure questionFailure) failure,
@@ -554,6 +755,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function(QuestionForm questionForm, String id)? editStart,
     TResult? Function()? loading,
     TResult? Function(Question question)? success,
     TResult? Function(QuestionFailure questionFailure)? failure,
@@ -565,6 +767,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function(QuestionForm questionForm, String id)? editStart,
     TResult Function()? loading,
     TResult Function(Question question)? success,
     TResult Function(QuestionFailure questionFailure)? failure,
@@ -580,6 +783,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(QuestionEditInitialState value) initial,
+    required TResult Function(QuestionEditEditingState value) editStart,
     required TResult Function(QuestionEditLoadingState value) loading,
     required TResult Function(QuestionEditSuccessState value) success,
     required TResult Function(QuestionEditFailureState value) failure,
@@ -591,6 +795,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(QuestionEditInitialState value)? initial,
+    TResult? Function(QuestionEditEditingState value)? editStart,
     TResult? Function(QuestionEditLoadingState value)? loading,
     TResult? Function(QuestionEditSuccessState value)? success,
     TResult? Function(QuestionEditFailureState value)? failure,
@@ -602,6 +807,7 @@ class _$QuestionEditFailureState implements QuestionEditFailureState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(QuestionEditInitialState value)? initial,
+    TResult Function(QuestionEditEditingState value)? editStart,
     TResult Function(QuestionEditLoadingState value)? loading,
     TResult Function(QuestionEditSuccessState value)? success,
     TResult Function(QuestionEditFailureState value)? failure,

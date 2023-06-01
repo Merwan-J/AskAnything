@@ -1,11 +1,27 @@
 import 'package:askanything/domain/question/question_form.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'question_edit_events.freezed.dart';
+class QuestionEditEvent {
+  final QuestionForm questionForm;
+  final String questionId;
 
-@freezed
-abstract class QuestionEditEvent with _$QuestionEditEvent {
-  const factory QuestionEditEvent.edit(
-      {required QuestionForm questionForm,
-      required String questionId}) = EditQuestionEvent;
+  const QuestionEditEvent.edit({
+    required this.questionForm,
+    required this.questionId,
+  });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is QuestionEditEvent &&
+          runtimeType == other.runtimeType &&
+          questionForm == other.questionForm &&
+          questionId == other.questionId;
+
+  @override
+  int get hashCode => questionForm.hashCode ^ questionId.hashCode;
+
+  @override
+  String toString() =>
+      'QuestionEditEvent.edit(questionForm: $questionForm, questionId: $questionId)';
 }

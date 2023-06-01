@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/question/question.dart';
+import '../../../infrastructure/user/author_dto.dart';
 import '../../widgets/question.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,10 +18,7 @@ class Pending_questions extends StatelessWidget {
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -35,10 +33,7 @@ class Pending_questions extends StatelessWidget {
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -53,10 +48,7 @@ class Pending_questions extends StatelessWidget {
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -71,17 +63,14 @@ class Pending_questions extends StatelessWidget {
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
         likes: ["1", "2"],
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
-        updatedAt: DateTime.now())
+        updatedAt: DateTime.now()),
   ];
 
   @override

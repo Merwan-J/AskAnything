@@ -1,3 +1,4 @@
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/util/constants.dart';
 import 'package:askanything/util/custom_color.dart';
@@ -28,6 +29,12 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+  }
 
   toggle() {
     setState(() {
@@ -239,11 +246,39 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                   child: Text("Post",
                                       style: TextStyle(color: Colors.white)),
                                 ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
+                              );                              //snackbar
+                            }
+                          },
+                          builder: (context, state) {
+                            return GestureDetector(
+                              onTap: () {
+                                final questionForm = QuestionForm(
+                                  title: titleController.text,
+                                  description: descriptionController.text,
+                                  topic: selectedTopic,
+                                  anonymous: isAnnonymous,
+                                );
+
+                                BlocProvider.of<QuestionPostBloc>(context)
+                                    .add(QuestionPostAdd(questionForm));
+                                BlocProvider.of<QuestionListBloc>(context)
+                                    .add(GetQuestionsEvent());
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                // color: Colors.blue,
+                                decoration: BoxDecoration(
+                                    color: Color.fromRGBO(255, 115, 92, 1),
+                                    borderRadius: BorderRadius.circular(10.h)),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20.h, vertical: 10.h),
+                                child: Text("Post",
+                                    style: TextStyle(color: Colors.white)),
+                              ),
+                            );
+                          },
+                        )
+                      ],
                     )
                   ],
                 ),
@@ -271,15 +306,3 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
         .toList();
   }
 }
-
-// Use this to display the sheet
-// buildBottomSheet(BuildContext context) {
-//   showModalBottomSheet(
-//       isScrollControlled: true,
-//       elevation: 10,
-//       shape: RoundedRectangleBorder(
-//           borderRadius: BorderRadius.only(
-//               topLeft: Radius.circular(30.h), topRight: Radius.circular(30.h))),
-//       context: context,
-//       builder: (context) => AskQuestionForm());
-// }

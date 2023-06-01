@@ -21,7 +21,8 @@ mixin _$QuestionLikeState {
     required TResult Function() initial,
     required TResult Function(QuestionFailure questionFailure) error,
     required TResult Function() loading,
-    required TResult Function(Question question) success,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +30,8 @@ mixin _$QuestionLikeState {
     TResult? Function()? initial,
     TResult? Function(QuestionFailure questionFailure)? error,
     TResult? Function()? loading,
-    TResult? Function(Question question)? success,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +39,8 @@ mixin _$QuestionLikeState {
     TResult Function()? initial,
     TResult Function(QuestionFailure questionFailure)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? success,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,7 +49,8 @@ mixin _$QuestionLikeState {
     required TResult Function(QuestionLikeStateInitial value) initial,
     required TResult Function(QuestionLikeStateError value) error,
     required TResult Function(QuestionLikeStateLoading value) loading,
-    required TResult Function(QuestionLikeStateSuccess value) success,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,7 +58,8 @@ mixin _$QuestionLikeState {
     TResult? Function(QuestionLikeStateInitial value)? initial,
     TResult? Function(QuestionLikeStateError value)? error,
     TResult? Function(QuestionLikeStateLoading value)? loading,
-    TResult? Function(QuestionLikeStateSuccess value)? success,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,7 +67,8 @@ mixin _$QuestionLikeState {
     TResult Function(QuestionLikeStateInitial value)? initial,
     TResult Function(QuestionLikeStateError value)? error,
     TResult Function(QuestionLikeStateLoading value)? loading,
-    TResult Function(QuestionLikeStateSuccess value)? success,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,7 +134,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     required TResult Function() initial,
     required TResult Function(QuestionFailure questionFailure) error,
     required TResult Function() loading,
-    required TResult Function(Question question) success,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
   }) {
     return initial();
   }
@@ -139,7 +146,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     TResult? Function()? initial,
     TResult? Function(QuestionFailure questionFailure)? error,
     TResult? Function()? loading,
-    TResult? Function(Question question)? success,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
   }) {
     return initial?.call();
   }
@@ -150,7 +158,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     TResult Function()? initial,
     TResult Function(QuestionFailure questionFailure)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? success,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,7 +174,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     required TResult Function(QuestionLikeStateInitial value) initial,
     required TResult Function(QuestionLikeStateError value) error,
     required TResult Function(QuestionLikeStateLoading value) loading,
-    required TResult Function(QuestionLikeStateSuccess value) success,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
   }) {
     return initial(this);
   }
@@ -176,7 +186,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     TResult? Function(QuestionLikeStateInitial value)? initial,
     TResult? Function(QuestionLikeStateError value)? error,
     TResult? Function(QuestionLikeStateLoading value)? loading,
-    TResult? Function(QuestionLikeStateSuccess value)? success,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
   }) {
     return initial?.call(this);
   }
@@ -187,7 +198,8 @@ class _$QuestionLikeStateInitial implements QuestionLikeStateInitial {
     TResult Function(QuestionLikeStateInitial value)? initial,
     TResult Function(QuestionLikeStateError value)? error,
     TResult Function(QuestionLikeStateLoading value)? loading,
-    TResult Function(QuestionLikeStateSuccess value)? success,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -280,7 +292,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     required TResult Function() initial,
     required TResult Function(QuestionFailure questionFailure) error,
     required TResult Function() loading,
-    required TResult Function(Question question) success,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
   }) {
     return error(questionFailure);
   }
@@ -291,7 +304,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     TResult? Function()? initial,
     TResult? Function(QuestionFailure questionFailure)? error,
     TResult? Function()? loading,
-    TResult? Function(Question question)? success,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
   }) {
     return error?.call(questionFailure);
   }
@@ -302,7 +316,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     TResult Function()? initial,
     TResult Function(QuestionFailure questionFailure)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? success,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -317,7 +332,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     required TResult Function(QuestionLikeStateInitial value) initial,
     required TResult Function(QuestionLikeStateError value) error,
     required TResult Function(QuestionLikeStateLoading value) loading,
-    required TResult Function(QuestionLikeStateSuccess value) success,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
   }) {
     return error(this);
   }
@@ -328,7 +344,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     TResult? Function(QuestionLikeStateInitial value)? initial,
     TResult? Function(QuestionLikeStateError value)? error,
     TResult? Function(QuestionLikeStateLoading value)? loading,
-    TResult? Function(QuestionLikeStateSuccess value)? success,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
   }) {
     return error?.call(this);
   }
@@ -339,7 +356,8 @@ class _$QuestionLikeStateError implements QuestionLikeStateError {
     TResult Function(QuestionLikeStateInitial value)? initial,
     TResult Function(QuestionLikeStateError value)? error,
     TResult Function(QuestionLikeStateLoading value)? loading,
-    TResult Function(QuestionLikeStateSuccess value)? success,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -401,7 +419,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     required TResult Function() initial,
     required TResult Function(QuestionFailure questionFailure) error,
     required TResult Function() loading,
-    required TResult Function(Question question) success,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
   }) {
     return loading();
   }
@@ -412,7 +431,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     TResult? Function()? initial,
     TResult? Function(QuestionFailure questionFailure)? error,
     TResult? Function()? loading,
-    TResult? Function(Question question)? success,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
   }) {
     return loading?.call();
   }
@@ -423,7 +443,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     TResult Function()? initial,
     TResult Function(QuestionFailure questionFailure)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? success,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -438,7 +459,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     required TResult Function(QuestionLikeStateInitial value) initial,
     required TResult Function(QuestionLikeStateError value) error,
     required TResult Function(QuestionLikeStateLoading value) loading,
-    required TResult Function(QuestionLikeStateSuccess value) success,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
   }) {
     return loading(this);
   }
@@ -449,7 +471,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     TResult? Function(QuestionLikeStateInitial value)? initial,
     TResult? Function(QuestionLikeStateError value)? error,
     TResult? Function(QuestionLikeStateLoading value)? loading,
-    TResult? Function(QuestionLikeStateSuccess value)? success,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
   }) {
     return loading?.call(this);
   }
@@ -460,7 +483,8 @@ class _$QuestionLikeStateLoading implements QuestionLikeStateLoading {
     TResult Function(QuestionLikeStateInitial value)? initial,
     TResult Function(QuestionLikeStateError value)? error,
     TResult Function(QuestionLikeStateLoading value)? loading,
-    TResult Function(QuestionLikeStateSuccess value)? success,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -515,7 +539,7 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
 
   @override
   String toString() {
-    return 'QuestionLikeState.success(question: $question)';
+    return 'QuestionLikeState.likesuccess(question: $question)';
   }
 
   @override
@@ -544,9 +568,10 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     required TResult Function() initial,
     required TResult Function(QuestionFailure questionFailure) error,
     required TResult Function() loading,
-    required TResult Function(Question question) success,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
   }) {
-    return success(question);
+    return likesuccess(question);
   }
 
   @override
@@ -555,9 +580,10 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     TResult? Function()? initial,
     TResult? Function(QuestionFailure questionFailure)? error,
     TResult? Function()? loading,
-    TResult? Function(Question question)? success,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
   }) {
-    return success?.call(question);
+    return likesuccess?.call(question);
   }
 
   @override
@@ -566,11 +592,12 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     TResult Function()? initial,
     TResult Function(QuestionFailure questionFailure)? error,
     TResult Function()? loading,
-    TResult Function(Question question)? success,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(question);
+    if (likesuccess != null) {
+      return likesuccess(question);
     }
     return orElse();
   }
@@ -581,9 +608,10 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     required TResult Function(QuestionLikeStateInitial value) initial,
     required TResult Function(QuestionLikeStateError value) error,
     required TResult Function(QuestionLikeStateLoading value) loading,
-    required TResult Function(QuestionLikeStateSuccess value) success,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
   }) {
-    return success(this);
+    return likesuccess(this);
   }
 
   @override
@@ -592,9 +620,10 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     TResult? Function(QuestionLikeStateInitial value)? initial,
     TResult? Function(QuestionLikeStateError value)? error,
     TResult? Function(QuestionLikeStateLoading value)? loading,
-    TResult? Function(QuestionLikeStateSuccess value)? success,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
   }) {
-    return success?.call(this);
+    return likesuccess?.call(this);
   }
 
   @override
@@ -603,11 +632,12 @@ class _$QuestionLikeStateSuccess implements QuestionLikeStateSuccess {
     TResult Function(QuestionLikeStateInitial value)? initial,
     TResult Function(QuestionLikeStateError value)? error,
     TResult Function(QuestionLikeStateLoading value)? loading,
-    TResult Function(QuestionLikeStateSuccess value)? success,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
     required TResult orElse(),
   }) {
-    if (success != null) {
-      return success(this);
+    if (likesuccess != null) {
+      return likesuccess(this);
     }
     return orElse();
   }
@@ -620,5 +650,161 @@ abstract class QuestionLikeStateSuccess implements QuestionLikeState {
   Question get question;
   @JsonKey(ignore: true)
   _$$QuestionLikeStateSuccessCopyWith<_$QuestionLikeStateSuccess>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$QuestionDisLikeStateSuccessCopyWith<$Res> {
+  factory _$$QuestionDisLikeStateSuccessCopyWith(
+          _$QuestionDisLikeStateSuccess value,
+          $Res Function(_$QuestionDisLikeStateSuccess) then) =
+      __$$QuestionDisLikeStateSuccessCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Question question});
+}
+
+/// @nodoc
+class __$$QuestionDisLikeStateSuccessCopyWithImpl<$Res>
+    extends _$QuestionLikeStateCopyWithImpl<$Res, _$QuestionDisLikeStateSuccess>
+    implements _$$QuestionDisLikeStateSuccessCopyWith<$Res> {
+  __$$QuestionDisLikeStateSuccessCopyWithImpl(
+      _$QuestionDisLikeStateSuccess _value,
+      $Res Function(_$QuestionDisLikeStateSuccess) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? question = null,
+  }) {
+    return _then(_$QuestionDisLikeStateSuccess(
+      null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as Question,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$QuestionDisLikeStateSuccess implements QuestionDisLikeStateSuccess {
+  const _$QuestionDisLikeStateSuccess(this.question);
+
+  @override
+  final Question question;
+
+  @override
+  String toString() {
+    return 'QuestionLikeState.dislikesuccess(question: $question)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$QuestionDisLikeStateSuccess &&
+            (identical(other.question, question) ||
+                other.question == question));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, question);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$QuestionDisLikeStateSuccessCopyWith<_$QuestionDisLikeStateSuccess>
+      get copyWith => __$$QuestionDisLikeStateSuccessCopyWithImpl<
+          _$QuestionDisLikeStateSuccess>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(QuestionFailure questionFailure) error,
+    required TResult Function() loading,
+    required TResult Function(Question question) likesuccess,
+    required TResult Function(Question question) dislikesuccess,
+  }) {
+    return dislikesuccess(question);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(QuestionFailure questionFailure)? error,
+    TResult? Function()? loading,
+    TResult? Function(Question question)? likesuccess,
+    TResult? Function(Question question)? dislikesuccess,
+  }) {
+    return dislikesuccess?.call(question);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(QuestionFailure questionFailure)? error,
+    TResult Function()? loading,
+    TResult Function(Question question)? likesuccess,
+    TResult Function(Question question)? dislikesuccess,
+    required TResult orElse(),
+  }) {
+    if (dislikesuccess != null) {
+      return dislikesuccess(question);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(QuestionLikeStateInitial value) initial,
+    required TResult Function(QuestionLikeStateError value) error,
+    required TResult Function(QuestionLikeStateLoading value) loading,
+    required TResult Function(QuestionLikeStateSuccess value) likesuccess,
+    required TResult Function(QuestionDisLikeStateSuccess value) dislikesuccess,
+  }) {
+    return dislikesuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(QuestionLikeStateInitial value)? initial,
+    TResult? Function(QuestionLikeStateError value)? error,
+    TResult? Function(QuestionLikeStateLoading value)? loading,
+    TResult? Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult? Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
+  }) {
+    return dislikesuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(QuestionLikeStateInitial value)? initial,
+    TResult Function(QuestionLikeStateError value)? error,
+    TResult Function(QuestionLikeStateLoading value)? loading,
+    TResult Function(QuestionLikeStateSuccess value)? likesuccess,
+    TResult Function(QuestionDisLikeStateSuccess value)? dislikesuccess,
+    required TResult orElse(),
+  }) {
+    if (dislikesuccess != null) {
+      return dislikesuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class QuestionDisLikeStateSuccess implements QuestionLikeState {
+  const factory QuestionDisLikeStateSuccess(final Question question) =
+      _$QuestionDisLikeStateSuccess;
+
+  Question get question;
+  @JsonKey(ignore: true)
+  _$$QuestionDisLikeStateSuccessCopyWith<_$QuestionDisLikeStateSuccess>
       get copyWith => throw _privateConstructorUsedError;
 }

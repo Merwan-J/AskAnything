@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:askanything/infrastructure/question/question_form_dto.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
 import 'package:askanything/util/string_extension.dart';
 
@@ -23,7 +24,7 @@ class QuestionProvider {
   // TODO: handle image uploads/ multipart form data
 
   Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    final author = "6448f5ead561de32dc337d5b";
+    final author = "644a59d906e58c639150523c";
     print("author: $author");
     var response = await _httpClient.post('questions',
         body: json.encode(questionFormDto.toJson()..['author'] = author));
@@ -32,7 +33,9 @@ class QuestionProvider {
     if (response.statusCode.toString() == 201.toString()) {
       Map<String, dynamic> decoded =
           await json.decode(response.body)['data']["question"];
-      QuestionDto questionDto = getQuestionDto(decoded);
+      print("decoded: $decoded");
+      QuestionDto questionDto = QuestionDto.fromJson(decoded);
+      print("decoding sucess");
       return questionDto;
     } else {
       throw Exception('Failed to create question');
@@ -41,11 +44,20 @@ class QuestionProvider {
 
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, String questionId) async {
-    var response = await _httpClient.put('questions/${questionId}',
-        body: json.encode(QuestionFormDto.fromJson(questionFormDto.toJson())));
+    print("provider");
+    print("questionId: $questionId");
+    print("questionFormDto: ${questionFormDto.toJson()}");
+    print("another");
+    var response = await _httpClient.patch('questions/6448f615d561de32dc337d5e',
+        body: json.encode(questionFormDto.toJson()));
+    print("response: ${response.body}");
 
-    if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    var decoded = await jsonDecode(response.body)['data']['question'];
+    print("decoded: $decoded");
+    QuestionDto questionDto = QuestionDto.fromJson(decoded);
+    print("decoding sucess");
+    if (response.statusCode.toString() == 200.toString()) {
+      return questionDto;
     } else {
       throw Exception('Failed to update question');
     }
@@ -63,18 +75,21 @@ class QuestionProvider {
 
   Future<List<QuestionDto>> getQuestions() async {
     print("fetching questions");
-    var response = await _httpClient.get('questions');
+    var response =
+        await _httpClient.get('questions?userId=6448f615d561de32dc337d5e');
     //print print
     print("res");
     var decoded = await jsonDecode(response.body);
+    print("decoded: $decoded");
 
     if (response.statusCode.toString() == 200.toString()) {
       var questionsLst = decoded["data"]["questions"];
+      print("questionsLst: $questionsLst");
 
       var questionLstDto =
-          (questionsLst as List).map((e) => getQuestionDto(e)).toList();
+          (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
       print("success");
-      return (questionsLst).map((e) => getQuestionDto(e)).toList();
+      return questionLstDto;
     } else {
       throw Exception('Failed to get questions');
     }
@@ -115,20 +130,38 @@ class QuestionProvider {
   }
 
   Future<QuestionDto> upvoteQuestion(String id) async {
-    var response = await _httpClient.post('questions/$id/upvote');
+    var userId = '6448f5ead561de32dc337d5b';
+    var body = json.encode({"userId": userId});
+    print("about like");
+    var response = await _httpClient.post('questions/upvote/$id', body: body);
+    var decoded = await jsonDecode(response.body)["data"]["question"];
+    print("decoded: $decoded");
+    print("like sucess");
 
-    if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    if (response.statusCode.toString() == 200.toString()) {
+      print("in here status");
+      try {
+        return QuestionDto.fromJson(decoded);
+      } catch (e) {
+        print("error: $e");
+        throw Exception('Failed to upvote question');
+      }
     } else {
       throw Exception('Failed to upvote question');
     }
   }
 
   Future<QuestionDto> downvoteQuestion(String id) async {
-    var response = await _httpClient.post('questions/$id/downvote');
+    var user = '6448f5ead561de32dc337d5b';
+    var body = json.encode({"userId": user});
+    print(body);
+    var response = await _httpClient.post('questions/downvote/$id', body: body);
+    var decoded = await jsonDecode(response.body)["data"]["question"];
+    print("decoded: $decoded");
 
-    if (response.statusCode == 200) {
-      return QuestionDto.fromJson(jsonDecode(response.body));
+    if (response.statusCode.toString() == 200.toString()) {
+      print("in status");
+      return QuestionDto.fromJson(decoded);
     } else {
       throw Exception('Failed to downvote question');
     }
@@ -140,13 +173,13 @@ class QuestionProvider {
       title: decoded['title'],
       description: decoded['description'],
       topic: decoded['topic'],
-      author: decoded['author'],
-      answers: decoded['answers'],
+      author: AuthorDto.fromJson(decoded['author']),
+      answers: decoded['answers'] as List<String>,
       anonymous: decoded['anonymous'],
       createdAt: DateTime.parse(decoded["createdAt"]),
       updatedAt: DateTime.parse(decoded["updatedAt"]),
-      likes: decoded['likes'],
-      dislikes: decoded['dislikes'],
+      likes: decoded['likes'] as List<String>,
+      dislikes: decoded['dislikes'] as List<String>,
     );
     return questionDto;
   }
