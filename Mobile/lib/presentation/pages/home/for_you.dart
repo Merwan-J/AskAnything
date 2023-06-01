@@ -29,68 +29,55 @@ class ForYou extends StatelessWidget {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
     ;
-    return Container(
-      child: BlocBuilder<QuestionListBloc, QuestionListState>(
-        builder: (context, state) {
-          if (state is QuestionListLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is QuestionListEmpty) {
-            return Center(
-              child: Text("🤔No questions found"),
-            );
-          }
-          if (state is QuestionListFailure) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("😢Something went wrong!"),
-                  TextButton(
-                      onPressed: () {
-                        BlocProvider.of<QuestionListBloc>(context)
-                            .add(GetQuestionsEvent());
-                      },
-                      child: Text("retry"))
-                ],
-              ),
-            );
-          }
-          if (state is QuestionListLoaded) {
-            return RefreshIndicator(
-              onRefresh: () {
-                BlocProvider.of<QuestionListBloc>(context)
-                    .add(GetQuestionsEvent());
-                return Future<void>.delayed(const Duration(seconds: 3));
-              },
-              child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  // shrinkWrap: true,
-                  // scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 15.h),
-                      child: QuestionW(question: state.questions[index]),
-                    );
-                  },
-                  itemCount: state.questions.length),
-            );
-          }
-          ;
-          // }
-          return Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<QuestionListBloc>(context)
-                      .add(GetQuestionsEvent());
-                },
-                child: Text(
-                  "retry",
-                )),
+    return Container(child: BlocBuilder<QuestionListBloc, QuestionListState>(
+      builder: (context, state) {
+        if (state is QuestionListLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
         }
+        if (state is QuestionListEmpty) {
+          return Center(
+            child: Text("🤔No questions found"),
+          );
+        }
+        if (state is QuestionListFailure) {
+          return Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("😢Something went wrong!"),
+                TextButton(
+                    onPressed: () {
+                      BlocProvider.of<QuestionListBloc>(context)
+                          .add(GetQuestionsEvent());
+                    },
+                    child: Text("retry"))
+              ],
+            ),
+          );
+        }
+        if (state is QuestionListLoaded) {
+          return RefreshIndicator(
+            onRefresh: () {
+              BlocProvider.of<QuestionListBloc>(context)
+                  .add(GetQuestionsEvent());
+              return Future<void>.delayed(const Duration(seconds: 3));
+            },
+            child: ListView.builder(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                // shrinkWrap: true,
+                // scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: QuestionW(question: state.questions[index]),
+                  );
+                },
+                itemCount: state.questions.length),
+          );
+        }
+
         return Center(
           child: ElevatedButton(
               onPressed: () {
@@ -100,7 +87,7 @@ class ForYou extends StatelessWidget {
               child: Text("Refresh")),
         );
       },
-    );
-    // return Expanded(child: QuestionW(question: question));
+      // return Expanded(child: QuestionW(question: question));
+    ));
   }
 }

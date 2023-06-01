@@ -25,10 +25,9 @@ import 'ask_question_form.dart';
 
 class QuestionW extends StatelessWidget {
   Question question;
-  QuestionW({
-    Key? key,
-    required this.question,
-  }) : super(key: key);
+  final showDetail;
+  QuestionW({Key? key, required this.question, this.showDetail = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -144,9 +143,28 @@ class QuestionW extends StatelessWidget {
                       child: Text(question.title,
                           style: Theme.of(context).textTheme.bodySmall),
                     ),
+
                     SizedBox(
                       height: 10.h,
                     ),
+                    Visibility(
+                        visible: showDetail,
+                        child: Column(
+                          children: [
+                            Divider(
+                              color: Colors.grey,
+                              thickness: 2,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(question.description,
+                                  style: TextStyle(fontSize: 12.sp)),
+                            ),
+                          ],
+                        )),
                     //TODO: change like color based on user likes
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -195,6 +213,9 @@ class QuestionW extends StatelessWidget {
                                               context)
                                           .add(QuestionDetailDeleteEvent(
                                               question.id));
+                                      if (showDetail) {
+                                        context.pop();
+                                      }
                                     },
                                     child: Icon(
                                       Icons.delete,

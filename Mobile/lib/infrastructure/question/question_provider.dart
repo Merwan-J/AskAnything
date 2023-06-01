@@ -44,11 +44,11 @@ class QuestionProvider {
 
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, String questionId) async {
-    print("provider");
+    print("update loading");
     print("questionId: $questionId");
-    print("questionFormDto: ${questionFormDto.toJson()}");
-    print("another");
-    var response = await _httpClient.patch('questions/6448f615d561de32dc337d5e',
+    print(questionFormDto);
+
+    var response = await _httpClient.patch('questions/6478af6ea70dcd58a46901db',
         body: json.encode(questionFormDto.toJson()));
     print("response: ${response.body}");
 

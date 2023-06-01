@@ -1,3 +1,4 @@
+
 import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/domain/question/question_repository_interface.dart';
 import 'package:askanything/util/constants.dart';
@@ -31,7 +32,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
   TextEditingController descriptionController = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
   }
@@ -73,7 +73,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
       expand: false,
       initialChildSize: 0.8,
       minChildSize: 0.3,
-      // maxChildSize: 0.9,
       builder: (BuildContext context, ScrollController scrollController) {
         return SingleChildScrollView(
           controller: scrollController,
@@ -93,9 +92,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                     top: 30.h,
                     right: 20.h,
                     left: 20.h,
-                    // ),
                     bottom: MediaQuery.of(context).viewInsets.bottom),
-                // height: MediaQuery.of(context).size.height * 0.8,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -120,11 +117,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                       height: 10.h,
                     ),
                     SizedBox(
-                      // height: 300.h,
                       child: TextField(
                         maxLines: 6,
-                        // expands: true,
-                        // keyboardType: TextInputType.multiline,
                         controller: descriptionController,
                         decoration:
                             InputDecoration(hintText: "Enter description"),
@@ -157,7 +151,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         const Text("Anonymous"),
                         Switch(
                             activeTrackColor: Color.fromRGBO(226, 230, 234, 1),
-                            // activeColor: Color.fromRGBO(255, 115, 92, 1),
                             activeColor: CustomColor.primaryColor,
                             value: isAnnonymous,
                             onChanged: (value) {
@@ -184,7 +177,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                             listener: (context, state) {
                               print(state);
                               if (state is QuestionPostInitial) {
-                                //snackbar
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text("Initial"),
@@ -192,8 +184,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                 );
                               }
                               if (state is QuestionPostSuccess) {
-                                //remove snackbar
-
                                 ScaffoldMessenger.of(context)
                                     .hideCurrentSnackBar();
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -201,7 +191,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                     content: Text("success"),
                                   ),
                                 );
-                                //snackbar
                               }
 
                               if (state is QuestionPosting) {
@@ -210,7 +199,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                     content: Text("posting"),
                                   ),
                                 );
-                                //snackbar
                               }
 
                               if (state is QuestionPostFailure) {
@@ -219,7 +207,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                     content: Text("failed"),
                                   ),
                                 );
-                                //snackbar
                               }
                             },
                             builder: (context, state) {
@@ -236,7 +223,6 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                   Navigator.pop(context);
                                 },
                                 child: Container(
-                                  // color: Colors.blue,
                                   decoration: BoxDecoration(
                                       color: Color.fromRGBO(255, 115, 92, 1),
                                       borderRadius:
@@ -246,44 +232,14 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                   child: Text("Post",
                                       style: TextStyle(color: Colors.white)),
                                 ),
-                              );                              //snackbar
+                              );
                             }
-                          },
-                          builder: (context, state) {
-                            return GestureDetector(
-                              onTap: () {
-                                final questionForm = QuestionForm(
-                                  title: titleController.text,
-                                  description: descriptionController.text,
-                                  topic: selectedTopic,
-                                  anonymous: isAnnonymous,
-                                );
-
-                                BlocProvider.of<QuestionPostBloc>(context)
-                                    .add(QuestionPostAdd(questionForm));
-                                BlocProvider.of<QuestionListBloc>(context)
-                                    .add(GetQuestionsEvent());
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                // color: Colors.blue,
-                                decoration: BoxDecoration(
-                                    color: Color.fromRGBO(255, 115, 92, 1),
-                                    borderRadius: BorderRadius.circular(10.h)),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.h, vertical: 10.h),
-                                child: Text("Post",
-                                    style: TextStyle(color: Colors.white)),
-                              ),
-                            );
-                          },
-                        )
-                      ],
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),
-
-                // color: Colors.red,
               ),
             ],
           ),
@@ -292,12 +248,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
     );
   }
 
-  //define drop down button list
-
   List<DropdownMenuItem> _dropDownButtonList() {
     final topics = Constants.topics;
-    //return list of DropDownMenuItem from topics
-
     return topics
         .map((topic) => DropdownMenuItem(
               child: Text(topic),

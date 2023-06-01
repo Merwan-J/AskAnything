@@ -6,21 +6,27 @@ const { isIdValid } = require('./../utils/validator');
 const Question = require('./../models/questionsModel');
 
 exports.createAnswer = catchAsyncError(async (req, res, next) => {
+  console.log(req.body);
   const answer = await Answer.create(req.body);
   const user = await User.findById(req.body.author);
   const question = await Question.findById(req.body.question);
-
-  // console.log(answer.question);
-  // console.log(answer.author);
-
+  console.log('backe here');
+  console.log(answer._id);
+  // console.log(question);
   question.answers.push(answer._id);
   user.answers.push(answer._id);
   await question.save();
   await user.save();
 
+  const newAnswer = await Answer.findById(answer._id).populate({
+    path: 'author',
+
+    model: 'User',
+  });
+
   res.status(201).json({
     status: 'success',
-    data: { answer },
+    data: { answer: newAnswer },
   });
 });
 exports.getAnswers = catchAsyncError(async (req, res, next) => {

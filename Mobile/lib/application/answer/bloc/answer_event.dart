@@ -16,3 +16,5 @@ class AnswerEvent with _$AnswerEvent {
   const factory AnswerEvent.upvote(String answerId) = UpvoteAnswerEvent;
   const factory AnswerEvent.downvote(String answerId) = DownVoteAnswerEvent;
 }
+
+//TODO: Implement upvote and downvote
