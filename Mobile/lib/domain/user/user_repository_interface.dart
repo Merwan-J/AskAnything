@@ -9,10 +9,11 @@ abstract class IUserRepository {
   Future<Either<UserFailure, User>> updateUser(UserForm user, String id);
   Future<Either<UserFailure, void>> deleteUser(String id);
   Future<Either<UserFailure, List<User>>> getAllUsers();
-  Future<Either<UserFailure, void>> followUser(
+  Future<Either<UserFailure, User>> followUser(
       String followerId, String followingId);
-  Future<Either<UserFailure, void>> unfollowUser(
+  Future<Either<UserFailure, User>> unfollowUser(
       String followerId, String followingId);
   Future<Either<UserFailure, List<User>>> getFollowers(String userId);
   Future<Either<UserFailure, List<User>>> getFollowings(String userId);
+  Future<Either<UserFailure, List<User>>> getAdminUsers();
 }

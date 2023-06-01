@@ -17,19 +17,20 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _router = getRoutes(authBloc);
+    final router = getRoutes(authBloc);
     return ScreenUtilInit(
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
+        return MaterialApp.router(
           debugShowCheckedModeBanner: false,
           theme: CustomTheme.lightTheme,
           darkTheme: CustomTheme.darkTheme,
           themeMode: ThemeMode.dark,
-          home: child,
-          // routerConfig: _router,
+          routerConfig: router,
         );
       },
-      child: MainScreen(),
+      child: MainScreen(
+        index: 0,
+      ),
     );
   }
 }

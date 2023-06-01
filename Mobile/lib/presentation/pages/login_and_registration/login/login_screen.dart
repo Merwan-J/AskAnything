@@ -6,10 +6,13 @@ import 'package:askanything/application/login/bloc/login_state.dart';
 import 'package:askanything/domain/auth/login_form.dart';
 import 'package:askanything/presentation/app.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
+import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../routes/routes_dart.dart';
 import '../../mainscreen/main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -63,13 +66,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Logged in successfully')),
             );
+            // context.go(Routes.SEARCH);
 
             // Navigate to home screen
             Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => const MainScreen(),
+                builder: (context) => QuestionDetail(),
               ),
             );
+            print('object');
           }
 
           if (state is LoginStateFailure) {
@@ -100,7 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(15.h),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go(Routes.SIGNUP);
+                        },
                         icon: const Icon(Icons.arrow_back_ios),
                         iconSize: 17.h,
                       ),
@@ -153,20 +160,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot Password?',
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -208,7 +201,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.go(Routes.SIGNUP);
+                      },
                       child: const Text(
                         'Register',
                         style: TextStyle(

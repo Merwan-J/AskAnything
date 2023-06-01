@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     pages = [
       SplashScreenItem(
         buttonTitle: "Next",
-        image: "assets/splash screen image 1.png",
+        image: "assets/images/splash screen image 1.png",
         subtitle:
             "Looking for people to ask your life’s most pressing questions?",
         title: "Do you have Questions in mind?",
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
       SplashScreenItem(
         buttonTitle: "Get Started",
-        image: "assets/splash screen image 2.png",
+        image: "assets/images/splash screen image 2.png",
         subtitle: "Discover new perspectives and insights every day.",
         title: "Welcome to Ask Anything!",
         controller: controller,

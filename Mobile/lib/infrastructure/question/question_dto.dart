@@ -7,7 +7,7 @@ class QuestionDto {
   final String description;
   final AuthorDto author;
   final bool anonymous;
-  final List<dynamic> answers;
+  final List<String> answers;
   final String topic;
   final List<String> likes;
   final List<String> dislikes;

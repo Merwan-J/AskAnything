@@ -1,13 +1,15 @@
 import 'dart:core';
 import 'dart:core';
 
+import 'package:askanything/infrastructure/user/author_dto.dart';
+
 class Answer {
   final String id;
   final String text;
   final String image;
   final List<String> likes;
   final List<String> dislikes;
-  final String author; //TODO: Change to User
+  final AuthorDto author; //TODO: Change to User
   final bool anonymous;
   final String question; //TODO: Change to Question
   final DateTime createdAt;

@@ -14,7 +14,7 @@ import '../search_page/search_page.dart';
 class MainScreen extends StatefulWidget {
   final int? index;
 
-  const MainScreen({super.key, this.index});
+  MainScreen({super.key, this.index});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -28,7 +28,6 @@ class _MainScreenState extends State<MainScreen> {
     BookmarkPage(),
     ProfileScreen()
   ];
-  int _selectedIndex = 0;
   @override
   // void didChangeDependencies() {
   //   super.didChangeDependencies();
@@ -39,8 +38,16 @@ class _MainScreenState extends State<MainScreen> {
   //       : 0;
   // }
 
+  int _selectedIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.index != null ? widget.index! : 0;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // int _selectedIndex = widget.index != null ? widget.index : 0;
     // final scaffoldState = GlobalKey<ScaffoldState>();
     buildBottomSheet(BuildContext context) {
       showModalBottomSheet(
