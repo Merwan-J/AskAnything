@@ -9,8 +9,8 @@ class AnswerDto with _$AnswerDto {
     required String id,
     required String text,
     required String image,
-    required List<String> likes, // TODO: Change to user ids
-    required List<String> dislikes, // TODO: List of user ids
+    required List<dynamic> likes, // TODO: Change to user ids
+    required List<dynamic> dislikes, // TODO: List of user ids
     required String author, // TODO: User id
     required String questionId, // TODO: Question id
     required bool anonymous,

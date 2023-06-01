@@ -3,6 +3,7 @@
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
+import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:askanything/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,7 @@ class App extends StatelessWidget {
           // routerConfig: _router,
         );
       },
-      child: MainScreen(),
+      child: QuestionDetail(),
     );
   }
 }

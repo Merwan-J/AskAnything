@@ -23,9 +23,9 @@ mixin _$AnswerDto {
   String get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get image => throw _privateConstructorUsedError;
-  List<String> get likes =>
+  List<dynamic> get likes =>
       throw _privateConstructorUsedError; // TODO: Change to user ids
-  List<String> get dislikes =>
+  List<dynamic> get dislikes =>
       throw _privateConstructorUsedError; // TODO: List of user ids
   String get author => throw _privateConstructorUsedError; // TODO: User id
   String get questionId =>
@@ -49,8 +49,8 @@ abstract class $AnswerDtoCopyWith<$Res> {
       {String id,
       String text,
       String image,
-      List<String> likes,
-      List<String> dislikes,
+      List<dynamic> likes,
+      List<dynamic> dislikes,
       String author,
       String questionId,
       bool anonymous,
@@ -98,11 +98,11 @@ class _$AnswerDtoCopyWithImpl<$Res, $Val extends AnswerDto>
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       dislikes: null == dislikes
           ? _value.dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -138,8 +138,8 @@ abstract class _$$_AnswerDtoCopyWith<$Res> implements $AnswerDtoCopyWith<$Res> {
       {String id,
       String text,
       String image,
-      List<String> likes,
-      List<String> dislikes,
+      List<dynamic> likes,
+      List<dynamic> dislikes,
       String author,
       String questionId,
       bool anonymous,
@@ -185,11 +185,11 @@ class __$$_AnswerDtoCopyWithImpl<$Res>
       likes: null == likes
           ? _value._likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       dislikes: null == dislikes
           ? _value._dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
@@ -221,8 +221,8 @@ class _$_AnswerDto implements _AnswerDto {
       {required this.id,
       required this.text,
       required this.image,
-      required final List<String> likes,
-      required final List<String> dislikes,
+      required final List<dynamic> likes,
+      required final List<dynamic> dislikes,
       required this.author,
       required this.questionId,
       required this.anonymous,
@@ -240,19 +240,19 @@ class _$_AnswerDto implements _AnswerDto {
   final String text;
   @override
   final String image;
-  final List<String> _likes;
+  final List<dynamic> _likes;
   @override
-  List<String> get likes {
+  List<dynamic> get likes {
     if (_likes is EqualUnmodifiableListView) return _likes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_likes);
   }
 
 // TODO: Change to user ids
-  final List<String> _dislikes;
+  final List<dynamic> _dislikes;
 // TODO: Change to user ids
   @override
-  List<String> get dislikes {
+  List<dynamic> get dislikes {
     if (_dislikes is EqualUnmodifiableListView) return _dislikes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_dislikes);
@@ -332,8 +332,8 @@ abstract class _AnswerDto implements AnswerDto {
       {required final String id,
       required final String text,
       required final String image,
-      required final List<String> likes,
-      required final List<String> dislikes,
+      required final List<dynamic> likes,
+      required final List<dynamic> dislikes,
       required final String author,
       required final String questionId,
       required final bool anonymous,
@@ -350,9 +350,9 @@ abstract class _AnswerDto implements AnswerDto {
   @override
   String get image;
   @override
-  List<String> get likes;
+  List<dynamic> get likes;
   @override // TODO: Change to user ids
-  List<String> get dislikes;
+  List<dynamic> get dislikes;
   @override // TODO: List of user ids
   String get author;
   @override // TODO: User id

@@ -5,8 +5,8 @@ class Answer {
   final String id;
   final String text;
   final String image;
-  final List<String> likes;
-  final List<String> dislikes;
+  final List<dynamic> likes;
+  final List<dynamic> dislikes;
   final String author; //TODO: Change to User
   final bool anonymous;
   final String question; //TODO: Change to Question

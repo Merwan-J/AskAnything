@@ -29,7 +29,8 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
     on<AddAnswerEvent>(((event, emit) async {
       Either<AnswerFailure, Answer> answer =
           await _answerRepository.createAnswer(event.answerForm);
-
+      print("success");
+      print(answer); //Right
       answer.fold(
           (l) => emit(const AnswerState.error("failed to create answer")),
           (r) => emit(AnswerState.loaded(answer)));

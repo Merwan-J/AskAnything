@@ -1,3 +1,4 @@
+import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,9 +63,7 @@ class ForYou extends StatelessWidget {
                 itemCount: state.questions.length),
           );
         }
-        return Center(
-          child: Text("state"),
-        );
+        return Center(child: QuestionDetail());
       },
     );
     // return Expanded(child: QuestionW(question: question));

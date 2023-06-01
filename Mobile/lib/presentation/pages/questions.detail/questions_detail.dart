@@ -1,11 +1,17 @@
+import 'package:askanything/application/answer/bloc/answer_event.dart';
+import 'package:askanything/infrastructure/answer/answer_repository.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/answer/bloc/answer_bloc.dart';
+import '../../../application/answer/bloc/answer_state.dart';
 import '../../../domain/answer/answer.dart';
+import '../../../domain/answer/answer_form.dart';
 import '../../../domain/question/question.dart';
 
 class QuestionDetail extends StatefulWidget {
@@ -29,7 +35,11 @@ class QuestionDetail extends StatefulWidget {
 }
 
 class _QuestionDetailState extends State<QuestionDetail> {
+  String dummyQuestionId = '647817e1ffb1e50ecf827531';
+  String dummyAuthorId = '6448f5ead561de32dc337d5b';
   bool isAnonymous = false;
+  final TextEditingController _textController = TextEditingController();
+  String finalText = '';
   final List<Answer> answerList = [
     Answer(
         id: "1",
@@ -189,71 +199,95 @@ class _QuestionDetailState extends State<QuestionDetail> {
             ))
         .toList();
 
-    return Scaffold(
-      appBar: AppBar(title: Text('question comments')),
-      bottomNavigationBar: BottomAppBar(),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 10.h,
-          ),
-          QuestionW(question: QuestionDetail.question),
-          SizedBox(
-            height: 10.h,
-          ),
-          Container(
-            // color: Colors.red,
-            child: Expanded(
-              child: ListView.builder(
-                  itemCount: answerList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          left: 16, right: 0, top: 0, bottom: 5),
-                      child: answerWidget[index],
-                    );
-                  }),
+    return BlocProvider(
+      create: (context) =>
+          AnswerBloc(RepositoryProvider.of<AnswerRepository>(context)),
+      child: Scaffold(
+        appBar: AppBar(title: Text('question comments')),
+        bottomNavigationBar: BottomAppBar(),
+        body: Column(
+          children: [
+            SizedBox(
+              height: 10.h,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isAnonymous = !isAnonymous;
-                    });
-                  },
-                  child: Container(
-                    width: 40.w,
-                    height: 40.h,
-                    child: Image.asset(
-                        // ignore: dead_code
-                        'assets/images/${isAnonymous ? 'anonnymous.png' : 'user 1.png'}'),
+            QuestionW(question: QuestionDetail.question),
+            SizedBox(
+              height: 10.h,
+            ),
+            Container(
+              // color: Colors.red,
+              child: Expanded(
+                child: ListView.builder(
+                    itemCount: answerList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(
+                            left: 16, right: 0, top: 0, bottom: 5),
+                        child: answerWidget[index],
+                      );
+                    }),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isAnonymous = !isAnonymous;
+                      });
+                    },
+                    child: Container(
+                      width: 40.w,
+                      height: 40.h,
+                      child: Image.asset(
+                          // ignore: dead_code
+                          'assets/images/${isAnonymous ? 'anonnymous.png' : 'user 1.png'}'),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Expanded(
-                  child: Container(
-                    height: 50.h,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                            onPressed: () {}, icon: Icon(Icons.send)),
-                        border: InputBorder.none,
-                        hintText: "reply",
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 50.h,
+                      child: TextField(
+                        controller: _textController,
+                        decoration: InputDecoration(
+                          suffixIcon: BlocConsumer<AnswerBloc, AnswerState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            builder: (context, state) {
+                              return IconButton(
+                                  onPressed: () {
+                                    finalText = _textController.text;
+                                    print(finalText);
+
+                                    BlocProvider.of<AnswerBloc>(context).add(
+                                        AddAnswerEvent(AnswerForm(
+                                            author: dummyAuthorId,
+                                            anonymous: isAnonymous,
+                                            image: "",
+                                            question: dummyQuestionId,
+                                            text: finalText)));
+                                  },
+                                  icon: Icon(Icons.send));
+                            },
+                          ),
+                          border: InputBorder.none,
+                          hintText: "reply",
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
