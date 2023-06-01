@@ -24,7 +24,8 @@ mixin _$AnswerFormDto {
   String get image =>
       throw _privateConstructorUsedError; //TODO: Change to image
   bool get anonymous => throw _privateConstructorUsedError;
-  String get questionId => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
+  String get question => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +39,12 @@ abstract class $AnswerFormDtoCopyWith<$Res> {
           AnswerFormDto value, $Res Function(AnswerFormDto) then) =
       _$AnswerFormDtoCopyWithImpl<$Res, AnswerFormDto>;
   @useResult
-  $Res call({String text, String image, bool anonymous, String questionId});
+  $Res call(
+      {String text,
+      String image,
+      bool anonymous,
+      String author,
+      String question});
 }
 
 /// @nodoc
@@ -57,7 +63,8 @@ class _$AnswerFormDtoCopyWithImpl<$Res, $Val extends AnswerFormDto>
     Object? text = null,
     Object? image = null,
     Object? anonymous = null,
-    Object? questionId = null,
+    Object? author = null,
+    Object? question = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
@@ -72,9 +79,13 @@ class _$AnswerFormDtoCopyWithImpl<$Res, $Val extends AnswerFormDto>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      questionId: null == questionId
-          ? _value.questionId
-          : questionId // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -88,7 +99,12 @@ abstract class _$$_AnswerFormDtoCopyWith<$Res>
       __$$_AnswerFormDtoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String image, bool anonymous, String questionId});
+  $Res call(
+      {String text,
+      String image,
+      bool anonymous,
+      String author,
+      String question});
 }
 
 /// @nodoc
@@ -105,7 +121,8 @@ class __$$_AnswerFormDtoCopyWithImpl<$Res>
     Object? text = null,
     Object? image = null,
     Object? anonymous = null,
-    Object? questionId = null,
+    Object? author = null,
+    Object? question = null,
   }) {
     return _then(_$_AnswerFormDto(
       text: null == text
@@ -120,9 +137,13 @@ class __$$_AnswerFormDtoCopyWithImpl<$Res>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      questionId: null == questionId
-          ? _value.questionId
-          : questionId // ignore: cast_nullable_to_non_nullable
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
+              as String,
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -135,7 +156,8 @@ class _$_AnswerFormDto implements _AnswerFormDto {
       {required this.text,
       required this.image,
       required this.anonymous,
-      required this.questionId});
+      required this.author,
+      required this.question});
 
   factory _$_AnswerFormDto.fromJson(Map<String, dynamic> json) =>
       _$$_AnswerFormDtoFromJson(json);
@@ -148,11 +170,13 @@ class _$_AnswerFormDto implements _AnswerFormDto {
   @override
   final bool anonymous;
   @override
-  final String questionId;
+  final String author;
+  @override
+  final String question;
 
   @override
   String toString() {
-    return 'AnswerFormDto(text: $text, image: $image, anonymous: $anonymous, questionId: $questionId)';
+    return 'AnswerFormDto(text: $text, image: $image, anonymous: $anonymous, author: $author, question: $question)';
   }
 
   @override
@@ -164,14 +188,15 @@ class _$_AnswerFormDto implements _AnswerFormDto {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.anonymous, anonymous) ||
                 other.anonymous == anonymous) &&
-            (identical(other.questionId, questionId) ||
-                other.questionId == questionId));
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.question, question) ||
+                other.question == question));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, text, image, anonymous, questionId);
+      Object.hash(runtimeType, text, image, anonymous, author, question);
 
   @JsonKey(ignore: true)
   @override
@@ -192,7 +217,8 @@ abstract class _AnswerFormDto implements AnswerFormDto {
       {required final String text,
       required final String image,
       required final bool anonymous,
-      required final String questionId}) = _$_AnswerFormDto;
+      required final String author,
+      required final String question}) = _$_AnswerFormDto;
 
   factory _AnswerFormDto.fromJson(Map<String, dynamic> json) =
       _$_AnswerFormDto.fromJson;
@@ -204,7 +230,9 @@ abstract class _AnswerFormDto implements AnswerFormDto {
   @override //TODO: Change to image
   bool get anonymous;
   @override
-  String get questionId;
+  String get author;
+  @override
+  String get question;
   @override
   @JsonKey(ignore: true)
   _$$_AnswerFormDtoCopyWith<_$_AnswerFormDto> get copyWith =>

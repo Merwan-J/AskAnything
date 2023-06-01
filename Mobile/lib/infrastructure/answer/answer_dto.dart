@@ -7,9 +7,9 @@ class AnswerDto {
   final String id;
   final String text;
   final String image;
-  final List<String> likes;
-  final List<String> dislikes;
-  final AuthorDto author;
+  final List<dynamic> likes;
+  final List<dynamic> dislikes;
+  final String author;
   final String questionId;
   final bool anonymous;
   final DateTime createdAt;
@@ -33,10 +33,9 @@ class AnswerDto {
       id: json['id'] ?? '',
       text: json['text'] ?? '',
       image: json['image'] ?? '',
-      likes: (json['likes'] as List<dynamic>).map((e) => e.toString()).toList(),
-      dislikes:
-          (json['dislikes'] as List<dynamic>).map((e) => e.toString()).toList(),
-      author: AuthorDto.fromJson(json['author']),
+      likes: json['likes'] as List<dynamic>,
+      dislikes: json['dislikes'] as List<dynamic>,
+      author: json['author'] ?? '',
       questionId: json['questionId'] ?? '',
       anonymous: json['anonymous'] ?? false,
       createdAt: DateTime.parse(json['createdAt'] ?? ''),

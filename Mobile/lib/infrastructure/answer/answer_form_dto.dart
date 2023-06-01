@@ -10,7 +10,8 @@ class AnswerFormDto with _$AnswerFormDto {
     required String text,
     required String image, //TODO: Change to image
     required bool anonymous,
-    required String questionId,
+    required String author,
+    required String question,
   }) = _AnswerFormDto;
 
   factory AnswerFormDto.fromJson(Map<String, dynamic> json) =>
