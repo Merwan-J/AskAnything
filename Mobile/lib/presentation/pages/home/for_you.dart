@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../application/question/question_list/bloc/question_list_bloc.dart';
 import '../../../domain/question/question.dart';
-import '../../../infrastructure/user/author_dto.dart';
 
 class ForYou extends StatelessWidget {
   const ForYou({super.key});
@@ -14,13 +13,16 @@ class ForYou extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Question question = Question(
-        id: "64768b7ffea9d03bb6389cb9",
+        id: "1",
         title:
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
         author: AuthorDto(
-            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
+          name: "Merwan Junyedi",
+          email: 'merwanj71@gmail.com',
+          id: '123123',
+        ),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -28,67 +30,41 @@ class ForYou extends StatelessWidget {
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
-    ;
-    return Container(
-      child: BlocBuilder<QuestionListBloc, QuestionListState>(
-        builder: (context, state) {
-          if (state is QuestionListLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is QuestionListEmpty) {
-            return Center(
-              child: Text("🤔No questions found"),
-            );
-          }
-          if (state is QuestionListFailure) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("😢Something went wrong!"),
-                  TextButton(
-                      onPressed: () {
-                        BlocProvider.of<QuestionListBloc>(context)
-                            .add(GetQuestionsEvent());
-                      },
-                      child: Text("retry"))
-                ],
-              ),
-            );
-          }
-          if (state is QuestionListLoaded) {
-            return RefreshIndicator(
-              onRefresh: () {
-                BlocProvider.of<QuestionListBloc>(context)
-                    .add(GetQuestionsEvent());
-                return Future<void>.delayed(const Duration(seconds: 3));
-              },
-              child: ListView.builder(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  // shrinkWrap: true,
-                  // scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 15.h),
-                      child: QuestionW(question: state.questions[index]),
-                    );
-                  },
-                  itemCount: state.questions.length),
-            );
-          }
-          ;
-          // }
+    return BlocBuilder<QuestionListBloc, QuestionListState>(
+      builder: (context, state) {
+        if (state is QuestionListLoading) {
           return Center(
-            child: ElevatedButton(
-                onPressed: () {
-                  BlocProvider.of<QuestionListBloc>(context)
-                      .add(GetQuestionsEvent());
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is QuestionListFailure) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
+        if (state is QuestionListEmpty) {
+          return Center(
+            child: Text("No questions found"),
+          );
+        }
+        if (state is QuestionListLoaded) {
+          return RefreshIndicator(
+            onRefresh: () {
+              BlocProvider.of<QuestionListBloc>(context)
+                  .add(GetQuestionsEvent());
+              return Future<void>.delayed(const Duration(seconds: 3));
+            },
+            child: ListView.builder(
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                // shrinkWrap: true,
+                // scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 15.h),
+                    child: QuestionW(question: state.questions[index]),
+                  );
                 },
-                child: Text(
-                  "retry",
-                )),
+                itemCount: state.questions.length),
           );
         }
         return Center(

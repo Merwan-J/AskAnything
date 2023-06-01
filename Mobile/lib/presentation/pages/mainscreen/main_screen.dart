@@ -62,47 +62,47 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     return SafeArea(
-      child: BlocListener<QuestionEditBloc, QuestionEditState>(
-        listener: (context, state) {
-          if (state is QuestionEditSuccessState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Question updated successfully"),
-              ),
-            );
-            BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
-          }
-          if (state is QuestionEditFailureState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Question update failed"),
-              ),
-            );
-          }
-          if (state is QuestionEditLoadingState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Updating Question"),
-              ),
-            );
-          }
-        },
-        child: Scaffold(
-            floatingActionButton: Visibility(
-              visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
-              child: FloatingActionButton(
-                onPressed: () {
-                  buildBottomSheet(context);
-                },
-                backgroundColor: Theme.of(context).primaryColor,
-                foregroundColor: Colors.white,
-                elevation: 4.0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const Icon(Icons.add),
-              ),
+        child: BlocListener<QuestionEditBloc, QuestionEditState>(
+      listener: (context, state) {
+        if (state is QuestionEditSuccessState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Question updated successfully"),
             ),
+          );
+          BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+        }
+        if (state is QuestionEditFailureState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Question update failed"),
+            ),
+          );
+        }
+        if (state is QuestionEditLoadingState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Updating Question"),
+            ),
+          );
+        }
+      },
+      child: Scaffold(
+          floatingActionButton: Visibility(
+            visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
+            child: FloatingActionButton(
+              onPressed: () {
+                buildBottomSheet(context);
+              },
+              backgroundColor: Theme.of(context).primaryColor,
+              foregroundColor: Colors.white,
+              elevation: 4.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: const Icon(Icons.add),
+            ),
+          ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
           body: IndexedStack(
@@ -111,7 +111,7 @@ class _MainScreenState extends State<MainScreen> {
             children: screens,
           ),
           bottomNavigationBar: CustomBottomNavigation()),
-    );
+    ));
   }
 
   void _onTap(int index) {

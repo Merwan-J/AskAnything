@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         builder: (context, state) {
           if (state is Initial) {
             BlocProvider.of<UserBloc>(context)
-                .add(const GetUserById('6448f5ead561de32dc337d5b'));
+                .add(const GetUserById('644a7a97dd0ade9f826deeda'));
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loading) {
             return const Center(child: CircularProgressIndicator());

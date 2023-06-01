@@ -168,20 +168,20 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                       ],
                     ),
                     MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          GestureDetector(
-                              onTap: () {
-                                context.pop();
-                              },
-                              child: Text("Cancel")),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          BlocConsumer<QuestionPostBloc, QuestionPostState>(
-                            listener: (context, state) {
+                        cursor: SystemMouseCursors.click,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                                onTap: () {
+                                  context.pop();
+                                },
+                                child: Text("Cancel")),
+                            SizedBox(
+                              width: 10.h,
+                            ),
+                            BlocConsumer<QuestionPostBloc, QuestionPostState>(
+                                listener: (context, state) {
                               print(state);
                               if (state is QuestionPostInitial) {
                                 //snackbar
@@ -221,8 +221,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                 );
                                 //snackbar
                               }
-                            },
-                            builder: (context, state) {
+                            }, builder: (context, state) {
                               return GestureDetector(
                                 onTap: () {
                                   final questionForm = QuestionForm(
@@ -246,40 +245,10 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                   child: Text("Post",
                                       style: TextStyle(color: Colors.white)),
                                 ),
-                              );                              //snackbar
-                            }
-                          },
-                          builder: (context, state) {
-                            return GestureDetector(
-                              onTap: () {
-                                final questionForm = QuestionForm(
-                                  title: titleController.text,
-                                  description: descriptionController.text,
-                                  topic: selectedTopic,
-                                  anonymous: isAnnonymous,
-                                );
-
-                                BlocProvider.of<QuestionPostBloc>(context)
-                                    .add(QuestionPostAdd(questionForm));
-                                BlocProvider.of<QuestionListBloc>(context)
-                                    .add(GetQuestionsEvent());
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                // color: Colors.blue,
-                                decoration: BoxDecoration(
-                                    color: Color.fromRGBO(255, 115, 92, 1),
-                                    borderRadius: BorderRadius.circular(10.h)),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20.h, vertical: 10.h),
-                                child: Text("Post",
-                                    style: TextStyle(color: Colors.white)),
-                              ),
-                            );
-                          },
-                        )
-                      ],
-                    )
+                              ); //snackbar
+                            })
+                          ],
+                        ))
                   ],
                 ),
 
