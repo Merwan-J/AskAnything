@@ -1,4 +1,5 @@
 import 'package:askanything/domain/question/question_repository_interface.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
@@ -38,7 +39,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-        author: "Merwan Junyedi",
+        author: AuthorDto(
+          name: "Merwan Junyedi",
+          email: 'merwanj71@gmail.com',
+          id: '123123',
+        ),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
