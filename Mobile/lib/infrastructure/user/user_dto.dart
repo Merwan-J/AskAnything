@@ -1,5 +1,6 @@
 import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:equatable/equatable.dart';
 
 class UserDTO extends Equatable {
@@ -14,8 +15,8 @@ class UserDTO extends Equatable {
   final int likes;
   final int dislikes;
   final Map<String, dynamic> bookmarks;
-  final List<String> followers;
-  final List<String> followings;
+  final List<AuthorDto> followers;
+  final List<AuthorDto> followings;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -82,12 +83,12 @@ class UserDTO extends Equatable {
           : {},
       followers: json['followers'] != null
           ? (json['followers'] as List<dynamic>)
-              .map((e) => e.toString())
+              .map((follower) => AuthorDto.fromJson(follower))
               .toList()
           : [],
       followings: json['following'] != null
           ? (json['following'] as List<dynamic>)
-              .map((e) => e.toString())
+              .map((following) => AuthorDto.fromJson(following))
               .toList()
           : [],
       createdAt: json['createdAt'] != null

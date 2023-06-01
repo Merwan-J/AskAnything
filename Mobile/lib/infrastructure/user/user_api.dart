@@ -73,8 +73,13 @@ class UserApi {
         body: json.encode({"followerId": followerId}));
     if (response.statusCode == 200) {
       var user = jsonDecode(response.body)['data']['user'];
-      print(user);
-      print('unfollow');
+      print(user['followings']);
+      print('follow');
+      user.forEach((key, value) {
+        if (value is String) {
+          print(key);
+        }
+      });
       return UserDTO.fromJson(user);
     } else {
       print('follow error');
@@ -101,10 +106,12 @@ class UserApi {
 
     if (response.statusCode == 200) {
       List<dynamic> followersJson = jsonDecode(response.body);
+      print(followersJson);
       return followersJson
           .map((follower) => UserDTO.fromJson(follower))
           .toList();
     } else {
+      print('failed to load followers');
       throw Exception("Failed to load followers");
     }
   }

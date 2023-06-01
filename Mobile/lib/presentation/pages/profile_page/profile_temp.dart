@@ -12,6 +12,7 @@ import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
+import 'package:askanything/presentation/pages/followings_followers_page/users_screen.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen>
         builder: (context, state) {
           if (state is Initial) {
             BlocProvider.of<UserBloc>(context)
-                .add(const GetUserById('6448f5ead561de32dc337d5b'));
+                .add(const GetUserById('644a59d906e58c639150523c'));
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loading) {
             return const Center(child: CircularProgressIndicator());
@@ -80,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildBody(BuildContext context, User checkUser) {
-    final String authenticatedUser = '6477da9c8d15004012f9f6a4';
+    final String authenticatedUser = '644a7a97dd0ade9f826deeda';
     User user = checkUser;
 
     return Padding(
@@ -175,7 +176,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  FollowersFollowingPage(
+                                                      user: user)));
+                                    },
                                     child: Text(
                                       '${user.followings.length} following',
                                       style: TextStyle(
@@ -220,6 +227,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   if (authenticatedUser == user.id) {
                                     //
                                   } else if (user.followers
+                                      .map((follower) => follower.id)
+                                      .toList()
                                       .contains(authenticatedUser)) {
                                     BlocProvider.of<FollowBloc>(context).add(
                                         UnfollowUserEvent(
@@ -246,6 +255,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   child: authenticatedUser == user.id
                                       ? const Text('Edit')
                                       : user.followers
+                                              .map((follower) => follower.id)
+                                              .toList()
                                               .contains(authenticatedUser)
                                           ? const Text('Unfollow')
                                           : const Text('Follow'),
