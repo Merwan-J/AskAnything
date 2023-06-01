@@ -115,9 +115,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void _onTap(int index) {
-    // if (index == 2) {
-    //   return;
-    // }
     setState(() {
       _selectedIndex = index;
     });

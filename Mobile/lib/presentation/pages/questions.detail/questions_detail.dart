@@ -153,7 +153,6 @@ class _QuestionDetailState extends State<QuestionDetail> {
                               return IconButton(
                                   onPressed: () {
                                     finalText = _textController.text;
-                                    print(finalText);
 
                                     BlocProvider.of<AnswerBloc>(context).add(
                                         AddAnswerEvent(AnswerForm(
