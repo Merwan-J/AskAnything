@@ -63,8 +63,16 @@ class UserError extends UserState {
 
 class Deleted extends UserState {}
 
-class Followed extends UserState {}
+class Followed extends UserState {
+  final User user;
 
-class Unfollowed extends UserState {}
+  Followed(this.user);
+}
+
+class Unfollowed extends UserState {
+  final User user;
+
+  Unfollowed(this.user);
+}
 
 class Success extends UserState {}

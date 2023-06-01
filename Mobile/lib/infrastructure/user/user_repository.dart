@@ -74,23 +74,27 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, void>> followUser(
+  Future<Either<UserFailure, User>> followUser(
       String followerId, String followingId) async {
     try {
-      await _userApi.followUser(followerId, followingId);
-      return const Right(null);
+      final userDto = await _userApi.followUser(followerId, followingId);
+      final user = userDto.toModel();
+      return Right(user);
     } catch (e) {
+      print(e);
       return const Left(UserFailure.unexpectedError());
     }
   }
 
   @override
-  Future<Either<UserFailure, void>> unfollowUser(
+  Future<Either<UserFailure, User>> unfollowUser(
       String followerId, String followingId) async {
     try {
-      await _userApi.unfollowUser(followerId, followingId);
-      return const Right(null);
+      final userDto = await _userApi.unfollowUser(followerId, followingId);
+      final user = userDto.toModel();
+      return Right(user);
     } catch (e) {
+      print(e);
       return const Left(UserFailure.unexpectedError());
     }
   }

@@ -68,20 +68,30 @@ class UserApi {
     }
   }
 
-  Future<void> followUser(String followerId, String followingId) async {
-    var response = await _customHttpClient.post("users/$followerId/follow",
-        body: json.encode({"followingId": followingId}));
-
-    if (response.statusCode != 200) {
+  Future<UserDTO> followUser(String followerId, String followingId) async {
+    var response = await _customHttpClient.post("users/$followingId/follow",
+        body: json.encode({"followerId": followerId}));
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('unfollow');
+      return UserDTO.fromJson(user);
+    } else {
+      print('follow error');
       throw Exception("Failed to follow user");
     }
   }
 
-  Future<void> unfollowUser(String followerId, String followingId) async {
-    var response = await _customHttpClient.post("users/$followerId/unfollow",
-        body: json.encode({"followingId": followingId}));
-
-    if (response.statusCode != 200) {
+  Future<UserDTO> unfollowUser(String followerId, String followingId) async {
+    var response = await _customHttpClient.post("users/$followingId/unfollow",
+        body: json.encode({"followerId": followerId}));
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('unfollow');
+      return UserDTO.fromJson(user);
+    } else {
+      print('unfollow error');
       throw Exception("Failed to unfollow user");
     }
   }

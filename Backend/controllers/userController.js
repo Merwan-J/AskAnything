@@ -99,50 +99,80 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
 
 //follow a user
 exports.followUser = catchAsyncError(async (req, res) => {
-  const { id } = req.params;
-  const { _id } = req.body;
+  const followingId = req.params.id;
+  const { followerId } = req.body;
 
   // if (!isIdValid(id) || !isIdValid(_id)) {
   //   return next(new AppError('invalid id'));
   // }
 
   await User.findByIdAndUpdate(
-    _id,
-    { $addToSet: { followings: id } },
+    followerId,
+    { $addToSet: { followings: followingId } },
     { new: true }
   );
   const user = await User.findByIdAndUpdate(
-    id,
-    { $addToSet: { followers: _id } },
+    followingId,
+    { $addToSet: { followers: followerId } },
     { new: true }
-  );
-  res.status(201).json({
-    status: 'sukcess',
+  )
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+  res.status(200).json({
+    status: 'sucess',
     data: { user },
   });
 });
 
 //unfollow a user
 exports.unfollowUser = catchAsyncError(async (req, res, next) => {
-  const { id } = req.params;
-  const { _id } = req.body;
+  const followingId = req.params.id;
+  const { followerId } = req.body;
 
   // if (!isIdValid(id) || !isIdValid(_id)) {
   //   return next(new AppError('invalid id'));
   // }
 
   await User.findByIdAndUpdate(
-    _id,
-    { $pull: { followings: id } },
+    followerId,
+    { $pull: { followings: followingId } },
     { new: true }
   );
   const user = await User.findByIdAndUpdate(
-    id,
-    { $pull: { followers: _id } },
+    followingId,
+    { $pull: { followers: followerId } },
     { new: true }
-  );
-  res.status(201).json({
-    status: 'sukcess',
+  )
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+  res.status(200).json({
+    status: 'sucess',
     data: { user },
   });
 });
