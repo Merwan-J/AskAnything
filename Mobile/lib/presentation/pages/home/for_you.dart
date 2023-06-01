@@ -68,7 +68,12 @@ class ForYou extends StatelessWidget {
           );
         }
         return Center(
-          child: Text("state"),
+          child: ElevatedButton(
+              onPressed: () {
+                BlocProvider.of<QuestionListBloc>(context)
+                    .add(GetQuestionsEvent());
+              },
+              child: Text("Refresh")),
         );
       },
     );
