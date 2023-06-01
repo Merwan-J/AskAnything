@@ -77,16 +77,22 @@ class QuestionW extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  question.author,
+                                  question.anonymous
+                                      ? "Anonnymous"
+                                      : question.author.name,
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 SizedBox(
                                   height: 3.h,
                                 ),
                                 Text(
-                                  DateFormat.jm()
+                                  //calculate difference between now and createdAt
+
+                                  DateFormat.yMMMd()
+                                      .add_jm()
                                       .format(question.createdAt)
                                       .toString(),
+
                                   style: Theme.of(context).textTheme.labelSmall,
                                 ),
                               ],
@@ -119,8 +125,11 @@ class QuestionW extends StatelessWidget {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Text(question.title,
-                        style: Theme.of(context).textTheme.bodySmall),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(question.title,
+                          style: Theme.of(context).textTheme.bodySmall),
+                    ),
                     SizedBox(
                       height: 10.h,
                     ),
@@ -158,20 +167,35 @@ class QuestionW extends StatelessWidget {
                             Text(question.answers.length.toString()),
                           ],
                         ),
-                        InkWell(
-                          radius: 10.h,
-                          onTap: () {
-                            QuestionForm questionForm = QuestionForm(
-                              anonymous: question.anonymous,
-                              title: question.title,
-                              topic: question.topic,
-                              description: question.description,
-                            );
 
-                            buildBottomSheet(
-                                context, questionForm, question.id);
-                          },
-                          child: Icon(Icons.edit),
+                        //TODO: change based on user type
+                        Row(
+                          children: [
+                            InkWell(
+                              radius: 10.h,
+                              onTap: () {
+                                QuestionForm questionForm = QuestionForm(
+                                  anonymous: question.anonymous,
+                                  title: question.title,
+                                  topic: question.topic,
+                                  description: question.description,
+                                );
+
+                                buildBottomSheet(
+                                    context, questionForm, question.id);
+                              },
+                              child: Icon(Icons.edit),
+                            ),
+                            SizedBox(
+                              width: 10.h,
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Icon(
+                                Icons.delete,
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),

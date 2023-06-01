@@ -8,7 +8,15 @@ const Questions = require('./../models/questionsModel');
 
 //Find all Questions
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
-  const questions = await Questions.find();
+  console.log('get all questions');
+
+  const questions = await Questions.find().populate({
+    path: 'author',
+    model: 'User',
+  });
+  console.log(questions.length);
+  //populate author
+
   res.status(200).json({
     status: 'success',
     results: questions.length,
@@ -21,8 +29,11 @@ exports.getQuestionById = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.id)) {
   //   return new AppError('invalid id', 400);
   // }
-
-  const question = await Questions.findById(req.params.id);
+  //populate answers and author
+  const question = await Questions.findById(req.params.id).populate({
+    path: 'author',
+    model: 'User',
+  });
   if (!question) {
     return next(new AppError('question not found', 404));
   }
@@ -37,10 +48,17 @@ exports.createQuestion = catchAsyncError(async (req, res) => {
   // console.log(user.questions);
   // console.log(user.email);
   user.questions.push(question._id);
+
+  //populate the created question before sending back
+
   await user.save();
+  const populatedQuestion = await Questions.findById(question._id).populate({
+    path: 'author',
+    model: 'User',
+  });
   res.status(201).json({
     status: 'success',
-    data: { question },
+    data: { question: populatedQuestion },
   });
 });
 
@@ -49,7 +67,11 @@ exports.updateQuestion = catchAsyncError(async (req, res) => {
   const question = await Questions.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
-  res.status(200).json({ status: 'success', data: { question } });
+  const newQuestion = await Questions.findById(question._id).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({ status: 'success', data: { question: newQuestion } });
 });
 
 //Delete a question

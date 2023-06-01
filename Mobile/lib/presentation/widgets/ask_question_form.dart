@@ -224,8 +224,11 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                   topic: selectedTopic,
                                   anonymous: isAnnonymous,
                                 );
+
                                 BlocProvider.of<QuestionPostBloc>(context)
                                     .add(QuestionPostAdd(questionForm));
+                                BlocProvider.of<QuestionListBloc>(context)
+                                    .add(GetQuestionsEvent());
                                 Navigator.pop(context);
                               },
                               child: Container(

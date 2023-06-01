@@ -1,3 +1,4 @@
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/foundation.dart';
@@ -15,7 +16,8 @@ class QuestionDetail extends StatefulWidget {
           "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
       description:
           "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-      author: "Merwan Junyedi",
+      author: AuthorDto(
+          name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
       anonymous: false,
       answers: ["1", "2", "3"],
       topic: "Technology",

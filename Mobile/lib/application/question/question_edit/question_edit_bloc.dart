@@ -16,7 +16,7 @@ class QuestionEditBloc extends Bloc<QuestionEditEvent, QuestionEditState> {
 
   QuestionEditBloc(this._questionRepository)
       : super(const QuestionEditState.initial()) {
-    on<EditQuestionEvent>((event, emit) async {
+    on<QuestionEditEvent>((event, emit) async {
       emit(const QuestionEditState.loading());
 
       print("before edit bloc");

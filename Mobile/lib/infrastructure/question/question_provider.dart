@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:askanything/infrastructure/question/question_form_dto.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
 import 'package:askanything/util/string_extension.dart';
 
@@ -32,7 +33,9 @@ class QuestionProvider {
     if (response.statusCode.toString() == 201.toString()) {
       Map<String, dynamic> decoded =
           await json.decode(response.body)['data']["question"];
-      QuestionDto questionDto = getQuestionDto(decoded);
+      print("decoded: $decoded");
+      QuestionDto questionDto = QuestionDto.fromJson(decoded);
+      print("decoding sucess");
       return questionDto;
     } else {
       throw Exception('Failed to create question');
@@ -41,16 +44,19 @@ class QuestionProvider {
 
   Future<QuestionDto> updateQuestion(
       QuestionFormDto questionFormDto, String questionId) async {
-    print("before question provider");
-    print(questionFormDto.description);
-    var response = await _httpClient.patch('questions/$questionId',
-        body: json.encode(QuestionFormDto.fromJson(questionFormDto.toJson())));
-    print("after provider");
-    var decoded = await jsonDecode(response.body)["data"]["question"];
-    print(decoded);
+    print("provider");
+    print("questionId: $questionId");
+    print("questionFormDto: ${questionFormDto.toJson()}");
+    print("another");
+    var response = await _httpClient.patch('questions/64768b7ffea9d03bb6389cb9',
+        body: json.encode(questionFormDto.toJson()));
+    print("response: ${response.body}");
 
-    QuestionDto questionDto = getQuestionDto(decoded);
-    if (response.statusCode == 200) {
+    var decoded = await jsonDecode(response.body)['data']['question'];
+    print("decoded: $decoded");
+    QuestionDto questionDto = QuestionDto.fromJson(decoded);
+    print("decoding sucess");
+    if (response.statusCode.toString() == 200.toString()) {
       return questionDto;
     } else {
       throw Exception('Failed to update question');
@@ -60,7 +66,7 @@ class QuestionProvider {
   Future<QuestionDto> getQuestion(String id) async {
     var response = await _httpClient.get('questions/$id');
 
-    if (response.statusCode.toString() == 200.toString()) {
+    if (response.statusCode == 200) {
       return QuestionDto.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to get question');
@@ -73,14 +79,16 @@ class QuestionProvider {
     //print print
     print("res");
     var decoded = await jsonDecode(response.body);
+    print("decoded: $decoded");
 
     if (response.statusCode.toString() == 200.toString()) {
       var questionsLst = decoded["data"]["questions"];
+      print("questionsLst: $questionsLst");
 
       var questionLstDto =
-          (questionsLst as List).map((e) => getQuestionDto(e)).toList();
+          (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
       print("success");
-      return (questionsLst).map((e) => getQuestionDto(e)).toList();
+      return questionLstDto;
     } else {
       throw Exception('Failed to get questions');
     }
@@ -146,13 +154,13 @@ class QuestionProvider {
       title: decoded['title'],
       description: decoded['description'],
       topic: decoded['topic'],
-      author: decoded['author'],
-      answers: decoded['answers'],
+      author: AuthorDto.fromJson(decoded['author']),
+      answers: decoded['answers'] as List<String>,
       anonymous: decoded['anonymous'],
       createdAt: DateTime.parse(decoded["createdAt"]),
       updatedAt: DateTime.parse(decoded["updatedAt"]),
-      likes: decoded['likes'],
-      dislikes: decoded['dislikes'],
+      likes: decoded['likes'] as List<String>,
+      dislikes: decoded['dislikes'] as List<String>,
     );
     return questionDto;
   }

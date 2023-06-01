@@ -151,7 +151,7 @@ class _UpdateProfileFormState extends State<UpdateQuestionForm> {
                                   topic: _selectedTopic);
 
                               BlocProvider.of<QuestionEditBloc>(context).add(
-                                  EditQuestionEvent(
+                                  QuestionEditEvent.edit(
                                       questionForm: questionForm,
                                       questionId: widget.questionId));
                               Navigator.of(context).pop();
