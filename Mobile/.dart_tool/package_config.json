@@ -104,6 +104,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "cloudinary_public",
+      "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/cloudinary_public-0.21.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "code_builder",
       "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/code_builder-4.4.0",
       "packageUri": "lib/",
@@ -138,6 +144,12 @@
       "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/dartz-0.10.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "dio",
+      "rootUri": "file:///C:/Users/Home/AppData/Local/Pub/Cache/hosted/pub.dev/dio-5.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "either_dart",
@@ -680,7 +692,7 @@
       "languageVersion": "2.19"
     }
   ],
-  "generated": "2023-05-31T19:23:12.665995Z",
+  "generated": "2023-05-31T23:55:45.966747Z",
   "generator": "pub",
   "generatorVersion": "2.19.4"
 }

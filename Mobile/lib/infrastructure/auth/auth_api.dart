@@ -71,16 +71,18 @@ class AuthApi {
     }
   }
 
-  Future changePassword(
-      {required ChangePasswordForm changePassword,
-      required String userId}) async {
+  Future changePassword({required ChangePasswordForm changePassword}) async {
+    print("in change password api");
+    var id = "6477d9a58d15004012f9f67e";
     var body = jsonEncode({
-      'password': changePassword.newPassword.password,
+      'newPassword': changePassword.newPassword,
+      "oldPassword": changePassword.oldPassword,
     });
-    var response = await http
-        .patch(_registerUrl, body: body, queryParameters: {'id': userId});
+    var response = await http.patch("auth/changePassword/$id", body: body);
+    print("after change password api");
+    print(response.body);
     if (response.statusCode == 200) {
-      var data = await jsonDecode(response.body);
+      var data = await jsonDecode(response.body)['data']['user'];
       return UserDTO.fromJson(data);
     } else {
       throw Error();

@@ -1,17 +1,27 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class ChangePasswordFormDto {
+  final String oldPassword;
+  final String newPassword;
+  final String confirmPassword;
 
-part 'change_password_form_dto.freezed.dart';
-part 'change_password_form_dto.g.dart';
+  ChangePasswordFormDto({
+    required this.oldPassword,
+    required this.newPassword,
+    required this.confirmPassword,
+  });
 
-@freezed
-class ChangePasswordFormDto with _$ChangePasswordFormDto {
-  factory ChangePasswordFormDto({
-    required String name,
-    required String oldPassword,
-    required String newPassword,
-    required String confirmPassword,
-  }) = _ChangePasswordFormDto;
+  factory ChangePasswordFormDto.fromJson(Map<String, dynamic> json) {
+    return ChangePasswordFormDto(
+      oldPassword: json['oldPassword'],
+      newPassword: json['newPassword'],
+      confirmPassword: json['confirmPassword'],
+    );
+  }
 
-  factory ChangePasswordFormDto.fromJson(Map<String, dynamic> json) =>
-      _$ChangePasswordFormDtoFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'oldPassword': oldPassword,
+      'newPassword': newPassword,
+      'confirmPassword': confirmPassword,
+    };
+  }
 }

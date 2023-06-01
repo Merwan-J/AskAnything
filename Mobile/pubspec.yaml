@@ -31,6 +31,7 @@ dependencies:
   go_router: ^7.1.1
   unicons: ^2.1.1
   font_awesome_flutter: ^10.4.0
+  cloudinary_public: ^0.21.0
 
 dev_dependencies:
   flutter_test:
