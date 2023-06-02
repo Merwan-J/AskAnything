@@ -33,7 +33,7 @@ mixin _$UserDTO {
   int get reputation => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   int get dislikes => throw _privateConstructorUsedError;
-  Map<String, dynamic> get bookmarks => throw _privateConstructorUsedError;
+  List<String> get bookmarks => throw _privateConstructorUsedError;
   List<String> get followers => throw _privateConstructorUsedError;
   List<String> get followings => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $UserDTOCopyWith<$Res> {
       int reputation,
       int likes,
       int dislikes,
-      Map<String, dynamic> bookmarks,
+      List<String> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -140,7 +140,7 @@ class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
       bookmarks: null == bookmarks
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<String>,
       followers: null == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
       int reputation,
       int likes,
       int dislikes,
-      Map<String, dynamic> bookmarks,
+      List<String> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -256,7 +256,7 @@ class __$$_UserDTOCopyWithImpl<$Res>
       bookmarks: null == bookmarks
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as List<String>,
       followers: null == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -291,7 +291,7 @@ class _$_UserDTO implements _UserDTO {
       required this.reputation,
       required this.likes,
       required this.dislikes,
-      required final Map<String, dynamic> bookmarks,
+      required final List<String> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required this.createdAt,
@@ -341,12 +341,12 @@ class _$_UserDTO implements _UserDTO {
   final int likes;
   @override
   final int dislikes;
-  final Map<String, dynamic> _bookmarks;
+  final List<String> _bookmarks;
   @override
-  Map<String, dynamic> get bookmarks {
-    if (_bookmarks is EqualUnmodifiableMapView) return _bookmarks;
+  List<String> get bookmarks {
+    if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_bookmarks);
+    return EqualUnmodifiableListView(_bookmarks);
   }
 
   final List<String> _followers;
@@ -454,7 +454,7 @@ abstract class _UserDTO implements UserDTO {
       required final int reputation,
       required final int likes,
       required final int dislikes,
-      required final Map<String, dynamic> bookmarks,
+      required final List<String> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required final DateTime createdAt,
@@ -486,7 +486,7 @@ abstract class _UserDTO implements UserDTO {
   @override
   int get dislikes;
   @override
-  Map<String, dynamic> get bookmarks;
+  List<String> get bookmarks;
   @override
   List<String> get followers;
   @override

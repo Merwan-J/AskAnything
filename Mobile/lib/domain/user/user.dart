@@ -11,7 +11,7 @@ class User {
   final int reputation;
   final int likes;
   final int dislikes;
-  final Map<String, dynamic> bookmarks;
+  final List<String> bookmarks;
   final List<String> followers;
   final List<String> followings;
   final DateTime createdAt;
@@ -28,7 +28,7 @@ class User {
       this.reputation = 0,
       this.likes = 0,
       this.dislikes = 0,
-      this.bookmarks = const {},
+      this.bookmarks = const [],
       this.followers = const [],
       this.followings = const [],
       required this.createdAt,

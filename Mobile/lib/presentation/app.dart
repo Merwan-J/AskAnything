@@ -31,7 +31,7 @@ class App extends StatelessWidget {
           // routerConfig: _router,
         );
       },
-      child: BookmarkPage(),
+      child: MainScreen(),
     );
   }
 }

@@ -63,7 +63,7 @@ class ForYou extends StatelessWidget {
                 itemCount: state.questions.length),
           );
         }
-        return Center(child: QuestionDetail());
+        return Center(child: Text('hayloga'));
       },
     );
     // return Expanded(child: QuestionW(question: question));

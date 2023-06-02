@@ -10,6 +10,34 @@ class UserRepository implements IUserRepository {
   final UserApi _userApi;
 
   UserRepository(this._userApi);
+  @override
+  Future<Either<UserFailure, User>> addBookmark(
+      String userId, String questionId) async {
+    print('user repository');
+    try {
+      final userDto = await _userApi.addBookmark(userId, questionId);
+
+      final user = userDto.toModel();
+
+      return Right(user);
+    } catch (e) {
+      return Left(UserFailure.unexpectedError());
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, User>> removeBookmark(
+      String userId, String questionId) async {
+    try {
+      final userDto = await _userApi.removeBookmark(userId, questionId);
+
+      final user = userDto.toModel();
+
+      return Right(user);
+    } catch (e) {
+      return Left(UserFailure.unexpectedError());
+    }
+  }
 
   @override
   Future<Either<UserFailure, User>> getUserById(String id) async {
