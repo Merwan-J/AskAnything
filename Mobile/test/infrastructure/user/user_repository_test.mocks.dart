@@ -112,7 +112,7 @@ class MockUserApi extends _i1.Mock implements _i3.UserApi {
         returnValue: _i4.Future<List<_i2.UserDTO>>.value(<_i2.UserDTO>[]),
       ) as _i4.Future<List<_i2.UserDTO>>);
   @override
-  _i4.Future<void> followUser(
+  _i4.Future<_i2.UserDTO> followUser(
     String? followerId,
     String? followingId,
   ) =>
@@ -124,11 +124,19 @@ class MockUserApi extends _i1.Mock implements _i3.UserApi {
             followingId,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.UserDTO>.value(_FakeUserDTO_0(
+          this,
+          Invocation.method(
+            #followUser,
+            [
+              followerId,
+              followingId,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserDTO>);
   @override
-  _i4.Future<void> unfollowUser(
+  _i4.Future<_i2.UserDTO> unfollowUser(
     String? followerId,
     String? followingId,
   ) =>
@@ -140,9 +148,17 @@ class MockUserApi extends _i1.Mock implements _i3.UserApi {
             followingId,
           ],
         ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+        returnValue: _i4.Future<_i2.UserDTO>.value(_FakeUserDTO_0(
+          this,
+          Invocation.method(
+            #unfollowUser,
+            [
+              followerId,
+              followingId,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserDTO>);
   @override
   _i4.Future<List<_i2.UserDTO>> getFollowers(String? userId) =>
       (super.noSuchMethod(
@@ -161,4 +177,60 @@ class MockUserApi extends _i1.Mock implements _i3.UserApi {
         ),
         returnValue: _i4.Future<List<_i2.UserDTO>>.value(<_i2.UserDTO>[]),
       ) as _i4.Future<List<_i2.UserDTO>>);
+  @override
+  _i4.Future<List<_i2.UserDTO>> getAdminUsers() => (super.noSuchMethod(
+        Invocation.method(
+          #getAdminUsers,
+          [],
+        ),
+        returnValue: _i4.Future<List<_i2.UserDTO>>.value(<_i2.UserDTO>[]),
+      ) as _i4.Future<List<_i2.UserDTO>>);
+  @override
+  _i4.Future<_i2.UserDTO> addBookmark(
+    String? userId,
+    String? questionId,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addBookmark,
+          [
+            userId,
+            questionId,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.UserDTO>.value(_FakeUserDTO_0(
+          this,
+          Invocation.method(
+            #addBookmark,
+            [
+              userId,
+              questionId,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserDTO>);
+  @override
+  _i4.Future<_i2.UserDTO> removeBookmark(
+    String? userId,
+    String? questionId,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #removeBookmark,
+          [
+            userId,
+            questionId,
+          ],
+        ),
+        returnValue: _i4.Future<_i2.UserDTO>.value(_FakeUserDTO_0(
+          this,
+          Invocation.method(
+            #removeBookmark,
+            [
+              userId,
+              questionId,
+            ],
+          ),
+        )),
+      ) as _i4.Future<_i2.UserDTO>);
 }
