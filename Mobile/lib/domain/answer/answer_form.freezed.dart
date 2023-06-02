@@ -20,7 +20,8 @@ mixin _$AnswerForm {
   String get image =>
       throw _privateConstructorUsedError; //TODO: Change to image
   bool get anonymous => throw _privateConstructorUsedError;
-  String get questionId => throw _privateConstructorUsedError;
+  String get question => throw _privateConstructorUsedError;
+  String get author => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnswerFormCopyWith<AnswerForm> get copyWith =>
@@ -33,7 +34,12 @@ abstract class $AnswerFormCopyWith<$Res> {
           AnswerForm value, $Res Function(AnswerForm) then) =
       _$AnswerFormCopyWithImpl<$Res, AnswerForm>;
   @useResult
-  $Res call({String text, String image, bool anonymous, String questionId});
+  $Res call(
+      {String text,
+      String image,
+      bool anonymous,
+      String question,
+      String author});
 }
 
 /// @nodoc
@@ -52,7 +58,8 @@ class _$AnswerFormCopyWithImpl<$Res, $Val extends AnswerForm>
     Object? text = null,
     Object? image = null,
     Object? anonymous = null,
-    Object? questionId = null,
+    Object? question = null,
+    Object? author = null,
   }) {
     return _then(_value.copyWith(
       text: null == text
@@ -67,9 +74,13 @@ class _$AnswerFormCopyWithImpl<$Res, $Val extends AnswerForm>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      questionId: null == questionId
-          ? _value.questionId
-          : questionId // ignore: cast_nullable_to_non_nullable
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -83,7 +94,12 @@ abstract class _$$_AnswerFormCopyWith<$Res>
       __$$_AnswerFormCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String image, bool anonymous, String questionId});
+  $Res call(
+      {String text,
+      String image,
+      bool anonymous,
+      String question,
+      String author});
 }
 
 /// @nodoc
@@ -100,7 +116,8 @@ class __$$_AnswerFormCopyWithImpl<$Res>
     Object? text = null,
     Object? image = null,
     Object? anonymous = null,
-    Object? questionId = null,
+    Object? question = null,
+    Object? author = null,
   }) {
     return _then(_$_AnswerForm(
       text: null == text
@@ -115,9 +132,13 @@ class __$$_AnswerFormCopyWithImpl<$Res>
           ? _value.anonymous
           : anonymous // ignore: cast_nullable_to_non_nullable
               as bool,
-      questionId: null == questionId
-          ? _value.questionId
-          : questionId // ignore: cast_nullable_to_non_nullable
+      question: null == question
+          ? _value.question
+          : question // ignore: cast_nullable_to_non_nullable
+              as String,
+      author: null == author
+          ? _value.author
+          : author // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -130,7 +151,8 @@ class _$_AnswerForm implements _AnswerForm {
       {required this.text,
       required this.image,
       required this.anonymous,
-      required this.questionId});
+      required this.question,
+      required this.author});
 
   @override
   final String text;
@@ -140,11 +162,13 @@ class _$_AnswerForm implements _AnswerForm {
   @override
   final bool anonymous;
   @override
-  final String questionId;
+  final String question;
+  @override
+  final String author;
 
   @override
   String toString() {
-    return 'AnswerForm(text: $text, image: $image, anonymous: $anonymous, questionId: $questionId)';
+    return 'AnswerForm(text: $text, image: $image, anonymous: $anonymous, question: $question, author: $author)';
   }
 
   @override
@@ -156,13 +180,14 @@ class _$_AnswerForm implements _AnswerForm {
             (identical(other.image, image) || other.image == image) &&
             (identical(other.anonymous, anonymous) ||
                 other.anonymous == anonymous) &&
-            (identical(other.questionId, questionId) ||
-                other.questionId == questionId));
+            (identical(other.question, question) ||
+                other.question == question) &&
+            (identical(other.author, author) || other.author == author));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, text, image, anonymous, questionId);
+      Object.hash(runtimeType, text, image, anonymous, question, author);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +201,8 @@ abstract class _AnswerForm implements AnswerForm {
       {required final String text,
       required final String image,
       required final bool anonymous,
-      required final String questionId}) = _$_AnswerForm;
+      required final String question,
+      required final String author}) = _$_AnswerForm;
 
   @override
   String get text;
@@ -185,7 +211,9 @@ abstract class _AnswerForm implements AnswerForm {
   @override //TODO: Change to image
   bool get anonymous;
   @override
-  String get questionId;
+  String get question;
+  @override
+  String get author;
   @override
   @JsonKey(ignore: true)
   _$$_AnswerFormCopyWith<_$_AnswerForm> get copyWith =>

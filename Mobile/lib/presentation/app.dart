@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:askanything/presentation/pages/bottom_navigation.dart';
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
+import 'package:askanything/presentation/pages/bookmark_page/book_mark.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
+import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:askanything/presentation/routes/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

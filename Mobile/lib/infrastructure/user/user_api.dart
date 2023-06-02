@@ -132,6 +132,46 @@ class UserApi {
       throw Exception("Failed to load users");
     }
   }
+
+  Future<UserDTO> addBookmark(String userId, String questionId) async {
+    try {
+      print("i'm from addbookmark api");
+      var body = await jsonEncode({"questionId": questionId});
+      var response =
+          await _customHttpClient.post("users/bookmarks/$userId", body: body);
+
+      var temp = await json.decode(response.body)["data"]["user"];
+      print(temp);
+      if (response.statusCode == 200) {
+        return UserDTO.fromJson(temp);
+      } else {
+        throw Exception("Failed to load user");
+      }
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
+
+  Future<UserDTO> removeBookmark(String userId, String questionId) async {
+    try {
+      var body = await jsonEncode({"questionId": questionId});
+      var response = await _customHttpClient
+          .post("users/removebookmarks/$userId", body: body);
+
+      var temp = await json.decode(response.body)["data"]["user"];
+      print(temp);
+      if (response.statusCode == 200) {
+        print('from status');
+        return UserDTO.fromJson(temp);
+      } else {
+        throw Exception("Failed to load user");
+      }
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
 }
 
 void printUserJson(Map<String, dynamic> json) {

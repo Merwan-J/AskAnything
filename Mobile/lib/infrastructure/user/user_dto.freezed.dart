@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'user_entity.dart';
+part of 'user_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,23 +14,26 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-UserEntity _$UserEntityFromJson(Map<String, dynamic> json) {
-  return _UserEntity.fromJson(json);
+UserDTO _$UserDTOFromJson(Map<String, dynamic> json) {
+  return _UserDTO.fromJson(json);
 }
 
 /// @nodoc
-mixin _$UserEntity {
+mixin _$UserDTO {
+  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get profilePic => throw _privateConstructorUsedError;
+  @JsonKey(name: 'questions')
   List<String> get questionIds => throw _privateConstructorUsedError;
+  @JsonKey(name: 'answers')
   List<String> get answerIds => throw _privateConstructorUsedError;
   int get reputation => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   int get dislikes => throw _privateConstructorUsedError;
-  List<dynamic> get bookmarks => throw _privateConstructorUsedError;
+  List<String> get bookmarks => throw _privateConstructorUsedError;
   List<String> get followers => throw _privateConstructorUsedError;
   List<String> get followings => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -38,28 +41,26 @@ mixin _$UserEntity {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $UserEntityCopyWith<UserEntity> get copyWith =>
-      throw _privateConstructorUsedError;
+  $UserDTOCopyWith<UserDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UserEntityCopyWith<$Res> {
-  factory $UserEntityCopyWith(
-          UserEntity value, $Res Function(UserEntity) then) =
-      _$UserEntityCopyWithImpl<$Res, UserEntity>;
+abstract class $UserDTOCopyWith<$Res> {
+  factory $UserDTOCopyWith(UserDTO value, $Res Function(UserDTO) then) =
+      _$UserDTOCopyWithImpl<$Res, UserDTO>;
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String name,
       String email,
       String password,
       String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
+      @JsonKey(name: 'questions') List<String> questionIds,
+      @JsonKey(name: 'answers') List<String> answerIds,
       int reputation,
       int likes,
       int dislikes,
-      List<dynamic> bookmarks,
+      List<String> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -67,9 +68,9 @@ abstract class $UserEntityCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
-    implements $UserEntityCopyWith<$Res> {
-  _$UserEntityCopyWithImpl(this._value, this._then);
+class _$UserDTOCopyWithImpl<$Res, $Val extends UserDTO>
+    implements $UserDTOCopyWith<$Res> {
+  _$UserDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -139,7 +140,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       bookmarks: null == bookmarks
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       followers: null == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -161,25 +162,24 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
 }
 
 /// @nodoc
-abstract class _$$_UserEntityCopyWith<$Res>
-    implements $UserEntityCopyWith<$Res> {
-  factory _$$_UserEntityCopyWith(
-          _$_UserEntity value, $Res Function(_$_UserEntity) then) =
-      __$$_UserEntityCopyWithImpl<$Res>;
+abstract class _$$_UserDTOCopyWith<$Res> implements $UserDTOCopyWith<$Res> {
+  factory _$$_UserDTOCopyWith(
+          _$_UserDTO value, $Res Function(_$_UserDTO) then) =
+      __$$_UserDTOCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
+      {@JsonKey(name: '_id') String id,
       String name,
       String email,
       String password,
       String profilePic,
-      List<String> questionIds,
-      List<String> answerIds,
+      @JsonKey(name: 'questions') List<String> questionIds,
+      @JsonKey(name: 'answers') List<String> answerIds,
       int reputation,
       int likes,
       int dislikes,
-      List<dynamic> bookmarks,
+      List<String> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -187,11 +187,10 @@ abstract class _$$_UserEntityCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_UserEntityCopyWithImpl<$Res>
-    extends _$UserEntityCopyWithImpl<$Res, _$_UserEntity>
-    implements _$$_UserEntityCopyWith<$Res> {
-  __$$_UserEntityCopyWithImpl(
-      _$_UserEntity _value, $Res Function(_$_UserEntity) _then)
+class __$$_UserDTOCopyWithImpl<$Res>
+    extends _$UserDTOCopyWithImpl<$Res, _$_UserDTO>
+    implements _$$_UserDTOCopyWith<$Res> {
+  __$$_UserDTOCopyWithImpl(_$_UserDTO _value, $Res Function(_$_UserDTO) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -213,7 +212,7 @@ class __$$_UserEntityCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(_$_UserEntity(
+    return _then(_$_UserDTO(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -257,7 +256,7 @@ class __$$_UserEntityCopyWithImpl<$Res>
       bookmarks: null == bookmarks
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<String>,
       followers: null == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -280,19 +279,19 @@ class __$$_UserEntityCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_UserEntity implements _UserEntity {
-  const _$_UserEntity(
-      {required this.id,
+class _$_UserDTO implements _UserDTO {
+  const _$_UserDTO(
+      {@JsonKey(name: '_id') required this.id,
       required this.name,
       required this.email,
       required this.password,
-      required this.profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
+      this.profilePic = '',
+      @JsonKey(name: 'questions') required final List<String> questionIds,
+      @JsonKey(name: 'answers') required final List<String> answerIds,
       required this.reputation,
       required this.likes,
       required this.dislikes,
-      required final List<dynamic> bookmarks,
+      required final List<String> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required this.createdAt,
@@ -303,10 +302,11 @@ class _$_UserEntity implements _UserEntity {
         _followers = followers,
         _followings = followings;
 
-  factory _$_UserEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_UserEntityFromJson(json);
+  factory _$_UserDTO.fromJson(Map<String, dynamic> json) =>
+      _$$_UserDTOFromJson(json);
 
   @override
+  @JsonKey(name: '_id')
   final String id;
   @override
   final String name;
@@ -315,9 +315,11 @@ class _$_UserEntity implements _UserEntity {
   @override
   final String password;
   @override
+  @JsonKey()
   final String profilePic;
   final List<String> _questionIds;
   @override
+  @JsonKey(name: 'questions')
   List<String> get questionIds {
     if (_questionIds is EqualUnmodifiableListView) return _questionIds;
     // ignore: implicit_dynamic_type
@@ -326,6 +328,7 @@ class _$_UserEntity implements _UserEntity {
 
   final List<String> _answerIds;
   @override
+  @JsonKey(name: 'answers')
   List<String> get answerIds {
     if (_answerIds is EqualUnmodifiableListView) return _answerIds;
     // ignore: implicit_dynamic_type
@@ -338,9 +341,9 @@ class _$_UserEntity implements _UserEntity {
   final int likes;
   @override
   final int dislikes;
-  final List<dynamic> _bookmarks;
+  final List<String> _bookmarks;
   @override
-  List<dynamic> get bookmarks {
+  List<String> get bookmarks {
     if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bookmarks);
@@ -369,14 +372,14 @@ class _$_UserEntity implements _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(id: $id, name: $name, email: $email, password: $password, profilePic: $profilePic, questionIds: $questionIds, answerIds: $answerIds, reputation: $reputation, likes: $likes, dislikes: $dislikes, bookmarks: $bookmarks, followers: $followers, followings: $followings, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserDTO(id: $id, name: $name, email: $email, password: $password, profilePic: $profilePic, questionIds: $questionIds, answerIds: $answerIds, reputation: $reputation, likes: $likes, dislikes: $dislikes, bookmarks: $bookmarks, followers: $followers, followings: $followings, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_UserEntity &&
+            other is _$_UserDTO &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
@@ -428,39 +431,39 @@ class _$_UserEntity implements _UserEntity {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>
-      __$$_UserEntityCopyWithImpl<_$_UserEntity>(this, _$identity);
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
+      __$$_UserDTOCopyWithImpl<_$_UserDTO>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserEntityToJson(
+    return _$$_UserDTOToJson(
       this,
     );
   }
 }
 
-abstract class _UserEntity implements UserEntity {
-  const factory _UserEntity(
-      {required final String id,
+abstract class _UserDTO implements UserDTO {
+  const factory _UserDTO(
+      {@JsonKey(name: '_id') required final String id,
       required final String name,
       required final String email,
       required final String password,
-      required final String profilePic,
-      required final List<String> questionIds,
-      required final List<String> answerIds,
+      final String profilePic,
+      @JsonKey(name: 'questions') required final List<String> questionIds,
+      @JsonKey(name: 'answers') required final List<String> answerIds,
       required final int reputation,
       required final int likes,
       required final int dislikes,
-      required final List<dynamic> bookmarks,
+      required final List<String> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$_UserEntity;
+      required final DateTime updatedAt}) = _$_UserDTO;
 
-  factory _UserEntity.fromJson(Map<String, dynamic> json) =
-      _$_UserEntity.fromJson;
+  factory _UserDTO.fromJson(Map<String, dynamic> json) = _$_UserDTO.fromJson;
 
   @override
+  @JsonKey(name: '_id')
   String get id;
   @override
   String get name;
@@ -471,8 +474,10 @@ abstract class _UserEntity implements UserEntity {
   @override
   String get profilePic;
   @override
+  @JsonKey(name: 'questions')
   List<String> get questionIds;
   @override
+  @JsonKey(name: 'answers')
   List<String> get answerIds;
   @override
   int get reputation;
@@ -481,7 +486,7 @@ abstract class _UserEntity implements UserEntity {
   @override
   int get dislikes;
   @override
-  List<dynamic> get bookmarks;
+  List<String> get bookmarks;
   @override
   List<String> get followers;
   @override
@@ -492,6 +497,6 @@ abstract class _UserEntity implements UserEntity {
   DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$_UserEntityCopyWith<_$_UserEntity> get copyWith =>
+  _$$_UserDTOCopyWith<_$_UserDTO> get copyWith =>
       throw _privateConstructorUsedError;
 }

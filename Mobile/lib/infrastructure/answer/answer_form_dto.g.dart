@@ -11,7 +11,8 @@ _$_AnswerFormDto _$$_AnswerFormDtoFromJson(Map<String, dynamic> json) =>
       text: json['text'] as String,
       image: json['image'] as String,
       anonymous: json['anonymous'] as bool,
-      questionId: json['questionId'] as String,
+      author: json['author'] as String,
+      question: json['question'] as String,
     );
 
 Map<String, dynamic> _$$_AnswerFormDtoToJson(_$_AnswerFormDto instance) =>
@@ -19,5 +20,6 @@ Map<String, dynamic> _$$_AnswerFormDtoToJson(_$_AnswerFormDto instance) =>
       'text': instance.text,
       'image': instance.image,
       'anonymous': instance.anonymous,
-      'questionId': instance.questionId,
+      'author': instance.author,
+      'question': instance.question,
     };

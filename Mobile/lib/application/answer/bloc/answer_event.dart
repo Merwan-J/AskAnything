@@ -9,6 +9,8 @@ part 'answer_event.freezed.dart';
 @freezed
 class AnswerEvent with _$AnswerEvent {
   const factory AnswerEvent.loadAnswer(String answerId) = LoadAnswerEvent;
+  //by question id
+  //by user id
   const factory AnswerEvent.addAnswer(AnswerForm answerForm) = AddAnswerEvent;
   const factory AnswerEvent.updateAnswer(String id, String text) =
       UpdateAnswerEvent;

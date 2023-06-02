@@ -208,3 +208,33 @@ exports.getfollowing = catchAsyncError(async (req, res) => {
     data: { following },
   });
 });
+
+exports.addBookmark = catchAsyncError(async (req, res, next) => {
+
+  const user = await User.findById(req.params.id);
+  const questionId = req.body.questionId;
+  user.bookmarks.pull(questionId);
+  user.bookmarks.push(questionId);
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
+
+exports.removeBookmark = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  const questionId = req.body.questionId;
+  user.bookmarks.pull(questionId);
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});

@@ -16,7 +16,8 @@ class Following extends StatelessWidget {
         image: "",
         likes: ["1", "3"],
         dislikes: ["1,23"],
-        author: AuthorDto(id: '123', email: 'doju7@gmail.com', name: 'Doju'),
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         question: "2",
         createdAt: DateTime.now(),

@@ -13,7 +13,7 @@ class UserDTO extends Equatable {
   final int reputation;
   final int likes;
   final int dislikes;
-  final Map<String, dynamic> bookmarks;
+  final List<dynamic> bookmarks;
   final List<String> followers;
   final List<String> followings;
   final DateTime createdAt;
@@ -77,9 +77,7 @@ class UserDTO extends Equatable {
       reputation: json['reputation'] ?? 0,
       likes: json['likes'] ?? 0,
       dislikes: json['dislikes'] ?? 0,
-      bookmarks: json['bookmarks'] != null
-          ? Map<String, dynamic>.from(json['bookmarks'])
-          : {},
+      bookmarks: json['bookmarks'] ?? [],
       followers: json['followers'] != null
           ? (json['followers'] as List<dynamic>)
               .map((e) => e.toString())

@@ -13,6 +13,8 @@ router
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+router.route('/bookmarks/:id').post(userController.addBookmark);
+router.route('/removebookmarks/:id').post(userController.removeBookmark);
 
 //getfollowers
 router.route('/:id/followers').get(userController.getfollowers);
