@@ -72,6 +72,9 @@ void main() {
             child: MultiBlocProvider(
               providers: [
                 BlocProvider(
+                    create: (context) => QuestionListBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
+                BlocProvider(
                     create: (context) => ProfileBloc(
                         RepositoryProvider.of<ProfileRepository>(context))),
                 BlocProvider(
@@ -86,10 +89,8 @@ void main() {
                         RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
                     create: (context) => QuestionPostBloc(
-                        RepositoryProvider.of<QuestionRepository>(context))),
-                BlocProvider(
-                    create: (context) => QuestionListBloc(
-                        RepositoryProvider.of<QuestionRepository>(context))),
+                        RepositoryProvider.of<QuestionRepository>(context),
+                        BlocProvider.of<QuestionListBloc>(context))),
               ],
               child: BlocListener<AuthBloc, AuthState>(listener:
                   (context, state) {

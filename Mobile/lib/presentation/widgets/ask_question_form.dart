@@ -10,6 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../application/question/question_post/bloc/question_post_bloc.dart';
 import '../../domain/question/question_form.dart';
+import '../../domain/user/user.dart';
+import '../../infrastructure/auth/auth_repository.dart';
 
 class AskQuestionForm extends StatefulWidget {
   const AskQuestionForm({super.key});
@@ -69,6 +71,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
 
   @override
   Widget build(BuildContext context) {
+    User? _user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
     return DraggableScrollableSheet(
       expand: false,
       initialChildSize: 0.8,
@@ -100,8 +104,9 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     DropdownButtonFormField(
-                        decoration: InputDecoration(hintText: "Select Topic"),
-                        disabledHint: Text("Choose Topic"),
+                        decoration:
+                            const InputDecoration(hintText: "Select Topic"),
+                        disabledHint: const Text("Choose Topic"),
                         value: selectedTopic != "" ? selectedTopic : null,
                         items: _dropDownButtonList(),
                         onChanged: (value) {
@@ -114,7 +119,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                     ),
                     TextField(
                       controller: titleController,
-                      decoration: InputDecoration(hintText: "Enter title here"),
+                      decoration:
+                          const InputDecoration(hintText: "Enter title here"),
                     ),
                     SizedBox(
                       height: 10.h,
@@ -126,8 +132,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                         // expands: true,
                         // keyboardType: TextInputType.multiline,
                         controller: descriptionController,
-                        decoration:
-                            InputDecoration(hintText: "Enter description"),
+                        decoration: const InputDecoration(
+                            hintText: "Enter description"),
                       ),
                     ),
                     SizedBox(
@@ -147,7 +153,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                             SizedBox(
                               width: 10.h,
                             ),
-                            Text("Upload Image")
+                            const Text("Upload Image")
                           ],
                         ),
                       ),
@@ -176,77 +182,41 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                 onTap: () {
                                   context.pop();
                                 },
-                                child: Text("Cancel")),
+                                child: const Text("Cancel")),
                             SizedBox(
                               width: 10.h,
                             ),
                             BlocConsumer<QuestionPostBloc, QuestionPostState>(
-                                listener: (context, state) {
-                              print(state);
-                              if (state is QuestionPostInitial) {
-                                //snackbar
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("Initial"),
-                                  ),
-                                );
-                              }
-                              if (state is QuestionPostSuccess) {
-                                //remove snackbar
-
-                                ScaffoldMessenger.of(context)
-                                    .hideCurrentSnackBar();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("success"),
-                                  ),
-                                );
-                                //snackbar
-                              }
-
-                              if (state is QuestionPosting) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("posting"),
-                                  ),
-                                );
-                                //snackbar
-                              }
-
-                              if (state is QuestionPostFailure) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text("failed"),
-                                  ),
-                                );
-                                //snackbar
-                              }
-                            }, builder: (context, state) {
-                              return GestureDetector(
-                                onTap: () {
-                                  final questionForm = QuestionForm(
-                                    title: titleController.text,
-                                    description: descriptionController.text,
-                                    topic: selectedTopic,
-                                    anonymous: isAnnonymous,
-                                  );
-                                  BlocProvider.of<QuestionPostBloc>(context)
-                                      .add(QuestionPostAdd(questionForm));
-                                  Navigator.pop(context);
-                                },
-                                child: Container(
-                                  // color: Colors.blue,
-                                  decoration: BoxDecoration(
-                                      color: Color.fromRGBO(255, 115, 92, 1),
-                                      borderRadius:
-                                          BorderRadius.circular(10.h)),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 20.h, vertical: 10.h),
-                                  child: Text("Post",
-                                      style: TextStyle(color: Colors.white)),
-                                ),
-                              ); //snackbar
-                            })
+                                listener: (context, state) {},
+                                builder: (context, state) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      final questionForm = QuestionForm(
+                                        title: titleController.text,
+                                        description: descriptionController.text,
+                                        topic: selectedTopic,
+                                        anonymous: isAnnonymous,
+                                      );
+                                      BlocProvider.of<QuestionPostBloc>(context)
+                                          .add(QuestionPostAdd(
+                                              questionForm, _user!.id));
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                      // color: Colors.blue,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromRGBO(
+                                              255, 115, 92, 1),
+                                          borderRadius:
+                                              BorderRadius.circular(10.h)),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 20.h, vertical: 10.h),
+                                      child: const Text("Post",
+                                          style:
+                                              TextStyle(color: Colors.white)),
+                                    ),
+                                  ); //snackbar
+                                })
                           ],
                         ))
                   ],
@@ -269,8 +239,8 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
 
     return topics
         .map((topic) => DropdownMenuItem(
-              child: Text(topic),
               value: topic,
+              child: Text(topic),
             ))
         .toList();
   }

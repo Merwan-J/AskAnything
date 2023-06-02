@@ -23,8 +23,10 @@ class QuestionProvider {
 
   // TODO: handle image uploads/ multipart form data
 
-  Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    final author = "644a59d906e58c639150523c";
+  Future<QuestionDto> createQuestion(
+      QuestionFormDto questionFormDto, String id) async {
+    //TODO: change this to the actual author id
+    final author = id;
     print("author: $author");
     var response = await _httpClient.post('questions',
         body: json.encode(questionFormDto.toJson()..['author'] = author));
@@ -36,6 +38,7 @@ class QuestionProvider {
       print("decoded: $decoded");
       QuestionDto questionDto = QuestionDto.fromJson(decoded);
       print("decoding sucess");
+      print("questionDto: $questionDto");
       return questionDto;
     } else {
       throw Exception('Failed to create question');
@@ -137,7 +140,7 @@ class QuestionProvider {
   }
 
   Future<QuestionDto> upvoteQuestion(String id) async {
-    var userId = '6448f5ead561de32dc337d5b';
+    var userId = '647941adb3ca8dc6c1ac3f77';
     var body = json.encode({"userId": userId});
     print("about like");
     var response = await _httpClient.post('questions/upvote/$id', body: body);
@@ -159,7 +162,7 @@ class QuestionProvider {
   }
 
   Future<QuestionDto> downvoteQuestion(String id) async {
-    var user = '6448f5ead561de32dc337d5b';
+    var user = '647941adb3ca8dc6c1ac3f77';
     var body = json.encode({"userId": user});
     print(body);
     var response = await _httpClient.post('questions/downvote/$id', body: body);

@@ -7,8 +7,9 @@ class QuestionPostingEvent extends QuestionPostEvent {}
 
 class QuestionPostAdd extends QuestionPostEvent {
   final QuestionForm questionForm;
+  final String id;
 
-  QuestionPostAdd(this.questionForm);
+  QuestionPostAdd(this.questionForm, this.id);
 }
 
 class PostQuestionWithImage extends QuestionPostEvent {
