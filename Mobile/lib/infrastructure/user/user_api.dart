@@ -4,6 +4,7 @@ import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_form_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
+import 'package:askanything/util/custom_timeout.dart';
 
 class UserApi {
   CustomHttpClient _customHttpClient;
@@ -20,19 +21,26 @@ class UserApi {
   }
 
   Future<UserDTO> getUserById(String id) async {
-    var response = await _customHttpClient.get("users/$id");
-    if (response.statusCode == 200) {
-      var user = jsonDecode(response.body)['data']['user'];
-      // var questions = (user['questions'] as List<dynamic>)
-      //     .map((question) => QuestionDto.fromJson(question))
-      //     .toList();
-      print("before updating");
-      // user['questions'] = questions;
-      print('after updating');
-      // print(user['questions'][0]['answers']);
-      return UserDTO.fromJson(user);
-    } else {
-      throw Exception("Failed to load user");
+    try {
+      int timeoutDurINSecs = 1;
+      var timeout = Duration(seconds: timeoutDurINSecs);
+      print("fetching user");
+      var response = await _customHttpClient.get("users/$id").timeout(timeout);
+      if (response.statusCode == 200) {
+        var user = jsonDecode(response.body)['data']['user'];
+        // var questions = (user['questions'] as List<dynamic>)
+        //     .map((question) => QuestionDto.fromJson(question))
+        //     .toList();
+        print("before updating");
+        // user['questions'] = questions;
+        print('after updating');
+        // print(user['questions'][0]['answers']);
+        return UserDTO.fromJson(user);
+      } else {
+        throw Exception("Failed to load user");
+      }
+    } catch (_) {
+      throw CustomTimeoutException();
     }
   }
 

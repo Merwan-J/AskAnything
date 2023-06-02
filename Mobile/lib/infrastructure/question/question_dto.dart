@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
 
@@ -81,5 +83,42 @@ class QuestionDto {
       createdAt: createdAt,
       updatedAt: updatedAt,
     );
+  }
+
+  Map<String, dynamic> toJsonForDb() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'author': author.toJsonString(),
+      'anonymous': anonymous,
+      'answers': answers,
+      'topic': topic,
+      'likes': likes.join(', '),
+      'dislikes': dislikes.join(', '),
+      'image': image,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  factory QuestionDto.fromjsonForDb(Map<String, dynamic> json) {
+    return QuestionDto(
+      id: json['id'] as String? ?? '',
+      title: json['title'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      author: AuthorDto.fromJsonString(json['author'] as String? ?? ''),
+      anonymous: json['anonymous'] == 0 ? false : true,
+      answers: (json['answers'].toString()).split(', '),
+      topic: json['topic'] as String? ?? '',
+      likes: (json['likes'] as String? ?? '').split(', '),
+      dislikes: (json['dislikes'] as String? ?? '').split(', '),
+      image: null,
+      createdAt: DateTime.parse(json['createdAt'] as String? ?? ''),
+      updatedAt: DateTime.parse(json['updatedAt'] as String? ?? ''),
+    );
+  }
+  String toStringJson() {
+    return jsonEncode(toJsonForDb());
   }
 }

@@ -1,6 +1,9 @@
+import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/profile/bloc/profile_bloc.dart';
 import 'package:askanything/application/profile/bloc/profile_event.dart';
 import 'package:askanything/domain/profile/edit_profile_form.dart';
+import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/infrastructure/profile/profile_dto.dart';
 import 'package:askanything/presentation/widgets/update_profie_form.dart';
 import 'package:flutter/foundation.dart';
@@ -73,6 +76,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    User? user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
+    print(user?.id);
+    if (user != null) {
+      nameController.text = user.name;
+      emailController.text = user.email;
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
