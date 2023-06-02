@@ -17,7 +17,7 @@ class UserEntity with _$UserEntity {
     required int reputation,
     required int likes,
     required int dislikes,
-    required Map<String, dynamic> bookmarks,
+    required List<String> bookmarks,
     required List<String> followers,
     required List<String> followings,
     required DateTime createdAt,

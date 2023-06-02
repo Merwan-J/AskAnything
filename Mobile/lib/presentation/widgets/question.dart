@@ -14,15 +14,6 @@ import 'package:askanything/domain/question/question.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
-import '../../application/question/question_detail/question_detail_bloc.dart';
-import '../../application/question/question_detail/question_detail_events.dart';
-import '../../application/question/question_detail/question_detail_state.dart';
-import '../../application/question/question_edit/question_edit_events.dart';
-import '../../application/question/question_like/question_like_state.dart';
-import '../../application/question/question_list/bloc/question_list_bloc.dart';
-import '../../infrastructure/question/question_repository.dart';
-import 'ask_question_form.dart';
-
 class QuestionW extends StatelessWidget {
   Question question;
   QuestionW({
@@ -91,22 +82,16 @@ class QuestionW extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  question.anonymous
-                                      ? "Anonnymous"
-                                      : question.author.name,
+                                  question.author,
                                   style: Theme.of(context).textTheme.labelLarge,
                                 ),
                                 SizedBox(
                                   height: 3.h,
                                 ),
                                 Text(
-                                  //calculate difference between now and createdAt
-
-                                  DateFormat.yMMMd()
-                                      .add_jm()
+                                  DateFormat.jm()
                                       .format(question.createdAt)
                                       .toString(),
-
                                   style: Theme.of(context).textTheme.labelSmall,
                                 ),
                               ],
@@ -139,72 +124,34 @@ class QuestionW extends StatelessWidget {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(question.title,
-                          style: Theme.of(context).textTheme.bodySmall),
-                    ),
+                    Text(question.title,
+                        style: Theme.of(context).textTheme.bodySmall),
                     SizedBox(
                       height: 10.h,
                     ),
                     //TODO: change like color based on user likes
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        getLikesAndComment(
-                            context,
-                            question,
-                            question.likes.contains(userId),
-                            question.dislikes.contains(userId)),
-
-                        //TODO: change based on user type
-                        Row(
-                          children: [
-                            InkWell(
-                              radius: 10.h,
-                              onTap: () {
-                                QuestionForm questionForm = QuestionForm(
-                                  anonymous: question.anonymous,
-                                  title: question.title,
-                                  topic: question.topic,
-                                  description: question.description,
-                                );
-
-                                buildBottomSheet(
-                                    context, questionForm, question.id);
-                              },
-                              child: Icon(Icons.edit),
-                            ),
-                            SizedBox(
-                              width: 10.h,
-                            ),
-                            BlocProvider(
-                              create: (context) => QuestionDetailBloc(
-                                  questionListBloc:
-                                      BlocProvider.of<QuestionListBloc>(
-                                          context),
-                                  questionRepository:
-                                      RepositoryProvider.of<QuestionRepository>(
-                                          context)),
-                              child: BlocBuilder<QuestionDetailBloc,
-                                  QuestionDetailState>(
-                                builder: (context, state) {
-                                  return InkWell(
-                                    onTap: () {
-                                      BlocProvider.of<QuestionDetailBloc>(
-                                              context)
-                                          .add(QuestionDetailDeleteEvent(
-                                              question.id));
-                                    },
-                                    child: Icon(
-                                      Icons.delete,
-                                    ),
-                                  );
-                                },
-                              ),
-                            )
-                          ],
-                        )
+                        SizedBox(
+                          width: 10.h,
+                        ),
+                        Icon(Icons.keyboard_arrow_up_outlined,
+                            color: nolikes > 0
+                                ? Theme.of(context).primaryColor
+                                : Theme.of(context).textTheme.bodyLarge!.color),
+                        Text(nolikes.toString()),
+                        Icon(Icons.keyboard_arrow_down_outlined,
+                            color: nolikes < 0
+                                ? Theme.of(context).primaryColor
+                                : Theme.of(context).textTheme.bodyLarge!.color),
+                        SizedBox(
+                          width: 10.h,
+                        ),
+                        Icon(Icons.mode_comment_outlined),
+                        SizedBox(
+                          width: 5.h,
+                        ),
+                        Text(question.answers.length.toString()),
                       ],
                     ),
                   ],

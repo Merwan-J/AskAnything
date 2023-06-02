@@ -11,7 +11,7 @@ class AnswerAPI {
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
     var answer = await _customHttpClient.post("answers",
         body: json.encode(answerFormDto.toJson()));
-    print(answer.body);
+
     var temp = json.decode(answer.body);
 
     var tempJson = temp["data"]["answer"];

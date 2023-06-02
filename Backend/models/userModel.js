@@ -37,16 +37,14 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    bookmarks: {
-      type: {
-        questions: [{ type: mongoose.Types.ObjectId, ref: 'Question' }],
-        answers: [{ type: mongoose.Types.ObjectId, ref: 'Answer' }],
+    bookmarks: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: 'Question',
+        default: [],
       },
-      default: {
-        questions: [],
-        answers: [],
-      },
-    },
+    ],
+
     followers: [
       {
         type: mongoose.Types.ObjectId,
