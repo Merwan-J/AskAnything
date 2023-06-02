@@ -1,11 +1,20 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:askanything/application/answer/bloc/answer_bloc.dart';
+import 'package:askanything/application/answer/bloc/answer_event.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/presentation/routes/routes_dart.dart';
+import 'package:askanything/presentation/widgets/answer_edit_form.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
 import 'package:askanything/domain/answer/answer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+
+import '../../domain/user/user.dart';
 
 class AnswerW extends StatelessWidget {
   Answer answer;
@@ -14,8 +23,31 @@ class AnswerW extends StatelessWidget {
     required this.answer,
   }) : super(key: key);
 
+  // Future<User?> getUser(context) async {
+  //   final User? user = await RepositoryProvider.of<AuthRepository>(context)
+  //       .getAuthenticatedUser();
+  //   return user;
+  // }
+  buildBottomSheet(BuildContext context, Answer answer) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.h),
+                topRight: Radius.circular(30.h))),
+        context: context,
+        builder: (context) => AnswerEditForm(
+              answer: answer,
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    User? user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
+    print(user?.email);
+
     final nolikes = answer.likes.length - answer.dislikes.length;
     return FittedBox(
       child: GestureDetector(
@@ -94,20 +126,55 @@ class AnswerW extends StatelessWidget {
                   ),
                   //TODO: change like color based on user likes
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        width: 10.h,
+                      Visibility(
+                          child: Row(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                buildBottomSheet(
+                                  context,
+                                  answer,
+                                );
+                              },
+                              child: Icon(
+                                Icons.edit_outlined,
+                                size: 20.h,
+                              )),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                BlocProvider.of<AnswerBloc>(context)
+                                    .add(DeleteAnswerEvent(answer.id));
+                              },
+                              child: Icon(
+                                Icons.delete,
+                                size: 20.h,
+                              )),
+                        ],
+                      )),
+                      Row(
+                        children: [
+                          Icon(Icons.keyboard_arrow_up_outlined,
+                              color: nolikes > 0
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .color),
+                          Text(nolikes.toString()),
+                          Icon(Icons.keyboard_arrow_down_outlined,
+                              color: nolikes < 0
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .color),
+                        ],
                       ),
-                      Icon(Icons.keyboard_arrow_up_outlined,
-                          color: nolikes > 0
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).textTheme.bodyLarge!.color),
-                      Text(nolikes.toString()),
-                      Icon(Icons.keyboard_arrow_down_outlined,
-                          color: nolikes < 0
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).textTheme.bodyLarge!.color),
                     ],
                   ),
                 ],

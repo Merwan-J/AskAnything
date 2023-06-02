@@ -161,7 +161,10 @@ class QuestionW extends StatelessWidget {
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Text(question.description,
-                                  style: TextStyle(fontSize: 12.sp)),
+                                  style: TextStyle(fontSize: 13.sp)),
+                            ),
+                            SizedBox(
+                              height: 10.h,
                             ),
                           ],
                         )),

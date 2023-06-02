@@ -4,6 +4,7 @@ const Answer = require('./../models/answerModel');
 const User = require('./../models/userModel');
 const { isIdValid } = require('./../utils/validator');
 const Question = require('./../models/questionsModel');
+const { default: mongoose } = require('mongoose');
 
 exports.createAnswer = catchAsyncError(async (req, res, next) => {
   console.log(req.body);
@@ -48,29 +49,48 @@ exports.getAnswer = catchAsyncError(async (req, res, next) => {
   });
 });
 exports.updateAnswer = catchAsyncError(async (req, res, next) => {
-  try {
-    const newAnswer = await User.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.status(200).json({
-      status: 'sucess',
-      data: { newAnswer },
-    });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  console.log(req.body);
+  const answer = await Answer.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  const savedAnswer = await Answer.findById(req.params.id).populate({
+    path: 'author',
+    model: 'User',
+  });
+  console.log('here is the new answer');
+  console.log(answer);
+  res.status(200).json({
+    status: 'sucess',
+    data: { answer: savedAnswer },
+  });
+});
+exports.getAnswersByQuestion = catchAsyncError(async (req, res, next) => {
+  console.log(req.params.id);
+  console.log('here herree --------------------');
+
+  const answers = await Answer.find({
+    question: req.params.id,
+  }).populate({
+    path: 'author',
+    model: 'User',
+  });
+  console.log("after popluation of author's name");
+  console.log(answers);
+  res.status(200).json({
+    status: 'success',
+    results: answers.length,
+    data: { answers },
+  });
 });
 
 exports.deleteAnswer = catchAsyncError(async (req, res, next) => {
-  // if (!isIdValid(req.id)) {
-  //   return next(new AppError('invalid id', 400));
-  // }
+  console.log("here's the id");
+  console.log(req.params.id);
+
   const answer = await Answer.findByIdAndDelete(req.params.id);
   const user = await User.findById(answer.author);
   const question = await Question.findById(answer.question);
-
-  // console.log(answer.question);
-  // console.log(answer.author);
 
   question.answers.pull(answer._id);
   user.answers.pull(answer._id);

@@ -29,14 +29,14 @@ class AnswerDto {
   });
 
   factory AnswerDto.fromJson(Map<String, dynamic> json) {
-    print("in json$json");
+    // print("in json$json");
     return AnswerDto(
       id: json['_id'] ?? '',
       text: json['text'] ?? '',
       image: json['image'] ?? '',
-      likes: (json['likes'] as List<String>).map((e) => e.toString()).toList(),
+      likes: (json['likes'] as List<dynamic>).map((e) => e.toString()).toList(),
       dislikes:
-          (json['dislikes'] as List<String>).map((e) => e.toString()).toList(),
+          (json['dislikes'] as List<dynamic>).map((e) => e.toString()).toList(),
       author: AuthorDto.fromJson(json["author"]),
       questionId: json['questionId'] ?? '',
       anonymous: json['anonymous'] ?? false,

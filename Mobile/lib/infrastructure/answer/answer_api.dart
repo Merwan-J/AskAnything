@@ -14,37 +14,16 @@ class AnswerAPI {
     var body = {
       "text": answerFormDto.text,
       "author": "644a59d906e58c639150523c",
-      "question": "6478b8c7a70dcd58a4690267"
+      "question": "64796d751ab06cdabc2f0fba"
     };
     var answer =
         await _customHttpClient.post("answers", body: json.encode(body));
 
     var decoded = await jsonDecode(answer.body)["data"]["answer"];
-    print("decoded$decoded");
+    // print("decoded$decoded");
 
     if (answer.statusCode == 201) {
-      try {
-        AnswerDto answerDto = AnswerDto(
-            id: decoded["_id"] as String,
-            text: decoded["text"].toString(),
-            image: "" as String,
-            likes: (decoded["likes"] as List<dynamic>)
-                .map((e) => e.toString())
-                .toList(),
-            dislikes: (decoded["dislikes"] as List<dynamic>)
-                .map((e) => e.toString())
-                .toList(),
-            author: AuthorDto.fromJson(decoded["author"]),
-            questionId: decoded["questionId"] as String,
-            anonymous: decoded["author"],
-            createdAt: decoded["createdAt"],
-            updatedAt: decoded["updatedAt"]);
-
-        return answerDto;
-      } catch (e) {
-        print(e);
-        throw (e);
-      }
+      return AnswerDto.fromJson(decoded);
     } else {
       throw Exception("Failed to create answer"); //TODO: handle the exceptions
     }
@@ -74,11 +53,21 @@ class AnswerAPI {
 // TODO: use Answer Body Instead of String
   Future<AnswerDto> updateAnswer(
       {required String id, required String text}) async {
-    var answer = await _customHttpClient.put("answers/$id",
+    print("updateAnswer api");
+    var response = await _customHttpClient.put("answers/$id",
         body: json.encode({"text": text}));
+    print(response);
 
-    if (answer.statusCode == 200) {
-      return AnswerDto.fromJson(jsonDecode(answer.body));
+    var decoded = await jsonDecode(response.body)["data"]["answer"];
+    print("decoded$decoded");
+
+    if (response.statusCode.toString() == 200.toString()) {
+      try {
+        return AnswerDto.fromJson(decoded);
+      } catch (e) {
+        print(e);
+        throw (e);
+      }
     } else {
       throw Exception("Failed to update answer"); //TODO: handle the exceptions
     }
@@ -91,6 +80,28 @@ class AnswerAPI {
       return;
     } else {
       throw Exception("Failed to delete answer"); //TODO: handle the exceptions
+    }
+  }
+
+  Future<List<AnswerDto>> getAnswersByQuestionId(String id) async {
+    print("igetAnswersByQuestionId $id");
+    //TODO: change the url
+
+    var answers = await _customHttpClient
+        .get("answers/question/64796d751ab06cdabc2f0fba");
+    var decoded = await jsonDecode(answers.body)["data"]["answers"];
+    print("decoded$decoded");
+
+    if (answers.statusCode.toString() == 200.toString()) {
+      print("heree");
+      try {
+        return List<AnswerDto>.from(decoded.map((a) => AnswerDto.fromJson(a)));
+      } catch (e) {
+        print(e);
+        throw (e);
+      }
+    } else {
+      throw Exception("Failed to load answers"); //TODO: handle the exceptions
     }
   }
 
