@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:equatable/equatable.dart';
@@ -115,5 +117,69 @@ class UserDTO extends Equatable {
       'createdAt': createdAt.toIso8601String(),
       'updatedAt': updatedAt.toIso8601String(),
     };
+  }
+
+  Map<String, dynamic> toJsonForDb() {
+    print("trying to map");
+
+    var question = questionIds.map((q) => q.toStringJson()).toList();
+    var answer = answerIds.map((q) => q.toStringJson()).toList();
+
+    print(question);
+    print(answer);
+
+    return {
+      'id': id.toString(),
+      'name': name.toString(),
+      'email': email.toString(),
+      'password': password.toString(),
+      'profilePic': profilePic.toString(),
+      'questionIds': question.join(','),
+      'answerIds': answer.join(','),
+      'reputation': reputation.toString(),
+      'likes': likes.toString(),
+      'dislikes': dislikes.toString(),
+      'bookmarks': bookmarks.join(','),
+      'followers': followers.join(','),
+      'followings': followings.join(','),
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  factory UserDTO.fromJsonForDb(Map<String, dynamic> json) {
+    print("trying to map for db from json");
+    print(json);
+    var question = (json['questionIds'] as String? ?? '').split(',');
+    var questions = question
+        .where((q) => q.isNotEmpty) // Add this line to filter out empty strings
+        .map((q) => QuestionDto.fromjsonForDb(jsonDecode(q)))
+        .toList();
+    var answerIds = (json['answerIds'] as String? ?? '')
+        .split(',')
+        .where((a) => a.isNotEmpty) // Add this line to filter out empty strings
+        .map((a) => AnswerDto.fromJsonForDb(jsonDecode(a)))
+        .toList();
+
+    print("answerIds: $answerIds");
+    print("questions: $questions");
+
+    return UserDTO(
+      id: json['id'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      email: json['email'] as String? ?? '',
+      password: json['password'] as String? ?? '',
+      profilePic: json['profilePic'] as String? ?? '',
+      questionIds: questions,
+      answerIds: answerIds,
+      reputation: int.tryParse(json['reputation'].toString()) ?? 0,
+      likes: int.tryParse(json['likes'].toString()) ?? 0,
+      dislikes: int.tryParse(json['dislikes'].toString()) ?? 0,
+      bookmarks: (json['bookmarks'] as String? ?? '').split(','),
+      followers: (json['followers'] as String? ?? '').split(','),
+      followings: (json['followings'] as String? ?? '').split(','),
+      createdAt: DateTime.parse(json['createdAt'] as String? ?? ''),
+      updatedAt: DateTime.parse(json['updatedAt'] as String? ?? ''),
+    );
   }
 }
