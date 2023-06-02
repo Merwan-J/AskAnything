@@ -1,11 +1,22 @@
-import 'package:askanything/domain/user/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'auth_event.freezed.dart';
+abstract class AuthEvent extends Equatable {
+  const AuthEvent();
 
-@freezed
-abstract class AuthEvent with _$AuthEvent {
-  const factory AuthEvent.signedIn(Map<String, dynamic> user, String token) =
-      AuthEventSignedIn;
-  const factory AuthEvent.signOut() = AuthEventSignOut;
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthEventSignedIn extends AuthEvent {
+  final Map<String, dynamic> user;
+  final String token;
+
+  const AuthEventSignedIn(this.user, this.token);
+
+  @override
+  List<Object?> get props => [user, token];
+}
+
+class AuthEventSignOut extends AuthEvent {
+  const AuthEventSignOut();
 }

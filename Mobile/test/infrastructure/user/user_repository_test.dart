@@ -20,8 +20,7 @@ import 'user_repository_test.mocks.dart';
 @GenerateMocks([UserApi])
 void main() {
   group('User Repository Test', () {
-    var file = File(
-            '/home/elizur/github/AskAnything/Mobile/test/sample_test_data/sample_user.json')
+    var file = File('Mobile/test/sample_test_data/sample_user.json')
         .readAsStringSync();
     test(
         'returns a UserDto if the http call for getAllUsers completes successfully',

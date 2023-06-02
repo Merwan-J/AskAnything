@@ -1,14 +1,33 @@
 import 'package:askanything/domain/auth/auth_failure.dart';
 import 'package:askanything/domain/user/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'login_state.freezed.dart';
+class LoginState extends Equatable {
+  const LoginState();
 
-@freezed
-class LoginState with _$LoginState {
-  const factory LoginState.initial() = LoginStateInitial;
-  const factory LoginState.loading() = LoginStateLoading;
-  const factory LoginState.success(Map<String, dynamic> user, String token) =
-      LoginStateSuccess;
-  const factory LoginState.failure(AuthFailure error) = LoginStateFailure;
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginStateInitial extends LoginState {}
+
+class LoginStateLoading extends LoginState {}
+
+class LoginStateSuccess extends LoginState {
+  final Map<String, dynamic> user;
+  final String token;
+
+  LoginStateSuccess(this.user, this.token);
+
+  @override
+  List<Object?> get props => [user, token];
+}
+
+class LoginStateFailure extends LoginState {
+  final AuthFailure error;
+
+  LoginStateFailure(this.error);
+
+  @override
+  List<Object?> get props => [error];
 }

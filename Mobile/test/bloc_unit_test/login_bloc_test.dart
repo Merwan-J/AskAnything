@@ -1,107 +1,55 @@
-// import 'package:askanything/application/login/bloc/login_bloc.dart';
-// import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
-// import 'package:askanything/infrastructure/auth/auth_repository.dart';
-// import 'package:bloc_test/bloc_test.dart';
-// import 'package:dartz/dartz.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:mockito/mockito.dart';
+import 'dart:convert';
+import 'dart:io';
 
-// @GenerateMocks([UserApi])
-// void main() {}
-// class MockAuthRepository extends Mock implements AuthRepository {}
-// class MockSharedPreferenceService extends Mock
-//     implements SharedPreferenceService {}
+import 'package:askanything/application/login/bloc/login_bloc.dart';
+import 'package:askanything/application/login/bloc/login_event.dart';
+import 'package:askanything/application/login/bloc/login_state.dart';
+import 'package:askanything/domain/auth/auth_repository_interface.dart';
+import 'package:askanything/domain/auth/login_form.dart';
+import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
+import 'package:askanything/infrastructure/auth/auth_response_dto.dart';
+import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
-// // class LoginBloc extends Bloc<LoginEvent, LoginState> {
-// //   late final CustomHttpClient _customHttpClient;
-// //   late final AuthApi _authApi;
-// //   late final IAuthRepository _authRepository;
-// //   late final SharedPreferenceService _sharedPreferenceService;
+import 'login_bloc_test.mocks.dart';
 
-// void main() {
-//   group('LoginBloc', () {
-//     late MockAuthRepository authRepository;
-//     late LoginBloc loginBloc;
+// Generate a MockClient using the Mockito package.
+// Create new instances of this class in each test.
+@GenerateMocks([AuthRepository])
+void main() {
+  late MockAuthRepository mockAuthRepository;
+  late LoginBloc loginBloc;
 
-//     setUp(() {
-//       authRepository = MockAuthRepository();
-//       loginBloc = LoginBloc(authRepository);
-//     });
+  setUp(() {
+    loginBloc = LoginBloc();
+    mockAuthRepository = MockAuthRepository();
+  });
 
-//     tearDown(() {
-//       loginBloc.close();
-//     });
+  group('Login Bloc test', () {
+    const data = '{"emailAddress": "gg@gmail.com","password": "123"}';
+    const resp = '{"user": {"name": "elizur"}, "accessToken": "token"}';
 
-//   test('initial state is correct', () => expect(loginBloc.state, equals(LoginState.initial())));
+    var loginData = LoginForm.fromJson(json.decode(data));
+    var responseDto = AuthResponseDto.fromJson(jsonDecode(resp));
+    blocTest<LoginBloc, LoginState>(
+      'emits Loading and Success states when LoginEventLogin is added',
+      build: () => loginBloc,
+      act: (bloc) {
+        // Mock the behavior of the auth repository
+        when(mockAuthRepository.login(loginForm: loginData))
+            .thenAnswer((_) async => Right(responseDto));
 
-//     blocTest<LoginBloc, LoginState>(
-//       'emits [emailAddress updated] when EmailChanged is added',
-//       build: () => loginBloc,
-//       act: (bloc) => bloc.add(LoginEvent.emailChanged('test@example.com')),
-//       expect: () => [
-//         LoginState.initial().copyWith(
-//           emailAddress: 'test@example.com',
-//           authFailureOrSuccessOption: none(),
-//         ),
-//       ],
-//     );
-
-//     blocTest<LoginBloc, LoginState>(
-//       'emits [password updated] when PasswordChanged is added',
-//       build: () => loginBloc,
-//       act: (bloc) => bloc.add(LoginEvent.passwordChanged('password123')),
-//       expect: () => [
-//         LoginState.initial().copyWith(
-//           password: 'password123',
-//           authFailureOrSuccessOption: none(),
-//         ),
-//       ],
-//     );
-
-//     blocTest<LoginBloc, LoginState>(
-//       'emits [isOrganizer updated] when IsOrganizerChanged is added',
-//       build: () => loginBloc,
-//       act: (bloc) => bloc.add(LoginEvent.isOrganizerChanged(true)),
-//       expect: () => [
-//         LoginState.initial().copyWith(
-//           isOrganizer: true,
-//           authFailureOrSuccessOption: none(),
-//         ),
-//       ],
-//     );
-
-//     blocTest<LoginBloc, LoginState>(
-//       'emits [isSubmitting, authFailureOrSuccessOption] when LoginPressed is added and authentication is successful',
-//       build: () {
-//         when(authRepository.loginUser(UserLoginModel(email:"test@example.com", password:"password123")
-//         )).thenAnswer((_) async => right('success'),);
-//         return loginBloc;
-//       },
-//       act: (bloc) => bloc.add(LoginEvent.loginPressed()),
-//       expect: () => [
-//         LoginState.initial().copyWith(
-//           isSubmitting: true,
-//           authFailureOrSuccessOption: some(right('success')),
-//         ),
-//       ],
-//     );
-
-//     blocTest<LoginBloc, LoginState>(
-//       'emits [isSubmitting, authFailureOrSuccessOption] when LoginPressed is added and authentication fails',
-//       build: () {
-//         when(() => authRepository.loginUser(UserLoginModel(email:"test@example.com", password:"password123"))).thenAnswer(
-//           (_) async => left(const AuthFailure.invalidEmailAndPasswordCombination() as Either<AuthFailure, Object>)
-//         );
-//         return loginBloc;
-//       },
-//       act: (bloc) => bloc.add(LoginEvent.loginPressed()),
-//       expect: () => [
-//         LoginState.initial().copyWith(
-//           isSubmitting: true,
-//           authFailureOrSuccessOption:
-//               some(left(const AuthFailure.invalidEmailAndPasswordCombination())),
-//         ),
-//       ],
-//     );
-//   });
-// }
+        // Add the LoginEventLogin to the bloc
+        bloc.add(LoginEventLogin(loginData));
+      },
+      expect: () => [
+        LoginStateLoading(),
+        // LoginStateSuccess(User(), 'token'),
+      ],
+    );
+  });
+}

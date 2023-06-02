@@ -1,16 +1,23 @@
-import 'package:askanything/infrastructure/user/user_dto.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+class AuthResponseDto {
+  final Map<String, dynamic> user;
+  final String accessToken;
 
-part 'auth_response_dto.freezed.dart';
-part 'auth_response_dto.g.dart';
+  AuthResponseDto({
+    required this.user,
+    required this.accessToken,
+  });
 
-@freezed
-class AuthResponseDto with _$AuthResponseDto {
-  const factory AuthResponseDto({
-    required Map<String, dynamic> user,
-    required String accessToken,
-  }) = _AuthResponseDto;
+  factory AuthResponseDto.fromJson(Map<String, dynamic> json) {
+    return AuthResponseDto(
+      user: json['user'] as Map<String, dynamic>,
+      accessToken: json['accessToken'] as String,
+    );
+  }
 
-  factory AuthResponseDto.fromJson(Map<String, dynamic> json) =>
-      _$AuthResponseDtoFromJson(json);
+  Map<String, dynamic> toJson() {
+    return {
+      'user': user,
+      'accessToken': accessToken,
+    };
+  }
 }

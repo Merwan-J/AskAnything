@@ -1,11 +1,19 @@
-import 'package:askanything/domain/auth/login_form.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'login_event.freezed.dart';
+import '../../../domain/auth/login_form.dart';
 
-@freezed
-class LoginEvent with _$LoginEvent {
-  const LoginEvent._();
+abstract class LoginEvent extends Equatable {
+  const LoginEvent();
 
-  const factory LoginEvent.login(LoginForm form) = LoginEventLogin;
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginEventLogin extends LoginEvent {
+  final LoginForm form;
+
+  const LoginEventLogin(this.form);
+
+  @override
+  List<Object?> get props => [form];
 }
