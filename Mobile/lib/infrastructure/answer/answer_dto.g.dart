@@ -10,9 +10,8 @@ _$_AnswerDto _$$_AnswerDtoFromJson(Map<String, dynamic> json) => _$_AnswerDto(
       id: json['id'] as String,
       text: json['text'] as String,
       image: json['image'] as String,
-      likes: (json['likes'] as List<dynamic>).map((e) => e as String).toList(),
-      dislikes:
-          (json['dislikes'] as List<dynamic>).map((e) => e as String).toList(),
+      likes: json['likes'] as List<dynamic>,
+      dislikes: json['dislikes'] as List<dynamic>,
       author: json['author'] as String,
       questionId: json['questionId'] as String,
       anonymous: json['anonymous'] as bool,

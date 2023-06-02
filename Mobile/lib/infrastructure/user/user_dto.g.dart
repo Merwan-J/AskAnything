@@ -19,7 +19,8 @@ _$_UserDTO _$$_UserDTOFromJson(Map<String, dynamic> json) => _$_UserDTO(
       reputation: json['reputation'] as int,
       likes: json['likes'] as int,
       dislikes: json['dislikes'] as int,
-      bookmarks: json['bookmarks'] as Map<String, dynamic>,
+      bookmarks:
+          (json['bookmarks'] as List<dynamic>).map((e) => e as String).toList(),
       followers:
           (json['followers'] as List<dynamic>).map((e) => e as String).toList(),
       followings: (json['followings'] as List<dynamic>)

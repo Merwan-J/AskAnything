@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel');
 const { catchAsyncError } = require('../utils/catchAsyncError');
 const AppError = require('../utils/appError');
+const User = require('../models/userModel');
 
 exports.signup = catchAsyncError(async (req, res, next) => {
   // Get user input

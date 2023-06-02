@@ -3,10 +3,10 @@ part 'answer_form.freezed.dart';
 
 @freezed
 class AnswerForm with _$AnswerForm {
-  factory AnswerForm({
-    required String text,
-    required String image, //TODO: Change to image
-    required bool anonymous,
-    required String questionId,
-  }) = _AnswerForm;
+  factory AnswerForm(
+      {required String text,
+      required String image, //TODO: Change to image
+      required bool anonymous,
+      required String question,
+      required String author}) = _AnswerForm;
 }

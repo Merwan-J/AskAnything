@@ -8,7 +8,18 @@ const Questions = require('./../models/questionsModel');
 
 //Find all Questions
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
-  const questions = await Questions.find();
+  console.log('get all questions');
+
+  //get questions sorted by date
+
+  const questions = await Questions.find()
+    .sort({ createdAt: -1 })
+    .populate({
+      path: 'author',
+      model: 'User',
+    });
+  console.log(questions.length);
+
   res.status(200).json({
     status: 'success',
     results: questions.length,
@@ -21,8 +32,11 @@ exports.getQuestionById = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.id)) {
   //   return new AppError('invalid id', 400);
   // }
-
-  const question = await Questions.findById(req.params.id);
+  //populate answers and author
+  const question = await Questions.findById(req.params.id).populate({
+    path: 'author',
+    model: 'User',
+  });
   if (!question) {
     return next(new AppError('question not found', 404));
   }
@@ -31,26 +45,36 @@ exports.getQuestionById = catchAsyncError(async (req, res, next) => {
 
 //Add a question
 exports.createQuestion = catchAsyncError(async (req, res) => {
-  const newQuestion = await Questions.create(req.body);
+  console.log(req.body);
+  const question = await Questions.create(req.body);
   const user = await User.findById(req.body.author);
   // console.log(user.questions);
   // console.log(user.email);
-  user.questions.push(newQuestion._id);
+  user.questions.push(question._id);
+
+  //populate the created question before sending back
+
   await user.save();
+  const populatedQuestion = await Questions.findById(question._id).populate({
+    path: 'author',
+    model: 'User',
+  });
   res.status(201).json({
     status: 'success',
-    data: { newQuestion },
+    data: { question: populatedQuestion },
   });
 });
 
 //Patch a question
 exports.updateQuestion = catchAsyncError(async (req, res) => {
-  const updatedQuestion = await Questions.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.status(200).json({ status: 'success', data: { updatedQuestion } });
+  const question = await Questions.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+  const newQuestion = await Questions.findById(question._id).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({ status: 'success', data: { question: newQuestion } });
 });
 
 //Delete a question
@@ -63,4 +87,53 @@ exports.deleteQuestionById = catchAsyncError(async (req, res) => {
     return new AppError('question not found', 404);
   }
   res.status(200).json({ status: 'success', data: null });
+});
+
+//Upvote a question
+exports.upvoteQuestion = catchAsyncError(async (req, res, next) => {
+  const questionId = req.params.id;
+  const userId = req.body.userId;
+  const question = await Questions.findById(questionId);
+  if (!question) {
+    return next(new AppError('question not found', 404));
+  }
+  //remove userId from dislikes and add to likes
+  question.dislikes.pull(userId);
+  question.likes.pull(userId);
+  question.likes.push(userId);
+  await question.save();
+  const newQuestion = await Questions.findById(questionId).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      question: newQuestion,
+    },
+  });
+});
+
+exports.downvoteQuestion = catchAsyncError(async (req, res, next) => {
+  const questionId = req.params.id;
+  const userId = req.body.userId;
+  const question = await Questions.findById(questionId);
+  if (!question) {
+    return next(new AppError('question not found', 404));
+  }
+  question.likes.pull(userId);
+  question.dislikes.pull(userId);
+  question.dislikes.push(userId);
+
+  await question.save();
+  const newQuestion = await Questions.findById(questionId).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      question: newQuestion,
+    },
+  });
 });

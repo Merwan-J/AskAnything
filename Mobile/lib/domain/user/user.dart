@@ -1,3 +1,5 @@
+import 'package:askanything/infrastructure/answer/answer_dto.dart';
+import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:flutter/foundation.dart';
 
 class User {
@@ -6,12 +8,12 @@ class User {
   final String email;
   final String password;
   final String? profilePic; // Added required modifier here
-  final List<String> questionIds;
-  final List<String> answerIds;
+  final List<QuestionDto> questionIds;
+  final List<AnswerDto> answerIds;
   final int reputation;
   final int likes;
   final int dislikes;
-  final Map<String, dynamic> bookmarks;
+  final List<dynamic> bookmarks;
   final List<String> followers;
   final List<String> followings;
   final DateTime createdAt;
@@ -28,7 +30,7 @@ class User {
       this.reputation = 0,
       this.likes = 0,
       this.dislikes = 0,
-      this.bookmarks = const {},
+      this.bookmarks = const [],
       this.followers = const [],
       this.followings = const [],
       required this.createdAt,

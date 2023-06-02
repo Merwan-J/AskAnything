@@ -3,14 +3,25 @@ class Constants {
 
   static List<String> get topics {
     return [
-      'All',
-      'Politics',
-      'Sports',
-      'Religion',
-      'Entertainment',
-      'Technology',
-      'Education',
-      'Other',
+      'technology',
+      'education',
+      'relationships',
+      'entertainment',
+      'bussiness',
+      'politics',
+      'health',
+      'science',
+      'food',
+      'sports',
+      'personal',
+      'art',
+      'other',
+      'religion',
+      'beauty',
+      'philosophy',
+      'music',
+      'society',
+      'family'
     ];
   }
 }

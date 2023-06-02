@@ -27,10 +27,10 @@ mixin _$QuestionEntity {
   String get author => throw _privateConstructorUsedError;
   bool get anonymous =>
       throw _privateConstructorUsedError; // TODO: Replace string with Answer model class
-  List<String> get answers => throw _privateConstructorUsedError;
+  List<dynamic> get answers => throw _privateConstructorUsedError;
   String get topic => throw _privateConstructorUsedError;
-  List<String> get likes => throw _privateConstructorUsedError;
-  List<String> get dislikes => throw _privateConstructorUsedError;
+  List<dynamic> get likes => throw _privateConstructorUsedError;
+  List<dynamic> get dislikes => throw _privateConstructorUsedError;
   String? get image =>
       throw _privateConstructorUsedError; // TODO: Convert to DateTime
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -54,10 +54,10 @@ abstract class $QuestionEntityCopyWith<$Res> {
       String description,
       String author,
       bool anonymous,
-      List<String> answers,
+      List<dynamic> answers,
       String topic,
-      List<String> likes,
-      List<String> dislikes,
+      List<dynamic> likes,
+      List<dynamic> dislikes,
       String? image,
       DateTime createdAt,
       DateTime updatedAt});
@@ -113,7 +113,7 @@ class _$QuestionEntityCopyWithImpl<$Res, $Val extends QuestionEntity>
       answers: null == answers
           ? _value.answers
           : answers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       topic: null == topic
           ? _value.topic
           : topic // ignore: cast_nullable_to_non_nullable
@@ -121,11 +121,11 @@ class _$QuestionEntityCopyWithImpl<$Res, $Val extends QuestionEntity>
       likes: null == likes
           ? _value.likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       dislikes: null == dislikes
           ? _value.dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -156,10 +156,10 @@ abstract class _$$_QuestionEntityCopyWith<$Res>
       String description,
       String author,
       bool anonymous,
-      List<String> answers,
+      List<dynamic> answers,
       String topic,
-      List<String> likes,
-      List<String> dislikes,
+      List<dynamic> likes,
+      List<dynamic> dislikes,
       String? image,
       DateTime createdAt,
       DateTime updatedAt});
@@ -213,7 +213,7 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
       answers: null == answers
           ? _value._answers
           : answers // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       topic: null == topic
           ? _value.topic
           : topic // ignore: cast_nullable_to_non_nullable
@@ -221,11 +221,11 @@ class __$$_QuestionEntityCopyWithImpl<$Res>
       likes: null == likes
           ? _value._likes
           : likes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       dislikes: null == dislikes
           ? _value._dislikes
           : dislikes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -253,10 +253,10 @@ class _$_QuestionEntity
       required this.description,
       required this.author,
       required this.anonymous,
-      required final List<String> answers,
+      required final List<dynamic> answers,
       required this.topic,
-      required final List<String> likes,
-      required final List<String> dislikes,
+      required final List<dynamic> likes,
+      required final List<dynamic> dislikes,
       this.image,
       required this.createdAt,
       required this.updatedAt})
@@ -279,10 +279,10 @@ class _$_QuestionEntity
   @override
   final bool anonymous;
 // TODO: Replace string with Answer model class
-  final List<String> _answers;
+  final List<dynamic> _answers;
 // TODO: Replace string with Answer model class
   @override
-  List<String> get answers {
+  List<dynamic> get answers {
     if (_answers is EqualUnmodifiableListView) return _answers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_answers);
@@ -290,17 +290,17 @@ class _$_QuestionEntity
 
   @override
   final String topic;
-  final List<String> _likes;
+  final List<dynamic> _likes;
   @override
-  List<String> get likes {
+  List<dynamic> get likes {
     if (_likes is EqualUnmodifiableListView) return _likes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_likes);
   }
 
-  final List<String> _dislikes;
+  final List<dynamic> _dislikes;
   @override
-  List<String> get dislikes {
+  List<dynamic> get dislikes {
     if (_dislikes is EqualUnmodifiableListView) return _dislikes;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_dislikes);
@@ -399,10 +399,10 @@ abstract class _QuestionEntity implements QuestionEntity {
       required final String description,
       required final String author,
       required final bool anonymous,
-      required final List<String> answers,
+      required final List<dynamic> answers,
       required final String topic,
-      required final List<String> likes,
-      required final List<String> dislikes,
+      required final List<dynamic> likes,
+      required final List<dynamic> dislikes,
       final String? image,
       required final DateTime createdAt,
       required final DateTime updatedAt}) = _$_QuestionEntity;
@@ -421,13 +421,13 @@ abstract class _QuestionEntity implements QuestionEntity {
   @override
   bool get anonymous;
   @override // TODO: Replace string with Answer model class
-  List<String> get answers;
+  List<dynamic> get answers;
   @override
   String get topic;
   @override
-  List<String> get likes;
+  List<dynamic> get likes;
   @override
-  List<String> get dislikes;
+  List<dynamic> get dislikes;
   @override
   String? get image;
   @override // TODO: Convert to DateTime

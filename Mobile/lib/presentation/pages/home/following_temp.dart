@@ -1,3 +1,4 @@
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,8 @@ class Following extends StatelessWidget {
         image: "",
         likes: ["1", "3"],
         dislikes: ["1,23"],
-        author: "Doju",
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         question: "2",
         createdAt: DateTime.now(),

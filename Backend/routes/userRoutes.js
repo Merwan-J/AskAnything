@@ -13,6 +13,8 @@ router
   .get(userController.getUser)
   .patch(userController.updateUser)
   .delete(userController.deleteUser);
+router.route('/bookmarks/:id').post(userController.addBookmark);
+router.route('/removebookmarks/:id').post(userController.removeBookmark);
 
 //getfollowers
 router.route('/:id/followers').get(userController.getfollowers);
@@ -21,9 +23,9 @@ router.route('/:id/followers').get(userController.getfollowers);
 router.route('/:id/following').get(userController.getfollowing);
 
 //follow a user
-router.route('/:id/follow').patch(userController.followUser);
+router.route('/:id/follow').post(userController.followUser);
 
 //unfollow a user
-router.route('/:id/unfollow/').patch(userController.unfollowUser);
+router.route('/:id/unfollow').post(userController.unfollowUser);
 
 module.exports = router;

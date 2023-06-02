@@ -1,21 +1,78 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'user_state.freezed.dart';
+abstract class UserState extends Equatable {
+  const UserState();
 
-@freezed
-abstract class UserState with _$UserState {
-  const factory UserState.initial() = Initial;
-  const factory UserState.loading() = Loading;
-  const factory UserState.loaded(User user) = Loaded;
-  const factory UserState.loadedAll(List<User> users) = LoadedAll;
-  const factory UserState.loadedFollowers(List<User> followers) =
-      LoadedFollowers;
-  const factory UserState.loadedFollowings(List<User> followings) =
-      LoadedFollowings;
-  const factory UserState.error(UserFailure failure) = Error;
-  const factory UserState.deleted() = Deleted;
-  const factory UserState.followed() = Followed;
-  const factory UserState.unfollowed() = Unfollowed;
+  @override
+  List<Object> get props => [];
 }
+
+class Initial extends UserState {}
+
+class Loading extends UserState {}
+
+class LoadedUser extends UserState {
+  final User user;
+  const LoadedUser(this.user);
+
+  @override
+  List<Object> get props => [user];
+}
+
+class LoadedAllUsers extends UserState {
+  final List<User> users;
+  const LoadedAllUsers(this.users);
+
+  @override
+  List<Object> get props => [users];
+}
+
+class LoadedAdminUsers extends UserState {
+  final List<User> users;
+  const LoadedAdminUsers(this.users);
+
+  @override
+  List<Object> get props => [users];
+}
+
+class LoadedFollowers extends UserState {
+  final List<User> followers;
+  const LoadedFollowers(this.followers);
+
+  @override
+  List<Object> get props => [followers];
+}
+
+class LoadedFollowings extends UserState {
+  final List<User> followings;
+  const LoadedFollowings(this.followings);
+
+  @override
+  List<Object> get props => [followings];
+}
+
+class UserError extends UserState {
+  final UserFailure failure;
+  const UserError(this.failure);
+
+  @override
+  List<Object> get props => [failure];
+}
+
+class Deleted extends UserState {}
+
+class Followed extends UserState {
+  final User user;
+
+  Followed(this.user);
+}
+
+class Unfollowed extends UserState {
+  final User user;
+
+  Unfollowed(this.user);
+}
+
+class Success extends UserState {}

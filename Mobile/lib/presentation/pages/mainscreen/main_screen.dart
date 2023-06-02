@@ -1,8 +1,10 @@
-import 'dart:math';
-
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../application/question/question_edit/question_edit_bloc.dart';
+import '../../../application/question/question_edit/question_edit_state.dart';
 import '../../widgets/ask_question_form.dart';
 import '../bookmark_page/book_mark.dart';
 import '../home/home_temp.dart';
@@ -12,7 +14,7 @@ import '../search_page/search_page.dart';
 class MainScreen extends StatefulWidget {
   final int? index;
 
-  const MainScreen({super.key, this.index});
+  MainScreen({super.key, this.index});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -26,19 +28,26 @@ class _MainScreenState extends State<MainScreen> {
     BookmarkPage(),
     ProfileScreen()
   ];
+  @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   int _selectedIndex = widget.index != null
+  //       ? widget.index! < screens.length
+  //           ? widget.index as int
+  //           : 0
+  //       : 0;
+  // }
+
   int _selectedIndex = 0;
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    int _selectedIndex = widget.index != null
-        ? widget.index! < screens.length
-            ? widget.index as int
-            : 0
-        : 0;
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.index != null ? widget.index! : 0;
   }
 
   @override
   Widget build(BuildContext context) {
+    // int _selectedIndex = widget.index != null ? widget.index : 0;
     // final scaffoldState = GlobalKey<ScaffoldState>();
     buildBottomSheet(BuildContext context) {
       showModalBottomSheet(
@@ -53,6 +62,31 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     return SafeArea(
+        child: BlocListener<QuestionEditBloc, QuestionEditState>(
+      listener: (context, state) {
+        if (state is QuestionEditSuccessState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Question updated successfully"),
+            ),
+          );
+          BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+        }
+        if (state is QuestionEditFailureState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Question update failed"),
+            ),
+          );
+        }
+        if (state is QuestionEditLoadingState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Updating Question"),
+            ),
+          );
+        }
+      },
       child: Scaffold(
           floatingActionButton: Visibility(
             visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
@@ -77,13 +111,10 @@ class _MainScreenState extends State<MainScreen> {
             children: screens,
           ),
           bottomNavigationBar: CustomBottomNavigation()),
-    );
+    ));
   }
 
   void _onTap(int index) {
-    // if (index == 2) {
-    //   return;
-    // }
     setState(() {
       _selectedIndex = index;
     });

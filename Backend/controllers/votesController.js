@@ -7,6 +7,7 @@ exports.upvote = catchAsyncError(async (req, res, next) => {
   const { itemId, itemType, userId } = req.body;
   let item;
   let author;
+  console.log(itemId, itemType, userId);
 
   switch (itemType) {
     case 'Question':

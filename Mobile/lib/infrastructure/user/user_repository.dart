@@ -10,15 +10,47 @@ class UserRepository implements IUserRepository {
   final UserApi _userApi;
 
   UserRepository(this._userApi);
+  @override
+  Future<Either<UserFailure, User>> addBookmark(
+      String userId, String questionId) async {
+    print('user repository');
+    try {
+      final userDto = await _userApi.addBookmark(userId, questionId);
+
+      final user = userDto.toModel();
+
+      return Right(user);
+    } catch (e) {
+      return Left(UserFailure.unexpectedError());
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, User>> removeBookmark(
+      String userId, String questionId) async {
+    try {
+      final userDto = await _userApi.removeBookmark(userId, questionId);
+
+      final user = userDto.toModel();
+
+      return Right(user);
+    } catch (e) {
+      return Left(UserFailure.unexpectedError());
+    }
+  }
 
   @override
   Future<Either<UserFailure, User>> getUserById(String id) async {
     try {
       final userDto = await _userApi.getUserById(id);
+      print(userDto.questionIds);
       final user = userDto.toModel();
+      print(user.questionIds);
       return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      print("hey");
+      print(e);
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -30,7 +62,7 @@ class UserRepository implements IUserRepository {
       final createdUser = createdUserDto.toModel();
       return Right(createdUser);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -43,7 +75,7 @@ class UserRepository implements IUserRepository {
       final updatedUser = updatedUserDto.toModel();
       return Right(updatedUser);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -51,9 +83,9 @@ class UserRepository implements IUserRepository {
   Future<Either<UserFailure, void>> deleteUser(String id) async {
     try {
       await _userApi.deleteUser(id);
-      return Right(null);
+      return const Right(null);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -64,29 +96,33 @@ class UserRepository implements IUserRepository {
       final userList = userListDto.map((userDto) => userDto.toModel()).toList();
       return Right(userList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
   @override
-  Future<Either<UserFailure, void>> followUser(
+  Future<Either<UserFailure, User>> followUser(
       String followerId, String followingId) async {
     try {
-      await _userApi.followUser(followerId, followingId);
-      return Right(null);
+      final userDto = await _userApi.followUser(followerId, followingId);
+      final user = userDto.toModel();
+      return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      print(e);
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
   @override
-  Future<Either<UserFailure, void>> unfollowUser(
+  Future<Either<UserFailure, User>> unfollowUser(
       String followerId, String followingId) async {
     try {
-      await _userApi.unfollowUser(followerId, followingId);
-      return Right(null);
+      final userDto = await _userApi.unfollowUser(followerId, followingId);
+      final user = userDto.toModel();
+      return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      print(e);
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -98,7 +134,7 @@ class UserRepository implements IUserRepository {
           followerListDto.map((followerDto) => followerDto.toModel()).toList();
       return Right(followerList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -111,7 +147,19 @@ class UserRepository implements IUserRepository {
           .toList();
       return Right(followingList);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, List<User>>> getAdminUsers() async {
+    try {
+      final adminListDto = await _userApi.getAdminUsers();
+      final adminList =
+          adminListDto.map((adminDto) => adminDto.toModel()).toList();
+      return Right(adminList);
+    } catch (e) {
+      return const Left(UserFailure.unexpectedError());
     }
   }
 }
