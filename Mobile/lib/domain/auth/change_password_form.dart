@@ -1,15 +1,14 @@
 import 'package:askanything/domain/auth/name.dart';
 import 'package:askanything/domain/auth/password.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'change_password_form.freezed.dart';
+class ChangePasswordForm {
+  final String oldPassword;
+  final String newPassword;
+  final String confirmPassword;
 
-@freezed
-class ChangePasswordForm with _$ChangePasswordForm {
-  factory ChangePasswordForm({
-    required Name name,
-    required Password oldPassword,
-    required Password newPassword,
-    required Password confirmPassword,
-  }) = _ChangePasswordForm;
+  ChangePasswordForm({
+    required this.oldPassword,
+    required this.newPassword,
+    required this.confirmPassword,
+  });
 }

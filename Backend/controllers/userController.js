@@ -70,11 +70,13 @@ exports.updateUser = catchAsyncError(async (req, res, next) => {
   // if (!isIdValid(req.params.id)) {
   //   return next(new AppError('invalid id', 400));
   // }
+  console.log(req.body);
+  console.log(req.params.id);
 
-  const newUser = await User.findOneAndUpdate(req.params.id, req.body, {
+  const newUser = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
-
+  console.log(newUser);
   if (!newUser) {
     return next(new AppError('user not found', 404));
   }

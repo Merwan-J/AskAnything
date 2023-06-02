@@ -1,3 +1,4 @@
+import 'package:askanything/domain/profile/edit_profile_form.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../infrastructure/profile/profile_form_dto.dart';
@@ -9,6 +10,6 @@ import 'profile.dart';
 abstract class IEditProfileFormRepository {
   Future<Either<EditProfileFailure, Profile>> getProfile(String userId);
   Future<Either<EditProfileFailure, Profile>> updateProfile(
-      {required ProfileFormDto profileForm});
+      {required EditProfileForm profileForm});
   Future<Either<EditProfileFailure, Unit>> deleteAccount(String userId);
 }

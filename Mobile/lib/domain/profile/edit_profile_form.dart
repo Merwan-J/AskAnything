@@ -1,11 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class EditProfileForm {
+  final String name;
+  final String email;
+  final String? image;
 
-part 'edit_profile_form.freezed.dart';
+  EditProfileForm({
+    required this.name,
+    required this.email,
+    this.image,
+  });
 
-@freezed
-class EditProfileForm with _$EditProfileForm {
-  const factory EditProfileForm(
-      {required String name,
-      required String email,
-      required String profilePicture}) = _EditProfileForm;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {
+      'name': name,
+      'email': email,
+      'image': image,
+    };
+    return data;
+  }
 }

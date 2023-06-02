@@ -12,10 +12,16 @@ import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
+import 'package:askanything/application/profile/bloc/profile_bloc.dart';
+import 'package:askanything/application/profile/bloc/profile_state.dart';
+import 'package:askanything/domain/profile/profile.dart';
+import 'package:askanything/infrastructure/profile/profile_repository.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
+import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
+import 'package:askanything/presentation/routes/routes_dart.dart';
 import 'package:askanything/util/Theme/custom_theme.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -26,6 +32,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../routes/routes_dart.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -37,6 +44,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late final TabController _tabController;
+  final user1 = 1;
+  final user2 = 2;
+  final selected = 2;
 
   @override
   void initState() {
@@ -80,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   }
 
   Widget _buildBody(BuildContext context, User checkUser) {
-    final String authenticatedUser = '6477da9c8d15004012f9f6a4';
+    final String authenticatedUser = '644a7a97dd0ade9f826deeda';
     User user = checkUser;
 
     return Padding(
@@ -218,6 +228,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 onPressed: () {
                                   // your button press logic here
                                   if (authenticatedUser == user.id) {
+                                    context.push(Routes.EDITPROFILE);
                                     //
                                   } else if (user.followers
                                       .contains(authenticatedUser)) {
