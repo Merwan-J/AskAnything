@@ -1,3 +1,7 @@
+// import 'package:askanything/Data/Local/local_database/local_storage.dart';
+import 'dart:async';
+
+import 'package:askanything/Data/Local/local_database/local_storage.dart';
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/domain/question/question_form.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
@@ -8,10 +12,12 @@ import 'package:askanything/domain/question/question_failure.dart';
 import 'package:askanything/infrastructure/question/question_mapper.dart';
 import 'package:askanything/infrastructure/question/question_form_mapper.dart';
 import 'package:askanything/util/custom_http_client.dart';
+import 'package:askanything/util/custom_timeout.dart';
 
 import 'package:dartz/dartz.dart';
 
 class QuestionRepository implements IQuestionRepository {
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
   final QuestionProvider _questionProvider;
 
   QuestionRepository(this._questionProvider);
@@ -20,8 +26,33 @@ class QuestionRepository implements IQuestionRepository {
   Future<Either<QuestionFailure, List<Question>>> getQuestions() async {
     try {
       var questions = await _questionProvider.getQuestions();
-      print("repository");
-      print("questions");
+
+      for (var question in questions) {
+        try {
+          await _databaseHelper.insertQuestion(question);
+          print(question.toJsonForDb());
+        } catch (e) {
+          print(e);
+          print(question.toJsonForDb());
+        }
+      }
+      try {
+        var questionsdb = await _databaseHelper.getQuestions();
+        print(questionsdb);
+      } catch (e) {
+        print(e);
+      }
+      return right(questions.map((QuestionDto questionDto) {
+        return Question.fromJson(questionDto.toJson());
+      }).toList());
+    } on CustomTimeoutException catch (timeout) {
+      var questions = await _databaseHelper.getQuestions();
+      print(questions);
+      print("timeout: $timeout");
+      if (questions.isEmpty) {
+        return left(const QuestionFailure.serverError());
+      }
+      print("questions: $questions");
       return right(questions.map((QuestionDto questionDto) {
         return Question.fromJson(questionDto.toJson());
       }).toList());
@@ -36,7 +67,19 @@ class QuestionRepository implements IQuestionRepository {
       String questionId) async {
     try {
       var question = await _questionProvider.getQuestion(questionId);
+      try {
+        await _databaseHelper.insertQuestion(question);
+      } catch (e) {
+        print(e);
+      }
       return Right(Question.fromJson(question.toJson()));
+    } on CustomTimeoutException catch (timeout) {
+      var questions = await _databaseHelper.getQuestions();
+      if (questions.isEmpty) {
+        return left(const QuestionFailure.serverError());
+      }
+      print("questions: $questions");
+      return Right(Question.fromJson(questions[0].toJson()));
     } catch (e) {
       return Left(const QuestionFailure.serverError());
     }
@@ -49,6 +92,12 @@ class QuestionRepository implements IQuestionRepository {
       var questionDto =
           await _questionProvider.createQuestion(questionForm.toDto(), id);
       var question = Question.fromJson(questionDto.toJson());
+
+      try {
+        await _databaseHelper.insertQuestion(questionDto);
+      } catch (e) {
+        print(e);
+      }
 
       return Right(question);
     } catch (e) {
@@ -64,6 +113,12 @@ class QuestionRepository implements IQuestionRepository {
     try {
       var questionDto =
           await _questionProvider.updateQuestion(question.toDto(), questionId);
+
+      try {
+        await _databaseHelper.updateQuestion(questionDto);
+      } catch (e) {
+        print(e);
+      }
       print("after update repo");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
@@ -77,6 +132,11 @@ class QuestionRepository implements IQuestionRepository {
       String questionId) async {
     try {
       await _questionProvider.deleteQuestion(questionId);
+      try {
+        await _databaseHelper.deleteQuestion(questionId);
+      } catch (e) {
+        print(e);
+      }
       return right(unit);
     } catch (e) {
       return left(QuestionFailure.serverError());

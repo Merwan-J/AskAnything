@@ -72,10 +72,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 isScrollable: true,
                 tabs: [
                   Tab(
-                    text: "Following",
+                    text: "Explore",
                   ),
                   Tab(
-                    text: "Explore",
+                    text: "For You",
                   ),
                 ],
               ),

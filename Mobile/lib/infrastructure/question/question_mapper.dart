@@ -1,4 +1,3 @@
-import 'package:askanything/domain/question/local/question_entity.dart';
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 

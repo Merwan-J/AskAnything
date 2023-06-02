@@ -5,7 +5,7 @@ version: 0.1.0
 
 environment:
   sdk: ">=2.19.4 <3.0.0"
-  
+
 dependencies:
   bloc: ^8.1.2
   dartz: ^0.10.1
@@ -31,6 +31,9 @@ dependencies:
   go_router: ^7.1.1
   unicons: ^2.1.1
   font_awesome_flutter: ^10.4.0
+  flutter_polls: ^0.1.2
+  flutter_launcher_icons: ^0.13.1
+  sqflite: ^2.2.8+4
 
 
 dev_dependencies:
@@ -44,4 +47,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
-
+flutter_icons:
+  image_path: "assets/splash screen image 1.png"
+  android: true
+  ios: true

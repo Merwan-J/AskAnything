@@ -4,9 +4,9 @@ import 'dart:ffi';
 import 'package:askanything/infrastructure/question/question_form_dto.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/util/custom_http_client.dart';
+import 'package:askanything/util/custom_timeout.dart';
 import 'package:askanything/util/string_extension.dart';
 
-import 'package:askanything/domain/question/local/question_entity.dart';
 import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/infrastructure/question/question_dto.dart';
 
@@ -77,24 +77,31 @@ class QuestionProvider {
   }
 
   Future<List<QuestionDto>> getQuestions() async {
-    print("fetching questions");
-    var response =
-        await _httpClient.get('questions?userId=6448f615d561de32dc337d5e');
-    //print print
-    print("res");
-    var decoded = await jsonDecode(response.body);
-    print("decoded: $decoded");
+    try {
+      int timeoutDurINSecs = 5;
+      var timeout = Duration(seconds: timeoutDurINSecs);
+      print("fetching questions");
+      var response = await _httpClient
+          .get('questions?userId=6448f615d561de32dc337d5e')
+          .timeout(timeout);
+      //print print
+      print("res");
+      var decoded = await jsonDecode(response.body);
+      print("decoded: $decoded");
 
-    if (response.statusCode.toString() == 200.toString()) {
-      var questionsLst = decoded["data"]["questions"];
-      print("questionsLst: $questionsLst");
+      if (response.statusCode.toString() == 200.toString()) {
+        var questionsLst = decoded["data"]["questions"];
+        print("questionsLst: $questionsLst");
 
-      var questionLstDto =
-          (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
-      print("success");
-      return questionLstDto;
-    } else {
-      throw Exception('Failed to get questions');
+        var questionLstDto =
+            (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
+        print("success");
+        return questionLstDto;
+      } else {
+        throw Exception('Failed to get questions');
+      }
+    } catch (_) {
+      throw CustomTimeoutException();
     }
   }
 
