@@ -50,10 +50,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
         likes: ["1", "3"],
         dislikes: ["1,23"],
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         question: "2",
         createdAt: DateTime.now(),
@@ -65,10 +62,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
         likes: ["1", "3"],
         dislikes: ["1,23"],
         author: AuthorDto(
-          name: "Merwan Junyedi",
-          email: 'merwanj71@gmail.com',
-          id: '123123',
-        ),
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         question: "2",
         createdAt: DateTime.now(),

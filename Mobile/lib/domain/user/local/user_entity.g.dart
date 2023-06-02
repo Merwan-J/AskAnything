@@ -21,8 +21,7 @@ _$_UserEntity _$$_UserEntityFromJson(Map<String, dynamic> json) =>
       reputation: json['reputation'] as int,
       likes: json['likes'] as int,
       dislikes: json['dislikes'] as int,
-      bookmarks:
-          (json['bookmarks'] as List<dynamic>).map((e) => e as String).toList(),
+      bookmarks: json['bookmarks'] as List<dynamic>,
       followers:
           (json['followers'] as List<dynamic>).map((e) => e as String).toList(),
       followings: (json['followings'] as List<dynamic>)

@@ -132,40 +132,6 @@ class UserApi {
       throw Exception("Failed to load users");
     }
   }
-}
-
-void printUserJson(Map<String, dynamic> json) {
-  String id = json['_id'];
-  String name = json['name'];
-  String email = json['email'];
-  String password = json['password'];
-  String profilePic = json['profilePic'] ?? '';
-  List<String> questionIds = List<String>.from(json['questions']);
-  List<String> answerIds = List<String>.from(json['answers']);
-  int reputation = json['reputation'];
-  int likes = json['likes'];
-  int dislikes = json['dislikes'];
-  Map<String, dynamic> bookmarks = Map<String, dynamic>.from(json['bookmarks']);
-  List<String> followers = List<String>.from(json['followers']);
-  List<String> followings = List<String>.from(json['following']);
-  DateTime createdAt = DateTime.parse(json['createdAt']);
-  DateTime updatedAt = DateTime.parse(json['updatedAt']);
-
-  print('id: $id');
-  print('name: $name');
-  print('email: $email');
-  print('password: $password');
-  print('profilePic: $profilePic');
-  print('questionIds: $questionIds');
-  print('answerIds: $answerIds');
-  print('reputation: $reputation');
-  print('likes: $likes');
-  print('dislikes: $dislikes');
-  print('bookmarks: $bookmarks');
-  print('followers: $followers');
-  print('followings: $followings');
-  print('createdAt: $createdAt');
-  print('updatedAt: $updatedAt');
 
   Future<UserDTO> addBookmark(String userId, String questionId) async {
     try {
@@ -206,4 +172,38 @@ void printUserJson(Map<String, dynamic> json) {
       throw e;
     }
   }
+}
+
+void printUserJson(Map<String, dynamic> json) {
+  String id = json['_id'];
+  String name = json['name'];
+  String email = json['email'];
+  String password = json['password'];
+  String profilePic = json['profilePic'] ?? '';
+  List<String> questionIds = List<String>.from(json['questions']);
+  List<String> answerIds = List<String>.from(json['answers']);
+  int reputation = json['reputation'];
+  int likes = json['likes'];
+  int dislikes = json['dislikes'];
+  Map<String, dynamic> bookmarks = Map<String, dynamic>.from(json['bookmarks']);
+  List<String> followers = List<String>.from(json['followers']);
+  List<String> followings = List<String>.from(json['following']);
+  DateTime createdAt = DateTime.parse(json['createdAt']);
+  DateTime updatedAt = DateTime.parse(json['updatedAt']);
+
+  print('id: $id');
+  print('name: $name');
+  print('email: $email');
+  print('password: $password');
+  print('profilePic: $profilePic');
+  print('questionIds: $questionIds');
+  print('answerIds: $answerIds');
+  print('reputation: $reputation');
+  print('likes: $likes');
+  print('dislikes: $dislikes');
+  print('bookmarks: $bookmarks');
+  print('followers: $followers');
+  print('followings: $followings');
+  print('createdAt: $createdAt');
+  print('updatedAt: $updatedAt');
 }

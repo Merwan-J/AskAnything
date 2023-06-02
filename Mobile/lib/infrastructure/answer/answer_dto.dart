@@ -9,7 +9,7 @@ class AnswerDto {
   final String image;
   final List<dynamic> likes;
   final List<dynamic> dislikes;
-  final String author;
+  final AuthorDto author;
   final String questionId;
   final bool anonymous;
   final DateTime createdAt;

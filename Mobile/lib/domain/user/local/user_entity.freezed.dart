@@ -30,7 +30,7 @@ mixin _$UserEntity {
   int get reputation => throw _privateConstructorUsedError;
   int get likes => throw _privateConstructorUsedError;
   int get dislikes => throw _privateConstructorUsedError;
-  List<String> get bookmarks => throw _privateConstructorUsedError;
+  List<dynamic> get bookmarks => throw _privateConstructorUsedError;
   List<String> get followers => throw _privateConstructorUsedError;
   List<String> get followings => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $UserEntityCopyWith<$Res> {
       int reputation,
       int likes,
       int dislikes,
-      List<String> bookmarks,
+      List<dynamic> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -139,7 +139,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       bookmarks: null == bookmarks
           ? _value.bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       followers: null == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ abstract class _$$_UserEntityCopyWith<$Res>
       int reputation,
       int likes,
       int dislikes,
-      List<String> bookmarks,
+      List<dynamic> bookmarks,
       List<String> followers,
       List<String> followings,
       DateTime createdAt,
@@ -257,7 +257,7 @@ class __$$_UserEntityCopyWithImpl<$Res>
       bookmarks: null == bookmarks
           ? _value._bookmarks
           : bookmarks // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<dynamic>,
       followers: null == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -292,7 +292,7 @@ class _$_UserEntity implements _UserEntity {
       required this.reputation,
       required this.likes,
       required this.dislikes,
-      required final List<String> bookmarks,
+      required final List<dynamic> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required this.createdAt,
@@ -338,9 +338,9 @@ class _$_UserEntity implements _UserEntity {
   final int likes;
   @override
   final int dislikes;
-  final List<String> _bookmarks;
+  final List<dynamic> _bookmarks;
   @override
-  List<String> get bookmarks {
+  List<dynamic> get bookmarks {
     if (_bookmarks is EqualUnmodifiableListView) return _bookmarks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_bookmarks);
@@ -451,7 +451,7 @@ abstract class _UserEntity implements UserEntity {
       required final int reputation,
       required final int likes,
       required final int dislikes,
-      required final List<String> bookmarks,
+      required final List<dynamic> bookmarks,
       required final List<String> followers,
       required final List<String> followings,
       required final DateTime createdAt,
@@ -481,7 +481,7 @@ abstract class _UserEntity implements UserEntity {
   @override
   int get dislikes;
   @override
-  List<String> get bookmarks;
+  List<dynamic> get bookmarks;
   @override
   List<String> get followers;
   @override

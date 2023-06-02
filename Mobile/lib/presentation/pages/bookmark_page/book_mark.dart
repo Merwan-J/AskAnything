@@ -1,3 +1,4 @@
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,8 @@ class BookmarkPage extends StatelessWidget {
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-        author: "Merwan Junyedi",
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -27,7 +29,8 @@ class BookmarkPage extends StatelessWidget {
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-        author: "Merwan Junyedi",
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -41,7 +44,8 @@ class BookmarkPage extends StatelessWidget {
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-        author: "Merwan Junyedi",
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",
@@ -55,7 +59,8 @@ class BookmarkPage extends StatelessWidget {
             "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
         description:
             "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-        author: "Merwan Junyedi",
+        author: AuthorDto(
+            name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
         anonymous: false,
         answers: ["1", "2", "3"],
         topic: "Technology",

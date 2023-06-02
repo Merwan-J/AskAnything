@@ -13,7 +13,7 @@ class User {
   final int reputation;
   final int likes;
   final int dislikes;
-  final List<String> bookmarks;
+  final List<dynamic> bookmarks;
   final List<String> followers;
   final List<String> followings;
   final DateTime createdAt;
