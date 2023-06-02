@@ -22,3 +22,21 @@ extension UserFormDtoMapper on UserFormDTO {
     );
   }
 }
+
+UserFormDTO userFormDtoFromJson(Map<String, dynamic> json) {
+  return UserFormDTO(
+    name: json['name'],
+    email: json['email'],
+    password: json['password'],
+    profilePic: json['profilePic'],
+  );
+}
+
+UserForm userFormFromJson(Map<String, dynamic> json) {
+  return UserForm(
+    name: json['name'],
+    email: json['email'],
+    password: json['password'],
+    profilePic: json['profilePic'],
+  );
+}

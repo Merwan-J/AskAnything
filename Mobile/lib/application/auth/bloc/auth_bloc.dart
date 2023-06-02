@@ -21,11 +21,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthEventSignedIn>(
       ((event, emit) async {
+        print(9);
         sharedPrefsService.setFirstRun(false);
         emit(AuthAuthenticated(event.user, event.token));
       }),
     );
     on<AuthEventSignOut>(((event, emit) async {
+      print('authsignout');
       await authRepository.logout();
       emit(const AuthUnauthenticated());
     }));

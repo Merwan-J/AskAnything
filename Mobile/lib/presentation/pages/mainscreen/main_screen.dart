@@ -21,6 +21,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+<<<<<<< HEAD
   final screens = [
     HomePage(),
     SearchScreen(),
@@ -37,6 +38,10 @@ class _MainScreenState extends State<MainScreen> {
   //           : 0
   //       : 0;
   // }
+=======
+  final screens = [HomePage(), SearchScreen(), BookmarkPage(), ProfileScreen()];
+  int _selectedIndex = 0;
+>>>>>>> 175aaab ([Mobile] testing)
 
   int _selectedIndex = 0;
   @override
