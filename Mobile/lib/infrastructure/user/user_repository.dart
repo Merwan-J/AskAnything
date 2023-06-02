@@ -13,6 +13,7 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<UserFailure, User>> addBookmark(
       String userId, String questionId) async {
+    print("something");
     print('user repository');
     try {
       final userDto = await _userApi.addBookmark(userId, questionId);
@@ -21,7 +22,7 @@ class UserRepository implements IUserRepository {
 
       return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 

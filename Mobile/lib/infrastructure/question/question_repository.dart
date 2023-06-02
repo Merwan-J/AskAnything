@@ -25,11 +25,8 @@ class QuestionRepository implements IQuestionRepository {
       return right(questions.map((QuestionDto questionDto) {
         return Question.fromJson(questionDto.toJson());
       }).toList());
-    }
-    // TODO: handle more errors
-    // TODO: Make sure user is authenticated
-    catch (e) {
-      print(e);
+    } catch (e) {
+      print("this is error: $e");
       return left(const QuestionFailure.serverError());
     }
   }
@@ -47,10 +44,10 @@ class QuestionRepository implements IQuestionRepository {
 
   @override
   Future<Either<QuestionFailure, Question>> askQuestion(
-      QuestionForm questionForm) async {
+      QuestionForm questionForm, String id) async {
     try {
       var questionDto =
-          await _questionProvider.createQuestion(questionForm.toDto());
+          await _questionProvider.createQuestion(questionForm.toDto(), id);
       var question = Question.fromJson(questionDto.toJson());
 
       return Right(question);

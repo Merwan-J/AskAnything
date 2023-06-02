@@ -33,6 +33,9 @@ class ForYou extends StatelessWidget {
         updatedAt: DateTime.now());
     return BlocBuilder<QuestionListBloc, QuestionListState>(
       builder: (context, state) {
+        if (state is QuestionListInitial) {
+          BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+        }
         if (state is QuestionListLoading) {
           return Center(
             child: CircularProgressIndicator(),
@@ -74,7 +77,7 @@ class ForYou extends StatelessWidget {
                 BlocProvider.of<QuestionListBloc>(context)
                     .add(GetQuestionsEvent());
               },
-              child: Text("Refresh")),
+              child: const Text("Oops! Something went wrong. Click to retry")),
         );
       },
     );

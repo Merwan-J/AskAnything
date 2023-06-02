@@ -1,36 +1,66 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:askanything/application/bookmark/bookmark_event.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
+import 'package:askanything/presentation/widgets/question_edit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:askanything/domain/question/question.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../application/bookmark/bookmark_bloc.dart';
 import '../../application/bookmark/bookmark_state.dart';
+import '../../application/question/question_detail/question_detail_bloc.dart';
+import '../../application/question/question_detail/question_detail_events.dart';
+import '../../application/question/question_detail/question_detail_state.dart';
+import '../../application/question/question_like/question_like_bloc.dart';
+import '../../application/question/question_like/question_like_events.dart';
+import '../../application/question/question_like/question_like_state.dart';
+import '../../application/question/question_list/bloc/question_list_bloc.dart';
+import '../../domain/question/question_form.dart';
+import '../../domain/user/user.dart';
+import '../../infrastructure/question/question_repository.dart';
+import '../routes/routes_dart.dart';
 
 class QuestionW extends StatelessWidget {
   Question question;
+  final showDetail;
   QuestionW({
     Key? key,
     required this.question,
+    this.showDetail = false,
   }) : super(key: key);
+  buildBottomSheet(
+      BuildContext context, QuestionForm questionForm, String questionId) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30.h),
+                topRight: Radius.circular(30.h))),
+        context: context,
+        builder: (context) => UpdateQuestionForm(
+              questionForm: questionForm,
+              questionId: questionId,
+            ));
+  }
 
   @override
   Widget build(BuildContext context) {
-    // final nolikes = question.likes.length - question.dislikes.length;
-    final nolikes = 5;
-    //TODO: make this isbookmarked dynamic
+    User? _user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
     var isBookmarked = false;
     return BlocProvider(
       create: (context) => BookmarkBloc(
           repository: RepositoryProvider.of<UserRepository>(context)),
       child: GestureDetector(
-        onTap: () {}, //TODO: Go to question page
-        onDoubleTap: () {}, // TODO:Like
-        onLongPress: () {}, //TODO: maybe bookmark
+        onTap: () {
+          context.go('/${Routes.QUESTIONSDETAIL}/${question.id}');
+        }, //TODO: Go to question page//
         child: FittedBox(
           child: Container(
             child: Stack(
@@ -114,35 +144,66 @@ class QuestionW extends StatelessWidget {
                       SizedBox(
                         height: 10.h,
                       ),
-                      //TODO: change like color based on user likes
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          Icon(Icons.keyboard_arrow_up_outlined,
-                              color: nolikes > 0
-                                  ? Theme.of(context).primaryColor
-                                  : Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .color),
-                          Text(nolikes.toString()),
-                          Icon(Icons.keyboard_arrow_down_outlined,
-                              color: nolikes < 0
-                                  ? Theme.of(context).primaryColor
-                                  : Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .color),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          Icon(Icons.mode_comment_outlined),
-                          SizedBox(
-                            width: 5.h,
-                          ),
-                          Text(question.answers.length.toString()),
+                          getLikesAndComment(
+                              context,
+                              question,
+                              question.likes.contains(_user!.id),
+                              question.dislikes.contains(_user.id)),
+                          Visibility(
+                            visible: _user.id == question.author.id,
+                            child: Row(
+                              children: [
+                                InkWell(
+                                  radius: 10.h,
+                                  onTap: () {
+                                    QuestionForm questionForm = QuestionForm(
+                                      anonymous: question.anonymous,
+                                      title: question.title,
+                                      topic: question.topic,
+                                      description: question.description,
+                                    );
+
+                                    buildBottomSheet(
+                                        context, questionForm, question.id);
+                                  },
+                                  child: Icon(Icons.edit),
+                                ),
+                                SizedBox(
+                                  width: 10.h,
+                                ),
+                                BlocProvider(
+                                  create: (context) => QuestionDetailBloc(
+                                      questionListBloc:
+                                          BlocProvider.of<QuestionListBloc>(
+                                              context),
+                                      questionRepository: RepositoryProvider.of<
+                                          QuestionRepository>(context)),
+                                  child: BlocBuilder<QuestionDetailBloc,
+                                      QuestionDetailState>(
+                                    builder: (context, state) {
+                                      return InkWell(
+                                        onTap: () {
+                                          BlocProvider.of<QuestionDetailBloc>(
+                                                  context)
+                                              .add(QuestionDetailDeleteEvent(
+                                                  question.id));
+                                          if (showDetail) {
+                                            context.pop();
+                                          }
+                                        },
+                                        child: Icon(
+                                          Icons.delete,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ],
@@ -155,36 +216,37 @@ class QuestionW extends StatelessWidget {
                         right: 2.h,
                         child: InkWell(
                           onTap: () {
-                            //TODO: make the ids dynamic
                             BlocProvider.of<BookmarkBloc>(context).add(
                                 isBookmarked
-                                    ? RemoveBookmarkEvent(
-                                        '6478eda4d995e11e44bd63d1',
-                                        "64768b7ffea9d03bb6389cb9")
-                                    : AddBookmarkEvent(
-                                        '6478eda4d995e11e44bd63d1',
-                                        "64768b7ffea9d03bb6389cb9"));
+                                    ? RemoveBookmarkEvent(_user.id, question.id)
+                                    : AddBookmarkEvent(_user.id, question.id));
                           },
                           child: BlocConsumer<BookmarkBloc, BookmarkState>(
                             listener: (context, state) {
-                              // TODO: implement listener
+                              if (state is BookmarkAddSuccess) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "Question bookmarked successfully")));
+                              }
                             },
                             builder: (context, state) {
                               if (state is BookmarkAddSuccess) {
                                 var user = state.user;
-                                //TODO: make the ids dynamic
-                                isBookmarked = user.bookmarks
-                                    .contains("64768b7ffea9d03bb6389cb9");
-                                print(isBookmarked);
-                                print(user.bookmarks);
-                                print(question.id);
+                                isBookmarked =
+                                    user.bookmarks.contains(_user.id);
+                              }
+                              if (state is BookmarkRemoveSuccess) {
+                                var user = state.user;
+                                isBookmarked =
+                                    user.bookmarks.contains(_user.id);
                               }
                               return Icon(
                                 isBookmarked
                                     ? Icons.bookmark
                                     : Icons.bookmark_add_outlined,
                                 size: 30.h,
-                                color: Color.fromRGBO(56, 90, 100, 1),
+                                color: const Color.fromRGBO(56, 90, 100, 1),
                               );
                             },
                           ),
@@ -195,6 +257,68 @@ class QuestionW extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget getLikesAndComment(
+    context,
+    Question question,
+    bool isLiked,
+    bool isDisliked,
+  ) {
+    return BlocProvider(
+      create: (context) => QuestionLikeBloc(
+          questionListBloc: BlocProvider.of<QuestionListBloc>(context),
+          questionRepository:
+              RepositoryProvider.of<QuestionRepository>(context)),
+      child: BlocBuilder<QuestionLikeBloc, QuestionLikeState>(
+        builder: (context, state) {
+          return Row(
+            children: [
+              SizedBox(
+                width: 10.h,
+              ),
+              InkWell(
+                radius: 20,
+                onTap: () {
+                  BlocProvider.of<QuestionLikeBloc>(context)
+                      .add(QuestionLikeEvent.like(question.id));
+                },
+                child: Icon(Icons.keyboard_arrow_up_outlined,
+                    color: isLiked
+                        ? Theme.of(context).primaryColor
+                        : Colors.white),
+              ),
+              SizedBox(
+                width: 10.h,
+              ),
+              Text((question.likes.length - question.dislikes.length)
+                  .toString()),
+              SizedBox(
+                width: 10.h,
+              ),
+              InkWell(
+                onTap: () {
+                  BlocProvider.of<QuestionLikeBloc>(context)
+                      .add(QuestionLikeEvent.dislike(question.id));
+                },
+                child: Icon(Icons.keyboard_arrow_down_outlined,
+                    color: isDisliked
+                        ? Theme.of(context).primaryColor
+                        : Theme.of(context).textTheme.bodyLarge!.color),
+              ),
+              SizedBox(
+                width: 20.h,
+              ),
+              Icon(Icons.mode_comment_outlined),
+              SizedBox(
+                width: 5.h,
+              ),
+              Text(question.answers.length.toString()),
+            ],
+          );
+        },
       ),
     );
   }
