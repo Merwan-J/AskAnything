@@ -22,22 +22,6 @@ class AnswerAPI {
     var decoded = await jsonDecode(answer.body)["data"]["answer"];
     // print("decoded$decoded");
 
-    var temp = json.decode(answer.body);
-
-    var tempJson = temp["data"]["answer"];
-    final answerDto = AnswerDto(
-      id: tempJson['_id'],
-      text: tempJson['text'],
-      image: tempJson['image'],
-      likes: List<dynamic>.from(tempJson['likes']),
-      dislikes: List<dynamic>.from(tempJson['dislikes']),
-      author: tempJson['author'],
-      questionId: tempJson['question'],
-      anonymous: tempJson['anonymous'],
-      createdAt: DateTime.parse(tempJson['createdAt']),
-      updatedAt: DateTime.parse(tempJson['updatedAt']),
-    );
-
     if (answer.statusCode == 201) {
       return AnswerDto.fromJson(decoded);
     } else {

@@ -92,9 +92,9 @@ void main() {
                     create: (context) => QuestionListBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
-                    create: (context) => QuestionPostBloc(
-                        RepositoryProvider.of<QuestionRepository>(context),
-                        BlocProvider.of<QuestionListBloc>(context))),
+                  create: (context) => AnswerBloc(
+                      RepositoryProvider.of<AnswerRepository>(context)),
+                )
               ],
               child: BlocListener<AuthBloc, AuthState>(listener:
                   (context, state) {
