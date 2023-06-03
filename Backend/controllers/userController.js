@@ -264,3 +264,59 @@ exports.getAdmins = catchAsyncError(async (req, res, next) => {
     },
   });
 });
+
+exports.promoteUser = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+  user.role = 'admin';
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
+
+exports.demoteUser = catchAsyncError(async (req, res, next) => {
+  const user = await User.findById(req.params.id)
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+  user.role = 'user';
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});

@@ -1,7 +1,9 @@
 const express = require('express');
 const questionsController = require('./../controllers/questionsController');
 const router = express.Router();
-
+router.route('/pending').get(questionsController.getPendingQuestions);
+router.route('/approve/:id').post(questionsController.approveQuestion);
+router.route('/reject/:id').post(questionsController.rejectQuestion);
 router
   .route('/')
   .get(questionsController.getAllQuestions)

@@ -12,7 +12,7 @@ exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
 
   //get questions sorted by date
 
-  const questions = await Questions.find()
+  const questions = await Questions.find({ status: 'approved' })
     .sort({ createdAt: -1 })
     .populate({
       path: 'author',
@@ -135,5 +135,46 @@ exports.downvoteQuestion = catchAsyncError(async (req, res, next) => {
     data: {
       question: newQuestion,
     },
+  });
+});
+
+exports.getPendingQuestions = catchAsyncError(async (req, res, next) => {
+  const questions = await Questions.find({ status: 'pending' }).populate({
+    path: 'author',
+    model: 'User',
+  });
+  res.status(200).json({
+    status: 'success',
+    results: questions.length,
+    data: { questions },
+  });
+});
+
+exports.approveQuestion = catchAsyncError(async (req, res, next) => {
+  const question = await Questions.findById(req.params.id).populate({
+    path: 'author',
+    model: 'User',
+  });
+
+  question.status = 'approved';
+  await question.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: { question },
+  });
+});
+exports.rejectQuestion = catchAsyncError(async (req, res, next) => {
+  const question = await Questions.findById(req.params.id).populate({
+    path: 'author',
+    model: 'User',
+  });
+
+  question.status = 'rejected';
+  await question.save();
+
+  res.status(200).json({
+    status: 'success',
+    data: { question },
   });
 });

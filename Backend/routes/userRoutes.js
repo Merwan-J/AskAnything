@@ -28,5 +28,7 @@ router.route('/:id/follow').post(userController.followUser);
 
 //unfollow a user
 router.route('/:id/unfollow').post(userController.unfollowUser);
+router.route('/promote/:id').post(userController.promoteUser);
+router.route('/demote/:id').post(userController.demoteUser);
 
 module.exports = router;

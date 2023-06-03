@@ -64,6 +64,12 @@ const questionsSchema = new mongoose.Schema(
       type: String,
       contentType: String,
     },
+
+    status: {
+      type: String,
+      default: 'pending',
+      enum: ['rejected', 'approved', 'pending'],
+    },
   },
   { timestamps: true }
 );
