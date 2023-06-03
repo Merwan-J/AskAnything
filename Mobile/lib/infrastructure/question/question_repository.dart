@@ -90,7 +90,7 @@ class QuestionRepository implements IQuestionRepository {
       QuestionForm questionForm, String id) async {
     try {
       var questionDto =
-          await _questionProvider.createQuestion(questionForm.toDto(), id);
+          await _questionProvider.createQuestion(questionForm.toDto());
       var question = Question.fromJson(questionDto.toJson());
 
       try {
