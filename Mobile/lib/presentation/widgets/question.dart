@@ -59,7 +59,7 @@ class QuestionW extends StatelessWidget {
             repository: RepositoryProvider.of<UserRepository>(context)),
         child: GestureDetector(
           onTap: () {
-            context.go('/${Routes.QUESTIONSDETAIL}/${question.id}');
+            context.pushNamed("questionsdetail", extra: question);
           }, //TODO: Go to question page//
           child: FittedBox(
             child: Container(

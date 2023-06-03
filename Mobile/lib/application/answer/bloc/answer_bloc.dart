@@ -42,9 +42,12 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
     }));
 
     on<AddAnswerEvent>(((event, emit) async {
-      // print("creating answer");
+      print("creating answer");
+      print("dfaklajkfjlssssssssssssssssssssssssssssssss");
+      print(event.answerForm.question);
+      print(event.userId);
       Either<AnswerFailure, Answer> answer =
-          await _answerRepository.createAnswer(event.answerForm);
+          await _answerRepository.createAnswer(event.answerForm, event.userId);
       print("success");
       print(answer); //Right
       answer.fold(

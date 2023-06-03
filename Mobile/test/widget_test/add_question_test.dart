@@ -1,5 +1,6 @@
 import 'dart:js';
 
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/application/question/question_post/bloc/question_post_bloc.dart';
 import 'package:askanything/infrastructure/question/question_provider.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
@@ -36,7 +37,8 @@ void main() {
                   providers: [
                     BlocProvider(
                         create: (context) => QuestionPostBloc(
-                            RepositoryProvider.of<QuestionRepository>(context)))
+                            RepositoryProvider.of<QuestionRepository>(context),
+                            BlocProvider.of<QuestionListBloc>(context)))
                   ],
                   child: AskQuestionForm(),
                 ))),

@@ -14,12 +14,13 @@ class AnswerRepository implements IAnswerRepository {
   AnswerAPI _answerAPI;
 
   AnswerRepository(this._answerAPI);
-
+//I made it accept a userId
   @override
   Future<Either<AnswerFailure, Answer>> createAnswer(
-      AnswerForm answerForm) async {
+      AnswerForm answerForm, String userId) async {
     try {
-      var answer = await _answerAPI.createAnswer(answerForm.toAnswerFormDto());
+      var answer =
+          await _answerAPI.createAnswer(answerForm.toAnswerFormDto(), userId);
       // print(answer);
       print('answer in repo');
 

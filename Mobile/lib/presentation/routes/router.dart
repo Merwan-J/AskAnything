@@ -1,5 +1,6 @@
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_state.dart';
+import 'package:askanything/domain/question/question.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/admin_users.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
@@ -74,7 +75,10 @@ GoRouter getRoutes(AuthBloc authBloc) {
     ),
     GoRoute(
       path: Routes.QUESTIONSDETAIL,
-      builder: (context, state) => QuestionDetail(),
+      name: "questionsdetail",
+      builder: (context, state) => QuestionDetail(
+        question: state.extra as Question,
+      ),
     ),
     GoRoute(
       path: Routes.USERS,

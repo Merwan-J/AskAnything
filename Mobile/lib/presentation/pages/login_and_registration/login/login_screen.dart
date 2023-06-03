@@ -69,11 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
             // context.go(Routes.SEARCH);
 
             // Navigate to home screen
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => QuestionDetail(),
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => QuestionDetail(),
+            //   ),
+            // );
             print('object');
           }
 
