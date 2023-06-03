@@ -6,6 +6,7 @@ const authRouter = require('./routes/authRoutes');
 const imageRouter = require('./routes/imageRoutes');
 const votesRouter = require('./routes/votesRouter');
 const searchRouter = require('./routes/searchRoutes');
+const pollRouter = require('./routes/pollRoute');
 
 const AppError = require('./utils/appError');
 const errorHandler = require('./controllers/errorController');
@@ -21,6 +22,7 @@ app.use(`${prefix}/auth`, authRouter);
 app.use(`${prefix}/uploads`, imageRouter);
 app.use(`${prefix}/questions`, questionsRouter);
 app.use(`${prefix}/answers`, answerRouter);
+app.use(`${prefix}/polls`, pollRouter);
 
 app.use(`${prefix}/votes`, votesRouter);
 app.use(`${prefix}/search`, searchRouter);

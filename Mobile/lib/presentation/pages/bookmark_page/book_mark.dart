@@ -1,5 +1,6 @@
 import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
+import 'package:askanything/presentation/widgets/poll.dart';
 import 'package:flutter/material.dart';
 
 import '../../../domain/question/question.dart';
@@ -89,11 +90,7 @@ class BookmarkPage extends StatelessWidget {
         child: ListView.builder(
             itemCount: questionWidget.length,
             itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                    left: 8, right: 0, top: 10, bottom: 5),
-                child: questionWidget[index],
-              );
+              return PollW();
             }),
       ),
     );
