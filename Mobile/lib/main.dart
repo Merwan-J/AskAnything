@@ -1,4 +1,5 @@
 import 'package:askanything/Data/Local/Shared_prefs/shared_pref_service.dart';
+import 'package:askanything/application/answer/bloc/answer_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_state.dart';
 import 'package:askanything/application/question/question_like/question_like_bloc.dart';
@@ -86,6 +87,9 @@ void main() {
                                 context))),
                 BlocProvider(
                     create: (context) => QuestionEditBloc(
+                        RepositoryProvider.of<QuestionRepository>(context))),
+                BlocProvider(
+                    create: (context) => QuestionListBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
                     create: (context) => QuestionPostBloc(

@@ -18,6 +18,7 @@ class AnswerRepository implements IAnswerRepository {
       AnswerForm answerForm) async {
     try {
       var answer = await _answerAPI.createAnswer(answerForm.toAnswerFormDto());
+      print(answer);
 
       return right(answer.toAnswer());
     } catch (e) {

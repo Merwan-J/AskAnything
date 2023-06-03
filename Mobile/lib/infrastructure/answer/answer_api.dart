@@ -1,6 +1,7 @@
 import "dart:convert";
 import "package:askanything/infrastructure/answer/answer_dto.dart";
 import "package:askanything/infrastructure/answer/answer_form_dto.dart";
+import "package:askanything/infrastructure/user/author_dto.dart";
 import "package:askanything/util/custom_http_client.dart";
 
 class AnswerAPI {
@@ -9,8 +10,17 @@ class AnswerAPI {
   AnswerAPI(this._customHttpClient);
 
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
-    var answer = await _customHttpClient.post("answers",
-        body: json.encode(answerFormDto.toJson()));
+    print("answer api");
+    var body = {
+      "text": answerFormDto.text,
+      "author": "644a59d906e58c639150523c",
+      "question": "6478b8c7a70dcd58a4690267"
+    };
+    var answer =
+        await _customHttpClient.post("answers", body: json.encode(body));
+
+    var decoded = await jsonDecode(answer.body)["data"]["answer"];
+    print("decoded$decoded");
 
     var temp = json.decode(answer.body);
 
@@ -29,7 +39,28 @@ class AnswerAPI {
     );
 
     if (answer.statusCode == 201) {
-      return answerDto;
+      try {
+        AnswerDto answerDto = AnswerDto(
+            id: decoded["_id"] as String,
+            text: decoded["text"].toString(),
+            image: "" as String,
+            likes: (decoded["likes"] as List<dynamic>)
+                .map((e) => e.toString())
+                .toList(),
+            dislikes: (decoded["dislikes"] as List<dynamic>)
+                .map((e) => e.toString())
+                .toList(),
+            author: AuthorDto.fromJson(decoded["author"]),
+            questionId: decoded["questionId"] as String,
+            anonymous: decoded["author"],
+            createdAt: decoded["createdAt"],
+            updatedAt: decoded["updatedAt"]);
+
+        return answerDto;
+      } catch (e) {
+        print(e);
+        throw (e);
+      }
     } else {
       throw Exception("Failed to create answer"); //TODO: handle the exceptions
     }

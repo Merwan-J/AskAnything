@@ -28,11 +28,8 @@ import '../routes/routes_dart.dart';
 class QuestionW extends StatelessWidget {
   Question question;
   final showDetail;
-  QuestionW({
-    Key? key,
-    required this.question,
-    this.showDetail = false,
-  }) : super(key: key);
+  QuestionW({Key? key, required this.question, this.showDetail = false})
+      : super(key: key);
   buildBottomSheet(
       BuildContext context, QuestionForm questionForm, String questionId) {
     showModalBottomSheet(
@@ -55,210 +52,326 @@ class QuestionW extends StatelessWidget {
         .getAuthenticatedUserSync();
     var isBookmarked = false;
     return BlocProvider(
-      create: (context) => BookmarkBloc(
-          repository: RepositoryProvider.of<UserRepository>(context)),
-      child: GestureDetector(
-        onTap: () {
-          context.go('/${Routes.QUESTIONSDETAIL}/${question.id}');
-        }, //TODO: Go to question page//
-        child: FittedBox(
-          child: Container(
-            child: Stack(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10.h),
-                  //prevent expanding
+        create: (context) => BookmarkBloc(
+            repository: RepositoryProvider.of<UserRepository>(context)),
+        child: GestureDetector(
+          onTap: () {
+            context.go('/${Routes.QUESTIONSDETAIL}/${question.id}');
+          }, //TODO: Go to question page//
+          child: FittedBox(
+            child: Container(
+              child: Stack(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10.h),
+                    //prevent expanding
 
-                  // height: 150.h,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  // width: 300,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).cardColor),
-                  // color: Colors.red,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const CircleAvatar(
-                                  radius: 20, child: Icon(Icons.person)),
-                              SizedBox(
-                                width: 10.h,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    question.author.name,
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge,
-                                  ),
-                                  SizedBox(
-                                    height: 3.h,
-                                  ),
-                                  Text(
-                                    DateFormat.jm()
-                                        .format(question.createdAt)
-                                        .toString(),
-                                    style:
-                                        Theme.of(context).textTheme.labelSmall,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.circle,
-                                  color: Theme.of(context).primaryColor,
-                                  size: 10.h),
-                              SizedBox(
-                                width: 3.w,
-                              ),
-                              Text(
-                                question.topic,
-                                style: TextStyle(
-                                    fontSize: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .fontSize,
-                                    fontWeight: FontWeight.bold,
-                                    // fontWeight: FontWeight.bold,
-                                    color: Theme.of(context).primaryColor),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Text(question.title,
-                          style: Theme.of(context).textTheme.bodySmall),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          getLikesAndComment(
-                              context,
-                              question,
-                              question.likes.contains(_user!.id),
-                              question.dislikes.contains(_user.id)),
-                          Visibility(
-                            visible: _user.id == question.author.id,
-                            child: Row(
+                    // height: 150.h,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    // width: 300,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Theme.of(context).cardColor),
+                    // color: Colors.red,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
                               children: [
-                                InkWell(
-                                  radius: 10.h,
-                                  onTap: () {
-                                    QuestionForm questionForm = QuestionForm(
-                                      anonymous: question.anonymous,
-                                      title: question.title,
-                                      topic: question.topic,
-                                      description: question.description,
-                                    );
-
-                                    buildBottomSheet(
-                                        context, questionForm, question.id);
-                                  },
-                                  child: Icon(Icons.edit),
-                                ),
+                                const CircleAvatar(
+                                    radius: 20, child: Icon(Icons.person)),
                                 SizedBox(
                                   width: 10.h,
                                 ),
-                                BlocProvider(
-                                  create: (context) => QuestionDetailBloc(
-                                      questionListBloc:
-                                          BlocProvider.of<QuestionListBloc>(
-                                              context),
-                                      questionRepository: RepositoryProvider.of<
-                                          QuestionRepository>(context)),
-                                  child: BlocBuilder<QuestionDetailBloc,
-                                      QuestionDetailState>(
-                                    builder: (context, state) {
-                                      return InkWell(
-                                        onTap: () {
-                                          BlocProvider.of<QuestionDetailBloc>(
-                                                  context)
-                                              .add(QuestionDetailDeleteEvent(
-                                                  question.id));
-                                          if (showDetail) {
-                                            context.pop();
-                                          }
-                                        },
-                                        child: Icon(
-                                          Icons.delete,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                )
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      question.author.name,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    SizedBox(
+                                      height: 3.h,
+                                    ),
+                                    Text(
+                                      DateFormat.jm()
+                                          .format(question.createdAt)
+                                          .toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelSmall,
+                                    ),
+                                  ],
+                                ),
                               ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(Icons.circle,
+                                    color: Theme.of(context).primaryColor,
+                                    size: 10.h),
+                                SizedBox(
+                                  width: 3.w,
+                                ),
+                                Text(
+                                  question.topic,
+                                  style: TextStyle(
+                                      fontSize: Theme.of(context)
+                                          .textTheme
+                                          .bodySmall!
+                                          .fontSize,
+                                      fontWeight: FontWeight.bold,
+                                      // fontWeight: FontWeight.bold,
+                                      color: Theme.of(context).primaryColor),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Text(question.title,
+                            style: Theme.of(context).textTheme.bodySmall),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            getLikesAndComment(
+                                context,
+                                question,
+                                question.likes.contains(_user!.id),
+                                question.dislikes.contains(_user.id)),
+                            Visibility(
+                              visible: _user.id == question.author.id,
+                              child: Row(
+                                children: [
+                                  InkWell(
+                                    radius: 10.h,
+                                    onTap: () {
+                                      QuestionForm questionForm = QuestionForm(
+                                        anonymous: question.anonymous,
+                                        title: question.title,
+                                        topic: question.topic,
+                                        description: question.description,
+                                      );
+
+                                      buildBottomSheet(
+                                          context, questionForm, question.id);
+                                    },
+                                    child: Icon(Icons.edit),
+                                  ),
+                                  SizedBox(
+                                    width: 10.h,
+                                  ),
+                                  BlocProvider(
+                                    create: (context) => QuestionDetailBloc(
+                                        questionListBloc:
+                                            BlocProvider.of<QuestionListBloc>(
+                                                context),
+                                        questionRepository: RepositoryProvider
+                                            .of<QuestionRepository>(context)),
+                                    child: BlocBuilder<QuestionDetailBloc,
+                                        QuestionDetailState>(
+                                      builder: (context, state) {
+                                        return InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<QuestionDetailBloc>(
+                                                    context)
+                                                .add(QuestionDetailDeleteEvent(
+                                                    question.id));
+                                            if (showDetail) {
+                                              context.pop();
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.delete,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.circle,
+                                color: Theme.of(context).primaryColor,
+                                size: 10.h),
+                            SizedBox(
+                              width: 3.w,
+                            ),
+                            Text(
+                              question.topic,
+                              style: TextStyle(
+                                  fontSize: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall!
+                                      .fontSize,
+                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
+                                  color: Theme.of(context).primaryColor),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(question.title,
+                        style: Theme.of(context).textTheme.bodySmall),
+                  ),
+
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Visibility(
+                      visible: showDetail,
+                      child: Column(
+                        children: [
+                          Divider(
+                            color: Colors.grey,
+                            thickness: 2,
+                          ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(question.description,
+                                style: TextStyle(fontSize: 12.sp)),
+                          ),
+                        ],
+                      )),
+                  //TODO: change like color based on user likes
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      getLikesAndComment(
+                          context,
+                          question,
+                          question.likes.contains(_user.id),
+                          question.dislikes.contains(_user.id)),
+
+                      //TODO: change based on user type
+                      Row(
+                        children: [
+                          InkWell(
+                            radius: 10.h,
+                            onTap: () {
+                              QuestionForm questionForm = QuestionForm(
+                                anonymous: question.anonymous,
+                                title: question.title,
+                                topic: question.topic,
+                                description: question.description,
+                              );
+
+                              buildBottomSheet(
+                                  context, questionForm, question.id);
+                            },
+                            child: Icon(Icons.edit),
+                          ),
+                          SizedBox(
+                            width: 10.h,
+                          ),
+                          BlocProvider(
+                            create: (context) => QuestionDetailBloc(
+                                questionListBloc:
+                                    BlocProvider.of<QuestionListBloc>(context),
+                                questionRepository:
+                                    RepositoryProvider.of<QuestionRepository>(
+                                        context)),
+                            child: BlocBuilder<QuestionDetailBloc,
+                                QuestionDetailState>(
+                              builder: (context, state) {
+                                return InkWell(
+                                  onTap: () {
+                                    BlocProvider.of<QuestionDetailBloc>(context)
+                                        .add(QuestionDetailDeleteEvent(
+                                            question.id));
+                                    if (showDetail) {
+                                      context.pop();
+                                    }
+                                  },
+                                  child: Icon(
+                                    Icons.delete,
+                                  ),
+                                );
+                              },
                             ),
                           )
                         ],
-                      ),
+                      )
                     ],
                   ),
-                ),
-                BlocBuilder<BookmarkBloc, BookmarkState>(
-                  builder: (context, state) {
-                    return Positioned(
-                        top: -4.h,
-                        right: 2.h,
-                        child: InkWell(
-                          onTap: () {
-                            BlocProvider.of<BookmarkBloc>(context).add(
-                                isBookmarked
-                                    ? RemoveBookmarkEvent(_user.id, question.id)
-                                    : AddBookmarkEvent(_user.id, question.id));
-                          },
-                          child: BlocConsumer<BookmarkBloc, BookmarkState>(
-                            listener: (context, state) {
-                              if (state is BookmarkAddSuccess) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text(
-                                            "Question bookmarked successfully")));
-                              }
+
+                  BlocBuilder<BookmarkBloc, BookmarkState>(
+                    builder: (context, state) {
+                      return Positioned(
+                          top: -4.h,
+                          right: 2.h,
+                          child: InkWell(
+                            onTap: () {
+                              BlocProvider.of<BookmarkBloc>(context).add(
+                                  isBookmarked
+                                      ? RemoveBookmarkEvent(
+                                          _user.id, question.id)
+                                      : AddBookmarkEvent(
+                                          _user.id, question.id));
                             },
-                            builder: (context, state) {
-                              if (state is BookmarkAddSuccess) {
-                                var user = state.user;
-                                isBookmarked =
-                                    user.bookmarks.contains(_user.id);
-                              }
-                              if (state is BookmarkRemoveSuccess) {
-                                var user = state.user;
-                                isBookmarked =
-                                    user.bookmarks.contains(_user.id);
-                              }
-                              return Icon(
-                                isBookmarked
-                                    ? Icons.bookmark
-                                    : Icons.bookmark_add_outlined,
-                                size: 30.h,
-                                color: const Color.fromRGBO(56, 90, 100, 1),
-                              );
-                            },
-                          ),
-                        ));
-                  },
-                )
-              ],
+                            child: BlocConsumer<BookmarkBloc, BookmarkState>(
+                              listener: (context, state) {
+                                if (state is BookmarkAddSuccess) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              "Question bookmarked successfully")));
+                                }
+                              },
+                              builder: (context, state) {
+                                if (state is BookmarkAddSuccess) {
+                                  var user = state.user;
+                                  isBookmarked =
+                                      user.bookmarks.contains(_user.id);
+                                }
+                                if (state is BookmarkRemoveSuccess) {
+                                  var user = state.user;
+                                  isBookmarked =
+                                      user.bookmarks.contains(_user.id);
+                                }
+                                return Icon(
+                                  isBookmarked
+                                      ? Icons.bookmark
+                                      : Icons.bookmark_add_outlined,
+                                  size: 30.h,
+                                  color: const Color.fromRGBO(56, 90, 100, 1),
+                                );
+                              },
+                            ),
+                          ));
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   Widget getLikesAndComment(
