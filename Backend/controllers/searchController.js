@@ -5,57 +5,32 @@ const AppError = require('../utils/appError');
 
 exports.search = catchAsyncError(async (req, res) => {
   // Get search query from request query string
-  const searchQuery = req.query.q;
-  // Check if filter is by Question or user
-  // eslint-disable-next-line prefer-destructuring
-  const filterBy = req.query.filterBy;
+  const { topic, title } = req.query;
 
-  let results = null;
+  try {
+    let questions;
 
-  if (filterBy === 'question') {
-    // Filter question by title or description containing the search query and topic if provided
-    // $options: 'i' makes sure that the matches are case insensetive
-
-    let questionQuery = {
-      $or: [
-        { title: { $regex: searchQuery, $options: 'i' } },
-        { description: { $regex: searchQuery, $options: 'i' } },
-      ],
-    };
-
-    if (req.query.topic) {
-      questionQuery.topic = req.query.topic;
+    if (topic) {
+      questions = await Question.find({ topic });
+    } else if (title) {
+      questions = await Question.find({
+        title: { $regex: title, $options: 'i' },
+      });
+    } else {
+      questions = await Question.find();
     }
 
-    // Sort results by 'like' or 'createdAt' if 'like' query parameter is not provided
-    const sortField = req.query.sortField === 'likes' ? 'likes' : 'createdAt';
-    const sortOrder = req.query.sortOrder === '1' ? '' : '-';
-
-    questionQuery = Question.find(questionQuery);
-
-    results = await questionQuery.sort(sortOrder + sortField);
-  } else if (filterBy === 'user') {
-    // Filter users by name containing the search query
-    let userQuery = {
-      name: { $regex: searchQuery, $options: 'i' },
-    };
-
-    // Sort results by 'reputation'
-    const sortOrder = req.query.sortOrder === '1' ? '' : '-';
-
-    userQuery = User.find(userQuery).sort(`${sortOrder}reputation`);
-
-    results = await userQuery;
-  } else {
-    // Invalid filterBy parameter
-    return next(new AppError('invalid filterBy parameter', 400));
+    res.status(200).json({ success: true, data: questions });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, error: error.message });
   }
   // Send Results back as a response
   res.status(200).json({
     status: 'success',
     results: results.length,
     data: {
-      results,
+      results: questions,
     },
   });
 });

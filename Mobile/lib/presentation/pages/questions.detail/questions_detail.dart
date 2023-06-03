@@ -1,3 +1,5 @@
+import 'package:askanything/domain/answer/answer_form.dart';
+import 'package:askanything/infrastructure/answer/answer_repository.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/application/answer/bloc/answer_event.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
@@ -10,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../application/answer/bloc/answer_bloc.dart';
+import '../../../application/answer/bloc/answer_event.dart';
 import '../../../application/answer/bloc/answer_state.dart';
 import '../../../domain/answer/answer.dart';
 import '../../../domain/answer/answer_form.dart';
@@ -40,8 +43,8 @@ class _QuestionDetailState extends State<QuestionDetail> {
   String dummyQuestionId = '647817e1ffb1e50ecf827531';
   String dummyAuthorId = '6448f5ead561de32dc337d5b';
   bool isAnonymous = false;
-  final TextEditingController _textController = TextEditingController();
   String finalText = '';
+  TextEditingController _answerController = TextEditingController();
   final List<Answer> answerList = [
     Answer(
         id: "1",
@@ -68,9 +71,17 @@ class _QuestionDetailState extends State<QuestionDetail> {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now()),
   ];
+  //dispose contorller
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _answerController.clear();
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool showDetail = MediaQuery.of(context).viewInsets.bottom == 0.0;
     List<Widget> answerWidget = answerList
         .map((answer) => Row(
               children: [
@@ -82,37 +93,83 @@ class _QuestionDetailState extends State<QuestionDetail> {
             ))
         .toList();
 
-    return BlocProvider(
-      create: (context) =>
-          AnswerBloc(RepositoryProvider.of<AnswerRepository>(context)),
-      child: Scaffold(
-        appBar: AppBar(title: Text('question comments')),
-        bottomNavigationBar: BottomAppBar(),
-        body: Column(
+    return Scaffold(
+      // resizeToAvoidBottomInset: false,
+      appBar: AppBar(title: Text('Comments')),
+      bottomNavigationBar: BottomAppBar(),
+      body: BlocProvider(
+        create: (context) =>
+            AnswerBloc(RepositoryProvider.of<AnswerRepository>(context)),
+        child: Column(
           children: [
             SizedBox(
               height: 10.h,
             ),
-            QuestionW(question: QuestionDetail.question),
+            QuestionW(
+              question: QuestionDetail.question,
+              showDetail: showDetail,
+            ),
             SizedBox(
               height: 10.h,
             ),
             Container(
               // color: Colors.red,
-              child: Expanded(
-                child: ListView.builder(
-                    itemCount: answerList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                            left: 16, right: 0, top: 0, bottom: 5),
-                        child: answerWidget[index],
-                      );
-                    }),
+              child: BlocBuilder<AnswerBloc, AnswerState>(
+                builder: (context, state) {
+                  print(state);
+                  if (state is InitialAnswerState) {
+                    print("we are here");
+                    BlocProvider.of<AnswerBloc>(context).add(
+                        LoadAnswersByQuestionEvent("6478af6ea70dcd58a46901db"));
+                    return Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  if (state is LoadingAnswerState) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is ErrorAnswerState) {
+                    print(state);
+
+                    return Expanded(
+                      child: Center(
+                        child: Text(state.message),
+                      ),
+                    );
+                  }
+                  if (state is ListLoadedAnswerState && state.answer.isEmpty) {
+                    return Expanded(
+                      child: Center(
+                        child: Text("No Answers yet, be the first to answer!"),
+                      ),
+                    );
+                  }
+                  if (state is ListLoadedAnswerState) {
+                    print("presentation layer ${state.answer}");
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: state.answer.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                  left: 16.h, right: 0, top: 0, bottom: 5.h),
+                              child: AnswerW(answer: state.answer[index]),
+                            );
+                          }),
+                    );
+                  }
+                  return Center(
+                    child: Text("Something went wrong"),
+                  );
+                },
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 8.0),
+              padding: EdgeInsets.fromLTRB(16.h, 16.0.h, 0.0, 8.0.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
@@ -137,28 +194,31 @@ class _QuestionDetailState extends State<QuestionDetail> {
                     child: Container(
                       height: 50.h,
                       child: TextField(
-                        controller: _textController,
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                        controller: _answerController,
                         decoration: InputDecoration(
-                          suffixIcon: BlocConsumer<AnswerBloc, AnswerState>(
-                            listener: (context, state) {
-                              // TODO: implement listener
-                            },
-                            builder: (context, state) {
-                              return IconButton(
-                                  onPressed: () {
-                                    finalText = _textController.text;
-
-                                    BlocProvider.of<AnswerBloc>(context).add(
-                                        AddAnswerEvent(AnswerForm(
-                                            author: dummyAuthorId,
-                                            anonymous: isAnonymous,
-                                            image: "",
-                                            question: dummyQuestionId,
-                                            text: finalText)));
-                                  },
-                                  icon: Icon(Icons.send));
-                            },
-                          ),
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                var text = _answerController.text;
+                                AnswerForm answerForm = AnswerForm(
+                                    author: 'the author',
+                                    text: text,
+                                    anonymous: isAnonymous,
+                                    question: "6478af6ea70dcd58a46901db",
+                                    image: '');
+                                print("event form $answerForm");
+                                BlocProvider.of<AnswerBloc>(context)
+                                    .add(AddAnswerEvent(answerForm));
+                                BlocProvider.of<AnswerBloc>(context).add(
+                                    LoadAnswersByQuestionEvent(
+                                        "6478af6ea70dcd58a46901db"));
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                _answerController.clear();
+                                print("after evnet $answerForm");
+                              },
+                              icon: Icon(Icons.send)),
                           border: InputBorder.none,
                           hintText: "reply",
                         ),

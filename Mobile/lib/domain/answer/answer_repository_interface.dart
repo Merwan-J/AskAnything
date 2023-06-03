@@ -12,4 +12,6 @@ abstract class IAnswerRepository {
   Future<Either<AnswerFailure, Unit>> deleteAnswer(String id);
   Future<Either<AnswerFailure, Unit>> likeAnswer();
   Future<Either<AnswerFailure, Unit>> disLikeAnswer();
+  Future<Either<AnswerFailure, List<Answer>>> getAnswersByQuestion(
+      String questionId);
 }
