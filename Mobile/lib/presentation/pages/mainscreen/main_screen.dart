@@ -74,6 +74,7 @@ class _MainScreenState extends State<MainScreen> {
       },
       child: Scaffold(
           floatingActionButton: Visibility(
+            key: Key('add_questiion'),
             visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
             child: FloatingActionButton(
               onPressed: () {

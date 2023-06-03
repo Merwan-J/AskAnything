@@ -70,6 +70,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
   @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
+      key: const Key('draggable_scrollable_sheet'),
       expand: false,
       initialChildSize: 0.8,
       minChildSize: 0.3,
@@ -113,6 +114,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                       height: 10.h,
                     ),
                     TextField(
+                      key: const Key('title'),
                       controller: titleController,
                       decoration: InputDecoration(hintText: "Enter title here"),
                     ),
@@ -122,6 +124,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                     SizedBox(
                       // height: 300.h,
                       child: TextField(
+                        key: const Key('description'),
                         maxLines: 6,
                         // expands: true,
                         // keyboardType: TextInputType.multiline,
@@ -156,6 +159,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                       children: [
                         const Text("Anonymous"),
                         Switch(
+                            key: Key('switch'),
                             activeTrackColor: Color.fromRGBO(226, 230, 234, 1),
                             // activeColor: Color.fromRGBO(255, 115, 92, 1),
                             activeColor: CustomColor.primaryColor,
@@ -223,6 +227,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                               }
                             }, builder: (context, state) {
                               return GestureDetector(
+                                key: const Key('post'),
                                 onTap: () {
                                   final questionForm = QuestionForm(
                                     title: titleController.text,
