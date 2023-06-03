@@ -172,9 +172,17 @@ class UserApi {
           await _customHttpClient.post("users/bookmarks/$userId", body: body);
 
       var temp = await json.decode(response.body)["data"]["user"];
+      print(response.body);
+      print(response.statusCode);
       print(temp);
       if (response.statusCode == 200) {
-        return UserDTO.fromJson(temp);
+        print("from status");
+        try {
+          return UserDTO.fromJson(temp);
+        } catch (e) {
+          print(e);
+          throw e;
+        }
       } else {
         throw Exception("Failed to load user");
       }

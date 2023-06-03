@@ -4,6 +4,7 @@ import 'package:askanything/application/login/bloc/login_bloc.dart';
 import 'package:askanything/application/login/bloc/login_event.dart';
 import 'package:askanything/application/login/bloc/login_state.dart';
 import 'package:askanything/domain/auth/login_form.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/presentation/app.dart';
 import 'package:askanything/presentation/pages/home/home_temp.dart';
 import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
@@ -39,7 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginBloc(),
+      create: (context) =>
+          LoginBloc(RepositoryProvider.of<AuthRepository>(context)),
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is LoginStateLoading) {

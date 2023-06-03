@@ -10,13 +10,11 @@ import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:askanything/presentation/pages/profile_page/other_profile.dart';
-import 'package:askanything/presentation/pages/profile_page/profile_temp.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AdminUsers extends StatefulWidget {
@@ -187,77 +185,88 @@ class _AdminUsersState extends State<AdminUsers>
               itemCount: state.users.length,
               itemBuilder: (context, index) {
                 final user = state.users[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => OtherProfile(user: user),
+                    ));
+                  },
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/user 2.png'),
-                        radius: 25.h,
+                    child: ListTile(
+                      leading: Container(
+                        margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/user 2.png'),
+                          radius: 25.h,
+                        ),
                       ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          user['name'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            user['name'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.trophy,
+                                color: Theme.of(context).primaryColor,
+                                size: 15.sp,
+                              ),
+                              SizedBox(width: 4.w),
+                              Text(
+                                user['reputation']
+                                    .toString(), // Replace with actual reputation number
+                                style: TextStyle(
+                                  color: CustomColor.primaryColor,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          if (user['role'] == 'admin') {
+                            context
+                                .read<UserBloc>()
+                                .add(DemoteUser(user['_id']));
+                          } else {
+                            context
+                                .read<UserBloc>()
+                                .add(PromoteUser(user['_id']));
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: user['role'] == 'admin'
+                              ? Theme.of(context).secondaryHeaderColor
+                              : Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.h),
                           ),
                         ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.trophy,
-                              color: Theme.of(context).primaryColor,
-                              size: 15.sp,
-                            ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              user['reputation']
-                                  .toString(), // Replace with actual reputation number
-                              style: TextStyle(
-                                color: CustomColor.primaryColor,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        if (user['role'] == 'admin') {
-                          context.read<UserBloc>().add(DemoteUser(user['_id']));
-                        } else {
-                          context
-                              .read<UserBloc>()
-                              .add(PromoteUser(user['_id']));
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: user['role'] == 'admin'
-                            ? Theme.of(context).secondaryHeaderColor
-                            : Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.h),
-                        ),
+                        child:
+                            Text(user['role'] == 'admin' ? 'Demote' : 'Promote',
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                )),
                       ),
-                      child:
-                          Text(user['role'] == 'admin' ? 'Demote' : 'Promote',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                              )),
                     ),
                   ),
                 );
@@ -296,34 +305,31 @@ class _AdminUsersState extends State<AdminUsers>
               itemCount: state.users.length,
               itemBuilder: (context, index) {
                 final user = state.users[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OtherProfile(user: user),
+                  )),
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/user 2.png'),
-                        radius: 25.h,
+                    child: ListTile(
+                      leading: Container(
+                        margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/images/user 2.png'),
+                          radius: 25.h,
+                        ),
                       ),
-                    ),
-                    title: InkWell(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          // Navigate to user profile page
-                          MaterialPageRoute(
-                            builder: (context) => OtherProfile(user: user),
-                          ),
-                        );
-                      },
-                      child: Column(
+                      title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -353,28 +359,30 @@ class _AdminUsersState extends State<AdminUsers>
                           ),
                         ],
                       ),
-                    ),
-                    trailing: ElevatedButton(
-                      onPressed: () {
-                        if (user['role'] == 'admin') {
-                          context.read<UserBloc>().add(DemoteUser(user['_id']));
-                        } else {
-                          context
-                              .read<UserBloc>()
-                              .add(PromoteUser(user['_id']));
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blueGrey[700],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.h),
+                      trailing: ElevatedButton(
+                        onPressed: () {
+                          if (user['role'] == 'admin') {
+                            context
+                                .read<UserBloc>()
+                                .add(DemoteUser(user['_id']));
+                          } else {
+                            context
+                                .read<UserBloc>()
+                                .add(PromoteUser(user['_id']));
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blueGrey[700],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.h),
+                          ),
                         ),
+                        child:
+                            Text(user['role'] == 'admin' ? 'Demote' : 'Promote',
+                                style: TextStyle(
+                                  fontSize: 12.sp,
+                                )),
                       ),
-                      child:
-                          Text(user['role'] == 'admin' ? 'Demote' : 'Promote',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                              )),
                     ),
                   ),
                 );

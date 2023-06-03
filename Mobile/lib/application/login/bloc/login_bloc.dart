@@ -14,17 +14,9 @@ import 'login_event.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  late final CustomHttpClient _customHttpClient;
-  late final AuthApi _authApi;
-  late final IAuthRepository _authRepository;
-  late final SharedPreferenceService _sharedPreferenceService;
+  final IAuthRepository _authRepository;
 
-  LoginBloc() : super(LoginStateInitial()) {
-    _customHttpClient = CustomHttpClient();
-    _authApi = AuthApi(_customHttpClient);
-    _sharedPreferenceService = SharedPreferenceService();
-    _authRepository = AuthRepository(_authApi, _sharedPreferenceService);
-
+  LoginBloc(this._authRepository) : super(LoginStateInitial()) {
     on<LoginEventLogin>(
       ((event, emit) async {
         emit(LoginStateLoading());

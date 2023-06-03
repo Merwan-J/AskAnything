@@ -62,11 +62,10 @@ class _OtherProfileState extends State<OtherProfile>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final wantedUser = widget.user;
     final User? _user = RepositoryProvider.of<AuthRepository>(context)
         .getAuthenticatedUserSync();
-
-    super.build(context);
 
     return BlocProvider(
       create: (context) => UserBloc(
@@ -77,7 +76,7 @@ class _OtherProfileState extends State<OtherProfile>
         builder: (context, state) {
           if (state is Initial) {
             BlocProvider.of<UserBloc>(context)
-                .add(GetUserById(wantedUser['id']));
+                .add(GetUserById(wantedUser['_id']));
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loading) {
             return const Center(child: CircularProgressIndicator());
@@ -96,111 +95,130 @@ class _OtherProfileState extends State<OtherProfile>
       BuildContext context, User checkUser, User? authenticatedUser) {
     User user = checkUser;
 
-    print(user.id);
-    print('the current user-------------------  ');
-
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(
-                  'assets/images/user 3.jpg',
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const CircleAvatar(
+                  backgroundImage: AssetImage(
+                    'assets/images/user 3.jpg',
+                  ),
+                  radius: 60,
                 ),
-                radius: 60,
-              ),
-              BlocProvider(
-                create: (context) =>
-                    FollowBloc(RepositoryProvider.of<UserRepository>(context)),
-                child: BlocConsumer<FollowBloc, FollowState>(
-                  listener: (context, state) {
-                    // TODO: implement listener
-                    if (state is FollowSuccess) {
-                      user = state.user;
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('You are now Following ${user.name}'),
-                        duration: const Duration(seconds: 1),
-                      ));
-                    }
+                BlocProvider(
+                  create: (context) => FollowBloc(
+                      RepositoryProvider.of<UserRepository>(context)),
+                  child: BlocConsumer<FollowBloc, FollowState>(
+                    listener: (context, state) {
+                      // TODO: implement listener
+                      if (state is FollowSuccess) {
+                        user = state.user;
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('You are now Following ${user.name}'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                      }
 
-                    if (state is UnFollowSuccess) {
-                      user = state.user;
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('You have unfollowed ${user.name}'),
-                        duration: const Duration(seconds: 1),
-                      ));
-                    }
+                      if (state is UnFollowSuccess) {
+                        user = state.user;
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('You have unfollowed ${user.name}'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                      }
 
-                    if (state is FollowError) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Error Following ${user.name}'),
-                        duration: const Duration(seconds: 1),
-                      ));
-                    }
+                      if (state is FollowError) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Error Following ${user.name}'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                      }
 
-                    if (state is UnFollowError) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Error Unfollowing ${user.name}'),
-                        duration: const Duration(seconds: 1),
-                      ));
-                    }
-                  },
-                  builder: (context, state) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  user.name,
-                                  style: TextStyle(
-                                      fontSize: Theme.of(context)
-                                          .textTheme
-                                          .bodyLarge!
-                                          .fontSize),
-                                ),
-                                Row(
+                      if (state is UnFollowError) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Error Unfollowing ${user.name}'),
+                          duration: const Duration(seconds: 1),
+                        ));
+                      }
+                    },
+                    builder: (context, state) {
+                      return Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    user.name,
+                                    style: TextStyle(
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge!
+                                            .fontSize),
+                                  ),
+                                  Row(
+                                    children: [
+                                      FaIcon(FontAwesomeIcons.trophy,
+                                          color: Theme.of(context).primaryColor,
+                                          size: 20),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(user.reputation.toString(),
+                                          style: TextStyle(
+                                              fontSize: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyMedium!
+                                                  .fontSize))
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: [
-                                    FaIcon(FontAwesomeIcons.trophy,
-                                        color: Theme.of(context).primaryColor,
-                                        size: 20),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(user.reputation.toString(),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    FollowersFollowingPage(
+                                                        user: user)));
+                                      },
+                                      child: Text(
+                                        '${user.followings.length} following',
                                         style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall!
+                                                .color,
                                             fontSize: Theme.of(context)
                                                 .textTheme
-                                                .bodyMedium!
-                                                .fontSize))
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  FollowersFollowingPage(
-                                                      user: user)));
-                                    },
-                                    child: Text(
-                                      '${user.followings.length} following',
-                                      style: TextStyle(
+                                                .bodySmall!
+                                                .fontSize),
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.circle,
+                                      color: Theme.of(context).primaryColor,
+                                      size: 10,
+                                    ),
+                                    TextButton(
+                                      onPressed: () {},
+                                      child: Text(
+                                        "${user.followers.length} followers",
+                                        style: TextStyle(
                                           color: Theme.of(context)
                                               .textTheme
                                               .bodySmall!
@@ -208,136 +226,122 @@ class _OtherProfileState extends State<OtherProfile>
                                           fontSize: Theme.of(context)
                                               .textTheme
                                               .bodySmall!
-                                              .fontSize),
-                                    ),
-                                  ),
-                                  Icon(
-                                    Icons.circle,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 10,
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "${user.followers.length} followers",
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .color,
-                                        fontSize: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .fontSize,
+                                              .fontSize,
+                                        ),
+                                      ),
+                                    )
+                                  ]),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    // your button press logic here
+                                    if (authenticatedUser!.id == user.id) {
+                                      context.push(Routes.EDITPROFILE);
+                                      //
+                                    } else if (user.followers
+                                        .contains(authenticatedUser!.id)) {
+                                      BlocProvider.of<FollowBloc>(context).add(
+                                          UnfollowUserEvent(
+                                              authenticatedUser.id, user.id));
+                                    } else {
+                                      BlocProvider.of<FollowBloc>(context).add(
+                                          FollowUserEvent(
+                                              authenticatedUser.id, user.id));
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(0),
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(18.0),
                                       ),
                                     ),
-                                  )
-                                ]),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ElevatedButton(
-                                onPressed: () {
-                                  // your button press logic here
-                                  if (authenticatedUser!.id == user.id) {
-                                    context.push(Routes.EDITPROFILE);
-                                    //
-                                  } else if (user.followers
-                                      .contains(authenticatedUser!.id)) {
-                                    BlocProvider.of<FollowBloc>(context).add(
-                                        UnfollowUserEvent(
-                                            authenticatedUser.id, user.id));
-                                  } else {
-                                    BlocProvider.of<FollowBloc>(context).add(
-                                        FollowUserEvent(
-                                            authenticatedUser.id, user.id));
-                                  }
-                                },
-                                style: ButtonStyle(
-                                  elevation:
-                                      MaterialStateProperty.all<double>(0),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                    ),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 36),
-                                  child: authenticatedUser!.id == user.id
-                                      ? const Text('Edit')
-                                      : user.followers
-                                              .contains(authenticatedUser.id)
-                                          ? const Text('Unfollow')
-                                          : const Text('Follow'),
-                                ))
-                          ],
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 36),
+                                    child: authenticatedUser!.id == user.id
+                                        ? const Text('Edit')
+                                        : user.followers
+                                                .contains(authenticatedUser.id)
+                                            ? const Text('Unfollow')
+                                            : const Text('Follow'),
+                                  ))
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            TabBar(
+              controller: _tabController,
+              indicatorWeight: 4,
+              // isScrollable: true,
+              tabs: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text('Questions',
+                      style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .fontSize)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Text('Answers',
+                      style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .fontSize)),
+                ),
+              ],
+            ),
+            Expanded(
+              child: PageStorage(
+                bucket: PageStorageBucket(),
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        // shrinkWrap: true,
+                        // scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: QuestionW(
+                                question: user.questionIds[index].toQuestion()),
+                          );
+                        },
+                        itemCount: user.questionIds.length),
+                    ListView.builder(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        // shrinkWrap: true,
+                        // scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 15),
+                            child: AnswerW(
+                                answer: user.answerIds[index].toAnswer()),
+                          );
+                        },
+                        itemCount: user.answerIds.length)
+                  ],
                 ),
               ),
-            ],
-          ),
-          TabBar(
-            controller: _tabController,
-            indicatorWeight: 4,
-            // isScrollable: true,
-            tabs: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text('Questions',
-                    style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium!.fontSize)),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text('Answers',
-                    style: TextStyle(
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium!.fontSize)),
-              ),
-            ],
-          ),
-          Expanded(
-            child: PageStorage(
-              bucket: PageStorageBucket(),
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  ListView.builder(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      // shrinkWrap: true,
-                      // scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child: QuestionW(
-                              question: user.questionIds[index].toQuestion()),
-                        );
-                      },
-                      itemCount: user.questionIds.length),
-                  ListView.builder(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      // shrinkWrap: true,
-                      // scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 15),
-                          child:
-                              AnswerW(answer: user.answerIds[index].toAnswer()),
-                        );
-                      },
-                      itemCount: user.answerIds.length)
-                ],
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -98,6 +98,7 @@ class Pending_questions extends StatelessWidget {
           // color: Colors.red,
           child: BlocBuilder<QuestionListBloc, QuestionListState>(
             builder: (context, state) {
+              print(state);
               if (state is QuestionListInitial) {
                 BlocProvider.of<QuestionListBloc>(context)
                     .add(GetPendingQuestions());

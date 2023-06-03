@@ -60,6 +60,7 @@ exports.getUser = catchAsyncError(async (req, res, next) => {
   if (!user) {
     return next(new AppError('user not found', 404));
   }
+
   res.status(200).json({
     status: 'success',
     data: { user },
@@ -217,11 +218,27 @@ exports.addBookmark = catchAsyncError(async (req, res, next) => {
   user.bookmarks.pull(questionId);
   user.bookmarks.push(questionId);
   await user.save();
+  const newUser = await User.findById(user._id)
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
 
   res.status(200).json({
     status: 'success',
     data: {
-      user,
+      user: newUser,
     },
   });
 });
@@ -232,10 +249,27 @@ exports.removeBookmark = catchAsyncError(async (req, res, next) => {
   user.bookmarks.pull(questionId);
   await user.save();
 
+  const newUser = await User.findById(user._id)
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+
   res.status(200).json({
     status: 'success',
     data: {
-      user,
+      user: newUser,
     },
   });
 });

@@ -88,8 +88,8 @@ class UserDTO extends Equatable {
               .map((e) => e.toString())
               .toList()
           : [],
-      followings: json['following'] != null
-          ? (json['following'] as List<dynamic>)
+      followings: json['followings'] != null
+          ? (json['followings'] as List<dynamic>)
               .map((e) => e.toString())
               .toList()
           : [],

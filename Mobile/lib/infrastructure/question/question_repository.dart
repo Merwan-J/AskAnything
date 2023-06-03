@@ -206,6 +206,7 @@ class QuestionRepository implements IQuestionRepository {
         return Question.fromJson(questionDto.toJson());
       }).toList());
     } catch (e) {
+      print(e);
       return left(const QuestionFailure.serverError());
     }
   }

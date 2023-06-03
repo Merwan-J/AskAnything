@@ -8,6 +8,7 @@ import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
+import 'package:askanything/presentation/pages/profile_page/other_profile.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,54 +137,60 @@ class _FollowersFollowingPageState extends State<FollowersFollowingPage>
               itemCount: state.followers.length,
               itemBuilder: (context, index) {
                 final follower = state.followers[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OtherProfile(user: follower),
+                  )),
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
-                      child: CircleAvatar(
-                        backgroundImage:
-                            const AssetImage('assets/images/user 2.png'),
-                        radius: 25.h,
+                    child: ListTile(
+                      leading: Container(
+                        margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              const AssetImage('assets/images/user 2.png'),
+                          radius: 25.h,
+                        ),
                       ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          follower['name'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            follower['name'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
+                            ),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.trophy,
-                              color: Theme.of(context).primaryColor,
-                              size: 15.sp,
-                            ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              follower['reputation']
-                                  .toString(), // Replace with actual reputation number
-                              style: TextStyle(
-                                color: CustomColor.primaryColor,
-                                fontSize: 12.sp,
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.trophy,
+                                color: Theme.of(context).primaryColor,
+                                size: 15.sp,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              SizedBox(width: 4.w),
+                              Text(
+                                follower['reputation']
+                                    .toString(), // Replace with actual reputation number
+                                style: TextStyle(
+                                  color: CustomColor.primaryColor,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -224,67 +231,73 @@ class _FollowersFollowingPageState extends State<FollowersFollowingPage>
               itemCount: state.followings.length,
               itemBuilder: (context, index) {
                 final following = state.followings[index];
-                return Container(
-                  margin: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+                return GestureDetector(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OtherProfile(user: following),
+                  )),
+                  child: Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.h),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
+                        ),
                       ),
                     ),
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
-                      child: CircleAvatar(
-                        backgroundImage:
-                            const AssetImage('assets/images/user 2.png'),
-                        radius: 25.h,
+                    child: ListTile(
+                      leading: Container(
+                        margin: EdgeInsets.fromLTRB(1.h, 0, 1.h, 5.h),
+                        child: CircleAvatar(
+                          backgroundImage:
+                              const AssetImage('assets/images/user 2.png'),
+                          radius: 25.h,
+                        ),
                       ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          following['name'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            following['name'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.trophy,
+                                color: Theme.of(context).primaryColor,
+                                size: 15.sp,
+                              ),
+                              SizedBox(width: 4.w),
+                              Text(
+                                following['reputation']
+                                    .toString(), // Replace with actual reputation number
+                                style: TextStyle(
+                                  color: CustomColor.primaryColor,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      trailing: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.blueGrey[700],
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.h),
                           ),
                         ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.trophy,
-                              color: Theme.of(context).primaryColor,
-                              size: 15.sp,
-                            ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              following['reputation']
-                                  .toString(), // Replace with actual reputation number
-                              style: TextStyle(
-                                color: CustomColor.primaryColor,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    trailing: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blueGrey[700],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.h),
-                        ),
+                        child: Text('Following',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                            )),
                       ),
-                      child: Text('Following',
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                          )),
                     ),
                   ),
                 );

@@ -178,6 +178,8 @@ class QuestionProvider {
 
     //print print
     var decoded = await jsonDecode(response.body);
+    print(response.statusCode.toString());
+    print("decoded: $decoded");
 
     if (response.statusCode.toString() == 200.toString()) {
       var questionsLst = decoded["data"]["questions"];

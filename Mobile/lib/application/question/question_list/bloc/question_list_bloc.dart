@@ -38,10 +38,15 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
     on<GetPendingQuestions>((event, emit) async {
       print('get pending questions event-----------------------------------');
       emit(QuestionListLoading());
+      print('after loading event-----------------------------------');
+
       final Either<QuestionFailure, List<Question>> questionsList =
           await _questionRepository.getPendingQuestions();
+      print(' after getting the whole data-----------------------------------');
 
-      questionsList.fold((failure) => QuestionListFailure,
+      questionsList.fold(
+          (failure) =>
+              emit(QuestionListFailure("Unable to load pending questions")),
           (questions) => emit(QuestionListLoaded(questions)));
     });
     on<ApproveQuestion>((event, emit) async {

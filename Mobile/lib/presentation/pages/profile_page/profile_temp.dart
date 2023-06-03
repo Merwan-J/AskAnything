@@ -30,6 +30,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
@@ -92,6 +93,9 @@ class _ProfileScreenState extends State<ProfileScreen>
   Widget _buildBody(
       BuildContext context, User checkUser, User? authenticatedUser) {
     User user = checkUser;
+    print(user.followings);
+    print(
+        '-------------------------------------###################################333');
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -99,11 +103,11 @@ class _ProfileScreenState extends State<ProfileScreen>
         children: [
           Row(
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 backgroundImage: AssetImage(
                   'assets/images/user 3.jpg',
                 ),
-                radius: 60,
+                radius: 60.h,
               ),
               BlocProvider(
                 create: (context) =>
@@ -144,10 +148,16 @@ class _ProfileScreenState extends State<ProfileScreen>
                   builder: (context, state) {
                     return Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.all(16),
+                        padding: EdgeInsets.all(16.h),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // InkWell(
+                            //     onTap: () {
+                            //       context.push(Routes.SETTINGS);
+                            //     },
+                            //     child: Align(
+                            //         child: Icon(Icons.settings, size: 20.h))),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -163,9 +173,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   children: [
                                     FaIcon(FontAwesomeIcons.trophy,
                                         color: Theme.of(context).primaryColor,
-                                        size: 20),
-                                    const SizedBox(
-                                      width: 5,
+                                        size: 20.h),
+                                    SizedBox(
+                                      width: 5.h,
                                     ),
                                     Text(user.reputation.toString(),
                                         style: TextStyle(
@@ -177,8 +187,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: 10.h,
                             ),
                             Row(
                                 mainAxisAlignment:
@@ -186,6 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                 children: [
                                   TextButton(
                                     onPressed: () {
+                                      print(user);
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
@@ -208,7 +219,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   Icon(
                                     Icons.circle,
                                     color: Theme.of(context).primaryColor,
-                                    size: 10,
+                                    size: 10.h,
                                   ),
                                   TextButton(
                                     onPressed: () {},
@@ -227,8 +238,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     ),
                                   )
                                 ]),
-                            const SizedBox(
-                              height: 10,
+                            SizedBox(
+                              height: 10.h,
                             ),
                             ElevatedButton(
                                 onPressed: () {
@@ -253,13 +264,14 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
+                                      borderRadius:
+                                          BorderRadius.circular(18.0.h),
                                     ),
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 36),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 36.h),
                                   child: authenticatedUser!.id == user.id
                                       ? const Text('Edit')
                                       : user.followers
