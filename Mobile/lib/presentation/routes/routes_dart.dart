@@ -16,4 +16,5 @@ class Routes {
   static const String FOLLOWING = '/following';
   static const String FOLLOWERS = '/followers';
   static const String SETTINGS = '/settings';
+  static const String USERSSCREEN = '/usersscreen';
 }

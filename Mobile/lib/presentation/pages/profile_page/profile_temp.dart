@@ -16,6 +16,7 @@ import 'package:askanything/application/profile/bloc/profile_bloc.dart';
 import 'package:askanything/application/profile/bloc/profile_state.dart';
 import 'package:askanything/domain/profile/profile.dart';
 import 'package:askanything/infrastructure/profile/profile_repository.dart';
+import 'package:askanything/presentation/pages/followings_followers_page/users_screen.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
@@ -57,11 +58,6 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   bool get wantKeepAlive => true;
 
-  final tabScreens = [
-    const ForYou(key: PageStorageKey<String>('ForYou')),
-    const Following(key: PageStorageKey<String>('Following'))
-  ];
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -75,11 +71,12 @@ class _ProfileScreenState extends State<ProfileScreen>
         builder: (context, state) {
           if (state is Initial) {
             BlocProvider.of<UserBloc>(context)
-                .add(const GetUserById('644a7a97dd0ade9f826deeda'));
+                .add(const GetUserById('647a72116cd279ac7a10bdb9'));
             return const Center(child: CircularProgressIndicator());
           } else if (state is Loading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is LoadedUser) {
+            print(state.user.id);
             return _buildBody(context, state.user);
           } else {
             return const Center(child: Text('unexpected error'));
@@ -185,7 +182,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                                     MainAxisAlignment.spaceAround,
                                 children: [
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  FollowersFollowingPage(
+                                                      user: user)));
+                                    },
                                     child: Text(
                                       '${user.followings.length} following',
                                       style: TextStyle(

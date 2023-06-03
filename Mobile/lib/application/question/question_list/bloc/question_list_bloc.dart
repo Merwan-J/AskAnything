@@ -33,5 +33,30 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
 
       // TODO: implement event handler
     });
+
+    on<GetPendingQuestions>((event, emit) async {
+      emit(QuestionListLoading());
+      final Either<QuestionFailure, List<Question>> questionsList =
+          await _questionRepository.getPendingQuestions();
+
+      questionsList.fold((failure) => QuestionListFailure,
+          (questions) => emit(QuestionListLoaded(questions)));
+    });
+    on<ApproveQuestion>((event, emit) async {
+      print("heyllo from bloc");
+      final Either<QuestionFailure, Question> questionsList =
+          await _questionRepository.approveQuestion(event.questionId);
+
+      questionsList.fold((failure) => QuestionListFailure,
+          (questions) => add(GetPendingQuestions()));
+    });
+    on<RejectQuestion>((event, emit) async {
+      print("heyllo from bloc");
+      final Either<QuestionFailure, Question> questionsList =
+          await _questionRepository.rejectQuestion(event.questionId);
+
+      questionsList.fold((failure) => QuestionListFailure,
+          (questions) => add(GetPendingQuestions()));
+    });
   }
 }

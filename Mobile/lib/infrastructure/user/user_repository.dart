@@ -90,12 +90,15 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, List<User>>> getAllUsers() async {
+  Future<Either<UserFailure, List<dynamic>>> getAllUsers() async {
     try {
-      final userListDto = await _userApi.getUsers();
-      final userList = userListDto.map((userDto) => userDto.toModel()).toList();
+      final userList = await _userApi.getUsers();
+      print(userList);
+      print('success in repo ');
       return Right(userList);
     } catch (e) {
+      print(e);
+      print('error in repo');
       return const Left(UserFailure.unexpectedError());
     }
   }
@@ -127,37 +130,60 @@ class UserRepository implements IUserRepository {
   }
 
   @override
-  Future<Either<UserFailure, List<User>>> getFollowers(String userId) async {
+  Future<Either<UserFailure, List<dynamic>>> getFollowers(String userId) async {
     try {
-      final followerListDto = await _userApi.getFollowers(userId);
-      final followerList =
-          followerListDto.map((followerDto) => followerDto.toModel()).toList();
+      final followerList = await _userApi.getFollowers(userId);
+
       return Right(followerList);
     } catch (e) {
+      print(e);
+      print('followers');
       return const Left(UserFailure.unexpectedError());
     }
   }
 
   @override
-  Future<Either<UserFailure, List<User>>> getFollowings(String userId) async {
+  Future<Either<UserFailure, List<dynamic>>> getFollowings(
+      String userId) async {
     try {
-      final followingListDto = await _userApi.getFollowings(userId);
-      final followingList = followingListDto
-          .map((followingDto) => followingDto.toModel())
-          .toList();
+      final followingList = await _userApi.getFollowings(userId);
+
       return Right(followingList);
+    } catch (e) {
+      print(e);
+      print('followings');
+      return const Left(UserFailure.unexpectedError());
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, List<dynamic>>> getAdminUsers() async {
+    try {
+      final adminList = await _userApi.getAdminUsers();
+
+      return Right(adminList);
     } catch (e) {
       return const Left(UserFailure.unexpectedError());
     }
   }
 
   @override
-  Future<Either<UserFailure, List<User>>> getAdminUsers() async {
+  Future<Either<UserFailure, User>> promoteUser(String userId) async {
     try {
-      final adminListDto = await _userApi.getAdminUsers();
-      final adminList =
-          adminListDto.map((adminDto) => adminDto.toModel()).toList();
-      return Right(adminList);
+      final userDto = await _userApi.promote(userId);
+      final user = userDto.toModel();
+      return Right(user);
+    } catch (e) {
+      return const Left(UserFailure.unexpectedError());
+    }
+  }
+
+  @override
+  Future<Either<UserFailure, User>> demoteUser(String userId) async {
+    try {
+      final userDto = await _userApi.demote(userId);
+      final user = userDto.toModel();
+      return Right(user);
     } catch (e) {
       return const Left(UserFailure.unexpectedError());
     }

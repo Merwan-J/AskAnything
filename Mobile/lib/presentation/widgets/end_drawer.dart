@@ -44,7 +44,7 @@ class MyDrawer extends StatelessWidget {
               style: TextStyle(fontSize: fontSize),
             ),
             onTap: () {
-              context.push(Routes.USERS);
+              context.push(Routes.ADMINS);
             },
           ),
           ListTile(

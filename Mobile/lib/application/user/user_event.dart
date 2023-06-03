@@ -62,3 +62,19 @@ class GetFollowings extends UserEvent {
   @override
   List<Object> get props => [userId];
 }
+
+class PromoteUser extends UserEvent {
+  final String userId;
+  const PromoteUser(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class DemoteUser extends UserEvent {
+  final String userId;
+  const DemoteUser(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}

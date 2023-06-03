@@ -57,12 +57,12 @@ class UserApi {
     }
   }
 
-  Future<List<UserDTO>> getUsers() async {
+  Future<List<dynamic>> getUsers() async {
     var response = await _customHttpClient.get("users");
 
     if (response.statusCode == 200) {
-      List<dynamic> usersJson = jsonDecode(response.body);
-      return usersJson.map((user) => UserDTO.fromJson(user)).toList();
+      List<dynamic> usersJson = jsonDecode(response.body)['data']['users'];
+      return usersJson;
     } else {
       throw Exception("Failed to load users");
     }
@@ -96,40 +96,70 @@ class UserApi {
     }
   }
 
-  Future<List<UserDTO>> getFollowers(String userId) async {
+  Future<List<dynamic>> getFollowers(String userId) async {
     var response = await _customHttpClient.get("users/$userId/followers");
 
     if (response.statusCode == 200) {
-      List<dynamic> followersJson = jsonDecode(response.body);
-      return followersJson
-          .map((follower) => UserDTO.fromJson(follower))
-          .toList();
+      List<dynamic> followersJson =
+          jsonDecode(response.body)['data']['followers'];
+      return followersJson;
     } else {
+      print(response);
       throw Exception("Failed to load followers");
     }
   }
 
-  Future<List<UserDTO>> getFollowings(String userId) async {
+  Future<List<dynamic>> getFollowings(String userId) async {
     var response = await _customHttpClient.get("users/$userId/followings");
 
     if (response.statusCode == 200) {
-      List<dynamic> followingsJson = jsonDecode(response.body);
-      return followingsJson
-          .map((following) => UserDTO.fromJson(following))
-          .toList();
+      List<dynamic> followingsJson =
+          jsonDecode(response.body)['data']['following'];
+      return followingsJson;
     } else {
+      print('iam the lord of errors');
+      print(response.statusCode);
+      print(jsonDecode(response.body));
       throw Exception("Failed to load followings");
     }
   }
 
-  Future<List<UserDTO>> getAdminUsers() async {
+  Future<List<dynamic>> getAdminUsers() async {
     var response = await _customHttpClient.get("users/admin");
 
     if (response.statusCode == 200) {
-      List<dynamic> usersJson = jsonDecode(response.body);
-      return usersJson.map((user) => UserDTO.fromJson(user)).toList();
+      List<dynamic> usersJson = jsonDecode(response.body)['data']['users'];
+      return usersJson;
     } else {
+      print(jsonDecode(response.body));
       throw Exception("Failed to load users");
+    }
+  }
+
+  Future<UserDTO> promote(String id) async {
+    var response = await _customHttpClient.post("users/promote/$id");
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('the user in promote');
+      return UserDTO.fromJson(user);
+    } else {
+      print('promote error');
+      throw Exception("Failed to promote user");
+    }
+  }
+
+  Future<UserDTO> demote(String id) async {
+    var response = await _customHttpClient.post("users/demote/$id");
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      print(user);
+      print('the user');
+      return UserDTO.fromJson(user);
+    } else {
+      print('demote error');
+      throw Exception("Failed to promote user");
     }
   }
 

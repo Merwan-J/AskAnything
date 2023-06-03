@@ -105,11 +105,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          body: IndexedStack(
-            // IndexedStack is used to keep the state of the pages
-            index: _selectedIndex,
-            children: screens,
-          ),
+          body: screens[_selectedIndex],
           bottomNavigationBar: CustomBottomNavigation()),
     ));
   }

@@ -59,30 +59,12 @@ class AuthRepository implements IAuthRepository {
     }
   }
 
-  // @override
-  // Future<Either<AuthFailure, User>> changePassword(
-  //     {required ChangePasswordForm changePasswordForm}) async {
-  //   try {
-  //     print("before change password repo");
-  //     User user = await authApi.changePassword(
-  //         changePassword: changePasswordForm, userId: _authenticatedUser!.id);
-  //     print("after change password repo");
-  //     return Right(user);
-  //   } on Exception catch (e) {
-  //     return left(const AuthFailure.serverError());
-  //   }
-  // }
   @override
   Future<Either<AuthFailure, User>> changePassword(
       {required ChangePasswordForm changePasswordForm}) async {
     try {
-      // if (_authenticatedUser == null) {
-      //   return left(const AuthFailure.serverError());
-      // }
-      print("before change password repo");
       User user =
           await authApi.changePassword(changePassword: changePasswordForm);
-      print("after change password repo");
       return Right(user);
     } on Exception catch (e) {
       return left(const AuthFailure.serverError());
