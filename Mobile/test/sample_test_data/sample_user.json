@@ -1,0 +1,21 @@
+{
+    "id": 1,
+    "name": "elizur",            
+    "email": "elisur@f.com",
+    "password": "123",        
+    "questionIds": "['1','2']",
+    "answerIds": "['3','4']",
+    "reputation": 0,
+    "likes": 0,
+    "dislikes": 0,
+    "bookmarks": "{'1':'1','2':'2'}",
+    "followers": "['follower1','follower12']",
+    "followings": "['following1','following2']",
+    "createdAt": "2021-06-06T12:00:00.000Z",
+    "updatedAt": "2021-06-06T12:00:00.000Z"    
+
+}
+
+
+
+

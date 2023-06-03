@@ -1,14 +1,36 @@
-import 'package:askanything/domain/user/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
 
-part 'auth_state.freezed.dart';
+abstract class AuthState extends Equatable {
+  const AuthState();
 
-@freezed
-class AuthState with _$AuthState {
-  const factory AuthState.unInitialized() = AuthUnInitialized;
-  const factory AuthState.initial({String? token, required bool isFirstRun}) =
-      AppInitialized;
-  const factory AuthState.authenticated(
-      Map<String, dynamic> user, String token) = AuthAuthenticated;
-  const factory AuthState.unauthenticated() = AuthUnauthenticated;
+  @override
+  List<Object?> get props => [];
+}
+
+class AuthUnInitialized extends AuthState {
+  const AuthUnInitialized();
+}
+
+class AppInitialized extends AuthState {
+  final String? token;
+  final bool isFirstRun;
+
+  const AppInitialized({this.token, required this.isFirstRun});
+
+  @override
+  List<Object?> get props => [token, isFirstRun];
+}
+
+class AuthAuthenticated extends AuthState {
+  final Map<String, dynamic> user;
+  final String token;
+
+  const AuthAuthenticated(this.user, this.token);
+
+  @override
+  List<Object?> get props => [user, token];
+}
+
+class AuthUnauthenticated extends AuthState {
+  const AuthUnauthenticated();
 }

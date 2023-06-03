@@ -22,24 +22,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final screens = [
-    HomePage(),
-    SearchScreen(),
-    // Text(""),
-    BookmarkPage(),
-    ProfileScreen()
-  ];
-  @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   int _selectedIndex = widget.index != null
-  //       ? widget.index! < screens.length
-  //           ? widget.index as int
-  //           : 0
-  //       : 0;
-  // }
-
+  final screens = [HomePage(), SearchScreen(), BookmarkPage(), ProfileScreen()];
   int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -89,6 +74,7 @@ class _MainScreenState extends State<MainScreen> {
       },
       child: Scaffold(
           floatingActionButton: Visibility(
+            key: Key('add_questiion'),
             visible: MediaQuery.of(context).viewInsets.bottom == 0.0,
             child: FloatingActionButton(
               onPressed: () {

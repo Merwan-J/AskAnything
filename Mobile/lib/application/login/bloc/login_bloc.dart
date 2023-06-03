@@ -19,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   late final IAuthRepository _authRepository;
   late final SharedPreferenceService _sharedPreferenceService;
 
-  LoginBloc() : super(const LoginState.initial()) {
+  LoginBloc() : super(LoginStateInitial()) {
     _customHttpClient = CustomHttpClient();
     _authApi = AuthApi(_customHttpClient);
     _sharedPreferenceService = SharedPreferenceService();
@@ -27,14 +27,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     on<LoginEventLogin>(
       ((event, emit) async {
-        emit(const LoginStateLoading());
+        emit(LoginStateLoading());
         Either<AuthFailure, AuthResponseDto> result =
             await _authRepository.login(loginForm: event.form);
 
         result.fold(
-          (failure) => emit(LoginState.failure(failure)),
+          (failure) => emit(LoginStateFailure(failure)),
           (response) =>
-              emit(LoginState.success(response.user, response.accessToken)),
+              emit(LoginStateSuccess(response.user, response.accessToken)),
         );
       }),
     );

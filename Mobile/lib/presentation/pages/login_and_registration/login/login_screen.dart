@@ -176,9 +176,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   emailAddress: _emailController.text,
                                   password: _passwordController.text);
                               print(form);
-                              BlocProvider.of<LoginBloc>(context).add(
-                                LoginEvent.login(form),
-                              );
+                              BlocProvider.of<LoginBloc>(context)
+                                  .add(LoginEventLogin(form)
+                                      // LoginEvent.login(form),
+                                      );
                             },
                       child: Text(
                         'Login',

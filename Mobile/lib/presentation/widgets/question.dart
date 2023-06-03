@@ -78,7 +78,7 @@ class QuestionW extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
@@ -138,10 +138,13 @@ class QuestionW extends StatelessWidget {
                         SizedBox(
                           height: 10.h,
                         ),
-                        Text(question.title,
-                            style: Theme.of(context).textTheme.bodySmall),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(question.title,
+                              style: Theme.of(context).textTheme.bodySmall),
+                        ),
                         SizedBox(
-                          height: 10.h,
+                          height: 16.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,38 +208,38 @@ class QuestionW extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Icon(Icons.circle,
-                                color: Theme.of(context).primaryColor,
-                                size: 10.h),
-                            SizedBox(
-                              width: 3.w,
-                            ),
-                            Text(
-                              question.topic,
-                              style: TextStyle(
-                                  fontSize: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall!
-                                      .fontSize,
-                                  fontWeight: FontWeight.bold,
-                                  // fontWeight: FontWeight.bold,
-                                  color: Theme.of(context).primaryColor),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     Icon(Icons.circle,
+                        //         color: Theme.of(context).primaryColor,
+                        //         size: 10.h),
+                        //     SizedBox(
+                        //       width: 3.w,
+                        //     ),
+                        //     Text(
+                        //       question.topic,
+                        //       style: TextStyle(
+                        //           fontSize: Theme.of(context)
+                        //               .textTheme
+                        //               .bodySmall!
+                        //               .fontSize,
+                        //           fontWeight: FontWeight.bold,
+                        //           // fontWeight: FontWeight.bold,
+                        //           color: Theme.of(context).primaryColor),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(question.title,
-                        style: Theme.of(context).textTheme.bodySmall),
-                  ),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
+                  // Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Text(question.title,
+                  //       style: Theme.of(context).textTheme.bodySmall),
+                  // ),
 
                   SizedBox(
                     height: 10.h,
@@ -260,66 +263,66 @@ class QuestionW extends StatelessWidget {
                         ],
                       )),
                   //TODO: change like color based on user likes
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      getLikesAndComment(
-                          context,
-                          question,
-                          question.likes.contains(_user.id),
-                          question.dislikes.contains(_user.id)),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     getLikesAndComment(
+                  //         context,
+                  //         question,
+                  //         question.likes.contains(_user!.id),
+                  //         question.dislikes.contains(_user.id)),
 
-                      //TODO: change based on user type
-                      Row(
-                        children: [
-                          InkWell(
-                            radius: 10.h,
-                            onTap: () {
-                              QuestionForm questionForm = QuestionForm(
-                                anonymous: question.anonymous,
-                                title: question.title,
-                                topic: question.topic,
-                                description: question.description,
-                              );
+                  //     //TODO: change based on user type
+                  //     Row(
+                  //       children: [
+                  //         InkWell(
+                  //           radius: 10.h,
+                  //           onTap: () {
+                  //             QuestionForm questionForm = QuestionForm(
+                  //               anonymous: question.anonymous,
+                  //               title: question.title,
+                  //               topic: question.topic,
+                  //               description: question.description,
+                  //             );
 
-                              buildBottomSheet(
-                                  context, questionForm, question.id);
-                            },
-                            child: Icon(Icons.edit),
-                          ),
-                          SizedBox(
-                            width: 10.h,
-                          ),
-                          BlocProvider(
-                            create: (context) => QuestionDetailBloc(
-                                questionListBloc:
-                                    BlocProvider.of<QuestionListBloc>(context),
-                                questionRepository:
-                                    RepositoryProvider.of<QuestionRepository>(
-                                        context)),
-                            child: BlocBuilder<QuestionDetailBloc,
-                                QuestionDetailState>(
-                              builder: (context, state) {
-                                return InkWell(
-                                  onTap: () {
-                                    BlocProvider.of<QuestionDetailBloc>(context)
-                                        .add(QuestionDetailDeleteEvent(
-                                            question.id));
-                                    if (showDetail) {
-                                      context.pop();
-                                    }
-                                  },
-                                  child: Icon(
-                                    Icons.delete,
-                                  ),
-                                );
-                              },
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                  //             buildBottomSheet(
+                  //                 context, questionForm, question.id);
+                  //           },
+                  //           child: Icon(Icons.edit),
+                  //         ),
+                  //         SizedBox(
+                  //           width: 10.h,
+                  //         ),
+                  //         BlocProvider(
+                  //           create: (context) => QuestionDetailBloc(
+                  //               questionListBloc:
+                  //                   BlocProvider.of<QuestionListBloc>(context),
+                  //               questionRepository:
+                  //                   RepositoryProvider.of<QuestionRepository>(
+                  //                       context)),
+                  //           child: BlocBuilder<QuestionDetailBloc,
+                  //               QuestionDetailState>(
+                  //             builder: (context, state) {
+                  //               return InkWell(
+                  //                 onTap: () {
+                  //                   BlocProvider.of<QuestionDetailBloc>(context)
+                  //                       .add(QuestionDetailDeleteEvent(
+                  //                           question.id));
+                  //                   if (showDetail) {
+                  //                     context.pop();
+                  //                   }
+                  //                 },
+                  //                 child: Icon(
+                  //                   Icons.delete,
+                  //                 ),
+                  //               );
+                  //             },
+                  //           ),
+                  //         )
+                  //       ],
+                  //     )
+                  //   ],
+                  // ),,
 
                   BlocBuilder<BookmarkBloc, BookmarkState>(
                     builder: (context, state) {
@@ -331,9 +334,9 @@ class QuestionW extends StatelessWidget {
                               BlocProvider.of<BookmarkBloc>(context).add(
                                   isBookmarked
                                       ? RemoveBookmarkEvent(
-                                          _user.id, question.id)
+                                          _user!.id, question.id)
                                       : AddBookmarkEvent(
-                                          _user.id, question.id));
+                                          _user!.id, question.id));
                             },
                             child: BlocConsumer<BookmarkBloc, BookmarkState>(
                               listener: (context, state) {
@@ -348,12 +351,12 @@ class QuestionW extends StatelessWidget {
                                 if (state is BookmarkAddSuccess) {
                                   var user = state.user;
                                   isBookmarked =
-                                      user.bookmarks.contains(_user.id);
+                                      user.bookmarks.contains(_user!.id);
                                 }
                                 if (state is BookmarkRemoveSuccess) {
                                   var user = state.user;
                                   isBookmarked =
-                                      user.bookmarks.contains(_user.id);
+                                      user.bookmarks.contains(_user!.id);
                                 }
                                 return Icon(
                                   isBookmarked

@@ -1,13 +1,39 @@
-import 'package:askanything/domain/auth/email.dart';
-import 'package:askanything/domain/auth/password.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
+import 'package:equatable/equatable.dart';
 
-part 'login_form.freezed.dart';
+class LoginForm extends Equatable {
+  final String emailAddress;
+  final String password;
 
-@freezed
-class LoginForm with _$LoginForm {
-  const factory LoginForm({
-    required String emailAddress,
-    required String password,
-  }) = _LoginForm;
+  LoginForm({
+    required this.emailAddress,
+    required this.password,
+  });
+
+  LoginForm copyWith({
+    String? emailAddress,
+    String? password,
+  }) {
+    return LoginForm(
+      emailAddress: emailAddress ?? this.emailAddress,
+      password: password ?? this.password,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'emailAddress': emailAddress,
+      'password': password,
+    };
+  }
+
+  factory LoginForm.fromJson(Map<String, dynamic> json) {
+    return LoginForm(
+      emailAddress: json['emailAddress'],
+      password: json['password'],
+    );
+  }
+
+  @override
+  List<Object?> get props => [emailAddress, password];
 }

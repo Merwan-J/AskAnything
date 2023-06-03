@@ -91,3 +91,5 @@ GoRouter getRoutes(AuthBloc authBloc) {
     )
   ]);
 }
+
+//Unit test

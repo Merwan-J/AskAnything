@@ -62,18 +62,6 @@ class UserRepository implements IUserRepository {
       final user = userDto.toModel();
       print(user.questionIds);
       return Right(user);
-    } on CustomTimeoutException catch (timeout) {
-      var userDto = await _databaseHelper.getUser(id);
-      // print(userDto);
-      print("timeout: $timeout");
-
-      if (userDto == null) {
-        return Left(const UserFailure.serverError());
-      }
-      var user = userDto.toModel();
-      print("yess yess yess yess ");
-      print("user: $user");
-      return Right(user);
     } catch (e) {
       print("hey");
       print(e);
