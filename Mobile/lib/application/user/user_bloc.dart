@@ -40,9 +40,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
 
     on<GetAllUsers>((event, emit) async {
-      emit(Loading());
-      Either<UserFailure, List<User>> failureOrUsers =
+      // emit(Loading());
+      Either<UserFailure, List<dynamic>> failureOrUsers =
           await _userRepository.getAllUsers();
+      // print(failureOrUsers);
+      // print('in the bloc');
       failureOrUsers.fold(
         (failure) => emit(UserError(failure)),
         (users) => emit(LoadedAllUsers(users)),
@@ -50,8 +52,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
 
     on<GetAdminUsers>((event, emit) async {
-      emit(Loading());
-      Either<UserFailure, List<User>> failureOrUsers =
+      // emit(Loading());
+      Either<UserFailure, List<dynamic>> failureOrUsers =
           await _userRepository.getAdminUsers();
       failureOrUsers.fold(
         (failure) => emit(UserError(failure)),
@@ -81,7 +83,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<GetFollowers>((event, emit) async {
       emit(Loading());
-      Either<UserFailure, List<User>> failureOrFollowers =
+      Either<UserFailure, List<dynamic>> failureOrFollowers =
           await _userRepository.getFollowers(event.userId);
       failureOrFollowers.fold(
         (failure) => emit(UserError(failure)),
@@ -91,11 +93,30 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<GetFollowings>((event, emit) async {
       emit(Loading());
-      Either<UserFailure, List<User>> failureOrFollowings =
+      Either<UserFailure, List<dynamic>> failureOrFollowings =
           await _userRepository.getFollowings(event.userId);
       failureOrFollowings.fold(
         (failure) => emit(UserError(failure)),
         (followings) => emit(LoadedFollowings(followings)),
+      );
+    });
+
+    on<DemoteUser>((event, emit) async {
+      // emit(Loading());
+      Either<UserFailure, dynamic> failureOrUser =
+          await _userRepository.demoteUser(event.userId);
+      failureOrUser.fold(
+        (failure) => emit(UserError(failure)),
+        (user) => add(GetAllUsers()),
+      );
+    });
+    on<PromoteUser>((event, emit) async {
+      // emit(Loading());
+      Either<UserFailure, dynamic> failureOrUser =
+          await _userRepository.promoteUser(event.userId);
+      failureOrUser.fold(
+        (failure) => emit(UserError(failure)),
+        (user) => add(GetAllUsers()),
       );
     });
   }

@@ -1,8 +1,11 @@
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
+import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/pages/pending_questions/pending_question.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/question/question.dart';
 import '../../../infrastructure/user/author_dto.dart';
@@ -85,21 +88,45 @@ class Pending_questions extends StatelessWidget {
               ],
             ))
         .toList();
-    return Scaffold(
-      appBar: CustomAppBar(title: 'Pending Questions'),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        // color: Colors.red,
-        child: Expanded(
-          child: ListView.builder(
-              itemCount: questionList.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                      left: 7, right: 0, top: 0, bottom: 5),
-                  child: questionWidget[index],
-                );
-              }),
+    return BlocProvider(
+      create: (context) =>
+          QuestionListBloc(RepositoryProvider.of<QuestionRepository>(context)),
+      child: Scaffold(
+        appBar: CustomAppBar(title: 'Pending Questions'),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          // color: Colors.red,
+          child: BlocBuilder<QuestionListBloc, QuestionListState>(
+            builder: (context, state) {
+              if (state is QuestionListInitial) {
+                BlocProvider.of<QuestionListBloc>(context)
+                    .add(GetPendingQuestions());
+                return Center(child: CircularProgressIndicator());
+              } else if (state is QuestionListLoading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is QuestionListFailure) {
+                return Center(child: Text(state.message));
+              } else if (state is QuestionListLoaded) {
+                if (state.questions.isEmpty)
+                  return Center(child: Text("No pending questions"));
+                else {
+                  return ListView.builder(
+                      itemCount: state.questions.length,
+                      itemBuilder: (context, index) {
+                        final question = state.questions[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 7, right: 0, top: 0, bottom: 5),
+                          child:
+                              QuestionPending(question: state.questions[index]),
+                        );
+                      });
+                }
+              } else {
+                return Center(child: Text("Something went wrong"));
+              }
+            },
+          ),
         ),
       ),
     );

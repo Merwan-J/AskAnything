@@ -43,3 +43,16 @@ class UpdateQuestionEvent extends QuestionListEvent {
 }
 //get question event
 
+class GetPendingQuestions extends QuestionListEvent {
+  GetPendingQuestions();
+}
+
+class ApproveQuestion extends QuestionListEvent {
+  final String questionId;
+  ApproveQuestion(this.questionId);
+}
+
+class RejectQuestion extends QuestionListEvent {
+  final String questionId;
+  RejectQuestion(this.questionId);
+}

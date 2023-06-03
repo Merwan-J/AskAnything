@@ -81,7 +81,7 @@ class QuestionRepository implements IQuestionRepository {
       print("questions: $questions");
       return Right(Question.fromJson(questions[0].toJson()));
     } catch (e) {
-      return Left(const QuestionFailure.serverError());
+      return const Left(QuestionFailure.serverError());
     }
   }
 
@@ -102,7 +102,7 @@ class QuestionRepository implements IQuestionRepository {
       return Right(question);
     } catch (e) {
       print(e);
-      return Left(const QuestionFailure.serverError());
+      return const Left(QuestionFailure.serverError());
     }
   }
 
@@ -139,7 +139,7 @@ class QuestionRepository implements IQuestionRepository {
       }
       return right(unit);
     } catch (e) {
-      return left(QuestionFailure.serverError());
+      return left(const QuestionFailure.serverError());
     }
   }
 
@@ -155,7 +155,7 @@ class QuestionRepository implements IQuestionRepository {
     } catch (e) {
       print(e);
       print("never here");
-      return left(QuestionFailure.serverError());
+      return left(const QuestionFailure.serverError());
     }
   }
 
@@ -169,7 +169,44 @@ class QuestionRepository implements IQuestionRepository {
       print("after like question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
-      return left(QuestionFailure.serverError());
+      return left(const QuestionFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<QuestionFailure, Question>> approveQuestion(
+      String questionId) async {
+    try {
+      print("in the repo approve");
+      QuestionDto questionDto =
+          await _questionProvider.approveQuestion(questionId);
+      return right(Question.fromJson(questionDto.toJson()));
+    } catch (e) {
+      return left(const QuestionFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<QuestionFailure, Question>> rejectQuestion(
+      String questionId) async {
+    try {
+      QuestionDto questionDto =
+          await _questionProvider.rejectQuestion(questionId);
+      return right(Question.fromJson(questionDto.toJson()));
+    } catch (e) {
+      return left(const QuestionFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<QuestionFailure, List<Question>>> getPendingQuestions() async {
+    try {
+      var questions = await _questionProvider.getPendingQuestions();
+      return right(questions.map((QuestionDto questionDto) {
+        return Question.fromJson(questionDto.toJson());
+      }).toList());
+    } catch (e) {
+      return left(const QuestionFailure.serverError());
     }
   }
 }

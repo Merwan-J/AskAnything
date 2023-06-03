@@ -55,7 +55,24 @@ exports.login = catchAsyncError(async (req, res, next) => {
     return next(new AppError('Please provide your email and password', 400));
   }
 
-  const user = await userModel.findOne({ email }).select('+password');
+  const user = await userModel
+    .findOne({ email })
+    .select('+password')
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return next(new AppError('Invalid email or password', 400));

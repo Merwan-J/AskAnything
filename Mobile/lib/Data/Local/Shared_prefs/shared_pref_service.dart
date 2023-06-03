@@ -38,6 +38,9 @@ class SharedPreferenceService {
       if (user == null) {
         return null;
       }
+
+      print(json.decode(user));
+      print('the user in shared pref ***********************');
       return UserDTO.fromJson(json.decode(user)).toModel();
     });
   }

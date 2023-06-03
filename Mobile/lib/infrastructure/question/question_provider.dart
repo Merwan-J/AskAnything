@@ -23,10 +23,8 @@ class QuestionProvider {
 
   // TODO: handle image uploads/ multipart form data
 
-  Future<QuestionDto> createQuestion(
-      QuestionFormDto questionFormDto, String id) async {
-    //TODO: change this to the actual author id
-    final author = id;
+  Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
+    final author = "647a72116cd279ac7a10bdb9";
     print("author: $author");
     var response = await _httpClient.post('questions',
         body: json.encode(questionFormDto.toJson()..['author'] = author));
@@ -174,6 +172,45 @@ class QuestionProvider {
       return QuestionDto.fromJson(decoded);
     } else {
       throw Exception('Failed to downvote question');
+    }
+  }
+
+  Future<List<QuestionDto>> getPendingQuestions() async {
+    var response = await _httpClient.get('questions/pending');
+
+    //print print
+    var decoded = await jsonDecode(response.body);
+
+    if (response.statusCode.toString() == 200.toString()) {
+      var questionsLst = decoded["data"]["questions"];
+      var questionLstDto =
+          (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
+      return questionLstDto;
+    } else {
+      throw Exception('Failed to get questions');
+    }
+  }
+
+  Future<QuestionDto> approveQuestion(String id) async {
+    print("in approve api");
+    var response = await _httpClient.post('questions/approve/$id');
+
+    if (response.statusCode.toString() == 200.toString()) {
+      var decoded = await jsonDecode(response.body)["data"]["question"];
+      return QuestionDto.fromJson(decoded);
+    } else {
+      throw Exception('Failed to approve question');
+    }
+  }
+
+  Future<QuestionDto> rejectQuestion(String id) async {
+    var response = await _httpClient.post('questions/reject/$id');
+
+    if (response.statusCode.toString() == 200.toString()) {
+      var decoded = await jsonDecode(response.body)["data"]["question"];
+      return QuestionDto.fromJson(decoded);
+    } else {
+      throw Exception('Failed to reject question');
     }
   }
 
