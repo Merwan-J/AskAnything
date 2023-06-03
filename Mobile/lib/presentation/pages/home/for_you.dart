@@ -37,8 +37,15 @@ class ForYou extends StatelessWidget {
           BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
         }
         if (state is QuestionListLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
+          return RefreshIndicator(
+            onRefresh: () {
+              BlocProvider.of<QuestionListBloc>(context)
+                  .add(GetQuestionsEvent());
+              return Future<void>.delayed(const Duration(seconds: 3));
+            },
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
           );
         }
         if (state is QuestionListFailure) {

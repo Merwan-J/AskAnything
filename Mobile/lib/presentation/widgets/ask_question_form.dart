@@ -223,7 +223,7 @@ class _AskQuestionFormState extends State<AskQuestionForm> {
                                 final questionForm = QuestionForm(
                                   title: titleController.text,
                                   description: descriptionController.text,
-                                  topic: selectedTopic,
+                                  topic: selectedTopic.toLowerCase(),
                                   anonymous: isAnnonymous,
                                 );
                                 BlocProvider.of<QuestionPostBloc>(context).add(

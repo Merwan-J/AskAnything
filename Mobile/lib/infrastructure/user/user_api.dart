@@ -21,26 +21,20 @@ class UserApi {
   }
 
   Future<UserDTO> getUserById(String id) async {
-    try {
-      int timeoutDurINSecs = 1;
-      var timeout = Duration(seconds: timeoutDurINSecs);
-      print("fetching user");
-      var response = await _customHttpClient.get("users/$id").timeout(timeout);
-      if (response.statusCode == 200) {
-        var user = jsonDecode(response.body)['data']['user'];
-        // var questions = (user['questions'] as List<dynamic>)
-        //     .map((question) => QuestionDto.fromJson(question))
-        //     .toList();
-        print("before updating");
-        // user['questions'] = questions;
-        print('after updating');
-        // print(user['questions'][0]['answers']);
-        return UserDTO.fromJson(user);
-      } else {
-        throw Exception("Failed to load user");
-      }
-    } catch (_) {
-      throw CustomTimeoutException();
+    print("fetching user");
+    var response = await _customHttpClient.get("users/$id");
+    if (response.statusCode == 200) {
+      var user = jsonDecode(response.body)['data']['user'];
+      // var questions = (user['questions'] as List<dynamic>)
+      //     .map((question) => QuestionDto.fromJson(question))
+      //     .toList();
+      print("before updating");
+      // user['questions'] = questions;
+      print('after updating');
+      // print(user['questions'][0]['answers']);
+      return UserDTO.fromJson(user);
+    } else {
+      throw Exception("Failed to load user");
     }
   }
 

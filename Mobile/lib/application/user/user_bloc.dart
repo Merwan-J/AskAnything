@@ -20,9 +20,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       Either<UserFailure, User> failureOrUser =
           await _userRepository.getUserById(event.id);
 
-      Either<QuestionFailure, Question> failureOrQuestion =
-          await _questionRepository.getQuestionById(event.id);
-
       failureOrUser.fold(
         (failure) => emit(UserError(failure)),
         (user) => emit(LoadedUser(user)),

@@ -36,6 +36,7 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
     });
 
     on<GetPendingQuestions>((event, emit) async {
+      print('get pending questions event-----------------------------------');
       emit(QuestionListLoading());
       final Either<QuestionFailure, List<Question>> questionsList =
           await _questionRepository.getPendingQuestions();

@@ -50,8 +50,15 @@ class Following extends StatelessWidget {
           );
         }
         if (state is QuestionListEmpty) {
-          return Center(
-            child: Text("No questions found"),
+          return RefreshIndicator(
+            onRefresh: () {
+              BlocProvider.of<QuestionListBloc>(context)
+                  .add(GetQuestionsEvent());
+              return Future<void>.delayed(const Duration(seconds: 3));
+            },
+            child: Center(
+              child: Text("No questions found"),
+            ),
           );
         }
         if (state is QuestionListLoaded) {

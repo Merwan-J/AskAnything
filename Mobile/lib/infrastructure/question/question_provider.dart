@@ -23,20 +23,18 @@ class QuestionProvider {
 
   // TODO: handle image uploads/ multipart form data
 
-  Future<QuestionDto> createQuestion(QuestionFormDto questionFormDto) async {
-    final author = "647a72116cd279ac7a10bdb9";
-    print("author: $author");
+  Future<QuestionDto> createQuestion(
+      QuestionFormDto questionFormDto, authorId) async {
     var response = await _httpClient.post('questions',
-        body: json.encode(questionFormDto.toJson()..['author'] = author));
-    print("response: ${response.body}");
+        body: json.encode(questionFormDto.toJson()..['author'] = authorId));
+
+    print(response.body);
 
     if (response.statusCode.toString() == 201.toString()) {
       Map<String, dynamic> decoded =
           await json.decode(response.body)['data']["question"];
-      print("decoded: $decoded");
       QuestionDto questionDto = QuestionDto.fromJson(decoded);
-      print("decoding sucess");
-      print("questionDto: $questionDto");
+
       return questionDto;
     } else {
       throw Exception('Failed to create question');
@@ -76,7 +74,7 @@ class QuestionProvider {
 
   Future<List<QuestionDto>> getQuestions() async {
     try {
-      int timeoutDurINSecs = 5;
+      int timeoutDurINSecs = 10;
       var timeout = Duration(seconds: timeoutDurINSecs);
       print("fetching questions");
       var response = await _httpClient

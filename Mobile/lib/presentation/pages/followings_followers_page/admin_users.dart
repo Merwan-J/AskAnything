@@ -3,6 +3,7 @@ import 'package:askanything/application/user/user_bloc.dart';
 import 'package:askanything/application/user/user_event.dart';
 import 'package:askanything/application/user/user_state.dart';
 import 'package:askanything/domain/user/user.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/infrastructure/question/question_repository.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
@@ -32,7 +33,6 @@ class _AdminUsersState extends State<AdminUsers>
 
   String searchQuery = "";
   TextEditingController _searchController = TextEditingController();
-  String currentUser = '6448f5ead561de32dc337d5b';
 
   @override
   void initState() {
@@ -52,6 +52,9 @@ class _AdminUsersState extends State<AdminUsers>
 
   @override
   Widget build(BuildContext context) {
+    final _user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
+
     super.build(context);
     return BlocProvider(
       create: (context) => UserBloc(

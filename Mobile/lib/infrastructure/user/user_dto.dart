@@ -20,6 +20,7 @@ class UserDTO extends Equatable {
   final List<String> followings;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String role;
 
   const UserDTO({
     required this.id,
@@ -37,6 +38,7 @@ class UserDTO extends Equatable {
     required this.followings,
     required this.createdAt,
     required this.updatedAt,
+    required this.role,
   });
 
   @override
@@ -63,6 +65,7 @@ class UserDTO extends Equatable {
       id: json['_id'] != null ? json['_id'].toString() : '',
       name: json['name'] != null ? json['name'].toString() : '',
       email: json['email'] != null ? json['email'].toString() : '',
+      role: json['role'] != null ? json['role'].toString() : 'user',
       password: json['password'] != null ? json['password'].toString() : '',
       profilePic:
           json['profilePic'] != null ? json['profilePic'].toString() : '',
@@ -104,6 +107,7 @@ class UserDTO extends Equatable {
       '_id': id,
       'name': name,
       'email': email,
+      'role': role,
       'password': password,
       'profilePic': profilePic,
       'questions': questionIds,
@@ -168,6 +172,7 @@ class UserDTO extends Equatable {
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
       email: json['email'] as String? ?? '',
+      role: json['role'] as String? ?? 'user',
       password: json['password'] as String? ?? '',
       profilePic: json['profilePic'] as String? ?? '',
       questionIds: questions,

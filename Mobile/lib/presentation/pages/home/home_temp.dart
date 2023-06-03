@@ -1,5 +1,7 @@
 import 'package:askanything/domain/question/question_repository_interface.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
+import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/pages/home/following_temp.dart';
 import 'package:askanything/presentation/pages/home/for_you.dart';
 import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
@@ -34,6 +36,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     final tabScreens = [ForYou(), Following()];
     TabController _tabController = TabController(length: 2, vsync: this);
+    final _user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
+    print("${_user!.role} ${_user.name}");
+
     Question(
         id: "1",
         title:
@@ -49,45 +55,94 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        elevation: 0.5,
-        actions: [
-          IconButton(
-              onPressed: () => context.go('/search'), icon: Icon(Icons.search)),
-          IconButton(
-            icon: const Icon(Icons.grid_view_rounded), // Change the icon here
-            onPressed: () {
-              openEndDrawer();
-            },
-          ),
-        ],
-        title: Container(
-          child: Row(
-            children: [
-              TabBar(
-                controller: _tabController,
-                indicatorColor: Colors.transparent,
-                isScrollable: true,
-                tabs: [
-                  Tab(
-                    text: "Explore",
-                  ),
-                  Tab(
-                    text: "For You",
-                  ),
-                ],
-              ),
-            ],
+
+    Widget _adminScaffold() {
+      return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          elevation: 0.5,
+          actions: [
+            IconButton(
+                onPressed: () => context.go('/search'),
+                icon: Icon(Icons.search)),
+            IconButton(
+              icon: const Icon(Icons.grid_view_rounded), // Change the icon here
+              onPressed: () {
+                openEndDrawer();
+              },
+            ),
+          ],
+          title: Container(
+            child: Row(
+              children: [
+                TabBar(
+                  controller: _tabController,
+                  indicatorColor: Colors.transparent,
+                  isScrollable: true,
+                  tabs: [
+                    Tab(
+                      text: "Explore",
+                    ),
+                    Tab(
+                      text: "For You",
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: tabScreens,
-      ),
-      endDrawer: MyDrawer(),
-    );
+        body: TabBarView(
+          controller: _tabController,
+          children: tabScreens,
+        ),
+        endDrawer: MyDrawer(),
+      );
+    }
+
+    Widget _userScaffold() {
+      return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          elevation: 0.5,
+          actions: [
+            IconButton(
+                onPressed: () => context.go('/search'),
+                icon: Icon(Icons.search)),
+            IconButton(
+              icon: const Icon(Icons.grid_view_rounded), // Change the icon here
+              onPressed: () {
+                openEndDrawer();
+              },
+            ),
+          ],
+          title: Container(
+            child: Row(
+              children: [
+                TabBar(
+                  controller: _tabController,
+                  indicatorColor: Colors.transparent,
+                  isScrollable: true,
+                  tabs: [
+                    Tab(
+                      text: "Explore",
+                    ),
+                    Tab(
+                      text: "For You",
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: tabScreens,
+        ),
+      );
+    }
+
+    return _user.role == 'user' ? _userScaffold() : _adminScaffold();
   }
 }
