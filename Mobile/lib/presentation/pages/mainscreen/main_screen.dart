@@ -10,6 +10,7 @@ import '../bookmark_page/book_mark.dart';
 import '../home/home_temp.dart';
 import '../profile_page/profile_temp.dart';
 import '../search_page/search_page.dart';
+import 'package:flutter_polls/flutter_polls.dart';
 
 class MainScreen extends StatefulWidget {
   final int? index;
@@ -45,7 +46,6 @@ class _MainScreenState extends State<MainScreen> {
           context: context,
           builder: (context) => AskQuestionForm());
     }
-
     return SafeArea(
         child: BlocListener<QuestionEditBloc, QuestionEditState>(
       listener: (context, state) {

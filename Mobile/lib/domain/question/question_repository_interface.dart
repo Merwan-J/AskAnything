@@ -6,7 +6,8 @@ import 'package:dartz/dartz.dart';
 abstract class IQuestionRepository {
   Future<Either<QuestionFailure, List<Question>>> getQuestions();
   Future<Either<QuestionFailure, Question>> getQuestionById(String questionId);
-  Future<Either<QuestionFailure, Question>> askQuestion(QuestionForm question);
+  Future<Either<QuestionFailure, Question>> askQuestion(
+      QuestionForm question, String id);
   Future<Either<QuestionFailure, Question>> updateQuestion(
       QuestionForm question, String questionId);
   Future<Either<QuestionFailure, Unit>> deleteQuestion(String questionId);

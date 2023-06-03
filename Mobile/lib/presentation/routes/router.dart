@@ -7,12 +7,10 @@ import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
 import 'package:askanything/presentation/pages/pending_questions/pending.dart';
 import 'package:askanything/presentation/pages/profile_page/profile_temp.dart';
 import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
-import 'package:askanything/presentation/pages/search_page/search_page.dart';
 import 'package:askanything/presentation/pages/settings_page/settings.dart';
 import 'package:askanything/presentation/pages/update_profile/update_profile_screen.dart';
 import 'package:askanything/presentation/routes/routes_dart.dart';
 import 'package:askanything/presentation/splash_screen/splash_screen.dart';
-import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 

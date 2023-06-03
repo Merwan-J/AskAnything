@@ -15,4 +15,6 @@ class AnswerState with _$AnswerState {
   const factory AnswerState.loaded(Either<AnswerFailure, Answer> answer) =
       LoadedAnswerState;
   const factory AnswerState.error(String message) = ErrorAnswerState;
+  const factory AnswerState.listLoaded(List<Answer> answer) =
+      ListLoadedAnswerState;
 }

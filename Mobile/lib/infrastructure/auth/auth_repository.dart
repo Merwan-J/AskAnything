@@ -51,6 +51,8 @@ class AuthRepository implements IAuthRepository {
       await sharedPreferences.setJwtToken(response.accessToken);
       await sharedPreferences.setAuthenticatedUser(response.user);
 
+      _authenticatedUser = await getAuthenticatedUser();
+
       return Right(response);
     } catch (e) {
       print(e);

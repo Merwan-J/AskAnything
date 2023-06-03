@@ -16,6 +16,7 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
 
   QuestionListBloc(this._questionRepository) : super(QuestionListInitial()) {
     on<GetQuestionsEvent>((event, emit) async {
+      print("get questions event");
       if (!event.isRefresh) {
         emit(QuestionListLoading());
       }

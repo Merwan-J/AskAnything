@@ -1,6 +1,7 @@
 import "dart:convert";
 import "package:askanything/infrastructure/answer/answer_dto.dart";
 import "package:askanything/infrastructure/answer/answer_form_dto.dart";
+import "package:askanything/infrastructure/user/author_dto.dart";
 import "package:askanything/util/custom_http_client.dart";
 
 class AnswerAPI {
@@ -9,27 +10,20 @@ class AnswerAPI {
   AnswerAPI(this._customHttpClient);
 
   Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
-    var answer = await _customHttpClient.post("answers",
-        body: json.encode(answerFormDto.toJson()));
+    print("answer api");
+    var body = {
+      "text": answerFormDto.text,
+      "author": "644a59d906e58c639150523c",
+      "question": "64796d751ab06cdabc2f0fba"
+    };
+    var answer =
+        await _customHttpClient.post("answers", body: json.encode(body));
 
-    var temp = json.decode(answer.body);
-
-    var tempJson = temp["data"]["answer"];
-    final answerDto = AnswerDto(
-      id: tempJson['_id'],
-      text: tempJson['text'],
-      image: tempJson['image'],
-      likes: List<dynamic>.from(tempJson['likes']),
-      dislikes: List<dynamic>.from(tempJson['dislikes']),
-      author: tempJson['author'],
-      questionId: tempJson['question'],
-      anonymous: tempJson['anonymous'],
-      createdAt: DateTime.parse(tempJson['createdAt']),
-      updatedAt: DateTime.parse(tempJson['updatedAt']),
-    );
+    var decoded = await jsonDecode(answer.body)["data"]["answer"];
+    // print("decoded$decoded");
 
     if (answer.statusCode == 201) {
-      return answerDto;
+      return AnswerDto.fromJson(decoded);
     } else {
       throw Exception("Failed to create answer"); //TODO: handle the exceptions
     }
@@ -59,11 +53,21 @@ class AnswerAPI {
 // TODO: use Answer Body Instead of String
   Future<AnswerDto> updateAnswer(
       {required String id, required String text}) async {
-    var answer = await _customHttpClient.put("answers/$id",
+    print("updateAnswer api");
+    var response = await _customHttpClient.put("answers/$id",
         body: json.encode({"text": text}));
+    print(response);
 
-    if (answer.statusCode == 200) {
-      return AnswerDto.fromJson(jsonDecode(answer.body));
+    var decoded = await jsonDecode(response.body)["data"]["answer"];
+    print("decoded$decoded");
+
+    if (response.statusCode.toString() == 200.toString()) {
+      try {
+        return AnswerDto.fromJson(decoded);
+      } catch (e) {
+        print(e);
+        throw (e);
+      }
     } else {
       throw Exception("Failed to update answer"); //TODO: handle the exceptions
     }
@@ -76,6 +80,28 @@ class AnswerAPI {
       return;
     } else {
       throw Exception("Failed to delete answer"); //TODO: handle the exceptions
+    }
+  }
+
+  Future<List<AnswerDto>> getAnswersByQuestionId(String id) async {
+    print("igetAnswersByQuestionId $id");
+    //TODO: change the url
+
+    var answers = await _customHttpClient
+        .get("answers/question/64796d751ab06cdabc2f0fba");
+    var decoded = await jsonDecode(answers.body)["data"]["answers"];
+    print("decoded$decoded");
+
+    if (answers.statusCode.toString() == 200.toString()) {
+      print("heree");
+      try {
+        return List<AnswerDto>.from(decoded.map((a) => AnswerDto.fromJson(a)));
+      } catch (e) {
+        print(e);
+        throw (e);
+      }
+    } else {
+      throw Exception("Failed to load answers"); //TODO: handle the exceptions
     }
   }
 

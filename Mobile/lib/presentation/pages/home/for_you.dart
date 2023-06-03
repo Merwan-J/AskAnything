@@ -33,6 +33,9 @@ class ForYou extends StatelessWidget {
         updatedAt: DateTime.now());
     return BlocBuilder<QuestionListBloc, QuestionListState>(
       builder: (context, state) {
+        if (state is QuestionListInitial) {
+          BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+        }
         if (state is QuestionListLoading) {
           return Center(
             child: CircularProgressIndicator(),
@@ -56,7 +59,7 @@ class ForYou extends StatelessWidget {
               return Future<void>.delayed(const Duration(seconds: 3));
             },
             child: ListView.builder(
-                padding: EdgeInsets.symmetric(vertical: 10.h),
+                padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
                 // shrinkWrap: true,
                 // scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -74,10 +77,10 @@ class ForYou extends StatelessWidget {
                 BlocProvider.of<QuestionListBloc>(context)
                     .add(GetQuestionsEvent());
               },
-              child: Text("Refresh")),
+              child: const Text("Oops! Something went wrong. Click to retry")),
         );
       },
+      // return Expanded(child: QuestionW(question: question));
     );
-    // return Expanded(child: QuestionW(question: question));
   }
 }

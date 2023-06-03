@@ -1,6 +1,8 @@
+import 'package:askanything/Data/Local/local_database/local_storage.dart';
 import 'package:askanything/domain/user/user_form.dart';
 import 'package:askanything/domain/user/user_repository_interface.dart';
 import 'package:askanything/infrastructure/user/user_mapper.dart';
+import 'package:askanything/util/custom_timeout.dart';
 import 'package:dartz/dartz.dart';
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
@@ -8,11 +10,13 @@ import 'package:askanything/infrastructure/user/user_api.dart';
 
 class UserRepository implements IUserRepository {
   final UserApi _userApi;
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
   UserRepository(this._userApi);
   @override
   Future<Either<UserFailure, User>> addBookmark(
       String userId, String questionId) async {
+    print("something");
     print('user repository');
     try {
       final userDto = await _userApi.addBookmark(userId, questionId);
@@ -21,7 +25,7 @@ class UserRepository implements IUserRepository {
 
       return Right(user);
     } catch (e) {
-      return Left(UserFailure.unexpectedError());
+      return const Left(UserFailure.unexpectedError());
     }
   }
 
@@ -42,8 +46,19 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<UserFailure, User>> getUserById(String id) async {
     try {
+      print("trying to get user");
       final userDto = await _userApi.getUserById(id);
       print(userDto.questionIds);
+      try {
+        print("entered the hole");
+        await _databaseHelper.insertUser(userDto);
+        // print("trying to get user db");
+        // final userDtodb = await _databaseHelper.getUser(id);
+        // print("got user db");
+        // print(userDtodb);
+      } catch (e) {
+        print(e);
+      }
       final user = userDto.toModel();
       print(user.questionIds);
       return Right(user);

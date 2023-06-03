@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/domain/question/question_failure.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
@@ -15,14 +16,16 @@ part 'question_post_state.dart';
 class QuestionPostBloc extends Bloc<QuestionPostEvent, QuestionPostState> {
   //accept question repository
   final IQuestionRepository _questionRepository;
+  final QuestionListBloc _questionListBloc;
 
-  QuestionPostBloc(this._questionRepository) : super(QuestionPostInitial()) {
+  QuestionPostBloc(this._questionRepository, this._questionListBloc)
+      : super(QuestionPostInitial()) {
     on<QuestionPostAdd>((event, emit) async {
       //emit loading state then add question then emit success or failure state
       emit(QuestionPostLoading());
       print("before");
       final Either<QuestionFailure, Question> question =
-          await _questionRepository.askQuestion(event.questionForm);
+          await _questionRepository.askQuestion(event.questionForm, event.id);
       //check if question is added
 
       question.fold(
@@ -31,6 +34,7 @@ class QuestionPostBloc extends Bloc<QuestionPostEvent, QuestionPostState> {
         },
         (question) {
           emit(QuestionPostSuccess("Question added successfully"));
+          _questionListBloc.add(GetQuestionsEvent(isRefresh: true));
         },
       );
     });
@@ -40,8 +44,8 @@ class QuestionPostBloc extends Bloc<QuestionPostEvent, QuestionPostState> {
       //emit loading state
       emit(QuestionPostLoading());
       //add question
-      final question =
-          await _questionRepository.askQuestion(event.questionForm);
+      final question = await _questionRepository.askQuestion(
+          event.questionForm, event.userId);
       //check if question is added
       if (question != null) {
         //emit success state

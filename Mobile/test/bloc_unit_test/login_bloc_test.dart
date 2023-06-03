@@ -30,7 +30,7 @@ void main() {
   });
 
   group('Login Bloc test', () {
-    const data = '{"emailAddress": "gg@gmail.com","password": "123"}';
+    const data = '{"emailAddress": "merwan@g.com","password": "merwan"}';
     const resp = '{"user": {"name": "elizur"}, "accessToken": "token"}';
 
     var loginData = LoginForm.fromJson(json.decode(data));

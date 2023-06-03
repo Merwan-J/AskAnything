@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:askanything/domain/user/user.dart';
 
 class AuthorDto {
@@ -29,5 +31,42 @@ class AuthorDto {
       id: user.id,
       profilePic: user.profilePic,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'email': email,
+      'profilePic': profilePic,
+    };
+  }
+
+  String toJsonString() {
+    print("in author dto TO JSON STRING");
+    return '{"name": "$name", "email": "$email", "id": "$id", "profilePic": "$profilePic"}';
+  }
+
+  static AuthorDto fromJsonString(String jsonString) {
+    print("in author dto");
+    final json = jsonDecode(jsonString);
+    print(json);
+    print(AuthorDto(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      profilePic: null,
+    ));
+    print("out author dto");
+    return AuthorDto(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      profilePic: null,
+    );
+  }
+
+  String toStringJson() {
+    return jsonEncode(toJson());
   }
 }
