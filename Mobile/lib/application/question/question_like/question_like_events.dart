@@ -6,7 +6,8 @@ part 'question_like_events.freezed.dart';
 class QuestionLikeEvent with _$QuestionLikeEvent {
   const factory QuestionLikeEvent.inital() = QuestionLikeEventInitial;
 
-  const factory QuestionLikeEvent.like(String questionId) = QuestionEventLike;
-  const factory QuestionLikeEvent.dislike(String questionId) =
+  const factory QuestionLikeEvent.like(String questionId, String userId) =
+      QuestionEventLike;
+  const factory QuestionLikeEvent.dislike(String questionId, String userId) =
       QuestionEventDislike;
 }

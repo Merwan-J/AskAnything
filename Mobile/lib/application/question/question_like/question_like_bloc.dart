@@ -18,7 +18,7 @@ class QuestionLikeBloc extends Bloc<QuestionLikeEvent, QuestionLikeState> {
     on<QuestionEventLike>((event, emit) async {
       emit(const QuestionLikeStateLoading());
       Either<QuestionFailure, Question> question =
-          await questionRepository.likeQuestion(event.questionId);
+          await questionRepository.likeQuestion(event.questionId, event.userId);
 
       print(question);
 
@@ -31,8 +31,8 @@ class QuestionLikeBloc extends Bloc<QuestionLikeEvent, QuestionLikeState> {
     on<QuestionEventDislike>((event, emit) async {
       emit(const QuestionLikeStateLoading());
       print("about to dislike");
-      Either<QuestionFailure, Question> question =
-          await questionRepository.dislikeQuestion(event.questionId);
+      Either<QuestionFailure, Question> question = await questionRepository
+          .dislikeQuestion(event.questionId, event.userId);
       print("here");
       print(question);
 

@@ -16,10 +16,6 @@ import '../../../application/user/user_state.dart';
 import '../../../domain/user/user.dart';
 import '../../routes/routes_dart.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -65,7 +61,9 @@ class Setting extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.h),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pop();
+            },
             icon: const Icon(Icons.arrow_back_ios),
             iconSize: 17.h,
           ),

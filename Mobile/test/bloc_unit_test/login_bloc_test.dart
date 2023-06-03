@@ -25,8 +25,8 @@ void main() {
   late LoginBloc loginBloc;
 
   setUp(() {
-    loginBloc = LoginBloc();
     mockAuthRepository = MockAuthRepository();
+    loginBloc = LoginBloc(mockAuthRepository);
   });
 
   group('Login Bloc test', () {

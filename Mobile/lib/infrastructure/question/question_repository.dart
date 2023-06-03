@@ -145,11 +145,11 @@ class QuestionRepository implements IQuestionRepository {
 
   @override
   Future<Either<QuestionFailure, Question>> dislikeQuestion(
-      String questionId) async {
+      String questionId, String userId) async {
     try {
       print("dislike question");
       QuestionDto questionDto =
-          await _questionProvider.downvoteQuestion(questionId);
+          await _questionProvider.downvoteQuestion(questionId, userId);
       print("after dislike question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {
@@ -161,11 +161,11 @@ class QuestionRepository implements IQuestionRepository {
 
   @override
   Future<Either<QuestionFailure, Question>> likeQuestion(
-      String questionId) async {
+      String questionId, String userId) async {
     try {
       print("like question repo");
       QuestionDto questionDto =
-          await _questionProvider.upvoteQuestion(questionId);
+          await _questionProvider.upvoteQuestion(questionId, userId);
       print("after like question$questionDto");
       return right(Question.fromJson(questionDto.toJson()));
     } catch (e) {

@@ -135,9 +135,12 @@ class QuestionProvider {
     }
   }
 
-  Future<QuestionDto> upvoteQuestion(String id) async {
-    var userId = '647941adb3ca8dc6c1ac3f77';
-    var body = json.encode({"userId": userId});
+  Future<QuestionDto> upvoteQuestion(String id, String userID) async {
+    print("being liked");
+    print("here is the id");
+    print(id);
+    // var userId = '647941adb3ca8dc6c1ac3f77';
+    var body = json.encode({"userId": userID});
     print("about like");
     var response = await _httpClient.post('questions/upvote/$id', body: body);
     var decoded = await jsonDecode(response.body)["data"]["question"];
@@ -157,9 +160,9 @@ class QuestionProvider {
     }
   }
 
-  Future<QuestionDto> downvoteQuestion(String id) async {
+  Future<QuestionDto> downvoteQuestion(String id, String userId) async {
     var user = '647941adb3ca8dc6c1ac3f77';
-    var body = json.encode({"userId": user});
+    var body = json.encode({"userId": userId});
     print(body);
     var response = await _httpClient.post('questions/downvote/$id', body: body);
     var decoded = await jsonDecode(response.body)["data"]["question"];

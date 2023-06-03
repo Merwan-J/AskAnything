@@ -103,9 +103,10 @@ class QuestionW extends StatelessWidget {
                                       height: 3.h,
                                     ),
                                     Text(
-                                      DateFormat.jm()
-                                          .format(question.createdAt)
-                                          .toString(),
+                                      formatTime(question.createdAt),
+                                      // DateFormat.jm()
+                                      //     .format(question.createdAt)
+                                      //     .toString(),
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelSmall,
@@ -148,6 +149,24 @@ class QuestionW extends StatelessWidget {
                         SizedBox(
                           height: 16.h,
                         ),
+                        Visibility(
+                            visible: showDetail,
+                            child: Column(
+                              children: [
+                                Divider(
+                                  color: Colors.grey,
+                                  thickness: 2,
+                                ),
+                                SizedBox(
+                                  height: 10.h,
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(question.description,
+                                      style: TextStyle(fontSize: 12.sp)),
+                                ),
+                              ],
+                            )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -155,7 +174,8 @@ class QuestionW extends StatelessWidget {
                                 context,
                                 question,
                                 question.likes.contains(_user.id),
-                                question.dislikes.contains(_user.id)),
+                                question.dislikes.contains(_user.id),
+                                _user.id),
                             Visibility(
                               visible: _user.id == question.author.id,
                               child: Row(
@@ -246,24 +266,7 @@ class QuestionW extends StatelessWidget {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Visibility(
-                      visible: showDetail,
-                      child: Column(
-                        children: [
-                          Divider(
-                            color: Colors.grey,
-                            thickness: 2,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(question.description,
-                                style: TextStyle(fontSize: 12.sp)),
-                          ),
-                        ],
-                      )),
+
                   //TODO: change like color based on user likes
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -402,6 +405,7 @@ class QuestionW extends StatelessWidget {
     Question question,
     bool isLiked,
     bool isDisliked,
+    String uid,
   ) {
     return BlocProvider(
       create: (context) => QuestionLikeBloc(
@@ -419,7 +423,7 @@ class QuestionW extends StatelessWidget {
                 radius: 20,
                 onTap: () {
                   BlocProvider.of<QuestionLikeBloc>(context)
-                      .add(QuestionLikeEvent.like(question.id));
+                      .add(QuestionLikeEvent.like(question.id, uid));
                 },
                 child: Icon(Icons.keyboard_arrow_up_outlined,
                     color: isLiked
@@ -437,7 +441,7 @@ class QuestionW extends StatelessWidget {
               InkWell(
                 onTap: () {
                   BlocProvider.of<QuestionLikeBloc>(context)
-                      .add(QuestionLikeEvent.dislike(question.id));
+                      .add(QuestionLikeEvent.dislike(question.id, uid));
                 },
                 child: Icon(Icons.keyboard_arrow_down_outlined,
                     color: isDisliked
@@ -457,5 +461,22 @@ class QuestionW extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String formatTime(DateTime time) {
+    final now = DateTime.now();
+    final difference = now.difference(time);
+
+    if (difference.inHours <= 12) {
+      if (difference.inHours <= 0) {
+        return '${difference.inMinutes} mins ago';
+      } else {
+        return '${difference.inHours} hrs ago';
+      }
+    } else if (time.day == now.day - 1) {
+      return 'Yesterday';
+    } else {
+      return DateFormat('h:mm a').format(time);
+    }
   }
 }

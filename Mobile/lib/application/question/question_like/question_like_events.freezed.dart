@@ -19,22 +19,22 @@ mixin _$QuestionLikeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inital,
-    required TResult Function(String questionId) like,
-    required TResult Function(String questionId) dislike,
+    required TResult Function(String questionId, String userId) like,
+    required TResult Function(String questionId, String userId) dislike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inital,
-    TResult? Function(String questionId)? like,
-    TResult? Function(String questionId)? dislike,
+    TResult? Function(String questionId, String userId)? like,
+    TResult? Function(String questionId, String userId)? dislike,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inital,
-    TResult Function(String questionId)? like,
-    TResult Function(String questionId)? dislike,
+    TResult Function(String questionId, String userId)? like,
+    TResult Function(String questionId, String userId)? dislike,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,8 +120,8 @@ class _$QuestionLikeEventInitial implements QuestionLikeEventInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inital,
-    required TResult Function(String questionId) like,
-    required TResult Function(String questionId) dislike,
+    required TResult Function(String questionId, String userId) like,
+    required TResult Function(String questionId, String userId) dislike,
   }) {
     return inital();
   }
@@ -130,8 +130,8 @@ class _$QuestionLikeEventInitial implements QuestionLikeEventInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inital,
-    TResult? Function(String questionId)? like,
-    TResult? Function(String questionId)? dislike,
+    TResult? Function(String questionId, String userId)? like,
+    TResult? Function(String questionId, String userId)? dislike,
   }) {
     return inital?.call();
   }
@@ -140,8 +140,8 @@ class _$QuestionLikeEventInitial implements QuestionLikeEventInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inital,
-    TResult Function(String questionId)? like,
-    TResult Function(String questionId)? dislike,
+    TResult Function(String questionId, String userId)? like,
+    TResult Function(String questionId, String userId)? dislike,
     required TResult orElse(),
   }) {
     if (inital != null) {
@@ -195,7 +195,7 @@ abstract class _$$QuestionEventLikeCopyWith<$Res> {
           _$QuestionEventLike value, $Res Function(_$QuestionEventLike) then) =
       __$$QuestionEventLikeCopyWithImpl<$Res>;
   @useResult
-  $Res call({String questionId});
+  $Res call({String questionId, String userId});
 }
 
 /// @nodoc
@@ -210,11 +210,16 @@ class __$$QuestionEventLikeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? questionId = null,
+    Object? userId = null,
   }) {
     return _then(_$QuestionEventLike(
       null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -223,14 +228,16 @@ class __$$QuestionEventLikeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$QuestionEventLike implements QuestionEventLike {
-  const _$QuestionEventLike(this.questionId);
+  const _$QuestionEventLike(this.questionId, this.userId);
 
   @override
   final String questionId;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'QuestionLikeEvent.like(questionId: $questionId)';
+    return 'QuestionLikeEvent.like(questionId: $questionId, userId: $userId)';
   }
 
   @override
@@ -239,11 +246,12 @@ class _$QuestionEventLike implements QuestionEventLike {
         (other.runtimeType == runtimeType &&
             other is _$QuestionEventLike &&
             (identical(other.questionId, questionId) ||
-                other.questionId == questionId));
+                other.questionId == questionId) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, questionId);
+  int get hashCode => Object.hash(runtimeType, questionId, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -255,32 +263,32 @@ class _$QuestionEventLike implements QuestionEventLike {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inital,
-    required TResult Function(String questionId) like,
-    required TResult Function(String questionId) dislike,
+    required TResult Function(String questionId, String userId) like,
+    required TResult Function(String questionId, String userId) dislike,
   }) {
-    return like(questionId);
+    return like(questionId, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inital,
-    TResult? Function(String questionId)? like,
-    TResult? Function(String questionId)? dislike,
+    TResult? Function(String questionId, String userId)? like,
+    TResult? Function(String questionId, String userId)? dislike,
   }) {
-    return like?.call(questionId);
+    return like?.call(questionId, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inital,
-    TResult Function(String questionId)? like,
-    TResult Function(String questionId)? dislike,
+    TResult Function(String questionId, String userId)? like,
+    TResult Function(String questionId, String userId)? dislike,
     required TResult orElse(),
   }) {
     if (like != null) {
-      return like(questionId);
+      return like(questionId, userId);
     }
     return orElse();
   }
@@ -321,10 +329,11 @@ class _$QuestionEventLike implements QuestionEventLike {
 }
 
 abstract class QuestionEventLike implements QuestionLikeEvent {
-  const factory QuestionEventLike(final String questionId) =
-      _$QuestionEventLike;
+  const factory QuestionEventLike(
+      final String questionId, final String userId) = _$QuestionEventLike;
 
   String get questionId;
+  String get userId;
   @JsonKey(ignore: true)
   _$$QuestionEventLikeCopyWith<_$QuestionEventLike> get copyWith =>
       throw _privateConstructorUsedError;
@@ -336,7 +345,7 @@ abstract class _$$QuestionEventDislikeCopyWith<$Res> {
           $Res Function(_$QuestionEventDislike) then) =
       __$$QuestionEventDislikeCopyWithImpl<$Res>;
   @useResult
-  $Res call({String questionId});
+  $Res call({String questionId, String userId});
 }
 
 /// @nodoc
@@ -351,11 +360,16 @@ class __$$QuestionEventDislikeCopyWithImpl<$Res>
   @override
   $Res call({
     Object? questionId = null,
+    Object? userId = null,
   }) {
     return _then(_$QuestionEventDislike(
       null == questionId
           ? _value.questionId
           : questionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -364,14 +378,16 @@ class __$$QuestionEventDislikeCopyWithImpl<$Res>
 /// @nodoc
 
 class _$QuestionEventDislike implements QuestionEventDislike {
-  const _$QuestionEventDislike(this.questionId);
+  const _$QuestionEventDislike(this.questionId, this.userId);
 
   @override
   final String questionId;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'QuestionLikeEvent.dislike(questionId: $questionId)';
+    return 'QuestionLikeEvent.dislike(questionId: $questionId, userId: $userId)';
   }
 
   @override
@@ -380,11 +396,12 @@ class _$QuestionEventDislike implements QuestionEventDislike {
         (other.runtimeType == runtimeType &&
             other is _$QuestionEventDislike &&
             (identical(other.questionId, questionId) ||
-                other.questionId == questionId));
+                other.questionId == questionId) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, questionId);
+  int get hashCode => Object.hash(runtimeType, questionId, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -397,32 +414,32 @@ class _$QuestionEventDislike implements QuestionEventDislike {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() inital,
-    required TResult Function(String questionId) like,
-    required TResult Function(String questionId) dislike,
+    required TResult Function(String questionId, String userId) like,
+    required TResult Function(String questionId, String userId) dislike,
   }) {
-    return dislike(questionId);
+    return dislike(questionId, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? inital,
-    TResult? Function(String questionId)? like,
-    TResult? Function(String questionId)? dislike,
+    TResult? Function(String questionId, String userId)? like,
+    TResult? Function(String questionId, String userId)? dislike,
   }) {
-    return dislike?.call(questionId);
+    return dislike?.call(questionId, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? inital,
-    TResult Function(String questionId)? like,
-    TResult Function(String questionId)? dislike,
+    TResult Function(String questionId, String userId)? like,
+    TResult Function(String questionId, String userId)? dislike,
     required TResult orElse(),
   }) {
     if (dislike != null) {
-      return dislike(questionId);
+      return dislike(questionId, userId);
     }
     return orElse();
   }
@@ -463,10 +480,11 @@ class _$QuestionEventDislike implements QuestionEventDislike {
 }
 
 abstract class QuestionEventDislike implements QuestionLikeEvent {
-  const factory QuestionEventDislike(final String questionId) =
-      _$QuestionEventDislike;
+  const factory QuestionEventDislike(
+      final String questionId, final String userId) = _$QuestionEventDislike;
 
   String get questionId;
+  String get userId;
   @JsonKey(ignore: true)
   _$$QuestionEventDislikeCopyWith<_$QuestionEventDislike> get copyWith =>
       throw _privateConstructorUsedError;

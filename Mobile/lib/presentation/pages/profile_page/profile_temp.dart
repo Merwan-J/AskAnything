@@ -182,7 +182,15 @@ class _ProfileScreenState extends State<ProfileScreen>
                                             fontSize: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium!
-                                                .fontSize))
+                                                .fontSize)),
+                                    SizedBox(
+                                      width: 20.h,
+                                    ),
+                                    InkWell(
+                                        onTap: () {
+                                          context.push(Routes.SETTINGS);
+                                        },
+                                        child: Icon(Icons.settings)),
                                   ],
                                 ),
                               ],
