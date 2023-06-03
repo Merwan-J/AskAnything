@@ -92,6 +92,10 @@ void main() {
                     create: (context) => QuestionListBloc(
                         RepositoryProvider.of<QuestionRepository>(context))),
                 BlocProvider(
+                    create: (context) => QuestionPostBloc(
+                        RepositoryProvider.of<QuestionRepository>(context),
+                        RepositoryProvider.of<QuestionListBloc>(context))),
+                BlocProvider(
                   create: (context) => AnswerBloc(
                       RepositoryProvider.of<AnswerRepository>(context)),
                 )

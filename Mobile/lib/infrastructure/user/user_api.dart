@@ -134,12 +134,11 @@ class UserApi {
 
   Future<List<dynamic>> getAdminUsers() async {
     var response = await _customHttpClient.get("users/admin");
-
     if (response.statusCode == 200) {
-      List<dynamic> usersJson = jsonDecode(response.body)['data']['users'];
+      List<dynamic> usersJson = jsonDecode(response.body)['data']['admins'];
       return usersJson;
     } else {
-      print(jsonDecode(response.body));
+      // print(jsonDecode(response.body));
       throw Exception("Failed to load users");
     }
   }

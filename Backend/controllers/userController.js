@@ -96,7 +96,7 @@ exports.deleteUser = catchAsyncError(async (req, res, next) => {
   const questions = await Question.deleteMany({ author: req.params.id });
   res.status(200).json({
     staus: 'success',
-    data: { user },
+    data: null,
   });
 });
 
@@ -236,6 +236,31 @@ exports.removeBookmark = catchAsyncError(async (req, res, next) => {
     status: 'success',
     data: {
       user,
+    },
+  });
+});
+
+exports.getAdmins = catchAsyncError(async (req, res, next) => {
+  const admins = await User.find({ role: 'admin' })
+    .populate({
+      path: 'questions',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .populate({
+      path: 'answers',
+      populate: {
+        path: 'author',
+        model: 'User',
+      },
+    })
+    .exec();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      admins,
     },
   });
 });
