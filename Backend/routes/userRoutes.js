@@ -20,7 +20,7 @@ router.route('/removebookmarks/:id').post(userController.removeBookmark);
 router.route('/:id/followers').get(userController.getfollowers);
 
 //getfollowing
-router.route('/:id/following').get(userController.getfollowing);
+router.route('/:id/followings').get(userController.getfollowing);
 
 //follow a user
 router.route('/:id/follow').post(userController.followUser);

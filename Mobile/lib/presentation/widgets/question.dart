@@ -50,6 +50,9 @@ class QuestionW extends StatelessWidget {
   Widget build(BuildContext context) {
     User? _user = RepositoryProvider.of<AuthRepository>(context)
         .getAuthenticatedUserSync();
+    print(_user!.id == question.author.id);
+    print("${_user.name} current user");
+    print(question.author.name);
     var isBookmarked = false;
     return BlocProvider(
         create: (context) => BookmarkBloc(

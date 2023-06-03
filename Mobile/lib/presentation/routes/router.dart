@@ -1,6 +1,7 @@
 import 'package:askanything/application/auth/bloc/auth_bloc.dart';
 import 'package:askanything/application/auth/bloc/auth_state.dart';
 import 'package:askanything/presentation/pages/followings_followers_page/followings_followers_screen.dart';
+import 'package:askanything/presentation/pages/followings_followers_page/admin_users.dart';
 import 'package:askanything/presentation/pages/login_and_registration/login/login_screen.dart';
 import 'package:askanything/presentation/pages/login_and_registration/register/register_screen.dart';
 import 'package:askanything/presentation/pages/mainscreen/main_screen.dart';
@@ -77,16 +78,18 @@ GoRouter getRoutes(AuthBloc authBloc) {
     ),
     GoRoute(
       path: Routes.USERS,
-      builder: (context, state) => FollowersFollowingPage(),
+      builder: (context, state) => AdminUsers(),
     ),
     GoRoute(
       path: Routes.ADMINS,
-      builder: (context, state) => FollowersFollowingPage(
-        isAdminProfile: true,
-      ),
+      builder: (context, state) => AdminUsers(),
     ),
     GoRoute(
       path: Routes.PENDINGQUESTIONS,
+      builder: (context, state) => Pending_questions(),
+    ),
+    GoRoute(
+      path: Routes.USERSSCREEN,
       builder: (context, state) => Pending_questions(),
     )
   ]);

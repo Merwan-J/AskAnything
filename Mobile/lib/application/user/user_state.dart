@@ -1,5 +1,6 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/domain/user/user_failure.dart';
+import 'package:askanything/infrastructure/question/question_dto.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class UserState extends Equatable {
@@ -22,7 +23,7 @@ class LoadedUser extends UserState {
 }
 
 class LoadedAllUsers extends UserState {
-  final List<User> users;
+  final List<dynamic> users;
   const LoadedAllUsers(this.users);
 
   @override
@@ -30,7 +31,7 @@ class LoadedAllUsers extends UserState {
 }
 
 class LoadedAdminUsers extends UserState {
-  final List<User> users;
+  final List<dynamic> users;
   const LoadedAdminUsers(this.users);
 
   @override
@@ -38,7 +39,7 @@ class LoadedAdminUsers extends UserState {
 }
 
 class LoadedFollowers extends UserState {
-  final List<User> followers;
+  final List<dynamic> followers;
   const LoadedFollowers(this.followers);
 
   @override
@@ -46,7 +47,7 @@ class LoadedFollowers extends UserState {
 }
 
 class LoadedFollowings extends UserState {
-  final List<User> followings;
+  final List<dynamic> followings;
   const LoadedFollowings(this.followings);
 
   @override
@@ -73,6 +74,16 @@ class Unfollowed extends UserState {
   final User user;
 
   Unfollowed(this.user);
+}
+
+class Promoted extends UserState {
+  final User user;
+  Promoted(this.user);
+}
+
+class Demoted extends UserState {
+  final User user;
+  Demoted(this.user);
 }
 
 class Success extends UserState {}

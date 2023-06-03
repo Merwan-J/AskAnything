@@ -205,14 +205,13 @@ exports.getfollowing = catchAsyncError(async (req, res) => {
 
   const user = await User.findById(id);
   const following = await User.find({ _id: { $in: user.followings } });
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     data: { following },
   });
 });
 
 exports.addBookmark = catchAsyncError(async (req, res, next) => {
-
   const user = await User.findById(req.params.id);
   const questionId = req.body.questionId;
   user.bookmarks.pull(questionId);
