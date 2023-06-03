@@ -3,11 +3,13 @@ import 'dart:math';
 import 'package:askanything/domain/answer/answer.dart';
 import 'package:askanything/domain/answer/answer_failure.dart';
 import 'package:askanything/domain/answer/answer_repository_interface.dart';
+import 'package:askanything/domain/question/question_failure.dart';
 import 'package:askanything/infrastructure/answer/answer_api.dart';
 import 'package:askanything/infrastructure/answer/answer_dto.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 
 import 'answer_event.dart';
@@ -25,21 +27,43 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
           (l) => emit(const AnswerState.error("Failed to load answers")),
           (r) => emit(AnswerState.loaded(answer)));
     });
+    on<LoadAnswersByQuestionEvent>(((event, emit) async {
+      print("loading anwers by questions");
+      Either<AnswerFailure, List<Answer>> answers =
+          await _answerRepository.getAnswersByQuestion(event.questionId);
+      print(answers);
+      print("loaded answers by questions id");
+      answers.fold(
+          (l) => emit(const ErrorAnswerState("Failed to load answers")), (r) {
+        print("1234567890-09876");
+        print(r);
+        return emit(ListLoadedAnswerState(r));
+      });
+    }));
 
     on<AddAnswerEvent>(((event, emit) async {
-      print("creating answer");
+      // print("creating answer");
       Either<AnswerFailure, Answer> answer =
           await _answerRepository.createAnswer(event.answerForm);
       print("success");
       print(answer); //Right
       answer.fold(
-          (l) => emit(const AnswerState.error("failed to create answer")),
-          (r) => emit(AnswerState.loaded(answer)));
+          (l) => emit(const AnswerState.error("failed to create answer")), (r) {
+        emit(AnswerState.loaded(answer));
+        add(LoadAnswersByQuestionEvent(r.question));
+      });
     }));
     on<UpdateAnswerEvent>(((event, emit) async {
+      print("updating answer");
       Either<AnswerFailure, Answer> answer =
           await _answerRepository.updateAnswer(event.id, event.text);
 
+      if (answer.isRight()) {
+        print('done');
+      } else {
+        print("try again");
+      }
+      print(answer);
       answer.fold(
           (l) => emit(const AnswerState.error("Failed to update answer")),
           (r) => {
@@ -49,8 +73,11 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
     }));
 
     on<DeleteAnswerEvent>((event, emit) async {
+      print("deleting");
       Either<AnswerFailure, Unit> answer =
           await _answerRepository.deleteAnswer(event.answerId);
+      print("testt..");
+      print(answer);
 
       answer.fold(
           (l) => emit(AnswerState.error("Failed to delete answer")),

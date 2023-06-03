@@ -14,6 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../application/answer/bloc/answer_bloc.dart';
 import '../../../application/answer/bloc/answer_event.dart';
+import '../../../application/answer/bloc/answer_state.dart';
 import '../../../domain/answer/answer.dart';
 import '../../../domain/answer/answer_form.dart';
 import '../../../domain/question/question.dart';
@@ -81,6 +82,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
 
   @override
   Widget build(BuildContext context) {
+    bool showDetail = MediaQuery.of(context).viewInsets.bottom == 0.0;
     List<Widget> answerWidget = answerList
         .map((answer) => Row(
               children: [
@@ -106,23 +108,65 @@ class _QuestionDetailState extends State<QuestionDetail> {
             ),
             QuestionW(
               question: QuestionDetail.question,
-              // showDetail: true,
+              showDetail: showDetail,
             ),
             SizedBox(
               height: 10.h,
             ),
             Container(
               // color: Colors.red,
-              child: Expanded(
-                child: ListView.builder(
-                    itemCount: answerList.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: 16.h, right: 0, top: 0, bottom: 5.h),
-                        child: answerWidget[index],
-                      );
-                    }),
+              child: BlocBuilder<AnswerBloc, AnswerState>(
+                builder: (context, state) {
+                  print(state);
+                  if (state is InitialAnswerState) {
+                    print("we are here");
+                    BlocProvider.of<AnswerBloc>(context).add(
+                        LoadAnswersByQuestionEvent("6478af6ea70dcd58a46901db"));
+                    return Expanded(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  }
+                  if (state is LoadingAnswerState) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                  if (state is ErrorAnswerState) {
+                    print(state);
+
+                    return Expanded(
+                      child: Center(
+                        child: Text(state.message),
+                      ),
+                    );
+                  }
+                  if (state is ListLoadedAnswerState && state.answer.isEmpty) {
+                    return Expanded(
+                      child: Center(
+                        child: Text("No Answers yet, be the first to answer!"),
+                      ),
+                    );
+                  }
+                  if (state is ListLoadedAnswerState) {
+                    print("presentation layer ${state.answer}");
+                    return Expanded(
+                      child: ListView.builder(
+                          itemCount: state.answer.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                  left: 16.h, right: 0, top: 0, bottom: 5.h),
+                              child: AnswerW(answer: state.answer[index]),
+                            );
+                          }),
+                    );
+                  }
+                  return Center(
+                    child: Text("Something went wrong"),
+                  );
+                },
               ),
             ),
             Padding(
@@ -151,6 +195,9 @@ class _QuestionDetailState extends State<QuestionDetail> {
                     child: Container(
                       height: 50.h,
                       child: TextField(
+                        onChanged: (value) {
+                          setState(() {});
+                        },
                         controller: _answerController,
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
@@ -165,6 +212,11 @@ class _QuestionDetailState extends State<QuestionDetail> {
                                 print("event form $answerForm");
                                 BlocProvider.of<AnswerBloc>(context)
                                     .add(AddAnswerEvent(answerForm));
+                                BlocProvider.of<AnswerBloc>(context).add(
+                                    LoadAnswersByQuestionEvent(
+                                        "6478af6ea70dcd58a46901db"));
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                _answerController.clear();
                                 print("after evnet $answerForm");
                               },
                               icon: Icon(Icons.send)),

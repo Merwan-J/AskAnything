@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:askanything/domain/answer/answer_failure.dart';
 import 'package:askanything/domain/answer/answer.dart';
 import 'package:askanything/domain/answer/answer_form.dart';
@@ -18,12 +20,25 @@ class AnswerRepository implements IAnswerRepository {
       AnswerForm answerForm) async {
     try {
       var answer = await _answerAPI.createAnswer(answerForm.toAnswerFormDto());
-      print(answer);
+      // print(answer);
+      print('answer in repo');
 
       return right(answer.toAnswer());
     } catch (e) {
+      print('repo error');
+      print(e);
       return left(const AnswerFailure.serverError(failedValue: 'Server Error'));
     } //TODO: Add more specific errors
+  }
+
+  Future<Either<AnswerFailure, List<Answer>>> getAnswersByQuestion(
+      String questionId) async {
+    try {
+      var answers = await _answerAPI.getAnswersByQuestionId(questionId);
+      return right(answers.map((e) => e.toAnswer()).toList());
+    } catch (e) {
+      return left(const AnswerFailure.serverError(failedValue: 'Server Error'));
+    }
   }
 
   @override
@@ -72,10 +87,16 @@ class AnswerRepository implements IAnswerRepository {
   @override
   Future<Either<AnswerFailure, Answer>> updateAnswer(
       String id, String text) async {
+    print("in reposityr");
     try {
+      print("in repo try");
       var answer = await _answerAPI.updateAnswer(id: id, text: text);
+      print("in repo try after");
+      answer.toAnswer();
       return right(answer.toAnswer());
     } catch (e) {
+      print("in repo catch");
+      print(e);
       return left(const AnswerFailure.serverError(failedValue: 'Server Error'));
     }
   }

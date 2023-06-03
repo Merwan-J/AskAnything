@@ -23,6 +23,7 @@ mixin _$AnswerState {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +33,7 @@ mixin _$AnswerState {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +43,7 @@ mixin _$AnswerState {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +54,7 @@ mixin _$AnswerState {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +64,7 @@ mixin _$AnswerState {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +74,7 @@ mixin _$AnswerState {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +141,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) {
     return initial();
   }
@@ -147,6 +154,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) {
     return initial?.call();
   }
@@ -159,6 +167,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -175,6 +184,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) {
     return initial(this);
   }
@@ -187,6 +197,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) {
     return initial?.call(this);
   }
@@ -199,6 +210,7 @@ class _$InitialAnswerState implements InitialAnswerState {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -255,6 +267,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) {
     return success();
   }
@@ -267,6 +280,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) {
     return success?.call();
   }
@@ -279,6 +293,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -295,6 +310,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) {
     return success(this);
   }
@@ -307,6 +323,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) {
     return success?.call(this);
   }
@@ -319,6 +336,7 @@ class _$SuccessAnswerEvent implements SuccessAnswerEvent {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -375,6 +393,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) {
     return loading();
   }
@@ -387,6 +406,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) {
     return loading?.call();
   }
@@ -399,6 +419,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -415,6 +436,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) {
     return loading(this);
   }
@@ -427,6 +449,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) {
     return loading?.call(this);
   }
@@ -439,6 +462,7 @@ class _$LoadingAnswerState implements LoadingAnswerState {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -521,6 +545,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) {
     return loaded(answer);
   }
@@ -533,6 +558,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) {
     return loaded?.call(answer);
   }
@@ -545,6 +571,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -561,6 +588,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) {
     return loaded(this);
   }
@@ -573,6 +601,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) {
     return loaded?.call(this);
   }
@@ -585,6 +614,7 @@ class _$LoadedAnswerState implements LoadedAnswerState {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -673,6 +703,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     required TResult Function() loading,
     required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
     required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
   }) {
     return error(message);
   }
@@ -685,6 +716,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     TResult? Function()? loading,
     TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
   }) {
     return error?.call(message);
   }
@@ -697,6 +729,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     TResult Function()? loading,
     TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
     TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -713,6 +746,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     required TResult Function(LoadingAnswerState value) loading,
     required TResult Function(LoadedAnswerState value) loaded,
     required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
   }) {
     return error(this);
   }
@@ -725,6 +759,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     TResult? Function(LoadingAnswerState value)? loading,
     TResult? Function(LoadedAnswerState value)? loaded,
     TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
   }) {
     return error?.call(this);
   }
@@ -737,6 +772,7 @@ class _$ErrorAnswerState implements ErrorAnswerState {
     TResult Function(LoadingAnswerState value)? loading,
     TResult Function(LoadedAnswerState value)? loaded,
     TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -752,5 +788,170 @@ abstract class ErrorAnswerState implements AnswerState {
   String get message;
   @JsonKey(ignore: true)
   _$$ErrorAnswerStateCopyWith<_$ErrorAnswerState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ListLoadedAnswerStateCopyWith<$Res> {
+  factory _$$ListLoadedAnswerStateCopyWith(_$ListLoadedAnswerState value,
+          $Res Function(_$ListLoadedAnswerState) then) =
+      __$$ListLoadedAnswerStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Answer> answer});
+}
+
+/// @nodoc
+class __$$ListLoadedAnswerStateCopyWithImpl<$Res>
+    extends _$AnswerStateCopyWithImpl<$Res, _$ListLoadedAnswerState>
+    implements _$$ListLoadedAnswerStateCopyWith<$Res> {
+  __$$ListLoadedAnswerStateCopyWithImpl(_$ListLoadedAnswerState _value,
+      $Res Function(_$ListLoadedAnswerState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? answer = null,
+  }) {
+    return _then(_$ListLoadedAnswerState(
+      null == answer
+          ? _value._answer
+          : answer // ignore: cast_nullable_to_non_nullable
+              as List<Answer>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ListLoadedAnswerState implements ListLoadedAnswerState {
+  const _$ListLoadedAnswerState(final List<Answer> answer) : _answer = answer;
+
+  final List<Answer> _answer;
+  @override
+  List<Answer> get answer {
+    if (_answer is EqualUnmodifiableListView) return _answer;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_answer);
+  }
+
+  @override
+  String toString() {
+    return 'AnswerState.listLoaded(answer: $answer)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ListLoadedAnswerState &&
+            const DeepCollectionEquality().equals(other._answer, _answer));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_answer));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ListLoadedAnswerStateCopyWith<_$ListLoadedAnswerState> get copyWith =>
+      __$$ListLoadedAnswerStateCopyWithImpl<_$ListLoadedAnswerState>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() success,
+    required TResult Function() loading,
+    required TResult Function(Either<AnswerFailure, Answer> answer) loaded,
+    required TResult Function(String message) error,
+    required TResult Function(List<Answer> answer) listLoaded,
+  }) {
+    return listLoaded(answer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? success,
+    TResult? Function()? loading,
+    TResult? Function(Either<AnswerFailure, Answer> answer)? loaded,
+    TResult? Function(String message)? error,
+    TResult? Function(List<Answer> answer)? listLoaded,
+  }) {
+    return listLoaded?.call(answer);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? success,
+    TResult Function()? loading,
+    TResult Function(Either<AnswerFailure, Answer> answer)? loaded,
+    TResult Function(String message)? error,
+    TResult Function(List<Answer> answer)? listLoaded,
+    required TResult orElse(),
+  }) {
+    if (listLoaded != null) {
+      return listLoaded(answer);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialAnswerState value) initial,
+    required TResult Function(SuccessAnswerEvent value) success,
+    required TResult Function(LoadingAnswerState value) loading,
+    required TResult Function(LoadedAnswerState value) loaded,
+    required TResult Function(ErrorAnswerState value) error,
+    required TResult Function(ListLoadedAnswerState value) listLoaded,
+  }) {
+    return listLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialAnswerState value)? initial,
+    TResult? Function(SuccessAnswerEvent value)? success,
+    TResult? Function(LoadingAnswerState value)? loading,
+    TResult? Function(LoadedAnswerState value)? loaded,
+    TResult? Function(ErrorAnswerState value)? error,
+    TResult? Function(ListLoadedAnswerState value)? listLoaded,
+  }) {
+    return listLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialAnswerState value)? initial,
+    TResult Function(SuccessAnswerEvent value)? success,
+    TResult Function(LoadingAnswerState value)? loading,
+    TResult Function(LoadedAnswerState value)? loaded,
+    TResult Function(ErrorAnswerState value)? error,
+    TResult Function(ListLoadedAnswerState value)? listLoaded,
+    required TResult orElse(),
+  }) {
+    if (listLoaded != null) {
+      return listLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ListLoadedAnswerState implements AnswerState {
+  const factory ListLoadedAnswerState(final List<Answer> answer) =
+      _$ListLoadedAnswerState;
+
+  List<Answer> get answer;
+  @JsonKey(ignore: true)
+  _$$ListLoadedAnswerStateCopyWith<_$ListLoadedAnswerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
