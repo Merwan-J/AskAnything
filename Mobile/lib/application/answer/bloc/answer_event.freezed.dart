@@ -19,7 +19,7 @@ mixin _$AnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -30,7 +30,7 @@ mixin _$AnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -41,7 +41,7 @@ mixin _$AnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -171,7 +171,7 @@ class _$LoadAnswerEvent implements LoadAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -185,7 +185,7 @@ class _$LoadAnswerEvent implements LoadAnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -199,7 +199,7 @@ class _$LoadAnswerEvent implements LoadAnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -276,7 +276,7 @@ abstract class _$$AddAnswerEventCopyWith<$Res> {
           _$AddAnswerEvent value, $Res Function(_$AddAnswerEvent) then) =
       __$$AddAnswerEventCopyWithImpl<$Res>;
   @useResult
-  $Res call({AnswerForm answerForm});
+  $Res call({AnswerForm answerForm, String userId});
 
   $AnswerFormCopyWith<$Res> get answerForm;
 }
@@ -293,12 +293,17 @@ class __$$AddAnswerEventCopyWithImpl<$Res>
   @override
   $Res call({
     Object? answerForm = null,
+    Object? userId = null,
   }) {
     return _then(_$AddAnswerEvent(
       null == answerForm
           ? _value.answerForm
           : answerForm // ignore: cast_nullable_to_non_nullable
               as AnswerForm,
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -314,14 +319,16 @@ class __$$AddAnswerEventCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddAnswerEvent implements AddAnswerEvent {
-  const _$AddAnswerEvent(this.answerForm);
+  const _$AddAnswerEvent(this.answerForm, this.userId);
 
   @override
   final AnswerForm answerForm;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'AnswerEvent.addAnswer(answerForm: $answerForm)';
+    return 'AnswerEvent.addAnswer(answerForm: $answerForm, userId: $userId)';
   }
 
   @override
@@ -330,11 +337,12 @@ class _$AddAnswerEvent implements AddAnswerEvent {
         (other.runtimeType == runtimeType &&
             other is _$AddAnswerEvent &&
             (identical(other.answerForm, answerForm) ||
-                other.answerForm == answerForm));
+                other.answerForm == answerForm) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, answerForm);
+  int get hashCode => Object.hash(runtimeType, answerForm, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -346,35 +354,35 @@ class _$AddAnswerEvent implements AddAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
     required TResult Function(String answerId) downvote,
     required TResult Function(String questionId) loadAnswersByQuestion,
   }) {
-    return addAnswer(answerForm);
+    return addAnswer(answerForm, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
     TResult? Function(String answerId)? downvote,
     TResult? Function(String questionId)? loadAnswersByQuestion,
   }) {
-    return addAnswer?.call(answerForm);
+    return addAnswer?.call(answerForm, userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -383,7 +391,7 @@ class _$AddAnswerEvent implements AddAnswerEvent {
     required TResult orElse(),
   }) {
     if (addAnswer != null) {
-      return addAnswer(answerForm);
+      return addAnswer(answerForm, userId);
     }
     return orElse();
   }
@@ -437,9 +445,11 @@ class _$AddAnswerEvent implements AddAnswerEvent {
 }
 
 abstract class AddAnswerEvent implements AnswerEvent {
-  const factory AddAnswerEvent(final AnswerForm answerForm) = _$AddAnswerEvent;
+  const factory AddAnswerEvent(
+      final AnswerForm answerForm, final String userId) = _$AddAnswerEvent;
 
   AnswerForm get answerForm;
+  String get userId;
   @JsonKey(ignore: true)
   _$$AddAnswerEventCopyWith<_$AddAnswerEvent> get copyWith =>
       throw _privateConstructorUsedError;
@@ -518,7 +528,7 @@ class _$UpdateAnswerEvent implements UpdateAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -532,7 +542,7 @@ class _$UpdateAnswerEvent implements UpdateAnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -546,7 +556,7 @@ class _$UpdateAnswerEvent implements UpdateAnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -685,7 +695,7 @@ class _$DeleteAnswerEvent implements DeleteAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -699,7 +709,7 @@ class _$DeleteAnswerEvent implements DeleteAnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -713,7 +723,7 @@ class _$DeleteAnswerEvent implements DeleteAnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -850,7 +860,7 @@ class _$UpvoteAnswerEvent implements UpvoteAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -864,7 +874,7 @@ class _$UpvoteAnswerEvent implements UpvoteAnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -878,7 +888,7 @@ class _$UpvoteAnswerEvent implements UpvoteAnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -1016,7 +1026,7 @@ class _$DownVoteAnswerEvent implements DownVoteAnswerEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -1030,7 +1040,7 @@ class _$DownVoteAnswerEvent implements DownVoteAnswerEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -1044,7 +1054,7 @@ class _$DownVoteAnswerEvent implements DownVoteAnswerEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,
@@ -1185,7 +1195,7 @@ class _$LoadAnswersByQuestionEvent implements LoadAnswersByQuestionEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String answerId) loadAnswer,
-    required TResult Function(AnswerForm answerForm) addAnswer,
+    required TResult Function(AnswerForm answerForm, String userId) addAnswer,
     required TResult Function(String id, String text) updateAnswer,
     required TResult Function(String answerId) deleteAnswer,
     required TResult Function(String answerId) upvote,
@@ -1199,7 +1209,7 @@ class _$LoadAnswersByQuestionEvent implements LoadAnswersByQuestionEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String answerId)? loadAnswer,
-    TResult? Function(AnswerForm answerForm)? addAnswer,
+    TResult? Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult? Function(String id, String text)? updateAnswer,
     TResult? Function(String answerId)? deleteAnswer,
     TResult? Function(String answerId)? upvote,
@@ -1213,7 +1223,7 @@ class _$LoadAnswersByQuestionEvent implements LoadAnswersByQuestionEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String answerId)? loadAnswer,
-    TResult Function(AnswerForm answerForm)? addAnswer,
+    TResult Function(AnswerForm answerForm, String userId)? addAnswer,
     TResult Function(String id, String text)? updateAnswer,
     TResult Function(String answerId)? deleteAnswer,
     TResult Function(String answerId)? upvote,

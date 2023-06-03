@@ -9,12 +9,14 @@ class AnswerAPI {
 
   AnswerAPI(this._customHttpClient);
 
-  Future<AnswerDto> createAnswer(AnswerFormDto answerFormDto) async {
-    print("answer api");
+  //here i made it accept a userId
+
+  Future<AnswerDto> createAnswer(
+      AnswerFormDto answerFormDto, String userId) async {
     var body = {
       "text": answerFormDto.text,
-      "author": "644a59d906e58c639150523c",
-      "question": "64796d751ab06cdabc2f0fba"
+      "author": userId,
+      "question": answerFormDto.question,
     };
     var answer =
         await _customHttpClient.post("answers", body: json.encode(body));
@@ -84,11 +86,9 @@ class AnswerAPI {
   }
 
   Future<List<AnswerDto>> getAnswersByQuestionId(String id) async {
-    print("igetAnswersByQuestionId $id");
     //TODO: change the url
 
-    var answers = await _customHttpClient
-        .get("answers/question/64796d751ab06cdabc2f0fba");
+    var answers = await _customHttpClient.get("answers/question/$id");
     var decoded = await jsonDecode(answers.body)["data"]["answers"];
     print("decoded$decoded");
 

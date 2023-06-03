@@ -1,8 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:askanything/application/answer/bloc/answer_event.dart';
+import 'package:askanything/application/question/question_list/bloc/question_list_bloc.dart';
 import 'package:askanything/domain/answer/answer_form.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
-import 'package:askanything/infrastructure/user/author_dto.dart';
-import 'package:askanything/application/answer/bloc/answer_event.dart';
 import 'package:askanything/infrastructure/answer/answer_repository.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
+import 'package:askanything/infrastructure/question/question_repository.dart';
+import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/presentation/widgets/answer.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/foundation.dart';
@@ -17,23 +21,15 @@ import '../../../application/answer/bloc/answer_state.dart';
 import '../../../domain/answer/answer.dart';
 import '../../../domain/answer/answer_form.dart';
 import '../../../domain/question/question.dart';
+import '../../../domain/user/user.dart';
+import '../../../infrastructure/user/user_repository.dart';
 
 class QuestionDetail extends StatefulWidget {
-  static Question question = Question(
-      id: "1",
-      title:
-          "What do you think is the best GPU to play Apex nds?  Do you have any suggestions?",
-      description:
-          "What do you think is the best GPU to play Apex Legends?  Do you have any suggestions?",
-      author: AuthorDto(
-          name: "Merwan Junyedi", id: "1", profilePic: "", email: "merwant"),
-      anonymous: false,
-      answers: ["1", "2", "3"],
-      topic: "Technology",
-      likes: ["1", "2"],
-      dislikes: ["1,2"],
-      createdAt: DateTime.now(),
-      updatedAt: DateTime.now());
+  Question question;
+  QuestionDetail({
+    Key? key,
+    required this.question,
+  }) : super(key: key);
 
   @override
   State<QuestionDetail> createState() => _QuestionDetailState();
@@ -71,6 +67,12 @@ class _QuestionDetailState extends State<QuestionDetail> {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now()),
   ];
+
+  Question getQuestion(context, id) {
+    Question question = RepositoryProvider.of(context).getQuestionById(id);
+    return question;
+  }
+
   //dispose contorller
   @override
   void dispose() {
@@ -82,6 +84,9 @@ class _QuestionDetailState extends State<QuestionDetail> {
   @override
   Widget build(BuildContext context) {
     bool showDetail = MediaQuery.of(context).viewInsets.bottom == 0.0;
+    User? user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
+
     List<Widget> answerWidget = answerList
         .map((answer) => Row(
               children: [
@@ -106,7 +111,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
               height: 10.h,
             ),
             QuestionW(
-              question: QuestionDetail.question,
+              question: widget.question,
               showDetail: showDetail,
             ),
             SizedBox(
@@ -119,8 +124,8 @@ class _QuestionDetailState extends State<QuestionDetail> {
                   print(state);
                   if (state is InitialAnswerState) {
                     print("we are here");
-                    BlocProvider.of<AnswerBloc>(context).add(
-                        LoadAnswersByQuestionEvent("6478af6ea70dcd58a46901db"));
+                    BlocProvider.of<AnswerBloc>(context)
+                        .add(LoadAnswersByQuestionEvent(widget.question.id));
                     return Expanded(
                       child: Center(
                         child: CircularProgressIndicator(),
@@ -206,14 +211,14 @@ class _QuestionDetailState extends State<QuestionDetail> {
                                     author: 'the author',
                                     text: text,
                                     anonymous: isAnonymous,
-                                    question: "6478af6ea70dcd58a46901db",
+                                    question: widget.question.id,
                                     image: '');
                                 print("event form $answerForm");
                                 BlocProvider.of<AnswerBloc>(context)
-                                    .add(AddAnswerEvent(answerForm));
+                                    .add(AddAnswerEvent(answerForm, user!.id));
                                 BlocProvider.of<AnswerBloc>(context).add(
                                     LoadAnswersByQuestionEvent(
-                                        "6478af6ea70dcd58a46901db"));
+                                        widget.question.id));
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 _answerController.clear();
                                 print("after evnet $answerForm");

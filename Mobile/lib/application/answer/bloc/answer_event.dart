@@ -11,7 +11,8 @@ class AnswerEvent with _$AnswerEvent {
   const factory AnswerEvent.loadAnswer(String answerId) = LoadAnswerEvent;
   //by question id
   //by user id
-  const factory AnswerEvent.addAnswer(AnswerForm answerForm) = AddAnswerEvent;
+  const factory AnswerEvent.addAnswer(AnswerForm answerForm, String userId) =
+      AddAnswerEvent;
   const factory AnswerEvent.updateAnswer(String id, String text) =
       UpdateAnswerEvent;
   const factory AnswerEvent.deleteAnswer(String answerId) = DeleteAnswerEvent;
