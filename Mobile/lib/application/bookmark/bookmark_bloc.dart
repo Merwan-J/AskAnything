@@ -23,7 +23,7 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
       print("bloc");
       Either<UserFailure, User> user =
           await _userRepository.addBookmark(event.userId, event.questionId);
-      print(user);
+      print("bloc $user");
       user.fold(
           (l) => emit(const BookmarkState.failure("Failed to add bookmark")),
           (r) => emit(BookmarkState.bookmarkAddSuccess(r)));

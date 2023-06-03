@@ -53,7 +53,6 @@ class QuestionW extends StatelessWidget {
     print(_user!.id == question.author.id);
     print("${_user.name} current user");
     print(question.author.name);
-    var isBookmarked = false;
     return BlocProvider(
         create: (context) => BookmarkBloc(
             repository: RepositoryProvider.of<UserRepository>(context)),
@@ -155,7 +154,7 @@ class QuestionW extends StatelessWidget {
                             getLikesAndComment(
                                 context,
                                 question,
-                                question.likes.contains(_user!.id),
+                                question.likes.contains(_user.id),
                                 question.dislikes.contains(_user.id)),
                             Visibility(
                               visible: _user.id == question.author.id,
@@ -329,6 +328,12 @@ class QuestionW extends StatelessWidget {
 
                   BlocBuilder<BookmarkBloc, BookmarkState>(
                     builder: (context, state) {
+                      if (state is BookmarkAddSuccess) {
+                        _user!.bookmarks.add(question.id);
+                      } else if (state is BookmarkRemoveSuccess) {
+                        _user!.bookmarks.remove(question.id);
+                      }
+                      var isBookmarked = _user.bookmarks.contains(question.id);
                       return Positioned(
                           top: -4.h,
                           right: 2.h,
@@ -344,22 +349,34 @@ class QuestionW extends StatelessWidget {
                             child: BlocConsumer<BookmarkBloc, BookmarkState>(
                               listener: (context, state) {
                                 if (state is BookmarkAddSuccess) {
+                                  isBookmarked = true;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content: Text(
                                               "Question bookmarked successfully")));
+                                  BlocProvider.of<QuestionListBloc>(context)
+                                      .add(GetQuestionsEvent(isRefresh: true));
+                                }
+                                if (state is BookmarkRemoveSuccess) {
+                                  isBookmarked = false;
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              "Question removed from bookmark")));
+                                  BlocProvider.of<QuestionListBloc>(context)
+                                      .add(GetQuestionsEvent(isRefresh: false));
                                 }
                               },
                               builder: (context, state) {
                                 if (state is BookmarkAddSuccess) {
+                                  print("bookmark add success${state.user}}");
                                   var user = state.user;
                                   isBookmarked =
-                                      user.bookmarks.contains(_user!.id);
-                                }
-                                if (state is BookmarkRemoveSuccess) {
+                                      user.bookmarks.contains(question.id);
+                                } else if (state is BookmarkRemoveSuccess) {
                                   var user = state.user;
                                   isBookmarked =
-                                      user.bookmarks.contains(_user!.id);
+                                      !user.bookmarks.contains(question.id);
                                 }
                                 return Icon(
                                   isBookmarked

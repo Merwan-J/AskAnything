@@ -1,7 +1,20 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:askanything/application/auth/bloc/auth_bloc.dart';
+import 'package:askanything/infrastructure/auth/auth_repository.dart';
+import 'package:askanything/infrastructure/question/question_repository.dart';
+import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../application/auth/bloc/auth_event.dart';
+import '../../../application/user/user_bloc.dart';
+import '../../../application/user/user_event.dart';
+import '../../../application/user/user_state.dart';
+import '../../../domain/user/user.dart';
+import '../../routes/routes_dart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -86,21 +99,11 @@ class SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User? _user = RepositoryProvider.of<AuthRepository>(context)
+        .getAuthenticatedUserSync();
     return Expanded(
         child: Column(
       children: [
-        ListTile(
-          leading: Icon(Icons.person),
-          title: Text(
-            'Profile',
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          trailing: IconButton(
-            icon: Icon(Icons.arrow_forward_ios),
-            onPressed: () {},
-          ),
-          onTap: () {},
-        ),
         ListTile(
           leading: Icon(Icons.lightbulb),
           title: Text(
@@ -131,7 +134,33 @@ class SettingsBody extends StatelessWidget {
             'Logout',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
-          onTap: () {},
+          onTap: () {
+            BlocProvider.of<AuthBloc>(context).add(AuthEventSignOut());
+          },
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(
+              RepositoryProvider.of<UserRepository>(context),
+              RepositoryProvider.of<QuestionRepository>(context)),
+          child: BlocBuilder<UserBloc, UserState>(
+            builder: (context, state) {
+              return ListTile(
+                leading: Icon(Icons.person),
+                title: Text(
+                  'Delete Account',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {},
+                ),
+                onTap: () {
+                  BlocProvider.of<UserBloc>(context).add(DeleteUser(_user!.id));
+                  context.go(Routes.SIGNUP);
+                },
+              );
+            },
+          ),
         ),
       ],
     ));
