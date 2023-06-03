@@ -28,6 +28,8 @@ class QuestionListBloc extends Bloc<QuestionListEvent, QuestionListState> {
         if (questions.isEmpty) {
           emit(QuestionListEmpty());
         } else {
+          print(questions.length);
+          print("blocssss --");
           emit(QuestionListLoaded(questions));
         }
       });

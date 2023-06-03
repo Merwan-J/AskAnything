@@ -28,6 +28,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
           (r) => emit(AnswerState.loaded(answer)));
     });
     on<LoadAnswersByQuestionEvent>(((event, emit) async {
+      print(event.questionId);
       print("loading anwers by questions");
       Either<AnswerFailure, List<Answer>> answers =
           await _answerRepository.getAnswersByQuestion(event.questionId);
@@ -42,17 +43,16 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
     }));
 
     on<AddAnswerEvent>(((event, emit) async {
-      print("creating answer");
-      print("dfaklajkfjlssssssssssssssssssssssssssssssss");
-      print(event.answerForm.question);
-      print(event.userId);
       Either<AnswerFailure, Answer> answer =
           await _answerRepository.createAnswer(event.answerForm, event.userId);
-      print("success");
+      print("answer");
       print(answer); //Right
       answer.fold(
           (l) => emit(const AnswerState.error("failed to create answer")), (r) {
+        print(r.question);
+        print("---0000-----");
         emit(AnswerState.loaded(answer));
+
         add(LoadAnswersByQuestionEvent(r.question));
       });
     }));
@@ -70,8 +70,8 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
       answer.fold(
           (l) => emit(const AnswerState.error("Failed to update answer")),
           (r) => {
+                add(LoadAnswerEvent(event.id)),
                 emit(const AnswerState.success()),
-                add(LoadAnswerEvent(event.id))
               });
     }));
 

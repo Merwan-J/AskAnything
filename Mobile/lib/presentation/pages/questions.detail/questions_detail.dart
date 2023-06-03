@@ -222,6 +222,7 @@ class _QuestionDetailState extends State<QuestionDetail> {
                                 FocusManager.instance.primaryFocus?.unfocus();
                                 _answerController.clear();
                                 print("after evnet $answerForm");
+                                setState(() {});
                               },
                               icon: Icon(Icons.send)),
                           border: InputBorder.none,

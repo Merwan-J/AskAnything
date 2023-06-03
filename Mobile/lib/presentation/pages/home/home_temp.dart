@@ -109,12 +109,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             IconButton(
                 onPressed: () => context.go('/search'),
                 icon: Icon(Icons.search)),
-            IconButton(
-              icon: const Icon(Icons.grid_view_rounded), // Change the icon here
-              onPressed: () {
-                openEndDrawer();
-              },
-            ),
+            // IconButton(
+            //   icon: const Icon(Icons.grid_view_rounded), // Change the icon here
+            //   onPressed: () {
+            //     openEndDrawer();
+            //   },
+            // ),
           ],
           title: Container(
             child: Row(

@@ -29,13 +29,18 @@ class BookmarkBloc extends Bloc<BookmarkEvent, BookmarkState> {
           (r) => emit(BookmarkState.bookmarkAddSuccess(r)));
     });
     on<RemoveBookmarkEvent>((event, emit) async {
+      print("bookmark remove event");
       emit(BookmarkState.loading());
       Either<UserFailure, User> user =
           await _userRepository.removeBookmark(event.userId, event.questionId);
 
       user.fold(
           (l) => emit(const BookmarkState.failure("Failed to add bookmark")),
-          (r) => emit(BookmarkState.bookmarkRemoveSuccess(r)));
+          (r) {
+        print("bookmark remove success");
+        print(r);
+        emit(BookmarkState.bookmarkRemoveSuccess(r));
+      });
     });
   }
 }

@@ -29,9 +29,12 @@ class UserRepository implements IUserRepository {
     }
   }
 
-  @override
   Future<Either<UserFailure, User>> removeBookmark(
       String userId, String questionId) async {
+    print("user repo remove");
+    print(userId);
+    print("question id");
+    print(questionId);
     try {
       final userDto = await _userApi.removeBookmark(userId, questionId);
 

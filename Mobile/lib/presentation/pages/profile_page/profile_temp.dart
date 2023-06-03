@@ -107,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                 backgroundImage: AssetImage(
                   'assets/images/user 3.jpg',
                 ),
-                radius: 60.h,
+                radius: 50.h,
               ),
               BlocProvider(
                 create: (context) =>
@@ -173,7 +173,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   children: [
                                     FaIcon(FontAwesomeIcons.trophy,
                                         color: Theme.of(context).primaryColor,
-                                        size: 20.h),
+                                        size: 18.h),
                                     SizedBox(
                                       width: 5.h,
                                     ),
@@ -184,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                                 .bodyMedium!
                                                 .fontSize)),
                                     SizedBox(
-                                      width: 20.h,
+                                      width: 10.h,
                                     ),
                                     InkWell(
                                         onTap: () {
@@ -196,7 +196,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                               ],
                             ),
                             SizedBox(
-                              height: 10.h,
+                              height: 6.h,
                             ),
                             Row(
                                 mainAxisAlignment:
@@ -227,7 +227,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   Icon(
                                     Icons.circle,
                                     color: Theme.of(context).primaryColor,
-                                    size: 10.h,
+                                    size: 5.h,
                                   ),
                                   TextButton(
                                     onPressed: () {},
@@ -247,7 +247,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                                   )
                                 ]),
                             SizedBox(
-                              height: 10.h,
+                              height: 6.h,
                             ),
                             ElevatedButton(
                                 onPressed: () {

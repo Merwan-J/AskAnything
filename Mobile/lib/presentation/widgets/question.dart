@@ -85,8 +85,11 @@ class QuestionW extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const CircleAvatar(
-                                    radius: 20, child: Icon(Icons.person)),
+                                CircleAvatar(
+                                    radius: 20,
+                                    child: Icon(question.anonymous
+                                        ? Icons.person_3_outlined
+                                        : Icons.person)),
                                 SizedBox(
                                   width: 10.h,
                                 ),
@@ -94,7 +97,9 @@ class QuestionW extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      question.author.name,
+                                      question.anonymous
+                                          ? "Anonymous"
+                                          : question.author.name,
                                       style: Theme.of(context)
                                           .textTheme
                                           .labelLarge,
@@ -209,11 +214,20 @@ class QuestionW extends StatelessWidget {
                                         QuestionDetailState>(
                                       builder: (context, state) {
                                         return InkWell(
-                                          onTap: () {
-                                            BlocProvider.of<QuestionDetailBloc>(
-                                                    context)
-                                                .add(QuestionDetailDeleteEvent(
-                                                    question.id));
+                                          onTap: () async {
+                                            bool result = await _showDialog(
+                                                    context, question.id) ??
+                                                false;
+
+                                            if (result) {
+                                              BlocProvider.of<
+                                                          QuestionDetailBloc>(
+                                                      context)
+                                                  .add(
+                                                      QuestionDetailDeleteEvent(
+                                                          question.id));
+                                            }
+
                                             if (showDetail) {
                                               context.pop();
                                             }
@@ -376,10 +390,12 @@ class QuestionW extends StatelessWidget {
                                   var user = state.user;
                                   isBookmarked =
                                       user.bookmarks.contains(question.id);
+                                  isBookmarked = true;
                                 } else if (state is BookmarkRemoveSuccess) {
                                   var user = state.user;
                                   isBookmarked =
-                                      !user.bookmarks.contains(question.id);
+                                      user.bookmarks.contains(question.id);
+                                  isBookmarked = false;
                                 }
                                 return Icon(
                                   isBookmarked
@@ -460,6 +476,34 @@ class QuestionW extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  Future<bool?> _showDialog(BuildContext context, String id) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Theme.of(context).cardColor,
+          title: Text('Confirm'),
+          content: Text('Are you sure you want to delete this question?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: Text('Delete'),
+              onPressed: () {
+                // Perform delete operation here
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 

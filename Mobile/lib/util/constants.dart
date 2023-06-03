@@ -3,7 +3,7 @@ class Constants {
 
   static List<String> get topics {
     return [
-      'All',
+      // 'All',
       'Technology',
       'Education',
       'Relationships',

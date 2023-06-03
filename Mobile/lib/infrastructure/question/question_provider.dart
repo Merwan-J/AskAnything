@@ -47,7 +47,7 @@ class QuestionProvider {
     print("questionId: $questionId");
     print(questionFormDto);
 
-    var response = await _httpClient.patch('questions/6478af6ea70dcd58a46901db',
+    var response = await _httpClient.patch('questions/$questionId',
         body: json.encode(questionFormDto.toJson()));
     print("response: ${response.body}");
 
@@ -76,22 +76,18 @@ class QuestionProvider {
     try {
       int timeoutDurINSecs = 10;
       var timeout = Duration(seconds: timeoutDurINSecs);
-      print("fetching questions");
-      var response = await _httpClient
-          .get('questions?userId=6448f615d561de32dc337d5e')
-          .timeout(timeout);
+
+      var response = await _httpClient.get('questions');
       //print print
-      print("res");
+
       var decoded = await jsonDecode(response.body);
-      print("decoded: $decoded");
 
       if (response.statusCode.toString() == 200.toString()) {
         var questionsLst = decoded["data"]["questions"];
-        print("questionsLst: $questionsLst");
 
         var questionLstDto =
             (questionsLst as List).map((e) => QuestionDto.fromJson(e)).toList();
-        print("success");
+
         return questionLstDto;
       } else {
         throw Exception('Failed to get questions');

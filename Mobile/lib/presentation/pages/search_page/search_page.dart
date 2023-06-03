@@ -56,7 +56,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             controller: _searchController,
                             onChanged: (value) {
                               setState(() {
-                                filter = value;
+                                filter = value.toLowerCase();
                               });
                             },
                             decoration: InputDecoration(
@@ -137,7 +137,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               onSelected: (bool selected) {
                                 setState(() {
                                   _selectedTopicIndex = selected ? index : 0;
-                                  selectedTopic = topics[index];
+                                  selectedTopic = topics[index].toLowerCase();
                                 });
                               },
                               selectedColor: const Color(0xFFFF735C),

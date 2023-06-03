@@ -24,40 +24,42 @@ class QuestionRepository implements IQuestionRepository {
 
   @override
   Future<Either<QuestionFailure, List<Question>>> getQuestions() async {
+    print("getting questions in repo 1");
     try {
       var questions = await _questionProvider.getQuestions();
+      print("getting questions in repo 2");
 
       for (var question in questions) {
         try {
           await _databaseHelper.insertQuestion(question);
-          print(question.toJsonForDb());
+          // print(question.toJsonForDb());
         } catch (e) {
-          print(e);
-          print(question.toJsonForDb());
+          // print(e);
+          // print(question.toJsonForDb());
         }
       }
       try {
         var questionsdb = await _databaseHelper.getQuestions();
         print(questionsdb);
       } catch (e) {
-        print(e);
+        // print(e);
       }
       return right(questions.map((QuestionDto questionDto) {
         return Question.fromJson(questionDto.toJson());
       }).toList());
     } on CustomTimeoutException catch (timeout) {
       var questions = await _databaseHelper.getQuestions();
-      print(questions);
-      print("timeout: $timeout");
+      // print(questions);
+      // print("timeout: $timeout");
       if (questions.isEmpty) {
         return left(const QuestionFailure.serverError());
       }
-      print("questions: $questions");
+      // print("questions: $questions");
       return right(questions.map((QuestionDto questionDto) {
         return Question.fromJson(questionDto.toJson());
       }).toList());
     } catch (e) {
-      print("this is error: $e");
+      // print("this is error: $e");
       return left(const QuestionFailure.serverError());
     }
   }

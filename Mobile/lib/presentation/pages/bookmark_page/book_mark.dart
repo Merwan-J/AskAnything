@@ -1,6 +1,7 @@
 import 'package:askanything/domain/user/user.dart';
 import 'package:askanything/infrastructure/auth/auth_repository.dart';
 import 'package:askanything/infrastructure/user/author_dto.dart';
+import 'package:askanything/presentation/base/app_bar.dart';
 import 'package:askanything/presentation/pages/questions.detail/questions_detail.dart';
 import 'package:askanything/presentation/widgets/question.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class BookmarkPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('in book mark page -----');
     User? user = RepositoryProvider.of<AuthRepository>(context)
         .getAuthenticatedUserSync();
 
@@ -36,61 +38,73 @@ class BookmarkPage extends StatelessWidget {
         dislikes: ["1,2"],
         createdAt: DateTime.now(),
         updatedAt: DateTime.now());
-    return BlocBuilder<QuestionListBloc, QuestionListState>(
-      builder: (context, state) {
-        List<Question> questions = [];
-        if (state is QuestionListLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is QuestionListFailure) {
-          return Center(
-            child: Text(state.message),
-          );
-        }
-        if (state is QuestionListEmpty) {
-          return Center(
-            child: Text("No questions found"),
-          );
-        }
-        if (state is QuestionListLoaded) {
-          questions = state.questions
-              .where((e) => user!.bookmarks.contains(e.author))
-              .toList();
-          return RefreshIndicator(
-            onRefresh: () {
-              BlocProvider.of<QuestionListBloc>(context)
-                  .add(GetQuestionsEvent());
-              return Future<void>.delayed(const Duration(seconds: 3));
-            },
-            child: questions.isNotEmpty
-                ? ListView.builder(
-                    padding: EdgeInsets.symmetric(vertical: 10.h),
-                    // shrinkWrap: true,
-                    // scrollDirection: Axis.horizontal,
-
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(bottom: 15.h),
-                        child: QuestionW(question: questions[index]),
-                      );
-                    },
-                    itemCount: questions.length)
-                : Center(
-                    child: Text("No questions found"),
-                  ),
-          );
-        }
-        return Center(
-          child: ElevatedButton(
-              onPressed: () {
+    return Scaffold(
+      appBar: CustomAppBar(title: "Bookmarks", includeBackButton: false),
+      body: BlocBuilder<QuestionListBloc, QuestionListState>(
+        builder: (context, state) {
+          List<Question> questions = [];
+          if (state is QuestionListInitial) {
+            BlocProvider.of<QuestionListBloc>(context).add(GetQuestionsEvent());
+          }
+          if (state is QuestionListLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is QuestionListFailure) {
+            return Center(
+              child: Text(state.message),
+            );
+          }
+          if (state is QuestionListEmpty) {
+            return Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    BlocProvider.of<QuestionListBloc>(context)
+                        .add(GetQuestionsEvent());
+                  },
+                  child: Text("Refresh")),
+            );
+          }
+          if (state is QuestionListLoaded) {
+            questions = state.questions
+                .where((e) => user!.bookmarks.contains(e.id))
+                .toList();
+            return RefreshIndicator(
+              onRefresh: () {
                 BlocProvider.of<QuestionListBloc>(context)
                     .add(GetQuestionsEvent());
+                return Future<void>.delayed(const Duration(seconds: 3));
               },
-              child: Text("Refresh")),
-        );
-      },
+              child: questions.isNotEmpty
+                  ? ListView.builder(
+                      padding: EdgeInsets.symmetric(vertical: 10.h),
+                      // shrinkWrap: true,
+                      // scrollDirection: Axis.horizontal,
+
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              bottom: 15.h, left: 10.h, right: 10.h),
+                          child: QuestionW(question: questions[index]),
+                        );
+                      },
+                      itemCount: questions.length)
+                  : Center(
+                      child: Text("No questions found"),
+                    ),
+            );
+          }
+          return Center(
+            child: ElevatedButton(
+                onPressed: () {
+                  BlocProvider.of<QuestionListBloc>(context)
+                      .add(GetQuestionsEvent());
+                },
+                child: Text("Refresh")),
+          );
+        },
+      ),
     );
     // return Expanded(child: QuestionW(question: question));
   }

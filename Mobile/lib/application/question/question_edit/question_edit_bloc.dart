@@ -22,9 +22,12 @@ class QuestionEditBloc extends Bloc<QuestionEditEvent, QuestionEditState> {
       print("before edit bloc");
       Either<QuestionFailure, Question> result = await _questionRepository
           .updateQuestion(event.questionForm.copyWith(), event.questionId);
+      print(result);
 
       result.fold((l) => emit(QuestionEditState.failure(questionFailure: l)),
           (r) {
+        print("after edit bloc");
+        print("sucess");
         emit(QuestionEditState.success(question: r));
       });
     });

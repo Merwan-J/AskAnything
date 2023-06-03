@@ -9,6 +9,7 @@ const Questions = require('./../models/questionsModel');
 //Find all Questions
 exports.getAllQuestions = catchAsyncError(async (req, res, next) => {
   console.log('get all questions');
+  console.log('sending them questions');
 
   //get questions sorted by date
 
