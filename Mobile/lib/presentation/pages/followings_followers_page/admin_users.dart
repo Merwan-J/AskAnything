@@ -9,11 +9,14 @@ import 'package:askanything/infrastructure/user/author_dto.dart';
 import 'package:askanything/infrastructure/user/user_dto.dart';
 import 'package:askanything/infrastructure/user/user_repository.dart';
 import 'package:askanything/presentation/base/app_bar.dart';
+import 'package:askanything/presentation/pages/profile_page/other_profile.dart';
+import 'package:askanything/presentation/pages/profile_page/profile_temp.dart';
 import 'package:askanything/util/custom_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AdminUsers extends StatefulWidget {
@@ -311,35 +314,45 @@ class _AdminUsersState extends State<AdminUsers>
                         radius: 25.h,
                       ),
                     ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          user['name'],
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                    title: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          // Navigate to user profile page
+                          MaterialPageRoute(
+                            builder: (context) => OtherProfile(user: user),
                           ),
-                        ),
-                        Row(
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.trophy,
-                              color: Theme.of(context).primaryColor,
-                              size: 15.sp,
+                        );
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            user['name'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.sp,
                             ),
-                            SizedBox(width: 4.w),
-                            Text(
-                              user['reputation']
-                                  .toString(), // Replace with actual reputation number
-                              style: TextStyle(
-                                color: CustomColor.primaryColor,
-                                fontSize: 12.sp,
+                          ),
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.trophy,
+                                color: Theme.of(context).primaryColor,
+                                size: 15.sp,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              SizedBox(width: 4.w),
+                              Text(
+                                user['reputation']
+                                    .toString(), // Replace with actual reputation number
+                                style: TextStyle(
+                                  color: CustomColor.primaryColor,
+                                  fontSize: 12.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                     trailing: ElevatedButton(
                       onPressed: () {
