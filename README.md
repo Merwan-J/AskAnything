@@ -2,8 +2,6 @@
 
 Ask Anything is a mobile application that enables users to ask and answer questions. The app will support user authorization and authentication, allowing users to create and manage their profiles. The platform will allow users to group questions based on tags, making it easier for them to find and answer questions that interests them.
 
-# Newly Added Features
-
 User-Generated-Polls: Let users create polls related to questions they have or topics they want to explore further and share them with the community. 
 
 Follow Feature: Allow users to follow other users or specific questions categories to receive updates and have an entire section dedicated to display questions only from users/categories they follow
@@ -16,10 +14,3 @@ Anonymity: Users have the ability to ask and answers questions with their identi
 
 
 
-|        Name      |       ID        |
-|:-----------------|:---------------:|
-| Abenezer Melaku  | **UGR/6003/13** |
-| Amanuel Yihune   | **UGR/8408/13** |
-| Elisur Freyesus  | **UGR/8806/13** |  
-| Merwan Juneydi   | **UGR/0816/13** |    
-| Yeabtsega Yifat  | **UGR/9766/13** |  
